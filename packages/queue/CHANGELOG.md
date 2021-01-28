@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.15.4](https://github.com/izatop/bunt/compare/v0.15.3...v0.15.4) (2021-01-28)
+
+
+### Bug Fixes
+
+* string -> K ([e76f951](https://github.com/izatop/bunt/commit/e76f95160c66966311a6e44f38c5b6caa605979c))
+
+
+
+
+
 ## [0.15.3](https://github.com/izatop/bunt/compare/v0.15.2...v0.15.3) (2021-01-26)
 
 
