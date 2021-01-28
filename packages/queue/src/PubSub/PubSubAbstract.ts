@@ -16,11 +16,11 @@ export abstract class PubSubAbstract<S extends Record<string, any>, T extends IP
         await this.#transport.publish(this.key(channel), this.serialize(message));
     }
 
-    public async subscribe<K extends keyof S>(channel: PubSubChannel<string>): Promise<AsyncIterable<S[K]>>;
-    public async subscribe<K extends keyof S>(channel: PubSubChannel<string>,
+    public async subscribe<K extends keyof S>(channel: PubSubChannel<K>): Promise<AsyncIterable<S[K]>>;
+    public async subscribe<K extends keyof S>(channel: PubSubChannel<K>,
                                               listener: Fn<[S[K]], unknown>): Promise<() => void>;
     public async subscribe<K extends keyof S>(
-        channel: PubSubChannel<string>, listener?: Fn<[S[K]], unknown>): Promise<AsyncIterable<S[K]> | (() => void)> {
+        channel: PubSubChannel<K>, listener?: Fn<[S[K]], unknown>): Promise<AsyncIterable<S[K]> | (() => void)> {
         const key = this.key(channel);
         const subscription = this.#subscriptions.get(key) ?? await this.#transport.subscribe(key);
         if (!this.#subscriptions.has(key)) {
@@ -40,7 +40,7 @@ export abstract class PubSubAbstract<S extends Record<string, any>, T extends IP
         return iterable;
     }
 
-    public async asyncIterator<K extends keyof S>(channel: Extract<K, string>): Promise<AsyncIterator<S[K]>> {
+    public async asyncIterator<K extends keyof S>(channel: PubSubChannel<K>): Promise<AsyncIterator<S[K]>> {
         const subscription = await this.subscribe(channel);
         return subscription[Symbol.asyncIterator]() as AsyncIterator<S[K]>;
     }
