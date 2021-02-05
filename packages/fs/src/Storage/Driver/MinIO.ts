@@ -35,6 +35,10 @@ export class MinIO extends FsDriverAbstract {
         return this.#client.getBucketPolicy(bucket);
     }
 
+    public getPresignedUrl(bucket: string, file: string): Promise<string> {
+        return this.#client.presignedUrl('GET', bucket, file, 24*60*60);
+    }
+
     public async createBucket(name: string, region?: string, checkExists = true): Promise<void> {
         if (checkExists && await this.#client.bucketExists(name)) {
             return;

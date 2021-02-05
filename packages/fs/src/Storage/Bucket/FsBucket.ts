@@ -24,6 +24,10 @@ export class FsBucket {
         return this.#fs.getDriver().getBucketPolicy(this.name);
     }
 
+    public getPresignedUrl(file: string): Promise<string> {
+        return this.#fs.getDriver().getPresignedUrl(this.name, file);
+    }
+
     public async write(id: string, file: string, metadata: Record<any, any>): Promise<string> {
         if (!this.ready) {
             await this.save();
