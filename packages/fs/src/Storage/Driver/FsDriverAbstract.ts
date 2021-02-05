@@ -6,4 +6,6 @@ export abstract class FsDriverAbstract {
     public abstract setBucketPolicy(bucket: string, policy: string): Promise<void>;
 
     public abstract getBucketPolicy(bucket: string): Promise<string>;
+
+    public abstract getPresignedUrl(bucket: string, file: string): Promise<string>;
 }
