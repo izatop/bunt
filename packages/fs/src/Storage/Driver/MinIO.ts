@@ -36,7 +36,15 @@ export class MinIO extends FsDriverAbstract {
     }
 
     public getPresignedUrl(bucket: string, file: string): Promise<string> {
-        return this.#client.presignedUrl('GET', bucket, file, 24*60*60);
+        return this.#client.presignedUrl('GET', bucket, file, 365*24*60*60);
+    }
+
+    public putPresignedUrl(bucket: string, file: string): Promise<string> {
+        return this.#client.presignedUrl('PUT', bucket, file, 60*60);
+    }
+
+    public deletePresignedUrl(bucket: string, file: string): Promise<string> {
+        return this.#client.presignedUrl('DELETE', bucket, file, 60*60);
     }
 
     public async createBucket(name: string, region?: string, checkExists = true): Promise<void> {
