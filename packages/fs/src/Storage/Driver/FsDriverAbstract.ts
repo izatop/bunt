@@ -8,4 +8,8 @@ export abstract class FsDriverAbstract {
     public abstract getBucketPolicy(bucket: string): Promise<string>;
 
     public abstract getPresignedUrl(bucket: string, file: string): Promise<string>;
+
+    public abstract putPresignedUrl(bucket: string, file: string): Promise<string>;
+
+    public abstract deletePresignedUrl(bucket: string, file: string): Promise<string>;
 }

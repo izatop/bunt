@@ -28,6 +28,14 @@ export class FsBucket {
         return this.#fs.getDriver().getPresignedUrl(this.name, file);
     }
 
+    public putPresignedUrl(file: string): Promise<string> {
+        return this.#fs.getDriver().putPresignedUrl(this.name, file);
+    }
+
+    public deletePresignedUrl(file: string): Promise<string> {
+        return this.#fs.getDriver().deletePresignedUrl(this.name, file);
+    }
+
     public async write(id: string, file: string, metadata: Record<any, any>): Promise<string> {
         if (!this.ready) {
             await this.save();
