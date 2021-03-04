@@ -13,24 +13,26 @@ export abstract class GQLProtoHandle<C extends IContext,
     readonly #connection = new GQLClientConnection(this.getShadowState());
 
     public async run(): Promise<void> {
-        try {
-            const layer = new GQLProtoLayer(
-                this.#connection,
-                (payload, params) => this.subscribe(payload, params),
-            );
+        this.connect();
+        this.#connection.on("close", () => this.close());
+        const layer = new GQLProtoLayer(
+            this.#connection,
+            (payload, params) => this.subscribe(payload, params),
+        );
 
-            for await (const operation of this.#connection) {
-                await layer.handle(operation);
-            }
-        } finally {
-            this.finish();
+        for await (const operation of this.#connection) {
+            await layer.handle(operation);
         }
     }
 
     protected abstract subscribe(payload: GQLClientPayload,
                                  params: Record<string, any>): Promisify<AsyncIterableIterator<any>>;
 
-    protected finish(): Promisify<void> {
-        // nothing
+    protected connect(): Promisify<void> {
+        // handle connection event
+    }
+
+    protected close(): Promisify<void> {
+        // handle connection close event
     }
 }
