@@ -17,7 +17,7 @@ export function getDefaultConfig(): DateConfig {
         ? parseInt(process.env.DATETIME_WEEK_BEGINS ?? "1", 10)
         : 1;
 
-    Intl.DateTimeFormat(locale, {...system, timeZone});
+    Intl.DateTimeFormat(locale, {...system, timeZone} as Intl.DateTimeFormatOptions);
     return {locale, timeZone, weekBegins};
 }
 
