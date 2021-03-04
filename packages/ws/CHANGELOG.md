@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.15.10](https://github.com/izatop/bunt/compare/v0.15.9...v0.15.10) (2021-03-04)
+
+
+### Bug Fixes
+
+* connect/close connection event ([1ab3798](https://github.com/izatop/bunt/commit/1ab37981310262ed885444101fe77a6dd85b5884))
+
+
+
+
+
 ## [0.15.9](https://github.com/izatop/bunt/compare/v0.15.8...v0.15.9) (2021-03-04)
 
 
