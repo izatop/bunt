@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.15.9](https://github.com/izatop/bunt/compare/v0.15.8...v0.15.9) (2021-03-04)
+
+
+### Bug Fixes
+
+* add finish to GQL proto handle ([fbc2d14](https://github.com/izatop/bunt/commit/fbc2d145435c4024164b241e21479bcba13e485d))
+
+
+
+
+
 # [0.15.0](https://github.com/izatop/bunt/compare/v0.14.9...v0.15.0) (2021-01-25)
 
 **Note:** Version bump only for package @bunt/util

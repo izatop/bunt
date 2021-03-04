@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.15.9](https://github.com/izatop/bunt/compare/v0.15.8...v0.15.9) (2021-03-04)
+
+**Note:** Version bump only for package @bunt/cli
+
+
+
+
+
 ## [0.15.3](https://github.com/izatop/bunt/compare/v0.15.2...v0.15.3) (2021-01-26)
 
 **Note:** Version bump only for package @bunt/cli
