@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.15.11](https://github.com/izatop/bunt/compare/v0.15.10...v0.15.11) (2021-03-04)
+
+
+### Bug Fixes
+
+* gql proto hooks ([d593b30](https://github.com/izatop/bunt/commit/d593b30594725488cc71c5f30981ed9c9e1d92e0))
+
+
+
+
+
 ## [0.15.9](https://github.com/izatop/bunt/compare/v0.15.8...v0.15.9) (2021-03-04)
 
 
