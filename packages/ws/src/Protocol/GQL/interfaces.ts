@@ -99,3 +99,5 @@ export type GQLOperationMessage = GQLClientOperation | GQLServerOperation;
 
 export type GQLSubscribeFunction = (payload: GQLClientPayload,
                                     params: Record<string, any>) => Promisify<AsyncIterableIterator<any>>;
+
+export type GQLInitFunction = (params: Record<string, any>) => unknown;

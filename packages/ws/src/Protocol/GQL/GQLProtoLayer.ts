@@ -4,7 +4,7 @@ import {
     GQLClientOperation,
     GQLClientOperationType,
     GQLClientPayload,
-    GQLError,
+    GQLError, GQLInitFunction,
     GQLOperationMessage,
     GQLServerOperationType,
     GQLSubscribeFunction,
@@ -17,13 +17,15 @@ const AllowTypes: string[] = Object.values(GQLClientOperationType);
  * @final
  */
 export class GQLProtoLayer {
+    readonly #initialize: GQLInitFunction;
     readonly #subscribe: GQLSubscribeFunction;
     readonly #client: GQLClientConnection;
     readonly #subscriptions = new Map<string, AsyncIterableIterator<any>>();
     readonly #params: Record<string, any> = {};
 
-    constructor(client: GQLClientConnection, factory: GQLSubscribeFunction) {
+    constructor(client: GQLClientConnection, init: GQLInitFunction, factory: GQLSubscribeFunction) {
         this.#client = client;
+        this.#initialize = init;
         this.#subscribe = factory;
 
         const interval = setInterval(() => this.keepAliveUpdate(), 30000);
@@ -38,6 +40,7 @@ export class GQLProtoLayer {
                 Object.assign(this.#params, operation.payload);
                 await this.#client.send({type: GQLServerOperationType.CONNECTION_ACK});
                 await this.keepAliveUpdate();
+                await Promise.resolve(this.#initialize(this.#params));
                 break;
             case GQLClientOperationType.CONNECTION_TERMINATE:
                 this.terminate();
