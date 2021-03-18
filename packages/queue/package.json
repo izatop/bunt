@@ -29,7 +29,7 @@
         "@bunt/unit": "^0.15.11",
         "@bunt/util": "^0.15.11",
         "@types/ioredis": "^4.22.0",
-        "ioredis": "^4.23.0"
+        "ioredis": "^4.24.2"
     },
     "license": "MIT"
 }
