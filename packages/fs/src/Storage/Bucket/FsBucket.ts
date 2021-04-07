@@ -32,6 +32,10 @@ export class FsBucket {
         return this.#fs.getDriver().putPresignedUrl(this.name, file, expire);
     }
 
+    public removeObject(file: string): Promise<void> {
+        return this.#fs.getDriver().removeObject(this.name, file);
+    }
+
     public deletePresignedUrl(file: string, expire: number = 60*60): Promise<string> {
         return this.#fs.getDriver().deletePresignedUrl(this.name, file, expire);
     }

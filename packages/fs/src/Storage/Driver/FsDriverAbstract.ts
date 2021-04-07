@@ -11,5 +11,7 @@ export abstract class FsDriverAbstract {
 
     public abstract putPresignedUrl(bucket: string, file: string, expire: number): Promise<string>;
 
+    public abstract removeObject(bucket: string, file: string): Promise<void>;
+
     public abstract deletePresignedUrl(bucket: string, file: string, expire: number): Promise<string>;
 }

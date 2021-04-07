@@ -47,6 +47,10 @@ export class MinIO extends FsDriverAbstract {
         return this.#client.presignedUrl('DELETE', bucket, file, expire);
     }
 
+    public removeObject(bucket: string, file: string): Promise<void> {
+        return this.#client.removeObject(bucket, file);
+    }
+
     public async createBucket(name: string, region?: string, checkExists = true): Promise<void> {
         if (checkExists && await this.#client.bucketExists(name)) {
             return;
