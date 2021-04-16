@@ -15,10 +15,10 @@ export type FieldFn<T> = () => T;
 export type FieldType<T> = T | FieldFn<T>;
 
 export type FieldsSchema<T> = {
-    [K in keyof T]-?: T[K] extends Record<string, any>
-        ? FieldType<Fields<T[K]>>
-        : T[K] extends Array<infer S>
-            ? FieldType<List<S, any>>
+    [K in keyof T]-?: T[K] extends Array<infer S>
+        ? FieldType<List<S, any>>
+        : T[K] extends Record<any, any>
+            ? FieldType<Fields<T[K]>>
             : FieldType<TypeAbstract<T[K], any>>;
 };
 

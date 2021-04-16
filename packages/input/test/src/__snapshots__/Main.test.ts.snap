@@ -12,6 +12,11 @@ Object {
               "payload": 1,
               "type": "List",
             },
+            "links": Object {
+              "message": "Wrong payload: Text[] expected",
+              "payload": undefined,
+              "type": "List",
+            },
           },
           "index": 1,
           "message": "Assertion failed",
@@ -24,6 +29,11 @@ Object {
         },
         Object {
           "fields": Object {
+            "links": Object {
+              "message": "Wrong payload: Text[] expected",
+              "payload": undefined,
+              "type": "List",
+            },
             "name": Object {
               "message": "Wrong payload: Text expected",
               "payload": undefined,
@@ -42,6 +52,9 @@ Object {
       "payload": Array [
         Object {
           "age": 8,
+          "links": Array [
+            "b",
+          ],
           "name": "Lisa",
         },
         Object {
@@ -70,6 +83,9 @@ Object {
       },
       "message": "Assertion failed",
       "payload": Object {
+        "links": Array [
+          "a",
+        ],
         "name": "Parent",
       },
       "type": "Human",
@@ -81,6 +97,9 @@ Object {
     "children": Array [
       Object {
         "age": 8,
+        "links": Array [
+          "b",
+        ],
         "name": "Lisa",
       },
       Object {
@@ -92,7 +111,14 @@ Object {
         "age": 3,
       },
     ],
+    "links": Array [
+      "a",
+      "c",
+    ],
     "parent": Object {
+      "links": Array [
+        "a",
+      ],
       "name": "Parent",
     },
   },

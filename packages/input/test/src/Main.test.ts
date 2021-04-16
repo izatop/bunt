@@ -64,16 +64,18 @@ describe("Test Input", () => {
             name: Text,
             children: () => new NonNull(new List(human), []),
             parent: () => new Nullable(human),
+            links: () => new List(Text),
         }, "Human");
 
         const payload = {
             age: 32,
-            parent: {name: "Parent"},
+            parent: {name: "Parent", links: ["a"]},
             children: [
-                {name: "Lisa", age: 8},
+                {name: "Lisa", age: 8, links: ["b"]},
                 {age: 12, name: "Bob", children: 1},
                 {age: 3},
             ],
+            links: ["a", "c"],
         };
 
         const pending = validate(human, payload);

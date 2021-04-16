@@ -3,4 +3,5 @@ export interface ITestType {
     age: number;
     parent?: ITestType;
     children?: ITestType[];
+    links: string[];
 }
