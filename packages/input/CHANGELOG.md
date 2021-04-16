@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.15.16](https://github.com/izatop/bunt/compare/v0.15.15...v0.15.16) (2021-04-16)
+
+
+### Bug Fixes
+
+* input type array ([ec77e42](https://github.com/izatop/bunt/commit/ec77e425a9a81ca8ef3ce2b588a5f5d7d10bff65))
+
+
+
+
+
 ## [0.15.11](https://github.com/izatop/bunt/compare/v0.15.10...v0.15.11) (2021-03-04)
 
 **Note:** Version bump only for package @bunt/input
