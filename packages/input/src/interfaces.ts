@@ -1,5 +1,5 @@
 import {MaybeArray, MayNullable} from "@bunt/util";
-import {Fields, List} from "./Type";
+import {Fields, List, Union} from "./Type";
 import {TypeAbstract} from "./TypeAbstract";
 
 export type Scalars = string | number | boolean;
@@ -17,9 +17,11 @@ export type FieldType<T> = T | FieldFn<T>;
 export type FieldsSchema<T> = {
     [K in keyof T]-?: T[K] extends Array<infer S>
         ? FieldType<List<S, any>>
-        : T[K] extends Record<any, any>
-            ? FieldType<Fields<T[K]>>
-            : FieldType<TypeAbstract<T[K], any>>;
+        : T[K] extends Date
+            ? FieldType<TypeAbstract<T[K], any>>
+            : T[K] extends Record<any, any>
+                ? FieldType<Fields<T[K]> | Union<T[K]>>
+                : FieldType<TypeAbstract<T[K], any>>;
 };
 
 export type ObjectFields<T> = T extends Promise<infer A>

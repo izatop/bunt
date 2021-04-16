@@ -1,4 +1,3 @@
-import {DateTime} from "@bunt/input";
 import {isInstanceOf} from "@bunt/util";
 import {
     Bool,
@@ -14,9 +13,10 @@ import {
     Union,
     validate,
     Varchar,
+    DateTime,
 } from "../../src";
 import {AssertionObjectError} from "../../src/Assertion";
-import {ITestType} from "./interfaces";
+import {ITestDescription, ITestHobby, ITestType} from "./interfaces";
 
 describe("Test Input", () => {
     const rand = Math.random();
@@ -59,12 +59,24 @@ describe("Test Input", () => {
     );
 
     test("AssertionError", async () => {
+        const Description = new Fields<ITestDescription>({
+            author: Text,
+            date: DateTime,
+            text: Text,
+        });
+
+        const Hobby = new Fields<ITestHobby>({
+            type: Text,
+            description: new Nullable(Description),
+        });
+
         const human: Fields<ITestType> = new Fields<ITestType>({
             age: Int,
             name: Text,
             children: () => new NonNull(new List(human), []),
             parent: () => new Nullable(human),
             links: () => new List(Text),
+            hobby: new Nullable(Hobby),
         }, "Human");
 
         const payload = {
