@@ -1,6 +1,6 @@
 {
     "name": "@bunt/cli",
-    "version": "0.15.16",
+    "version": "0.15.17",
     "keywords": [
         "typescript"
     ],
@@ -26,7 +26,7 @@
         "access": "public"
     },
     "dependencies": {
-        "@bunt/app": "^0.15.16",
+        "@bunt/app": "^0.15.17",
         "@bunt/util": "^0.15.11",
         "path-to-regexp": "^6.2.0"
     },
