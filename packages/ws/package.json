@@ -30,8 +30,8 @@
         "@bunt/unit": "^0.15.11",
         "@bunt/util": "^0.15.11",
         "@bunt/web": "^0.15.17",
-        "@types/ws": "^7.4.1",
-        "ws": "^7.4.4"
+        "@types/ws": "^7.4.2",
+        "ws": "^7.4.5"
     },
     "license": "MIT",
     "devDependencies": {
