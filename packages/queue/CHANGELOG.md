@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.15.18](https://github.com/izatop/bunt/compare/v0.15.17...v0.15.18) (2021-04-28)
+
+
+### Bug Fixes
+
+* update deps ([75e250d](https://github.com/izatop/bunt/commit/75e250d5653630bb28d2b72e868d749089466132))
+
+
+
+
+
 ## [0.15.15](https://github.com/izatop/bunt/compare/v0.15.14...v0.15.15) (2021-04-14)
 
 
