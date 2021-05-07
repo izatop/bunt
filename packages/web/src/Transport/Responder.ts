@@ -104,7 +104,7 @@ export class Responder extends RequestMessage implements IResponder {
             const {code, status} = options;
             const headers = new KeyValueMap(Object.entries(options.headers || {}));
             if (!headers.has("content-type")) {
-                headers.set("context-type", "text/plain; charset=utf-8");
+                headers.set("content-type", "text/plain; charset=utf-8");
             }
 
             for (const [header, value] of headers.entries()) {
