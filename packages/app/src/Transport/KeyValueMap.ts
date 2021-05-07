@@ -1,7 +1,7 @@
 import {IKeyValueMap} from "../interfaces";
 
 export class KeyValueMap implements IKeyValueMap {
-    #map: Map<string, string>;
+    readonly #map: Map<string, string>;
 
     constructor(values: [string, string][]) {
         this.#map = new Map(values);
@@ -16,7 +16,7 @@ export class KeyValueMap implements IKeyValueMap {
     }
 
     public get(name: string, defaultValue?: string): string {
-        return this.#map.get(name) || defaultValue || "";
+        return this.#map.get(name.toLowerCase()) || defaultValue || "";
     }
 
     public has(name: string): boolean {
@@ -24,7 +24,7 @@ export class KeyValueMap implements IKeyValueMap {
     }
 
     public set(name: string, value: string): void {
-        this.#map.set(name, value);
+        this.#map.set(name.toLowerCase(), value);
     }
 
     public toJSON(): { [p: string]: string } {

@@ -47,7 +47,7 @@ export abstract class ResponseAbstract<T> {
     public getHeaders(): Record<any, string> {
         return {
             ...this.#headers,
-            "Content-Type": this.getContentType(),
+            "content-type": this.getContentType(),
         };
     }
 

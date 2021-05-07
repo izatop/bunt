@@ -101,13 +101,13 @@ export class Responder extends RequestMessage implements IResponder {
      */
     protected send(body: string | undefined | Buffer, options: IRequestSendOptions = {code: 200}): void {
         try {
-            const {code, status} = options;
-            const headers = new KeyValueMap(Object.entries(options.headers || {}));
-            if (!headers.has("content-type")) {
-                headers.set("content-type", "text/plain; charset=utf-8");
+            const {code, status, headers} = options;
+            const headersMap = new KeyValueMap(Object.entries(headers || {}));
+            if (!headersMap.has("content-type")) {
+                headersMap.set("content-type", "text/plain; charset=utf-8");
             }
 
-            for (const [header, value] of headers.entries()) {
+            for (const [header, value] of headersMap.entries()) {
                 this.#response.setHeader(header, value);
             }
 
