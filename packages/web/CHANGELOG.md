@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.15.19](https://github.com/izatop/bunt/compare/v0.15.18...v0.15.19) (2021-05-07)
+
+
+### Bug Fixes
+
+* context-type -> content-type ([b14ca47](https://github.com/izatop/bunt/commit/b14ca473fd0470144ff5161a8bb106941cf4c086))
+
+
+
+
+
 ## [0.15.17](https://github.com/izatop/bunt/compare/v0.15.16...v0.15.17) (2021-04-16)
 
 **Note:** Version bump only for package @bunt/web
