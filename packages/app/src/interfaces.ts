@@ -39,11 +39,6 @@ export interface IKeyValueMap {
     toJSON(): { [key: string]: string };
 }
 
-export interface IKeyValueReadonlyMap extends IKeyValueMap {
-    set: never;
-    delete: never;
-}
-
 export interface IRequestBodyTransform<T> {
     transform(request: IRequestMessage): Promise<T>;
 }
@@ -89,6 +84,6 @@ export type HeaderAssertValue = |
     string[] |
     ((value: string) => boolean | void);
 
-export interface IHeaders extends IKeyValueReadonlyMap {
+export interface IHeaders extends IKeyValueMap {
     assert(header: string, values: HeaderAssertValue): void;
 }

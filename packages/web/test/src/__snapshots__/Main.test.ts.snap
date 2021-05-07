@@ -4,7 +4,7 @@ exports[`Response JSON 1`] = `"application/json; charset=utf-8"`;
 
 exports[`Response JSON 2`] = `
 Object {
-  "Content-Type": "application/json; charset=utf-8",
+  "content-type": "application/json; charset=utf-8",
 }
 `;
 
@@ -13,7 +13,7 @@ Object {
   "body": "{\\"foo\\":\\"bar\\"}",
   "code": 200,
   "headers": Object {
-    "Content-Type": "application/json; charset=utf-8",
+    "content-type": "application/json; charset=utf-8",
   },
   "status": "OK",
 }
@@ -23,7 +23,7 @@ exports[`Response Main 1`] = `"text/plain; charset=utf-8"`;
 
 exports[`Response Main 2`] = `
 Object {
-  "Content-Type": "text/plain; charset=utf-8",
+  "content-type": "text/plain; charset=utf-8",
   "foo": "123",
 }
 `;
@@ -33,7 +33,7 @@ Object {
   "body": "",
   "code": 204,
   "headers": Object {
-    "Content-Type": "text/plain; charset=utf-8",
+    "content-type": "text/plain; charset=utf-8",
     "foo": "123",
   },
   "status": "No Content",
@@ -45,7 +45,7 @@ Object {
   "body": "",
   "code": 301,
   "headers": Object {
-    "Content-Type": "text/plain; charset=utf-8",
+    "content-type": "text/plain; charset=utf-8",
     "location": "/redirect",
   },
   "status": "Moved Permanently",
@@ -54,7 +54,7 @@ Object {
 
 exports[`Response Redirect 2`] = `
 Object {
-  "Content-Type": "text/plain; charset=utf-8",
+  "content-type": "text/plain; charset=utf-8",
   "location": "/redirect",
 }
 `;

@@ -1,12 +1,9 @@
 import {assert, ILogable, isBoolean, isFunction} from "@bunt/util";
 import {HeaderAssertValue, IHeaders} from "../interfaces";
-import {KeyValueReadonlyMap} from "./KeyValueReadonlyMap";
+import {StrictKeyValueMap} from "./StrictKeyValueMap";
 
-export abstract class HeadersAbstract extends KeyValueReadonlyMap
+export abstract class HeadersAbstract extends StrictKeyValueMap
     implements IHeaders, ILogable<{ [key: string]: string }> {
-    constructor(values: [string, string][]) {
-        super(values.map(([key, value]) => [key.toLowerCase(), value]));
-    }
 
     public assert(header: string, expected: HeaderAssertValue): void {
         const clientValue = this.get(header.toLowerCase());

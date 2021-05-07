@@ -1,4 +1,4 @@
-import {IResponder, KeyValueMap, RouteResponse} from "@bunt/app";
+import {IResponder, RouteResponse, StrictKeyValueMap} from "@bunt/app";
 import {
     assert,
     isBoolean,
@@ -75,15 +75,23 @@ export class Responder extends RequestMessage implements IResponder {
             if (isError(response)) {
                 const transform = new TransformError(response);
                 const accept = this.headers.get("accept");
-                const {body: transformed, ...status} = accept.includes("application/json")
+                const {body: transformed, ...props} = accept.includes("application/json")
                     ? transform.toJSON()
                     : transform.toString();
 
                 if (accept.includes("application/json")) {
-                    return this.send(transformed, {...status, headers: {"content-type": "application/json"}});
+                    return this.send(
+                        transformed,
+                        {
+                            ...props,
+                            headers: {
+                                "content-type": "application/json; charset=utf-8",
+                            },
+                        },
+                    );
                 }
 
-                return this.send(transformed, {...status});
+                return this.send(transformed, {...props});
             }
 
             if (response instanceof ResponseAbstract) {
@@ -101,8 +109,8 @@ export class Responder extends RequestMessage implements IResponder {
      */
     protected send(body: string | undefined | Buffer, options: IRequestSendOptions = {code: 200}): void {
         try {
-            const {code, status, headers} = options;
-            const headersMap = new KeyValueMap(Object.entries(headers || {}));
+            const {code, status, headers = {}} = options;
+            const headersMap = StrictKeyValueMap.fromObject(headers);
             if (!headersMap.has("content-type")) {
                 headersMap.set("content-type", "text/plain; charset=utf-8");
             }
@@ -121,14 +129,14 @@ export class Responder extends RequestMessage implements IResponder {
     }
 
     protected applyServerOptions(): void {
-        const headers = this.getServerHeaders();
-        for (const [header, value] of Object.entries(headers)) {
+        const headers = StrictKeyValueMap.fromObject(this.getServerHeaders());
+        for (const [header, value] of headers.entries()) {
             this.#response.setHeader(header, value);
         }
     }
 
-    protected getServerHeaders(): Record<any, string> {
-        const headers = this.#options.headers ?? {};
+    protected getServerHeaders(): Record<string, string> {
+        const {headers = {}} = this.#options;
         if (isFunction(headers)) {
             return headers(this);
         }

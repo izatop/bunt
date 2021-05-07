@@ -15,16 +15,16 @@ export class KeyValueMap implements IKeyValueMap {
         return [...this.#map.entries()];
     }
 
-    public get(name: string, defaultValue?: string): string {
-        return this.#map.get(name.toLowerCase()) || defaultValue || "";
+    public static fromObject(input: Record<string, string>): IKeyValueMap {
+        return new this(Object.entries(input));
     }
 
     public has(name: string): boolean {
         return this.#map.has(name);
     }
 
-    public set(name: string, value: string): void {
-        this.#map.set(name.toLowerCase(), value);
+    public get(name: string, defaultValue?: string): string {
+        return this.#map.get(name) || defaultValue || "";
     }
 
     public toJSON(): { [p: string]: string } {
@@ -34,5 +34,9 @@ export class KeyValueMap implements IKeyValueMap {
         }
 
         return object;
+    }
+
+    public set(name: string, value: string): void {
+        this.#map.set(name, value);
     }
 }
