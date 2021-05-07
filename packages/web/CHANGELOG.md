@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.15.20](https://github.com/izatop/bunt/compare/v0.15.19...v0.15.20) (2021-05-07)
+
+
+### Bug Fixes
+
+* headers ([f0ebbf6](https://github.com/izatop/bunt/commit/f0ebbf66f794c6fc7302e015f55ba733b0dca507))
+* update kv map ([af92e90](https://github.com/izatop/bunt/commit/af92e905141e478c48e256c173707d8ce2d68e5e))
+
+
+
+
+
 ## [0.15.19](https://github.com/izatop/bunt/compare/v0.15.18...v0.15.19) (2021-05-07)
 
 
