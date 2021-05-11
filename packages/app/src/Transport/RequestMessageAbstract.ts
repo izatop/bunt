@@ -34,6 +34,11 @@ export abstract class RequestMessageAbstract implements IRequestMessage, ILogabl
         return this.to<unknown>(fromJsonRequest) as Promise<T>;
     }
 
+    public async toString(): Promise<string> {
+        const buffer = await this.getBuffer();
+        return buffer.toString("utf-8");
+    }
+
     public abstract validate(app: Application<any>): boolean;
 
     public abstract createReadableStream(): Promisify<NodeJS.ReadableStream>;

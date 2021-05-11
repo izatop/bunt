@@ -59,6 +59,8 @@ export interface IRequestMessage {
 
     toObject<T = unknown>(): Promise<T>;
 
+    toString() : Promise<string>;
+
     getBuffer(): Promise<Buffer>;
 
     createReadableStream(): Promisify<NodeJS.ReadableStream>;
