@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.15.22](https://github.com/izatop/bunt/compare/v0.15.21...v0.15.22) (2021-05-11)
+
+**Note:** Version bump only for package @bunt/app
+
+
+
+
+
 ## [0.15.20](https://github.com/izatop/bunt/compare/v0.15.19...v0.15.20) (2021-05-07)
 
 
