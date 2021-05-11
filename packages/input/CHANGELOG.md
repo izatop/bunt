@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.15.22](https://github.com/izatop/bunt/compare/v0.15.21...v0.15.22) (2021-05-11)
+
+
+### Bug Fixes
+
+* new type JSONString for the @bunt/input package ([a7dce72](https://github.com/izatop/bunt/commit/a7dce72326acf993971928c87b72567a4575159f))
+
+
+
+
+
 ## [0.15.17](https://github.com/izatop/bunt/compare/v0.15.16...v0.15.17) (2021-04-16)
 
 
