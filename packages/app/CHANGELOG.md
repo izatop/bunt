@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.15.24](https://github.com/izatop/bunt/compare/v0.15.23...v0.15.24) (2021-05-11)
+
+
+### Bug Fixes
+
+* RequestMessage.toString ([45fc8d6](https://github.com/izatop/bunt/commit/45fc8d686f1b949f2bbb691d4c057edee771a119))
+
+
+
+
+
 ## [0.15.23](https://github.com/izatop/bunt/compare/v0.15.22...v0.15.23) (2021-05-11)
 
 **Note:** Version bump only for package @bunt/app
