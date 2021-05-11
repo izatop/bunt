@@ -16,6 +16,7 @@ import {
     DateTime,
 } from "../../src";
 import {AssertionObjectError} from "../../src/Assertion";
+import {JSONString} from "../../src/Type/JSONString";
 import {ITestDescription, ITestHobby, ITestType} from "./interfaces";
 
 describe("Test Input", () => {
@@ -49,6 +50,10 @@ describe("Test Input", () => {
         [false, false, union],
         ["2020-01-01", new Date("2020-01-01"), union],
         [new Date("2020-01-01").getTime(), new Date("2020-01-01"), union],
+        [`{"foo": "bar"}`, {foo: "bar"}, JSONString],
+        ["true", true, JSONString],
+        ["1", 1, JSONString],
+        ["[1]", [1], JSONString],
     ];
 
     test.each(samples)(
@@ -97,5 +102,15 @@ describe("Test Input", () => {
         if (isInstanceOf(error, AssertionObjectError)) {
             expect(error.getLogValue()).toMatchSnapshot();
         }
+    });
+
+    test("JSON parse fails", () => {
+        expect(validate(JSONString, undefined))
+            .rejects
+            .toThrow();
+
+        expect(validate(JSONString, "{123r1]"))
+            .rejects
+            .toThrow();
     });
 });

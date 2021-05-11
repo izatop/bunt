@@ -13,3 +13,4 @@ export * from "./Varchar";
 export * from "./Union";
 export * from "./Bool";
 export * from "./UUID";
+export * from "./JSONString";
