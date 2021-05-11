@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.15.25](https://github.com/izatop/bunt/compare/v0.15.24...v0.15.25) (2021-05-11)
+
+
+### Bug Fixes
+
+* the numeric input type added ([758e07f](https://github.com/izatop/bunt/commit/758e07f64128a10ea94537232326d062a6b7d7a9))
+
+
+
+
+
 ## [0.15.23](https://github.com/izatop/bunt/compare/v0.15.22...v0.15.23) (2021-05-11)
 
 **Note:** Version bump only for package @bunt/input
