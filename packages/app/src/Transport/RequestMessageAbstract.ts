@@ -1,12 +1,15 @@
 import {ILogable, isFunction, Promisify} from "@bunt/util";
 import {Application} from "../Application";
 import {IHeaders, IRequestMessage, IRequestTransform, RequestTransformType} from "../interfaces";
-import {fromJsonRequest} from "./Request";
+import {fromJsonRequest, fromTextRequest} from "./Request";
 
 export abstract class RequestMessageAbstract implements IRequestMessage, ILogable<{ route: string }> {
     public abstract readonly route: string;
     public abstract readonly headers: IHeaders;
 
+    /**
+     * Get a request body as the Buffer object
+     */
     public async getBuffer(): Promise<Buffer> {
         const chunks: Buffer[] = [];
         const readableStream = await this.createReadableStream();
@@ -17,6 +20,11 @@ export abstract class RequestMessageAbstract implements IRequestMessage, ILogabl
         return Buffer.concat(chunks);
     }
 
+    /**
+     * Transform RequestMessage with transformer
+     *
+     * @param transformer
+     */
     public transform<T>(transformer: RequestTransformType<T>): Promise<T> {
         if (isFunction(transformer)) {
             return transformer(this);
@@ -25,18 +33,35 @@ export abstract class RequestMessageAbstract implements IRequestMessage, ILogabl
         return transformer.transform(this);
     }
 
+    /**
+     * Serialize request with transform function.
+     *
+     * @param transform
+     */
     public async to<T>(transform: IRequestTransform<T>): Promise<T> {
         this.headers.assert("content-type", [transform.type].flat(1));
         return transform(await this.getBuffer());
     }
 
+    /**
+     * @deprecated use toJSON<T>()
+     */
     public toObject<T = unknown>(): Promise<T> {
-        return this.to<unknown>(fromJsonRequest) as Promise<T>;
+        return this.to(fromJsonRequest) as Promise<T>;
     }
 
+    /**
+     * Serialize a request body to JSON object.
+     */
+    public toJSON<T = unknown>(): Promise<T> {
+        return this.to(fromJsonRequest) as Promise<T>;
+    }
+
+    /**
+     * Serialize a request body to string.
+     */
     public async toString(): Promise<string> {
-        const buffer = await this.getBuffer();
-        return buffer.toString("utf-8");
+        return this.to(fromTextRequest);
     }
 
     public abstract validate(app: Application<any>): boolean;

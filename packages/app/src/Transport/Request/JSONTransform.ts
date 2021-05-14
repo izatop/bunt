@@ -10,3 +10,8 @@ export const fromJsonRequest: IRequestTransform<unknown> = Object.assign(
     (buffer: Buffer) => JSON.parse(buffer.toString("utf-8")),
     {type: "application/json"},
 );
+
+export const fromTextRequest: IRequestTransform<string> = Object.assign(
+    (buffer: Buffer) => buffer.toString("utf-8"),
+    {type: "text/plain"},
+);
