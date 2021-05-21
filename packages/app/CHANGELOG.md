@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.16.0](https://github.com/izatop/bunt/compare/v0.15.25...v0.16.0) (2021-05-21)
+
+
+### Bug Fixes
+
+* update deps ([1900c81](https://github.com/izatop/bunt/commit/1900c81e2f4f873f3b109e895f661aa5efb51b25))
+
+
+### Features
+
+* clean codebase ([357d6aa](https://github.com/izatop/bunt/commit/357d6aaac3b647e7262459c368c6eb94fab8f96a))
+
+
+
+
+
 ## [0.15.25](https://github.com/izatop/bunt/compare/v0.15.24...v0.15.25) (2021-05-11)
 
 **Note:** Version bump only for package @bunt/app

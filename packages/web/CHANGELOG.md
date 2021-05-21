@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.16.0](https://github.com/izatop/bunt/compare/v0.15.25...v0.16.0) (2021-05-21)
+
+
+### Bug Fixes
+
+* error transformation ([7005c56](https://github.com/izatop/bunt/commit/7005c56e7b228c94c758e743cccd38aa77af43ee))
+* isPrototypeOf ([75cf660](https://github.com/izatop/bunt/commit/75cf6605de73ae25f276fb2a2e4326022b970bec))
+
+
+### Features
+
+* clean codebase ([357d6aa](https://github.com/izatop/bunt/commit/357d6aaac3b647e7262459c368c6eb94fab8f96a))
+
+
+
+
+
 ## [0.15.25](https://github.com/izatop/bunt/compare/v0.15.24...v0.15.25) (2021-05-11)
 
 **Note:** Version bump only for package @bunt/web

@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.16.0](https://github.com/izatop/bunt/compare/v0.15.25...v0.16.0) (2021-05-21)
+
+
+### Bug Fixes
+
+* exports ([20b5cad](https://github.com/izatop/bunt/commit/20b5cad15cb2d88025d101fe72dff21671894c23))
+
+
+### Features
+
+* clean codebase ([357d6aa](https://github.com/izatop/bunt/commit/357d6aaac3b647e7262459c368c6eb94fab8f96a))
+
+
+
+
+
 ## [0.15.25](https://github.com/izatop/bunt/compare/v0.15.24...v0.15.25) (2021-05-11)
 
 
