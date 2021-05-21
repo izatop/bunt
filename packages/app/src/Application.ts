@@ -1,6 +1,6 @@
 import {ApplyContext, Context, ContextArg, IContext, unit, Unit} from "@bunt/unit";
 import {assert, isDefined, logger, Logger} from "@bunt/util";
-import {IRequestMessage, MatchRoute, RouteResponse} from "./interfaces";
+import {ActionResponse, IRequest, MatchRoute} from "./interfaces";
 import {IRoute, RouteNotFound} from "./Route";
 
 export class Application<C extends IContext> {
@@ -51,7 +51,7 @@ export class Application<C extends IContext> {
         return this;
     }
 
-    public async run<R extends IRequestMessage>(request: R): Promise<RouteResponse> {
+    public async run(request: IRequest): Promise<ActionResponse> {
         const route = this.route.find((route) => route.test(request.route));
         assert(route, () => new RouteNotFound(request.route));
 

@@ -1,5 +1,5 @@
 import {Action, ActionCtor, IContext} from "@bunt/unit";
-import {IRequestMessage, RouteAction} from "../interfaces";
+import {IRequest, RouteAction} from "../interfaces";
 import {Payload} from "../Payload";
 import {Route} from "./Route";
 import {RouteRule} from "./RouteRule";
@@ -26,7 +26,7 @@ export type RouteFactory = <A extends RouteAction>(action: ActionCtor<A>, rule: 
 
 export interface IRouteContext<C extends IContext> {
     context: C;
-    request: IRequestMessage;
+    request: IRequest;
     args: Map<string, string>;
 }
 

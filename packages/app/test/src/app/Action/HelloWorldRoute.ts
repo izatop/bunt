@@ -1,9 +1,9 @@
-import {Resolver, RouteRule} from "../../../src";
+import {Resolver, RouteRule} from "../../../../src";
 import {Bool, Fields, Int, Text, ToNumber} from "@bunt/input";
-import {pathRoute} from "../route";
+import {route} from "../../route";
 import {HelloWorldAction} from "./HelloWorldAction";
 
-export default pathRoute(
+export default route(
     HelloWorldAction,
     new RouteRule(
         "/u/:id",

@@ -1,10 +1,10 @@
-import {IResponder, RouteResponse, StrictKeyValueMap} from "@bunt/app";
+import {ActionResponse, StrictKeyValueMap} from "@bunt/app";
 import {
     assert,
+    Ctor,
     isBoolean,
     isError,
     isFunction,
-    isNull,
     isNumber,
     isObject,
     isReadableStream,
@@ -15,18 +15,23 @@ import {IncomingMessage, ServerResponse} from "http";
 import {IRequestSendOptions, IResponderOptions} from "./interfaces";
 import {RequestMessage} from "./RequestMessage";
 import {ResponseAbstract} from "./Response";
-import {TransformError} from "./TransformError";
+import {IErrorResponseHeaders, TransformError} from "./TransformError";
 
-export class Responder extends RequestMessage implements IResponder {
+export class Responder extends RequestMessage {
     readonly #options: IResponderOptions;
     readonly #response: ServerResponse;
 
     #complete = false;
+    #errorHeadersMap: Map<Ctor<Error>, IErrorResponseHeaders>;
 
-    constructor(incomingMessage: IncomingMessage, serverResponse: ServerResponse, options?: IResponderOptions) {
+    constructor(incomingMessage: IncomingMessage,
+                serverResponse: ServerResponse,
+                errorHeadersMap: Map<Ctor<Error>, IErrorResponseHeaders>,
+                options?: IResponderOptions) {
         super(incomingMessage, options);
         this.#options = options ?? {};
         this.#response = serverResponse;
+        this.#errorHeadersMap = errorHeadersMap;
     }
 
     public get complete(): boolean {
@@ -39,26 +44,22 @@ export class Responder extends RequestMessage implements IResponder {
         }
     }
 
-    public async respond(response: RouteResponse): Promise<void> {
-        assert(!this.complete, `Response was already sent`);
-        try {
-            await this.write(response);
-        } finally {
-            this.#complete = true;
-        }
-    }
-
     /**
      * @param response
      */
-    protected async write(response: RouteResponse): Promise<void> {
-        // @TODO Validate types in the Accept header before send a #response.
-
-        if (isUndefined(response) || isNull(response)) {
+    public async respond(response: ActionResponse): Promise<void> {
+        assert(!this.complete, `Response was already sent`);
+        if (isUndefined(response)) {
             return this.send("");
         }
 
+        const accept = this.headers.get("accept");
+
         if (isString(response) || isNumber(response) || isBoolean(response)) {
+            if (accept.includes("application/json")) {
+                return this.send(JSON.stringify(response));
+            }
+
             return this.send(response.toString());
         }
 
@@ -73,7 +74,7 @@ export class Responder extends RequestMessage implements IResponder {
             }
 
             if (isError(response)) {
-                const transform = new TransformError(response);
+                const transform = new TransformError(response, this.#errorHeadersMap);
                 const accept = this.headers.get("accept");
                 const {body: transformed, ...props} = accept.includes("application/json")
                     ? transform.toJSON()
@@ -124,6 +125,7 @@ export class Responder extends RequestMessage implements IResponder {
             this.#response.writeHead(code, status);
             this.#response.write(body);
         } finally {
+            this.#complete = true;
             this.#response.end();
         }
     }

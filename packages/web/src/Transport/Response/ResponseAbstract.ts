@@ -1,7 +1,6 @@
 import {isFunction, isInstanceOf, isNumber, Promisify} from "@bunt/util";
 import * as HTTP from "http-status";
 import {Headers} from "../Headers";
-import {TransformError} from "../TransformError";
 
 export interface IResponseOptions {
     code?: number;
@@ -54,20 +53,13 @@ export abstract class ResponseAbstract<T> {
     public async getResponse(): Promise<IResponseAnswer> {
         const {status, code} = this;
         const headers = this.getHeaders();
-        try {
-            return {
-                code,
-                status,
-                headers,
-                body: this.stringify(await this.#data),
-            };
-        } catch (error) {
-            const transform = new TransformError(error);
-            return {
-                ...transform.toJSON(),
-                headers,
-            };
-        }
+
+        return {
+            code,
+            status,
+            headers,
+            body: this.stringify(await this.#data),
+        };
     }
 
     public getContentType(): string {

@@ -1,5 +1,5 @@
 import {JSONTransform, URLEncodedFormTransform} from "../../src";
-import {Request} from "./transport/Request";
+import {Request} from "./app/Request/Request";
 
 describe("Request", () => {
     test("JSONTransform", async () => {

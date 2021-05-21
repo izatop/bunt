@@ -1,2 +1,2 @@
 export * from "./Transport";
-export * from "./WebServer/WebServer";
+export * from "./WebServer";

@@ -1,6 +1,6 @@
 import {Application} from "../../src";
-import HelloWorldRoute from "./action/HelloWorldRoute";
-import {BaseContext} from "./context/BaseContext";
+import HelloWorldRoute from "./app/Action/HelloWorldRoute";
+import {BaseContext} from "./app/Context/BaseContext";
 
 test("Application", async () => {
     const app = await Application.factory(async () => new BaseContext(), []);

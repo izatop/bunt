@@ -1,4 +1,4 @@
-import {Application, IResponder, IRoute, MatchRoute} from "@bunt/app";
+import {ActionResponse, Application, IRoute, MatchRoute, RouteNotFound} from "@bunt/app";
 import {
     ApplyContext,
     Context,
@@ -12,11 +12,11 @@ import {
     unit,
     Unit,
 } from "@bunt/unit";
-import {assert, isInstanceOf, logger, Logger} from "@bunt/util";
+import {assert, AssertionError, Ctor, logger, Logger, Promisify} from "@bunt/util";
 import * as http from "http";
 import {IncomingMessage, ServerResponse} from "http";
 import {Socket} from "net";
-import {IProtocolAcceptor, IResponderOptions, Responder} from "../Transport";
+import {IErrorResponseHeaders, IProtocolAcceptor, IResponderOptions, Responder} from "./Transport";
 
 export class WebServer<C extends IContext> extends Application<C>
     implements IDisposableSync, IRunnable, IDestroyable {
@@ -27,11 +27,17 @@ export class WebServer<C extends IContext> extends Application<C>
     readonly #options: IResponderOptions;
     readonly #server: http.Server;
     readonly #acceptors = new Map<string, IProtocolAcceptor>();
+    readonly #errorsHeadersMap = new Map<Ctor<Error>, IErrorResponseHeaders>();
 
     protected constructor(unit: Unit<C>, routes: MatchRoute<C, IRoute>[] = [], options?: IResponderOptions) {
         super(unit, routes);
         this.#server = new http.Server();
         this.#options = options ?? {};
+
+        this.setExceptionResponseHeaders(
+            [AssertionError, {code: 400}],
+            [RouteNotFound, {code: 404, status: "Not found"}],
+        );
     }
 
     public static async factory<C extends Context>(
@@ -56,16 +62,6 @@ export class WebServer<C extends IContext> extends Application<C>
         return this;
     }
 
-    public async dispose(): Promise<void> {
-        await this.destroy();
-    }
-
-    public destroy(): Promise<void> {
-        this.logger.info("destroy");
-        assert(this.#server.listening, "Server was destroyed");
-        return new Promise<void>((resolve) => this.#server.close(() => resolve));
-    }
-
     public setUpgradeProtocolAcceptor(acceptor: IProtocolAcceptor): () => void {
         const protocol = acceptor.protocol.toLowerCase();
         assert(
@@ -78,26 +74,44 @@ export class WebServer<C extends IContext> extends Application<C>
         return () => this.#acceptors.delete(protocol);
     }
 
-    protected async handle<R extends IResponder>(request: R): Promise<void> {
-        const finish = this.logger.perf("handle", request);
+    public setExceptionResponseHeaders(...map: [error: Ctor<Error>, options: IErrorResponseHeaders][]): void {
+        for (const [error, options] of map) {
+            this.#errorsHeadersMap.set(error, options);
+        }
+    }
+
+    public async dispose(): Promise<void> {
+        await this.destroy();
+    }
+
+    public destroy(): Promise<void> {
+        this.logger.info("destroy");
+        assert(this.#server.listening, "Server was destroyed");
+        return new Promise<void>((resolve) => this.#server.close(() => resolve));
+    }
+
+    protected async handle(req: IncomingMessage, res: ServerResponse): Promise<void> {
+        const finish = this.logger.perf("handle", req.url);
 
         try {
+            const request = new Responder(req, res, this.#errorsHeadersMap, this.#options);
             assert(request.validate(this), "Invalid Request");
-            await request.respond(await this.run(request));
-        } catch (error) {
-            if (!request.complete) {
-                await request.respond(error);
-            }
-
-            if (isInstanceOf(error, Error)) {
-                throw error;
-            }
+            await this.respond(request, this.run(request));
         } finally {
             finish();
         }
     }
 
-    protected handleUpgrade = (req: IncomingMessage, socket: Socket, head: Buffer): void => {
+    private async respond(request: Responder, response: Promisify<ActionResponse>) {
+        try {
+            const next = await response;
+            await request.respond(next);
+        } catch (error) {
+            await request.respond(error);
+        }
+    }
+
+    private handleUpgrade = (req: IncomingMessage, socket: Socket, head: Buffer): void => {
         const {upgrade} = req.headers;
         try {
             assert(upgrade, "Upgrade headers mustn't be empty");
@@ -113,24 +127,27 @@ export class WebServer<C extends IContext> extends Application<C>
         }
     };
 
-    protected handleRequest = async (req: IncomingMessage, res: ServerResponse): Promise<void> => {
-        const finish = this.logger.perf("request", {request: req.method, url: req.url});
+    private handleRequest = async (req: IncomingMessage, res: ServerResponse): Promise<void> => {
+        const finish = this.logger.perf("request", {method: req.method, url: req.url});
         try {
-            this.logger.info(`${req.method} ${req.url}`);
-            await this.handle(new Responder(req, res, this.#options));
+            this.logger.debug(`${req.method} ${req.url}`);
+            await this.handle(req, res);
         } catch (error) {
-            this.logger.alert(
-                error.message,
-                error,
-                {url: req.url, method: req.method, headers: req.headers},
-            );
+            const {url, method, headers} = req;
+            const request = {url, method, headers};
+            const response = {writable: res.writable, headersSent: res.headersSent, headers: res.getHeaders()};
+            this.logger.critical("Uncaught error", error);
+            this.logger.debug(error.message, error, {request, response});
 
             if (!res.headersSent) {
                 res.writeHead(500, "Internal Server Error");
             }
         } finally {
+            if (res.writable) {
+                res.end();
+            }
+
             finish();
-            res.writable && res.end();
         }
     };
 }

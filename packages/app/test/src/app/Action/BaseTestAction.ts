@@ -1,5 +1,5 @@
 import {Action} from "@bunt/unit";
-import {IBaseContext} from "../context/BaseContext";
+import {IBaseContext} from "../Context/BaseContext";
 
 export class BaseTestAction extends Action<IBaseContext, { name: string }> {
     public run(): string {

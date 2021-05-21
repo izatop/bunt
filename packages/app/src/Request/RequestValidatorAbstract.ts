@@ -1,5 +1,5 @@
 import {Application} from "../Application";
-import {IRequestMessage} from "../interfaces";
+import {IRequest} from "../interfaces";
 
 export abstract class RequestValidatorAbstract<T extends Record<string, any>> {
     protected readonly options: T;
@@ -8,5 +8,5 @@ export abstract class RequestValidatorAbstract<T extends Record<string, any>> {
         this.options = options;
     }
 
-    public abstract validate(app: Application<any>, request: IRequestMessage): void;
+    public abstract validate(app: Application<any>, request: IRequest): void;
 }

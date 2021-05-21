@@ -1,7 +1,7 @@
 import {Application} from "../../src";
-import TestInputStateValidationRoute from "./action/TestInputStateValidationRoute";
-import {BaseContext} from "./context/BaseContext";
-import {Request} from "./transport/Request";
+import TestInputStateValidationRoute from "./app/Action/TestInputStateValidationRoute";
+import {BaseContext} from "./app/Context/BaseContext";
+import {Request} from "./app/Request/Request";
 
 describe("Route", () => {
     const bd = new Date("2020-11-08T12:18:06.051Z").toISOString();

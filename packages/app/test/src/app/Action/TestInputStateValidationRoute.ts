@@ -1,7 +1,7 @@
 import {DateTime, Fields, Text, Varchar} from "@bunt/input";
 import {Action} from "@bunt/unit";
-import {RegexpMatcher, Resolver, Route, RouteRule} from "../../../src";
-import {IBaseContext} from "../context/BaseContext";
+import {RegexpMatcher, Resolver, Route, RouteRule} from "../../../../src";
+import {IBaseContext} from "../Context/BaseContext";
 
 export interface ITestTypeValidationState {
     session: string;

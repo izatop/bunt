@@ -1,9 +1,9 @@
 import {ILogable, isFunction, Promisify} from "@bunt/util";
 import {Application} from "../Application";
-import {IHeaders, IRequestMessage, IRequestTransform, RequestTransformType} from "../interfaces";
-import {fromJsonRequest, fromTextRequest} from "./Request";
+import {IHeaders, IRequest, IRequestTransform, RequestTransformType} from "../interfaces";
+import {fromJsonRequest, fromTextRequest} from "../TransformRequest";
 
-export abstract class RequestMessageAbstract implements IRequestMessage, ILogable<{ route: string }> {
+export abstract class RequestAbstract implements IRequest, ILogable<{ route: string }> {
     public abstract readonly route: string;
     public abstract readonly headers: IHeaders;
 
@@ -44,16 +44,9 @@ export abstract class RequestMessageAbstract implements IRequestMessage, ILogabl
     }
 
     /**
-     * @deprecated use toJSON<T>()
+     * Serialize a request body to JSON.
      */
     public toObject<T = unknown>(): Promise<T> {
-        return this.to(fromJsonRequest) as Promise<T>;
-    }
-
-    /**
-     * Serialize a request body to JSON object.
-     */
-    public toJSON<T = unknown>(): Promise<T> {
         return this.to(fromJsonRequest) as Promise<T>;
     }
 

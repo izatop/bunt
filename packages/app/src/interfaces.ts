@@ -3,7 +3,7 @@ import {Promisify} from "@bunt/util";
 import {Application} from "./Application";
 import {IRoute} from "./Route";
 
-export type RouteResponse = Error
+export type ActionResponse = Error
     | { stringify(): string }
     | NodeJS.ReadableStream
     | Buffer
@@ -18,7 +18,7 @@ export type RouteResponse = Error
 export type RouteAction = Action<any, any>;
 
 export type MatchRoute<C extends Context, R> = R extends IRoute<infer A>
-    ? A extends Action<infer AC, any, RouteResponse>
+    ? A extends Action<infer AC, any, ActionResponse>
         ? MatchContext<C, AC> extends AC
             ? R
             : ["Action context doesn't match its parent context", C, AC]
@@ -40,10 +40,10 @@ export interface IKeyValueMap {
 }
 
 export interface IRequestBodyTransform<T> {
-    transform(request: IRequestMessage): Promise<T>;
+    transform(request: IRequest): Promise<T>;
 }
 
-export type RequestTransformType<T> = IRequestBodyTransform<T> | ((request: IRequestMessage) => Promise<T>);
+export type RequestTransformType<T> = IRequestBodyTransform<T> | ((request: IRequest) => Promise<T>);
 
 export interface IRequestTransform<T> {
     type: string | string[];
@@ -51,7 +51,7 @@ export interface IRequestTransform<T> {
     (buffer: Buffer): T;
 }
 
-export interface IRequestMessage {
+export interface IRequest {
     readonly route: string;
     readonly headers: IHeaders;
 
@@ -59,7 +59,7 @@ export interface IRequestMessage {
 
     toObject<T = unknown>(): Promise<T>;
 
-    toString() : Promise<string>;
+    toString(): Promise<string>;
 
     getBuffer(): Promise<Buffer>;
 
@@ -69,17 +69,6 @@ export interface IRequestMessage {
 
     validate(app: Application<any>): boolean;
 }
-
-export interface IResponder extends IRequestMessage {
-    readonly complete: boolean;
-
-    respond(response: RouteResponse): Promise<void>;
-}
-
-/**
- * @deprecated see IResponder
- */
-export interface IRequest extends IResponder {}
 
 export type HeaderAssertValue = |
     string |

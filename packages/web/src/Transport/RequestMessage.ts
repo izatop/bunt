@@ -1,11 +1,11 @@
-import {Application, IHeaders, RequestMessageAbstract, RequestValidatorAbstract} from "@bunt/app";
+import {Application, IHeaders, RequestAbstract, RequestMessageAbstract, RequestValidatorAbstract} from "@bunt/app";
 import {isString, toArray} from "@bunt/util";
 import {IncomingMessage} from "http";
 import {URL} from "url";
 import {Headers} from "./Headers";
 import {IRequestMessageOptions} from "./interfaces";
 
-export class RequestMessage extends RequestMessageAbstract {
+export class RequestMessage extends RequestAbstract {
     public readonly headers: IHeaders;
     public readonly route: string;
 

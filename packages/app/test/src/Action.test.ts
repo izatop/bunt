@@ -1,7 +1,7 @@
 import {Application, RouteNotFound} from "../../src";
-import HelloWorldRoute from "./action/HelloWorldRoute";
-import {BaseContext} from "./context/BaseContext";
-import {Request} from "./transport/Request";
+import HelloWorldRoute from "./app/Action/HelloWorldRoute";
+import {BaseContext} from "./app/Context/BaseContext";
+import {Request} from "./app/Request/Request";
 
 describe("Route", () => {
     const headers = {"Content-Type": "application/json"};
@@ -14,15 +14,11 @@ describe("Route", () => {
             JSON.stringify({name: "World"}),
         );
 
-        try {
-            const response = await app.run(request);
-            expect({request, response}).toMatchSnapshot();
-        } catch (error) {
-            console.log(error.toSafeJSON());
-        }
+        const response = await app.run(request);
+        expect({request, response}).toMatchSnapshot();
     });
 
-    test("Fails", async () => {
+    test("Validation fails", async () => {
         const app = await Application.factory(new BaseContext(), [HelloWorldRoute]);
         const wrongRequest = new Request(
             "/u/123",
@@ -35,7 +31,7 @@ describe("Route", () => {
             .toThrow("Assertion failed");
     });
 
-    test("Not found", async () => {
+    test("Route not found", async () => {
         const app = await Application.factory(new BaseContext());
         const request = new Request("/wrong-uri", {});
         await expect(app.run(request)).rejects.toThrowError(RouteNotFound);

@@ -1,6 +1,6 @@
 import {Argv} from "../Node";
 
-export class Console {
+export class ConsoleArgs {
     public readonly argv: Argv;
 
     constructor(argv?: string[]) {

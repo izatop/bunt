@@ -1,4 +1,4 @@
-import {isReadableError} from "@bunt/util";
+import {Ctor, isReadableError} from "@bunt/util";
 import {ServerError} from "./ServerError";
 
 export interface IErrorResponse {
@@ -7,17 +7,20 @@ export interface IErrorResponse {
     body: string;
 }
 
-const map = new Map([
-    ["RouteNotFound", {code: 404, status: "Not found"}],
-    ["ValidationError", {code: 400, status: "Bad request"}],
-    ["AssertionError", {code: 400, status: "Bad request"}],
-]);
+export interface IErrorResponseHeaders {
+    readonly code: number;
+    readonly status?: string;
+    readonly headers?: Record<string, string>;
+}
 
 export class TransformError {
     readonly #error: Error;
 
-    constructor(error: Error) {
+    readonly #errorHeadersMap: Map<Ctor<Error>, IErrorResponseHeaders>;
+
+    constructor(error: Error, errorHeadersMap: Map<Ctor<Error>, IErrorResponseHeaders>) {
         this.#error = error;
+        this.#errorHeadersMap = errorHeadersMap;
     }
 
     public toString(): IErrorResponse {
@@ -40,10 +43,7 @@ export class TransformError {
             return {code, status};
         }
 
-        const name = this.#error.constructor.name;
-        const status = map.get(name);
-
-        return status ?? {code: 500, status: "Internal Server Error"};
+        return {code: 500, status: "Internal Server Error"};
     }
 
     private getResponse(): string {

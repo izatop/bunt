@@ -1,5 +1,5 @@
 import {Action} from "@bunt/unit";
-import {IBaseContext} from "../context/BaseContext";
+import {IBaseContext} from "../Context/BaseContext";
 
 interface IHelloWorldActionState {
     id: number;
