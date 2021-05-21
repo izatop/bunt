@@ -43,6 +43,12 @@ export class TransformError {
             return {code, status};
         }
 
+        for (const [type, {code, status}] of this.#errorHeadersMap.entries()) {
+            if (type.isPrototypeOf(this.#error)) {
+                return {code, status};
+            }
+        }
+
         return {code: 500, status: "Internal Server Error"};
     }
 
