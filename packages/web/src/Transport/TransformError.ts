@@ -44,7 +44,7 @@ export class TransformError {
         }
 
         for (const [type, {code, status}] of this.#errorHeadersMap.entries()) {
-            if (type.isPrototypeOf(this.#error)) {
+            if (type.isPrototypeOf(this.#error.constructor)) {
                 return {code, status};
             }
         }
