@@ -1,9 +1,12 @@
 import {isInstanceOf} from "@bunt/util";
 import {
+    AssertionObjectError,
     Bool,
+    DateTime,
     Fields,
     Float,
     Int,
+    JSONString,
     List,
     NonNull,
     Nullable,
@@ -13,11 +16,9 @@ import {
     Union,
     validate,
     Varchar,
-    DateTime,
 } from "../../src";
-import {AssertionObjectError} from "../../src/Assertion";
-import {JSONString} from "../../src/Type/JSONString";
 import {ITestDescription, ITestHobby, ITestType} from "./interfaces";
+import {TestEnum, TestEnumType} from "./Type/TestEnum";
 
 describe("Test Input", () => {
     const rand = Math.random();
@@ -54,6 +55,7 @@ describe("Test Input", () => {
         ["true", true, JSONString],
         ["1", 1, JSONString],
         ["[1]", [1], JSONString],
+        ["STR", TestEnum.STR, TestEnumType],
     ];
 
     test.each(samples)(
@@ -112,5 +114,12 @@ describe("Test Input", () => {
         expect(validate(JSONString, "{123r1]"))
             .rejects
             .toThrow();
+    });
+
+    test("Test Enum", () => {
+        expect(() => TestEnumType.validate("1")).toThrow();
+        expect(() => TestEnumType.validate("str")).toThrow();
+        expect(TestEnumType.validate("NUM")).toBe(TestEnum.NUM);
+        expect(TestEnumType.validate("STR")).toBe(TestEnum.STR);
     });
 });

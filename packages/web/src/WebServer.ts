@@ -1,4 +1,4 @@
-import {ActionResponse, Application, IRoute, MatchRoute, RouteNotFound} from "@bunt/app";
+import {Application, IRoute, MatchRoute, RouteNotFound} from "@bunt/app";
 import {
     ApplyContext,
     Context,
@@ -12,7 +12,7 @@ import {
     unit,
     Unit,
 } from "@bunt/unit";
-import {assert, AssertionError, Ctor, logger, Logger, Promisify} from "@bunt/util";
+import {assert, AssertionError, Ctor, logger, Logger} from "@bunt/util";
 import * as http from "http";
 import {IncomingMessage, ServerResponse} from "http";
 import {Socket} from "net";
@@ -92,22 +92,16 @@ export class WebServer<C extends IContext> extends Application<C>
 
     protected async handle(req: IncomingMessage, res: ServerResponse): Promise<void> {
         const finish = this.logger.perf("handle", req.url);
+        const request = new Responder(req, res, this.#errorsHeadersMap, this.#options);
 
         try {
-            const request = new Responder(req, res, this.#errorsHeadersMap, this.#options);
             assert(request.validate(this), "Invalid Request");
-            await this.respond(request, this.run(request));
-        } finally {
-            finish();
-        }
-    }
-
-    private async respond(request: Responder, response: Promisify<ActionResponse>) {
-        try {
-            const next = await response;
-            await request.respond(next);
+            const response = await this.run(request);
+            await request.respond(response);
         } catch (error) {
             await request.respond(error);
+        } finally {
+            finish();
         }
     }
 
@@ -143,11 +137,11 @@ export class WebServer<C extends IContext> extends Application<C>
                 res.writeHead(500, "Internal Server Error");
             }
         } finally {
+            finish();
+
             if (res.writable) {
                 res.end();
             }
-
-            finish();
         }
     };
 }
