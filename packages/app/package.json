@@ -1,6 +1,6 @@
 {
     "name": "@bunt/app",
-    "version": "0.16.0",
+    "version": "0.17.0",
     "keywords": [
         "typescript"
     ],
@@ -26,9 +26,9 @@
         "access": "public"
     },
     "dependencies": {
-        "@bunt/input": "^0.16.0",
-        "@bunt/unit": "^0.16.0",
-        "@bunt/util": "^0.16.0",
+        "@bunt/input": "^0.17.0",
+        "@bunt/unit": "^0.17.0",
+        "@bunt/util": "^0.17.0",
         "path-to-regexp": "^6.2.0"
     },
     "license": "MIT"

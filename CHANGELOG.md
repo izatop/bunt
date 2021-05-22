@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.17.0](https://github.com/izatop/bunt/compare/v0.16.0...v0.17.0) (2021-05-22)
+
+
+### Features
+
+* add the Enum input type ([f752de7](https://github.com/izatop/bunt/commit/f752de7cf18ae357cdb7a8e6b1ad9c49e52fd283))
+
+
+
+
+
 # [0.16.0](https://github.com/izatop/bunt/compare/v0.15.25...v0.16.0) (2021-05-21)
 
 
