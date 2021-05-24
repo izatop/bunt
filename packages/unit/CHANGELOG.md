@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.18.1](https://github.com/izatop/bunt/compare/v0.18.0...v0.18.1) (2021-05-24)
+
+
+### Bug Fixes
+
+* disposer ([63f9af1](https://github.com/izatop/bunt/commit/63f9af19640a0ded4ae29e956c04e4de90b3b96f))
+
+
+
+
+
 # [0.18.0](https://github.com/izatop/bunt/compare/v0.17.0...v0.18.0) (2021-05-24)
 
 
