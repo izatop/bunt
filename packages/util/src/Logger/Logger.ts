@@ -44,7 +44,7 @@ export class Logger {
             : groupId;
     }
 
-    public get label() {
+    public get label(): string {
         return this.#label;
     }
 

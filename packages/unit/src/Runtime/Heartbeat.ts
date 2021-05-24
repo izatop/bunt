@@ -1,7 +1,7 @@
 import {AsyncState} from "@bunt/util";
 import {HeartbeatDisposer, IRunnable} from "./interfaces";
 
-const registry = new WeakMap<any, Heartbeat>();
+const registry = new WeakMap<IRunnable, Heartbeat>();
 
 export class Heartbeat {
     #beats = true;
@@ -26,7 +26,7 @@ export class Heartbeat {
      * @param target
      * @param disposer
      */
-    public static create(target: unknown, disposer?: HeartbeatDisposer): Heartbeat {
+    public static create(target: IRunnable, disposer?: HeartbeatDisposer): Heartbeat {
         const heartbeat = registry.get(target) ?? new Heartbeat(disposer);
         if (!registry.has(target)) {
             registry.set(target, heartbeat);
@@ -40,7 +40,7 @@ export class Heartbeat {
         return heartbeat.watch();
     }
 
-    public static destroy(target: unknown): void {
+    public static destroy(target: IRunnable): void {
         const heartbeat = registry.get(target);
         heartbeat?.destroy();
     }
