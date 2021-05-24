@@ -15,17 +15,18 @@ export class Disposable {
     }
 
     public static resolve(target: IDisposable): Disposer {
-        const disposer = collection.get(target) ?? new Disposer(target.constructor.name);
-        if (!collection.has(target)) {
-            const dispose = target.dispose;
-            disposer.attach(() => dispose.call(this));
+        const disposer = collection.get(target);
+        if (!disposer) {
+            const finish = target.dispose;
+            const newDisposer = new Disposer(target.constructor.name, () => finish.call(this));
             Reflect.defineProperty(target, "dispose", {
                 value: function () {
-                    return disposer.dispose();
+                    return newDisposer.dispose();
                 },
             });
 
-            collection.set(target, disposer);
+            collection.set(target, newDisposer);
+            return newDisposer;
         }
 
         return disposer;

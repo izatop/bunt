@@ -1,5 +1,5 @@
 import {assert, AsyncState, Logger, logger} from "@bunt/util";
-import {DisposableType, IDisposedHistory} from "../Runtime";
+import {DisposableFn, DisposableType, IDisposedHistory} from "../Runtime";
 import {dispose} from "./functions";
 
 export class Disposer {
@@ -8,11 +8,13 @@ export class Disposer {
 
     readonly #disposable: DisposableType[] = [];
     readonly #disposeHistory: IDisposedHistory[] = [];
+    readonly #finish: DisposableFn;
 
     #state?: Promise<void>;
 
-    constructor(label: string) {
+    constructor(label: string, finish: DisposableFn) {
         this.logger.setLabel(`Disposer(${label})`);
+        this.#finish = finish;
     }
 
     public get disposed(): boolean {
@@ -35,7 +37,7 @@ export class Disposer {
         }
 
         this.#state = AsyncState.acquire<void>();
-        for (const disposable of this.#disposable.splice(0)) {
+        for (const disposable of [...this.#disposable.splice(0), this.#finish]) {
             const date = new Date();
             const target = disposable?.constructor?.name ?? "Unknown";
 

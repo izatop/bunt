@@ -25,6 +25,6 @@ describe("Disposable", () => {
 
         await dispose(disposable1);
 
-        expect(pending).toEqual([1, 2, 3]);
+        expect(pending).toEqual([2, 3, 1]);
     });
 });

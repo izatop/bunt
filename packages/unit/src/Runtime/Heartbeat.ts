@@ -1,5 +1,5 @@
 import {AsyncState} from "@bunt/util";
-import {HeartbeatDisposer} from "./interfaces";
+import {HeartbeatDisposer, IRunnable} from "./interfaces";
 
 const registry = new WeakMap<any, Heartbeat>();
 
@@ -33,6 +33,11 @@ export class Heartbeat {
         }
 
         return heartbeat;
+    }
+
+    public static async watch(runnable: IRunnable): Promise<void> {
+        const heartbeat = runnable.getHeartbeat();
+        return heartbeat.watch();
     }
 
     public static destroy(target: unknown): void {
