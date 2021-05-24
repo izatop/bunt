@@ -18,7 +18,7 @@ export class Disposable {
         const disposer = collection.get(target);
         if (!disposer) {
             const finish = target.dispose;
-            const newDisposer = new Disposer(target.constructor.name, () => finish.call(this));
+            const newDisposer = new Disposer(target.constructor.name, () => finish.call(target));
             Reflect.defineProperty(target, "dispose", {
                 value: function () {
                     return newDisposer.dispose();
