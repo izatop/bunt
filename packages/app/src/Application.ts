@@ -58,7 +58,7 @@ export class Application<C extends IContext> {
         this.logger.debug("match", route);
 
         const unit = this.unit;
-        const state: Record<string, any> = {};
+        const state: Record<string, unknown> = {};
         const matches = route.match(request.route);
         const routeContext = {
             request,

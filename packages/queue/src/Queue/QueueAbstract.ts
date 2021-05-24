@@ -1,4 +1,4 @@
-import {IDisposable} from "@bunt/unit";
+import {Disposable, IDisposable} from "@bunt/unit";
 import {ITransport} from "../interfaces";
 import {IQueueList, Message, MessageCtor, MessageHandler, Task} from "./interfaces";
 
@@ -7,6 +7,8 @@ export abstract class QueueAbstract<Q extends ITransport> implements IDisposable
 
     constructor(transport: Q) {
         this.#transport = transport;
+
+        Disposable.attach(this, transport);
     }
 
     public async send<M extends Message>(message: M): Promise<void> {
@@ -17,7 +19,7 @@ export abstract class QueueAbstract<Q extends ITransport> implements IDisposable
         return this.#transport.createQueueList(type, handler);
     }
 
-    public async dispose(): Promise<IDisposable> {
-        return this.#transport;
+    public async dispose(): Promise<void> {
+        return;
     }
 }

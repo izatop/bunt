@@ -2,7 +2,7 @@ import {command} from "../route";
 import {BaseCommand} from "./BaseCommand";
 
 class UpdateLintCommand extends BaseCommand {
-    public async run() {
+    public async execute() {
         const {store} = this.context;
         const resource = await store.getResource("lint/.eslintrc");
 

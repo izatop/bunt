@@ -1,5 +1,5 @@
 import {Disposable, IDisposable} from "@bunt/unit";
-import {AsyncCallback, Fn, isArray, Promisify} from "@bunt/util";
+import {AsyncCallback, Fn, isArray} from "@bunt/util";
 import {IPubSubTransport, ISubscriber, PubSubChannel} from "./interfaces";
 
 export abstract class PubSubAbstract<S extends Record<string, any>, T extends IPubSubTransport>
@@ -10,6 +10,7 @@ export abstract class PubSubAbstract<S extends Record<string, any>, T extends IP
 
     public constructor(transport: T) {
         this.#transport = transport;
+        Disposable.attach(this, transport);
     }
 
     public async publish<K extends keyof S>(channel: PubSubChannel<K>, message: S[K]): Promise<void> {
@@ -37,6 +38,8 @@ export abstract class PubSubAbstract<S extends Record<string, any>, T extends IP
         });
 
         this.#iterables.add(iterable);
+        Disposable.attach(this, () => iterable.dispose());
+
         return iterable;
     }
 
@@ -45,15 +48,11 @@ export abstract class PubSubAbstract<S extends Record<string, any>, T extends IP
         return subscription[Symbol.asyncIterator]() as AsyncIterator<S[K]>;
     }
 
-    public dispose(): Promisify<Disposable | Disposable[] | void> {
-        for (const iterable of this.#iterables.values()) {
-            iterable.dispose();
-        }
-
-        return this.#transport.dispose();
+    public async dispose(): Promise<void> {
+        return;
     }
 
-    protected key(channel: PubSubChannel<string>): string {
+    protected key(channel: PubSubChannel): string {
         return isArray(channel) ? channel.join("/") : channel;
     }
 

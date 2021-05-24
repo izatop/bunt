@@ -1,4 +1,4 @@
-import {Context, Disposer} from "@bunt/unit";
+import {Context, dispose, Disposer} from "@bunt/unit";
 import {wait} from "@bunt/util";
 import {Queue} from "../../src";
 import {Dispatcher} from "../../src";
@@ -21,8 +21,8 @@ describe("Dispatcher", () => {
         expect(reply).toBe("Hello, Test");
 
         const heartbeat = dispatcher.getHeartbeat();
-        await Disposer.dispose(dispatcher);
+        await dispose(dispatcher);
 
-        await expect(heartbeat.waitUntilStop()).resolves.toBeUndefined();
+        await expect(heartbeat.watch()).resolves.toBeUndefined();
     });
 });

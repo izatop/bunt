@@ -4,11 +4,9 @@ import {
     ApplyContext,
     Context,
     ContextArg,
-    DisposableSync,
     Heartbeat,
     IContext,
-    IDestroyable,
-    IDisposableSync,
+    IDisposable,
     IRunnable,
     Runtime,
     ShadowState,
@@ -24,11 +22,9 @@ import * as ws from "ws";
 import {WebSocketCloseReason} from "./const";
 import {HandleProtoType, ProtoHandleAbstract} from "./Protocol";
 
-export class WebSocketServer<C extends IContext>
-    implements IDisposableSync, IRunnable, IDestroyable {
+export class WebSocketServer<C extends IContext> implements IDisposable, IRunnable {
     @logger
     public readonly logger!: Logger;
-    public readonly [DisposableSync]: true;
 
     readonly #disposeAcceptor: () => void;
     readonly #servers = new Map<Route, ws.Server>();
@@ -74,15 +70,11 @@ export class WebSocketServer<C extends IContext>
         this.#unit.add(action);
     }
 
-    public getHeartbeat(): Heartbeat<void> {
-        return new Heartbeat<void>((resolve) => this.#state.finally(resolve));
+    public getHeartbeat(): Heartbeat {
+        return Heartbeat.create(this, (resolve) => this.#state.finally(resolve));
     }
 
     public async dispose(): Promise<void> {
-        await this.destroy();
-    }
-
-    public async destroy(): Promise<void> {
         this.logger.info("destroy");
         try {
             this.#disposeAcceptor();

@@ -1,15 +1,14 @@
 import {RequestAbstract} from "@bunt/app";
-import {assert, ConsoleArgs} from "@bunt/util";
+import {Argv, assert} from "@bunt/util";
 import {Headers} from "./Headers";
 
 export class RequestCommand extends RequestAbstract {
     public readonly headers = new Headers([]);
     public readonly route: string;
 
-    constructor(argv?: string[]) {
+    constructor(args: Argv) {
         super();
-        const consoleArgs = new ConsoleArgs(argv);
-        const [command] = consoleArgs.argv.getArgs();
+        const [command] = args.getArgs();
         assert(command, `Command should be defined`);
 
         this.route = command;

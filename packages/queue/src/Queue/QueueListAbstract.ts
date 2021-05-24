@@ -29,6 +29,10 @@ export abstract class QueueListAbstract<M extends Message> implements IQueueList
         this.#handler = handler;
         this.#transport = transport;
         this.#state = this.listen();
+
+        Disposable.attach(this, this.#reader);
+        Disposable.attach(this, () => this.unsubscribe());
+        Disposable.attach(this, () => this.reset());
     }
 
     public get subscribed(): boolean {
@@ -54,14 +58,8 @@ export abstract class QueueListAbstract<M extends Message> implements IQueueList
         };
     }
 
-    public dispose(): Disposable[] {
-        return [
-            () => this.unsubscribe(),
-            () => {
-                this.#watchers.splice(0, this.#watchers.length);
-            },
-            this.#reader,
-        ];
+    public async dispose(): Promise<void> {
+        return;
     }
 
     protected async listen(): Promise<void> {
@@ -90,5 +88,9 @@ export abstract class QueueListAbstract<M extends Message> implements IQueueList
     private async fire(operation: Promise<OperationReleaseState<M>>) {
         const value = await operation;
         this.#watchers.forEach((fn) => fn(value));
+    }
+
+    private reset() {
+        this.#watchers.splice(0, this.#watchers.length);
     }
 }

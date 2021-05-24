@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
-import {Application} from "@bunt/app";
-import {RequestCommand} from "@bunt/cli";
+import {Commander} from "@bunt/cli";
 import {main, Runtime} from "@bunt/unit";
 import {debugLogFormat, Logger, SeverityLevel, StdErrorTransport, StdOutTransport} from "@bunt/util";
 import UpdateLintCommand from "./Command/UpdateLintCommand";
@@ -13,8 +12,7 @@ main(
             UpdateLintCommand,
         ];
 
-        const app = await Application.factory(new ProjectContext(), commands);
-        return app.run(new RequestCommand());
+        return Commander.execute(new ProjectContext(), commands);
     },
     () => {
         Logger.setSeverity(SeverityLevel.INFO);

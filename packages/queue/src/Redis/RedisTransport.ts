@@ -1,7 +1,7 @@
 import {Disposable, IDisposable} from "@bunt/unit";
 import {Redis} from "ioredis";
 import {ITransport} from "../interfaces";
-import {IPubSubTransport, ISubscriber} from "../PubSub/interfaces";
+import {IPubSubTransport, ISubscriber} from "../PubSub";
 import {isTransactionMessage, Message, MessageCtor, MessageHandler, serialize} from "../Queue";
 import {createConnection} from "./fn";
 import {RedisQ2Reader} from "./RedisQ2Reader";
@@ -11,11 +11,10 @@ import {RedisSubscriber} from "./RedisSubscriber";
 
 export class RedisTransport implements ITransport, IPubSubTransport {
     readonly #connection: Redis;
-    readonly #disposable: Disposable[] = [];
 
     constructor(dsn?: string) {
         this.#connection = createConnection(dsn);
-        this.#disposable.push(() => this.#connection.disconnect());
+        Disposable.attach(this, () => this.#connection.disconnect());
     }
 
     public get connection(): Redis {
@@ -36,7 +35,8 @@ export class RedisTransport implements ITransport, IPubSubTransport {
 
     public async subscribe(channel: string): Promise<ISubscriber> {
         const subscriber = new RedisSubscriber(this.duplicate(), channel);
-        this.#disposable.push(subscriber);
+        Disposable.attach(this, subscriber);
+
         return subscriber;
     }
 
@@ -52,12 +52,13 @@ export class RedisTransport implements ITransport, IPubSubTransport {
         return this.register(new RedisQueueReader(this, type));
     }
 
-    public async dispose(): Promise<Disposable | Disposable[] | void> {
-        return this.#disposable;
+    public async dispose(): Promise<void> {
+        return;
     }
 
     private register<T extends IDisposable>(value: T): T {
-        this.#disposable.push(value);
+        Disposable.attach(this, value);
+
         return value;
     }
 }

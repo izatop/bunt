@@ -1,11 +1,9 @@
-import {assert, Promisify} from "@bunt/util";
-import {ShadowState} from "./Context";
+import {Promisify} from "@bunt/util";
 import {IContext, StateType} from "./interfaces";
 
 export abstract class Action<C extends IContext = Record<any, any>,
     S extends StateType | null = null,
-    T extends any = any,
-    SS extends any = any> {
+    R extends any = any> {
 
     public readonly state!: S;
     protected readonly context: C;
@@ -19,11 +17,5 @@ export abstract class Action<C extends IContext = Record<any, any>,
         return this.constructor.name;
     }
 
-    public getShadowState(): SS {
-        const shadowState = ShadowState.get<SS>(this.state);
-        assert(shadowState, "Shadow state should be defined");
-        return shadowState;
-    }
-
-    public abstract run(): Promisify<T>;
+    public abstract run(): Promisify<R>;
 }

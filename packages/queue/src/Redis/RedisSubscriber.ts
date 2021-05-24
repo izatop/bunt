@@ -40,7 +40,7 @@ export class RedisSubscriber implements ISubscriber, IDisposable {
             .catch((error) => this.close(error));
     }
 
-    public dispose(): void {
+    public async dispose(): Promise<void> {
         this.close();
     }
 

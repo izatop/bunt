@@ -34,18 +34,26 @@ export class Logger {
     protected static info = Logger.make(SeverityLevel.INFO);
     protected static debug = Logger.make(SeverityLevel.DEBUG);
 
-    public readonly label: string;
+    #label: string;
     public groupId?: string;
 
     constructor(label: string, groupId?: string | number) {
-        this.label = label;
+        this.#label = label;
         this.groupId = isNumber(groupId)
             ? groupId.toString()
             : groupId;
     }
 
+    public get label() {
+        return this.#label;
+    }
+
     public get severity(): SeverityLevel {
         return Logger.severity;
+    }
+
+    public setLabel(label: string): void {
+        this.#label = label;
     }
 
     public static setSeverity(severity: SeverityLevel): void {

@@ -2,9 +2,8 @@ import {assert, fails, isClass, isFunction, isInstanceOf, isUndefined, logger, L
 import {Action} from "./Action";
 import {ApplyContext, Context} from "./Context";
 import {ActionContextCtor, ActionReturn, ActionStateArgs, ContextArg, IContext} from "./interfaces";
-import {IDisposable} from "./Runtime";
 
-export class Unit<C extends IContext = IContext> implements IDisposable {
+export class Unit<C extends IContext = IContext> {
     @logger
     protected readonly logger!: Logger;
 
@@ -88,10 +87,6 @@ export class Unit<C extends IContext = IContext> implements IDisposable {
         const [state = null] = args;
         const action = new ctor(this.#context, state);
         return Promise.resolve(action.run()).finally(finish);
-    }
-
-    public dispose(): IDisposable[] {
-        return [...Context.disposables.values()];
     }
 }
 

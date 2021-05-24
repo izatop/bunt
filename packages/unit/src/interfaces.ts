@@ -38,3 +38,7 @@ export interface IServiceResolver<T> {
 }
 
 export type StateType = Record<string, any>;
+
+export interface IShadowState<T> {
+    getShadowState(): T;
+}

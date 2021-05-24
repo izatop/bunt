@@ -1,4 +1,4 @@
-import {Disposer} from "@bunt/unit";
+import {dispose} from "@bunt/unit";
 import {assert, throttle, watch} from "@bunt/util";
 import {Redis} from "ioredis";
 import {Queue, RedisTransport, serialize} from "../../src";
@@ -29,7 +29,7 @@ describe.skip("Redis", () => {
         await watch(3, throttle(() => res.length));
         expect(res).toEqual([1, 2, 3]);
 
-        await Disposer.dispose(queue);
+        await dispose(queue);
     });
 
     test("Q2", async () => {
@@ -55,6 +55,6 @@ describe.skip("Redis", () => {
             [serialize(new TestTransaction(2))],
         ]);
 
-        await Disposer.dispose(queue);
+        await dispose(queue);
     });
 });

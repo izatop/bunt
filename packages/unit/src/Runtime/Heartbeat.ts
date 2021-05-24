@@ -1,34 +1,54 @@
-const of = new WeakMap<any, Heartbeat<any>>();
+import {AsyncState} from "@bunt/util";
+import {HeartbeatDisposer} from "./interfaces";
 
-export type HeartbeatExecutor<T> = (resolve: (value: Error | T) => void) => void;
+const registry = new WeakMap<any, Heartbeat>();
 
-export class Heartbeat<T = unknown> {
+export class Heartbeat {
     #beats = true;
-    readonly #defer: Promise<T | Error>;
 
-    constructor(executor: HeartbeatExecutor<T>) {
-        this.#defer = new Promise((resolve) => {
-            executor((error) => {
-                this.#beats = false;
-                resolve(error);
-            });
-        });
+    readonly #pending: Promise<void>;
+
+    constructor(disposer?: HeartbeatDisposer) {
+        this.#pending = AsyncState.acquire<void>();
+
+        if (disposer) {
+            disposer((error) => this.destroy(error));
+        }
     }
 
     public get beats(): boolean {
         return this.#beats;
     }
 
-    public static of<T = unknown>(target: unknown, executor: HeartbeatExecutor<T>): Heartbeat<T> {
-        const heartbeat = of.get(target) ?? new Heartbeat<any>(executor);
-        if (!of.has(target)) {
-            of.set(target, heartbeat);
+    /**
+     * Always getting an unique Heartbeat of the target
+     *
+     * @param target
+     * @param disposer
+     */
+    public static create(target: unknown, disposer?: HeartbeatDisposer): Heartbeat {
+        const heartbeat = registry.get(target) ?? new Heartbeat(disposer);
+        if (!registry.has(target)) {
+            registry.set(target, heartbeat);
         }
 
         return heartbeat;
     }
 
-    public waitUntilStop(): Promise<T | Error> {
-        return this.#defer;
+    public static destroy(target: unknown): void {
+        const heartbeat = registry.get(target);
+        heartbeat?.destroy();
+    }
+
+    public destroy(error?: Error): void {
+        if (error) {
+            return AsyncState.reject(this.#pending, error);
+        }
+
+        AsyncState.resolve(this.#pending);
+    }
+
+    public watch(): Promise<void> {
+        return this.#pending;
     }
 }

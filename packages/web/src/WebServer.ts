@@ -1,17 +1,5 @@
 import {Application, IRoute, MatchRoute, RouteNotFound} from "@bunt/app";
-import {
-    ApplyContext,
-    Context,
-    ContextArg,
-    DisposableSync,
-    Heartbeat,
-    IContext,
-    IDestroyable,
-    IDisposableSync,
-    IRunnable,
-    unit,
-    Unit,
-} from "@bunt/unit";
+import {ApplyContext, Context, ContextArg, Heartbeat, IContext, IDisposable, IRunnable, unit, Unit} from "@bunt/unit";
 import {assert, AssertionError, Ctor, logger, Logger} from "@bunt/util";
 import * as http from "http";
 import {IncomingMessage, ServerResponse} from "http";
@@ -19,10 +7,9 @@ import {Socket} from "net";
 import {IErrorResponseHeaders, IProtocolAcceptor, IResponderOptions, Responder} from "./Transport";
 
 export class WebServer<C extends IContext> extends Application<C>
-    implements IDisposableSync, IRunnable, IDestroyable {
+    implements IDisposable, IRunnable {
     @logger
     public readonly logger!: Logger;
-    public readonly [DisposableSync]: true;
 
     readonly #options: IResponderOptions;
     readonly #server: http.Server;
@@ -48,7 +35,7 @@ export class WebServer<C extends IContext> extends Application<C>
     }
 
     public getHeartbeat(): Heartbeat {
-        return new Heartbeat((resolve) => this.#server.once("close", resolve));
+        return Heartbeat.create(this, (resolve) => this.#server.once("close", resolve));
     }
 
     public listen(port: number, backlog?: number): this {
@@ -81,13 +68,9 @@ export class WebServer<C extends IContext> extends Application<C>
     }
 
     public async dispose(): Promise<void> {
-        await this.destroy();
-    }
-
-    public destroy(): Promise<void> {
         this.logger.info("destroy");
         assert(this.#server.listening, "Server was destroyed");
-        return new Promise<void>((resolve) => this.#server.close(() => resolve));
+        await new Promise<void>((resolve) => this.#server.close(() => resolve));
     }
 
     protected async handle(req: IncomingMessage, res: ServerResponse): Promise<void> {

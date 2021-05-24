@@ -23,7 +23,7 @@ export abstract class Service<T> implements IServiceResolver<T> {
         return fn as PropertyDecorator;
     }
 
-    protected static* getPrototypes(target: unknown, base: Ctor<any> | null = null): Generator<any> {
+    protected static* getPrototypes(target: unknown, base: Ctor | null = null): Generator<any> {
         let proto = Object.getPrototypeOf(target);
         const baseProto = base === null ? null : base.prototype;
         while (baseProto !== proto) {

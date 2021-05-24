@@ -1,18 +1,18 @@
 import {AsyncState} from "@bunt/util";
 import {
+    IQueueList,
     IQueueReader,
     IReadOperation,
-    IQueueList,
     ITransport,
     Message,
     MessageCtor,
     MessageHandler,
+    QueueList,
     ReadOperation,
 } from "../../../src";
-import {QueueList} from "../../../src/Queue/QueueList";
 
 export class TestTransport implements ITransport {
-    public readonly pending: Promise<void>[] = [];
+    public readonly pending: Promise<unknown>[] = [];
     readonly #messages = new Map<string, Message[]>();
 
     public createQueueList<M extends Message>(type: MessageCtor<M>, handler: MessageHandler<M>): IQueueList<M> {
@@ -41,8 +41,8 @@ export class TestTransport implements ITransport {
             async cancel(): Promise<void> {
                 cancel();
             },
-            dispose(): void {
-                // skip
+            dispose(): Promise<void> {
+                return Promise.resolve();
             },
         };
     }

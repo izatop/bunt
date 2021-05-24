@@ -1,4 +1,4 @@
-import {Disposer} from "@bunt/unit";
+import {dispose} from "@bunt/unit";
 import {wait} from "@bunt/util";
 import {Queue} from "../../src";
 import {BarMessage} from "./Message/BarMessage";
@@ -22,7 +22,7 @@ describe("Queue", () => {
 
         expect(success).toMatchSnapshot();
 
-        await Disposer.dispose(queue);
+        await dispose(queue);
     });
 
     test("Rejection", async () => {
@@ -43,7 +43,7 @@ describe("Queue", () => {
         expect(rejections[0].status).toBe(false);
         expect(rejections).toMatchSnapshot();
 
-        await Disposer.dispose(queue);
+        await dispose(queue);
     });
 
     test("Task", async () => {
@@ -60,6 +60,6 @@ describe("Queue", () => {
 
         expect(reply.payload).toBe(calc.reduce((l, r) => l + r, 0));
 
-        await Disposer.dispose(queue);
+        await dispose(queue);
     });
 });

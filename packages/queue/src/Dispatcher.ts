@@ -23,7 +23,6 @@ export class Dispatcher<C extends IContext> implements IDisposable, IRunnable {
     readonly #unit: Unit<C>;
     readonly #queue: QueueAbstract<ITransport>;
     readonly #route = new Map<MessageCtor<any>, ActionContextCtor<C, any>>();
-    readonly #disposable: Disposable[] = [];
 
     protected constructor(u: Unit<C>, queue: QueueAbstract<ITransport>) {
         this.#queue = queue;
@@ -39,20 +38,21 @@ export class Dispatcher<C extends IContext> implements IDisposable, IRunnable {
         return new this(await unit(context), queue);
     }
 
-    public getHeartbeat(): Heartbeat<void> {
-        return Heartbeat.of<void>(this, (resolve) => this.#disposable.push(resolve));
+    public getHeartbeat(): Heartbeat {
+        return Heartbeat.create(this, (resolve) => Disposable.attach(this, resolve));
     }
 
     public subscribe<M extends Message>(type: MessageCtor<M>, action: ActionCtor<ActionHandler<C, M>>): this {
         this.#unit.add(action);
-        this.#queue.subscribe(type, ((message) => {
-            return this.#unit.run(action, message);
-        }) as MessageHandler<M>);
+
+        const handler = ((message) => this.#unit.run(action, message)) as MessageHandler<M>;
+        const subscription = this.#queue.subscribe(type, handler);
+        Disposable.attach(this, subscription);
 
         return this;
     }
 
-    public dispose(): Disposable[] {
-        return [this.#queue, ...this.#disposable];
+    public async dispose(): Promise<void> {
+        return;
     }
 }

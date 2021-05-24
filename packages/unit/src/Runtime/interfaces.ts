@@ -1,25 +1,22 @@
 import {Promisify} from "@bunt/util";
 import {Heartbeat} from "./Heartbeat";
-import {DisposableSync} from "./index";
 
-export interface IRunnable<TState = unknown> {
-    getHeartbeat(): Heartbeat<TState>;
-}
-
-export interface IDestroyable<TState = unknown> {
-    destroy(): Promisify<void> | Heartbeat<TState>;
-}
-
-export interface IDisposableSync {
-    [DisposableSync]: true;
+export interface IRunnable {
+    getHeartbeat(): Heartbeat;
 }
 
 export interface IDisposable {
-    dispose(): Promisify<Disposable | Disposable[] | void>;
+    dispose(): Promise<void>;
 }
 
+export interface IDisposedHistory {
+    error?: Error;
+    timeout: number;
+    target: string;
+    date: Date;
+}
+
+export type HeartbeatDisposer = (resolve: (error?: Error) => any) => Promisify<any>;
+
 export type DisposableFn = () => Promisify<void>;
-export type Disposable = DisposableFn
-    | IDisposable
-    | IDisposableSync & DisposableFn
-    | IDisposable & IDisposableSync;
+export type DisposableType = DisposableFn | IDisposable;

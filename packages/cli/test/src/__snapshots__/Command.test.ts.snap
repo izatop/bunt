@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Command 1`] = `
+BaseTestCommand {
+  "context": BaseContext {
+    "program": Program {
+      "args": Argv {
+        "args": Set {
+          "test",
+        },
+        "flags": Map {},
+        "options": Map {
+          "name" => "test",
+        },
+      },
+    },
+  },
+  "state": Object {
+    "name": "test",
+  },
+}
+`;
