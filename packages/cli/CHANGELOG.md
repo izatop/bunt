@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.18.0](https://github.com/izatop/bunt/compare/v0.17.0...v0.18.0) (2021-05-24)
+
+
+### Features
+
+* refactor ([f857e9f](https://github.com/izatop/bunt/commit/f857e9f2734ef435d96c894bea9cca09839a86b2))
+
+
+
+
+
 # [0.17.0](https://github.com/izatop/bunt/compare/v0.16.0...v0.17.0) (2021-05-22)
 
 **Note:** Version bump only for package @bunt/cli
