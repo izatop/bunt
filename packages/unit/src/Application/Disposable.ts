@@ -11,6 +11,7 @@ export class Disposable {
 
     public static dispose(target: IDisposable): Promise<void> {
         const disposer = this.resolve(target);
+
         return disposer.dispose();
     }
 
@@ -19,13 +20,9 @@ export class Disposable {
         if (!disposer) {
             const finish = target.dispose;
             const newDisposer = new Disposer(target.constructor.name, () => finish.call(target));
-            Reflect.defineProperty(target, "dispose", {
-                value: function () {
-                    return newDisposer.dispose();
-                },
-            });
-
+            Reflect.defineProperty(target, "dispose", {value: () => newDisposer.dispose()});
             collection.set(target, newDisposer);
+
             return newDisposer;
         }
 
