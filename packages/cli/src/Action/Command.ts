@@ -17,19 +17,19 @@ export abstract class Command<C extends CommandContext,
         return this.context.program;
     }
 
-    public async dispose(): Promise<void> {
-        return;
-    }
-
-    public getHeartbeat(): Heartbeat {
-        return Heartbeat.create(this, (fn) => Disposable.attach(this, fn));
-    }
-
-    public async run(): Promise<this> {
-        await this.execute();
+    public async run(): Promise<IRunnable> {
+        process.nextTick(() => this.execute());
 
         return this;
     }
 
     public abstract execute(): Promisify<void>;
+
+    public getHeartbeat(): Heartbeat {
+        return Heartbeat.create(this, (fn) => Disposable.attach(this, fn));
+    }
+
+    public async dispose(): Promise<void> {
+        return;
+    }
 }
