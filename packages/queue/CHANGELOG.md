@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.18.3](https://github.com/izatop/bunt/compare/v0.18.2...v0.18.3) (2021-05-25)
+
+**Note:** Version bump only for package @bunt/queue
+
+
+
+
+
 ## [0.18.2](https://github.com/izatop/bunt/compare/v0.18.1...v0.18.2) (2021-05-24)
 
 **Note:** Version bump only for package @bunt/queue

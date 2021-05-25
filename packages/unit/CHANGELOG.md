@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.18.3](https://github.com/izatop/bunt/compare/v0.18.2...v0.18.3) (2021-05-25)
+
+
+### Bug Fixes
+
+* heartbeat test and deps ([e3ebec3](https://github.com/izatop/bunt/commit/e3ebec3274c0aa8cb5d1fbb65d0a78f72356d915))
+
+
+
+
+
 ## [0.18.2](https://github.com/izatop/bunt/compare/v0.18.1...v0.18.2) (2021-05-24)
 
 
