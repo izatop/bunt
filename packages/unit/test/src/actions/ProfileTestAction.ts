@@ -1,7 +1,7 @@
 import {Action} from "../../../src";
-import {IBaseContext} from "../context/BaseContext";
+import {BaseContext} from "../context/BaseContext";
 
-export class ProfileTestAction extends Action<IBaseContext> {
+export class ProfileTestAction extends Action<BaseContext> {
     public run(): boolean {
         return true;
     }

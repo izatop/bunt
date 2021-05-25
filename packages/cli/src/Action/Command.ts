@@ -1,8 +1,8 @@
 import {Action, Disposable, Heartbeat, IDisposable, IRunnable, StateType} from "@bunt/unit";
 import {Argv, Logger, logger, Program, Promisify} from "@bunt/util";
-import {ICommandContext} from "../Context/CommandContext";
+import {CommandContext} from "../Context/CommandContext";
 
-export abstract class Command<C extends ICommandContext = ICommandContext,
+export abstract class Command<C extends CommandContext,
     S extends StateType | null = null> extends Action<C, S, IRunnable>
     implements IDisposable, IRunnable {
 

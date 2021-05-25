@@ -1,17 +1,16 @@
-import {ActionContext, ActionState} from "@bunt/unit";
+import {ActionAny, ActionState} from "@bunt/unit";
 import {isFunction, isObject} from "@bunt/util";
-import {RouteAction} from "../interfaces";
 import {IRouteContext} from "../Route";
 import {ResolverResolvers} from "./interfaces";
 
-export class Resolver<A extends RouteAction> {
+export class Resolver<A extends ActionAny> {
     readonly resolvers: ResolverResolvers<A>;
 
     constructor(resolvers: ResolverResolvers<A>) {
         this.resolvers = resolvers;
     }
 
-    public async resolve(context: IRouteContext<ActionContext<A>>): Promise<ActionState<A>> {
+    public async resolve(context: IRouteContext<A>): Promise<ActionState<A>> {
         const state = {};
         const {resolvers} = this;
         if (isFunction(resolvers)) {

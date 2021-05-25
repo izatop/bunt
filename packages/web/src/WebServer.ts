@@ -1,12 +1,12 @@
-import {Application, IRoute, MatchRoute, RouteNotFound} from "@bunt/app";
-import {ApplyContext, Context, ContextArg, Heartbeat, IContext, IDisposable, IRunnable, unit, Unit} from "@bunt/unit";
+import {Application, IRoute, RouteNotFound} from "@bunt/app";
+import {ActionAny, Context, ContextArg, Heartbeat, IDisposable, IRunnable, unit, Unit} from "@bunt/unit";
 import {assert, AssertionError, Ctor, logger, Logger} from "@bunt/util";
 import * as http from "http";
 import {IncomingMessage, ServerResponse} from "http";
 import {Socket} from "net";
 import {IErrorResponseHeaders, IProtocolAcceptor, IResponderOptions, Responder} from "./Transport";
 
-export class WebServer<C extends IContext> extends Application<C>
+export class WebServer<C extends Context> extends Application<C>
     implements IDisposable, IRunnable {
     @logger
     public readonly logger!: Logger;
@@ -16,7 +16,7 @@ export class WebServer<C extends IContext> extends Application<C>
     readonly #acceptors = new Map<string, IProtocolAcceptor>();
     readonly #errorsHeadersMap = new Map<Ctor<Error>, IErrorResponseHeaders>();
 
-    protected constructor(unit: Unit<C>, routes: MatchRoute<C, IRoute>[] = [], options?: IResponderOptions) {
+    protected constructor(unit: Unit<C>, routes: IRoute<ActionAny<C>>[] = [], options?: IResponderOptions) {
         super(unit, routes);
         this.#server = new http.Server();
         this.#options = options ?? {};
@@ -29,9 +29,9 @@ export class WebServer<C extends IContext> extends Application<C>
 
     public static async factory<C extends Context>(
         context: ContextArg<C>,
-        routes: MatchRoute<C, IRoute>[] = [],
-        options?: IResponderOptions): Promise<WebServer<ApplyContext<C>>> {
-        return new this(await unit<C>(context), routes, options);
+        routes: IRoute<ActionAny<C>>[] = [],
+        options?: IResponderOptions): Promise<WebServer<C>> {
+        return new this(await unit(context), routes, options);
     }
 
     public getHeartbeat(): Heartbeat {

@@ -40,19 +40,13 @@ export interface IQueueReader<M extends Message, RO extends IReadOperation<M> = 
     cancel(): Promise<void>;
 }
 
-export interface IMessageHandler<M extends MessageAbstract<any>> {
-    (message: M): Promisify<unknown>;
-}
-
 export interface ITaskHandler<M extends TaskAbstract<any, any>> {
     (message: M): Promisify<TaskReply<M>>;
 }
 
-export type MessageHandler<M> = M extends TaskAbstract<any, any>
-    ? ITaskHandler<M>
-    : M extends MessageAbstract<any>
-        ? IMessageHandler<M>
-        : never;
+export type MessageHandler<M extends Incoming> = (message: M) => M extends TaskAbstract<any, any>
+    ? Promisify<TaskReply<M>>
+    : Promisify<any>;
 
 export type QueueKeys<T> = Extract<keyof T, string>;
 
@@ -77,9 +71,10 @@ export interface IQueueList<M extends Message> extends IDisposable {
 }
 
 export type MessagePayload<M extends Message> = M extends MessageAbstract<infer P> ? P : never;
+
 export type TaskReply<M extends Task> = M extends TaskAbstract<any, infer P> ? P : never;
 
-export interface MessageCtor<M extends Message> {
+export interface MessageCtor<M extends Incoming> {
     prototype: M;
 
     readonly channel: string;
@@ -93,6 +88,6 @@ export interface ITransactionType {
     getFallbackKey(): string;
 }
 
-export type Task<T extends TaskAbstract<any, any> = TaskAbstract<any, any>> = T;
-export type Message<T extends MessageAbstract<any> = MessageAbstract<any>> = T;
-export type MessageOrTask = Task | Message;
+export type Task = TaskAbstract<any, any>;
+export type Message = MessageAbstract<any>;
+export type Incoming = Task | Message;

@@ -1,17 +1,16 @@
-import {ActionCtor} from "@bunt/unit";
-import {ILogable, isFunction, isString} from "@bunt/util";
-import {RouteAction} from "../interfaces";
+import {ActionAny} from "@bunt/unit";
+import {Ctor, ILogable, isFunction, isString} from "@bunt/util";
 import {Payload} from "../Payload";
 import {IRoute, IRouteMatcher, RouteFactory, RouteMatcherFactory, RouteRuleArg} from "./interfaces";
 import {RouteRule} from "./RouteRule";
 
-export class Route<A extends RouteAction = RouteAction> implements IRoute<A>, ILogable<{ route: string }> {
+export class Route<A extends ActionAny> implements IRoute<A>, ILogable<{ route: string }> {
     public readonly route: string;
-    public readonly action: ActionCtor<A>;
+    public readonly action: Ctor<A>;
     public readonly payload?: Payload<A>;
     readonly #matcher: IRouteMatcher;
 
-    constructor(matcher: RouteMatcherFactory, action: ActionCtor<A>, rule: RouteRuleArg<A>) {
+    constructor(matcher: RouteMatcherFactory, action: Ctor<A>, rule: RouteRuleArg<A>) {
         const {route, payload} = this.getRuleArgs(rule);
         this.route = route;
         this.action = action;
@@ -21,7 +20,7 @@ export class Route<A extends RouteAction = RouteAction> implements IRoute<A>, IL
     }
 
     public static create(matcher: RouteMatcherFactory): RouteFactory {
-        return <A extends RouteAction>(action: ActionCtor<A>, rule: RouteRuleArg<A>) => (
+        return <A extends ActionAny>(action: Ctor<A>, rule: RouteRuleArg<A>) => (
             new Route<A>(matcher, action, rule)
         );
     }

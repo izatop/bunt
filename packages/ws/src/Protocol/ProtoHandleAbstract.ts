@@ -1,8 +1,8 @@
-import {Action, IContext, IShadowState, ShadowState, StateType} from "@bunt/unit";
+import {Action, Context, IShadowState, ShadowState, StateType} from "@bunt/unit";
 import {assert, Logger, logger} from "@bunt/util";
 import ws from "ws";
 
-export abstract class ProtoHandleAbstract<C extends IContext, S extends StateType | null = null>
+export abstract class ProtoHandleAbstract<C extends Context, S extends StateType = null>
     extends Action<C, S, void> implements IShadowState<ws> {
     /**
      * Supported WebSocket protocol, should be extended in child

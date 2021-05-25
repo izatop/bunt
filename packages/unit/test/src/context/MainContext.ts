@@ -1,5 +1,5 @@
 import * as crypto from "crypto";
-import {ApplyContext, Context, resolve} from "../../../src";
+import {Context, resolve} from "../../../src";
 import {BaseContext} from "./BaseContext";
 import {MemoryDb} from "./services/MemoryDb";
 import {MemoryDbServiceResolver} from "./services/MemoryDbServiceResolver";
@@ -20,5 +20,3 @@ export class MainContext extends BaseContext {
         return Context.resolve(this.memoryDb);
     }
 }
-
-export type IMainContext = ApplyContext<MainContext>;

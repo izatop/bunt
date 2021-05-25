@@ -1,4 +1,4 @@
-import {ApplyContext, Context} from "@bunt/unit";
+import {Context} from "@bunt/unit";
 import {Argv, Program} from "@bunt/util";
 
 export class CommandContext extends Context {
@@ -13,5 +13,3 @@ export class CommandContext extends Context {
         return this.program.args;
     }
 }
-
-export type ICommandContext = ApplyContext<CommandContext>;

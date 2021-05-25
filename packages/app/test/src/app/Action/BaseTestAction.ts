@@ -1,7 +1,7 @@
 import {Action} from "@bunt/unit";
-import {IBaseContext} from "../Context/BaseContext";
+import {BaseContext} from "../Context/BaseContext";
 
-export class BaseTestAction extends Action<IBaseContext, { name: string }> {
+export class BaseTestAction extends Action<BaseContext, { name: string }> {
     public run(): string {
         return `Hello, ${this.state.name}!`;
     }

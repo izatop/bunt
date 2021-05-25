@@ -1,8 +1,8 @@
-import {IContext, StateType} from "@bunt/unit";
+import {Context, StateType} from "@bunt/unit";
 import {ClientConnection} from "../Connection/ClientConnection";
 import {ProtoHandleAbstract} from "./ProtoHandleAbstract";
 
-export abstract class EchoProtoHandle<C extends IContext,
+export abstract class EchoProtoHandle<C extends Context,
     S extends StateType | null = null> extends ProtoHandleAbstract<C, S> {
 
     public static protocol = "echo-protocol";

@@ -1,10 +1,9 @@
 import {FieldSelectType, validate} from "@bunt/input";
-import {ActionContext, ActionState} from "@bunt/unit";
-import {RouteAction} from "../interfaces";
+import {ActionAny, ActionState} from "@bunt/unit";
 import {IRouteContext} from "../Route";
 import {Resolver} from "./Resolver";
 
-export class Payload<A extends RouteAction> {
+export class Payload<A extends ActionAny> {
     public readonly resolver: Resolver<A>;
     public readonly type: FieldSelectType<ActionState<A>>;
 
@@ -13,7 +12,7 @@ export class Payload<A extends RouteAction> {
         this.resolver = resolver;
     }
 
-    public async validate(context: IRouteContext<ActionContext<A>>): Promise<ActionState<A>> {
+    public async validate(context: IRouteContext<A>): Promise<ActionState<A>> {
         return validate<ActionState<A>>(this.type, await this.resolver.resolve(context));
     }
 }

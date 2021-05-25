@@ -1,63 +1,63 @@
-import {ApplyContext, Context, ContextArg, IContext, unit, Unit} from "@bunt/unit";
+import {ActionAny, ApplyContext, Context, ContextArg, unit, Unit} from "@bunt/unit";
 import {assert, isDefined, logger, Logger} from "@bunt/util";
-import {ActionResponse, IRequest, MatchRoute} from "./interfaces";
+import {ActionResponse, IRequest} from "./interfaces";
 import {IRoute, RouteNotFound} from "./Route";
 
-export class Application<C extends IContext> {
+export class Application<C extends Context> {
     @logger
     protected logger!: Logger;
 
-    protected readonly unit: Unit<C>;
-    protected readonly route: IRoute[] = [];
+    readonly #unit: Unit<C>;
+    readonly #routes: IRoute<ActionAny<C>>[] = [];
 
-    constructor(u: Unit<C>, routes: MatchRoute<C, IRoute>[] = []) {
-        this.unit = u;
+    constructor(u: Unit<C>, routes: IRoute<ActionAny<C>>[] = []) {
+        this.#unit = u;
 
         if (routes.length > 0) {
             routes.forEach((route) => this.add(route));
         }
     }
 
-    public get context(): C {
-        return this.unit.context;
+    public get context(): ApplyContext<C> {
+        return this.#unit.context;
     }
 
     public get size(): number {
-        return this.route.length;
+        return this.#routes.length;
     }
 
     public static async factory<C extends Context>(
         context: ContextArg<C>,
-        routes: MatchRoute<C, IRoute>[] = []): Promise<Application<ApplyContext<C>>> {
-        return new this(await unit<C>(context), routes);
+        routes: IRoute<ActionAny<C>>[] = []): Promise<Application<C>> {
+        return new this(await unit(context), routes);
     }
 
-    public add<R extends IRoute>(route: MatchRoute<C, R>): this {
+    public add(route: IRoute<ActionAny<C>>): this {
         this.logger.debug("add", route);
-        assert(!this.unit.has(route.action), `This route was already added`);
-        this.unit.add(route.action);
-        this.route.push(route);
+        assert(!this.#unit.has(route.action), `This route was already added`);
+        this.#unit.add(route.action);
+        this.#routes.push(route);
         return this;
     }
 
-    public remove<R extends IRoute>(route: MatchRoute<C, R>): this {
-        if (this.unit.has(route.action)) {
+    public remove(route: IRoute<ActionAny<C>>): this {
+        if (this.#unit.has(route.action)) {
             this.logger.debug("remove", route);
-            this.unit.remove(route.action);
-            const index = this.route.findIndex((item) => item === route);
-            this.route.splice(index, index + 1);
+            this.#unit.remove(route.action);
+            const index = this.#routes.findIndex((item) => item === route);
+            this.#routes.splice(index, index + 1);
         }
 
         return this;
     }
 
     public async run(request: IRequest): Promise<ActionResponse> {
-        const route = this.route.find((route) => route.test(request.route));
+        const route = this.#routes.find((route) => route.test(request.route));
         assert(route, () => new RouteNotFound(request.route));
 
         this.logger.debug("match", route);
 
-        const unit = this.unit;
+        const unit = this.#unit;
         const state: Record<string, unknown> = {};
         const matches = route.match(request.route);
         const routeContext = {
@@ -74,7 +74,7 @@ export class Application<C extends IContext> {
         return unit.run(route.action, state);
     }
 
-    public getRoutes(): IRoute[] {
-        return this.route;
+    public getRoutes(): IRoute<ActionAny<C>>[] {
+        return this.#routes;
     }
 }

@@ -6,7 +6,9 @@ import {ApplyContext, ResolveService} from "./interfaces";
 
 const cache = new WeakMap();
 
-export class Context {
+export class Context implements IDisposable {
+    readonly #IsContext!: boolean;
+
     public static logger = Logger.factory(Context);
     public static disposables = new Set<IDisposable>();
 
@@ -62,5 +64,9 @@ export class Context {
         } finally {
             finish();
         }
+    }
+
+    public dispose(): Promise<void> {
+        return Promise.resolve(undefined);
     }
 }

@@ -1,7 +1,23 @@
-import {Resolver, RouteRule} from "../../../../src";
 import {Bool, Fields, Int, Text, ToNumber} from "@bunt/input";
+import {Action} from "@bunt/unit";
+import {Resolver, RouteRule} from "../../../../src";
 import {route} from "../../route";
-import {HelloWorldAction} from "./HelloWorldAction";
+import {BaseContext} from "../Context/BaseContext";
+
+interface IHelloWorldActionState {
+    id: number;
+    payload: {
+        name: string;
+    };
+    option?: boolean;
+}
+
+export class HelloWorldAction extends Action<BaseContext, IHelloWorldActionState> {
+    public run(): string {
+        const {payload} = this.state;
+        return `Hello, ${payload.name}!`;
+    }
+}
 
 export default route(
     HelloWorldAction,

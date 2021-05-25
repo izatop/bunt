@@ -1,4 +1,4 @@
-import {ApplyContext, Context, resolve} from "../../../src";
+import {Context, resolve} from "../../../src";
 import {MemoryDbServiceResolver} from "./services/MemoryDbServiceResolver";
 
 export class BaseContext extends Context {
@@ -10,5 +10,3 @@ export class BaseContext extends Context {
         return new MemoryDbServiceResolver("parent");
     }
 }
-
-export type IBaseContext = ApplyContext<BaseContext>;

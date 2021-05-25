@@ -1,8 +1,8 @@
 import {FieldSelectType} from "@bunt/input";
-import {Action, ActionState} from "@bunt/unit";
+import {ActionAny, ActionState} from "@bunt/unit";
 import {Payload, Resolver} from "../Payload";
 
-export class RouteRule<A extends Action<any, any>> extends Payload<A> {
+export class RouteRule<A extends ActionAny> extends Payload<A> {
     public readonly route: string;
 
     constructor(route: string, type: FieldSelectType<ActionState<A>>, resolver: Resolver<A>) {

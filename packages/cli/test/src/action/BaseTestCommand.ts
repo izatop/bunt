@@ -1,7 +1,7 @@
 import {Command} from "../../../src";
-import {IBaseContext} from "../context/BaseContext";
+import {BaseContext} from "../context/BaseContext";
 
-export class BaseTestCommand extends Command<IBaseContext, { name: string }> {
+export class BaseTestCommand extends Command<BaseContext, { name: string }> {
     public execute(): void {
         return;
     }

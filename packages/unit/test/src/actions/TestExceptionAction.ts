@@ -1,8 +1,8 @@
-import {Action} from "../../../src";
 import {assert} from "@bunt/util";
-import {IBaseContext} from "../context/BaseContext";
+import {Action} from "../../../src";
+import {BaseContext} from "../context/BaseContext";
 
-export class TestExceptionAction extends Action<IBaseContext, { error: string }> {
+export class TestExceptionAction extends Action<BaseContext, { error: string }> {
     public run(): void {
         assert(false, this.state.error);
     }

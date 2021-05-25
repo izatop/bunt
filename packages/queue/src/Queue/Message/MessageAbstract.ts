@@ -1,15 +1,4 @@
-export abstract class MessageAbstract<T> {
-    public readonly payload: T;
+import {IncomingMessageAbstract} from "./IncomingMessageAbstract";
 
-    constructor(payload: T) {
-        this.payload = payload;
-    }
-
-    public static get channel(): string {
-        return this.prototype.channel;
-    }
-
-    public get channel(): string {
-        return this.constructor.name;
-    }
+export abstract class MessageAbstract<T> extends IncomingMessageAbstract<T> {
 }

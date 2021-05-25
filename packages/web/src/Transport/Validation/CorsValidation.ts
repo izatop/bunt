@@ -1,4 +1,5 @@
 import {Application, IRoute, IRouteMatcher, RegexpMatcher, RequestValidatorAbstract, RouteNotFound} from "@bunt/app";
+import {ActionAny} from "@bunt/unit";
 import {assert, isDefined, isFunction, isString} from "@bunt/util";
 import {Headers} from "../Headers";
 import {ICorsOptions} from "../interfaces";
@@ -96,7 +97,7 @@ export class CorsValidation extends RequestValidatorAbstract<ICorsOptions> {
         return "*";
     }
 
-    protected getRouteTuple(routes: IRoute[]): RouteTuple[] {
+    protected getRouteTuple(routes: IRoute<ActionAny>[]): RouteTuple[] {
         return routes
             .filter((route) => /^(GET|POST|PUT|PATCH|DELETE)\s/i.test(route.route))
             .map(({route}) => route.split(/\s/))

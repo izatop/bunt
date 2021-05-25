@@ -1,11 +1,11 @@
-import {IContext, StateType} from "@bunt/unit";
+import {Context, StateType} from "@bunt/unit";
 import {noop, Promisify} from "@bunt/util";
 import {ProtoHandleAbstract} from "../ProtoHandleAbstract";
 import {GQLClientConnection} from "./GQLClientConnection";
 import {GQLProtoLayer} from "./GQLProtoLayer";
 import {GQLClientPayload} from "./interfaces";
 
-export abstract class GQLProtoHandle<C extends IContext,
+export abstract class GQLProtoHandle<C extends Context,
     S extends StateType | null = null> extends ProtoHandleAbstract<C, S> {
 
     public static protocol = "graphql-ws";

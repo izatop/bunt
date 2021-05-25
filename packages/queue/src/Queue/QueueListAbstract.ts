@@ -2,13 +2,13 @@ import {Disposable} from "@bunt/unit";
 import {assert, isDefined, isInstanceOf} from "@bunt/util";
 import {ITransport} from "../interfaces";
 import {
-    IMessageHandler,
     IQueueList,
     IQueueListWatcher,
     IQueueReader,
     IReadOperation,
     Message,
     MessageCtor,
+    MessageHandler,
     OperationReleaseState,
 } from "./interfaces";
 import {TaskAbstract} from "./Message";
@@ -17,13 +17,13 @@ export abstract class QueueListAbstract<M extends Message> implements IQueueList
     readonly #type: MessageCtor<M>;
     readonly #reader: IQueueReader<M>;
     readonly #transport: ITransport;
-    readonly #handler: IMessageHandler<M>;
+    readonly #handler: MessageHandler<M>;
     readonly #watchers: IQueueListWatcher<M>[] = [];
 
     #subscribed = true;
     #state?: Promise<void>;
 
-    constructor(transport: ITransport, type: MessageCtor<M>, handler: IMessageHandler<M>) {
+    constructor(transport: ITransport, type: MessageCtor<M>, handler: MessageHandler<M>) {
         this.#type = type;
         this.#reader = transport.createQueueReader(type);
         this.#handler = handler;

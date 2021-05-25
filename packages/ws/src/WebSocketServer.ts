@@ -1,11 +1,10 @@
-import {RegexpMatcher, Route, RouteNotFound, RouteRuleArg} from "@bunt/app";
+import {IRoute, RegexpMatcher, Route, RouteNotFound, RouteRuleArg} from "@bunt/app";
 import {
+    ActionAny,
     ActionCtor,
-    ApplyContext,
     Context,
     ContextArg,
     Heartbeat,
-    IContext,
     IDisposable,
     IRunnable,
     Runtime,
@@ -22,12 +21,12 @@ import * as ws from "ws";
 import {WebSocketCloseReason} from "./const";
 import {HandleProtoType, ProtoHandleAbstract} from "./Protocol";
 
-export class WebSocketServer<C extends IContext> implements IDisposable, IRunnable {
+export class WebSocketServer<C extends Context> implements IDisposable, IRunnable {
     @logger
     public readonly logger!: Logger;
 
     readonly #disposeAcceptor: () => void;
-    readonly #servers = new Map<Route, ws.Server>();
+    readonly #servers = new Map<IRoute<ActionAny<C>>, ws.Server>();
     readonly #state = AsyncState.acquire();
     readonly #web: WebServer<C>;
 
@@ -48,14 +47,14 @@ export class WebSocketServer<C extends IContext> implements IDisposable, IRunnab
         });
     }
 
-    public static async attachTo<C extends IContext>(server: WebServer<C>): Promise<WebSocketServer<C>>;
+    public static async attachTo<C extends Context>(server: WebServer<C>): Promise<WebSocketServer<C>>;
     public static async attachTo<C extends Context>(
         server: WebServer<any>,
-        context: ContextArg<C>): Promise<WebSocketServer<ApplyContext<C>>>;
+        context: ContextArg<C>): Promise<WebSocketServer<C>>;
 
     public static async attachTo(
         server: WebServer<any>,
-        context?: ContextArg<any>): Promise<WebSocketServer<ApplyContext<any>>> {
+        context?: ContextArg<any>): Promise<WebSocketServer<any>> {
         if (context) {
             return new this(await unit(context), server);
         }
@@ -104,7 +103,7 @@ export class WebSocketServer<C extends IContext> implements IDisposable, IRunnab
         }
     }
 
-    protected getWebSocketServer(route: Route): ws.Server {
+    protected getWebSocketServer(route: IRoute<ActionAny<C>>): ws.Server {
         const webSocketServer = this.#servers.get(route) ?? this.factoryWebSocketServer();
         if (!this.#servers.has(route)) {
             this.#servers.set(route, webSocketServer);

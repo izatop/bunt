@@ -1,8 +1,8 @@
-import {Action} from "../../../src";
 import {assert} from "@bunt/util";
-import {IBaseContext} from "../context/BaseContext";
+import {Action} from "../../../src";
+import {BaseContext} from "../context/BaseContext";
 
-export class NeverRunAction extends Action<IBaseContext> {
+export class NeverRunAction extends Action<BaseContext> {
     public run(): void {
         assert(false, "This method shouldn't run");
     }

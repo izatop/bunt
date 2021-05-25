@@ -8,6 +8,8 @@ class UpdateLintCommand extends BaseCommand {
 
         const result = await store.writeToPackageRoot(resource);
         this.logger.info(`File ${result} has been updated`);
+
+        this.dispose();
     }
 }
 

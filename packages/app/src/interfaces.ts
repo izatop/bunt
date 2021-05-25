@@ -1,7 +1,5 @@
-import {Action, Context, MatchContext} from "@bunt/unit";
 import {Promisify} from "@bunt/util";
 import {Application} from "./Application";
-import {IRoute} from "./Route";
 
 export type ActionResponse = Error
     | { stringify(): string }
@@ -14,16 +12,6 @@ export type ActionResponse = Error
     | undefined
     | void
     | any;
-
-export type RouteAction = Action<any, any>;
-
-export type MatchRoute<C extends Context, R> = R extends IRoute<infer A>
-    ? A extends Action<infer AC, any, ActionResponse>
-        ? MatchContext<C, AC> extends AC
-            ? R
-            : ["Action context doesn't match its parent context", C, AC]
-        : ["Action doesn't satisfy its interface", A]
-    : never;
 
 export interface IKeyValueMap {
     has(name: string): boolean;
