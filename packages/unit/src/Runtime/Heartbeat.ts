@@ -1,14 +1,17 @@
-import {AsyncState} from "@bunt/util";
+import {AsyncState, Logger, logger} from "@bunt/util";
 import {HeartbeatDisposer, IRunnable} from "./interfaces";
 
 const registry = new WeakMap<IRunnable, Heartbeat>();
 
 export class Heartbeat {
-    #beats = true;
+    @logger
+    protected readonly logger!: Logger;
 
+    #beats = true;
     readonly #pending: Promise<void>;
 
-    constructor(disposer?: HeartbeatDisposer) {
+    constructor(label: string, disposer?: HeartbeatDisposer) {
+        this.logger.debug("create", {label});
         this.#pending = AsyncState.acquire<void>();
 
         if (disposer) {
@@ -27,7 +30,7 @@ export class Heartbeat {
      * @param disposer
      */
     public static create(target: IRunnable, disposer?: HeartbeatDisposer): Heartbeat {
-        const heartbeat = registry.get(target) ?? new Heartbeat(disposer);
+        const heartbeat = registry.get(target) ?? new Heartbeat(target.constructor.name, disposer);
         if (!registry.has(target)) {
             registry.set(target, heartbeat);
         }

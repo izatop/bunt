@@ -5,7 +5,7 @@ export class RunnableTest extends EventEmitter implements IRunnable {
     declare on: (event: "resolve", fn: (error?: Error) => void) => this;
 
     public getHeartbeat(): Heartbeat {
-        return new Heartbeat((resolve) => this.on("resolve", resolve));
+        return Heartbeat.create(this, (resolve) => this.on("resolve", resolve));
     }
 
     public crash(): void {
