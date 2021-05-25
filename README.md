@@ -8,7 +8,7 @@ Type `yarn add @bunt/app`
 
 ### Usage
 
-See `packages/test` for example.
+See `packages/{package}/test` for example.
 
 ##
 
