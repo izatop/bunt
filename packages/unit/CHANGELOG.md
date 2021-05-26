@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.19.0](https://github.com/izatop/bunt/compare/v0.18.3...v0.19.0) (2021-05-26)
+
+
+### Bug Fixes
+
+* tests, disposable ([99ead5a](https://github.com/izatop/bunt/commit/99ead5a2b518bb6160687afcf1d12311b38d1c44))
+
+
+### Features
+
+* update unit types ([6a7124c](https://github.com/izatop/bunt/commit/6a7124cb8074892a0d4ce4e86d551d34289b42ee))
+
+
+
+
+
 ## [0.18.3](https://github.com/izatop/bunt/compare/v0.18.2...v0.18.3) (2021-05-25)
 
 
