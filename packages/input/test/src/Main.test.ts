@@ -22,7 +22,7 @@ import {TestEnum, TestEnumType} from "./Type/TestEnum";
 
 describe("Test Input", () => {
     const rand = Math.random();
-    const union = new Union<Date | boolean, string | number | boolean>(
+    const union = new Union<Date | boolean>(
         (input) => {
             switch (typeof input) {
                 case "string":
@@ -34,7 +34,7 @@ describe("Test Input", () => {
         },
     );
 
-    const samples: [any, any, TypeAbstract<any, any>][] = [
+    const samples: [any, any, TypeAbstract<any>][] = [
         [1, 1, Int],
         ["1", 1, new ToNumber(Int)],
         [false, false, Bool],
@@ -82,7 +82,7 @@ describe("Test Input", () => {
             name: Text,
             children: () => new NonNull(new List(human), []),
             parent: () => new Nullable(human),
-            links: () => new List(Text),
+            links: new List(Text),
             hobby: new Nullable(Hobby),
         }, "Human");
 

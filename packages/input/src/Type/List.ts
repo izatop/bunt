@@ -1,11 +1,9 @@
-import {isArray, isInstanceOf, MayNullable} from "@bunt/util";
+import {isArray, isInstanceOf} from "@bunt/util";
 import {AssertionListError, AssertionTypeError, IReadableListField} from "../Assertion";
-import {MayListInput} from "../interfaces";
 import {SuperType} from "../SuperType";
 
-export class List<TValue, TInput extends MayListInput = MayListInput>
-    extends SuperType<TValue[], TValue, Array<TInput>, TInput> {
-    public async validate(payload: MayNullable<TInput[]>): Promise<TValue[]> {
+export class List<TValue> extends SuperType<TValue[], TValue> {
+    public async validate(payload: unknown): Promise<TValue[]> {
         this.assert(isArray(payload), `Wrong payload: ${this.type.name}[] expected`, payload);
 
         let index = 0;

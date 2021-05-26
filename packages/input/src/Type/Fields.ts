@@ -1,9 +1,9 @@
-import {entriesReverse, isFunction, isInstanceOf, isObject, MayNullable} from "@bunt/util";
+import {entriesReverse, isFunction, isInstanceOf, isObject} from "@bunt/util";
 import {AssertionObjectError, AssertionTypeError, IReadableTypeError} from "../Assertion";
 import {ObjectFields, ObjectTypeMerge} from "../interfaces";
 import {TypeAbstract} from "../TypeAbstract";
 
-export class Fields<TValue extends Record<string, any>> extends TypeAbstract<TValue, Record<string, any>> {
+export class Fields<TValue extends Record<string, any>> extends TypeAbstract<TValue> {
     readonly #fields: ObjectFields<TValue>;
     readonly #name: string;
 
@@ -33,7 +33,7 @@ export class Fields<TValue extends Record<string, any>> extends TypeAbstract<TVa
         );
     }
 
-    public async validate(payload: MayNullable<Record<string, any>>): Promise<TValue> {
+    public async validate(payload: unknown): Promise<TValue> {
         this.assert(isObject(payload), `Wrong payload: ${this.name} expected`, payload);
 
         const entries: [string, any][] = [];

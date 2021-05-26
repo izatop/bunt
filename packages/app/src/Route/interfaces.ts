@@ -1,4 +1,4 @@
-import {ActionAny, ActionContext, ActionCtor, ApplyContext, Context} from "@bunt/unit";
+import {ActionAny, ActionContext, ActionCtor, ActionState, ApplyContext} from "@bunt/unit";
 import {Ctor} from "@bunt/util";
 import {IRequest} from "../interfaces";
 import {Payload} from "../Payload";
@@ -19,9 +19,11 @@ export interface IRoute<A extends ActionAny> {
 
 export type RouteMatcherFactory = IRouteMatcher | ((route: string) => IRouteMatcher);
 
-export type RouteRuleArg<A extends ActionAny> = A extends ActionAny<any, infer S>
-    ? S extends null ? string : RouteRule<A>
-    : string;
+export type RouteRuleVariants<A extends ActionAny> = { route: string, payload: undefined }
+    | { route: string, payload: RouteRule<A> };
+
+export type RouteRuleArg<A extends ActionAny> = ActionState<A> extends null
+    ? string : RouteRule<A>;
 
 export type RouteFactory = <A extends ActionAny>(action: Ctor<A>, rule: RouteRuleArg<A>) => Route<A>;
 

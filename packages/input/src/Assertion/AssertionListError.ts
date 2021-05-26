@@ -12,10 +12,7 @@ export interface IReadableListError extends IReadableTypeError {
 export class AssertionListError extends AssertionTypeError {
     readonly #fields: IReadableListField[];
 
-    constructor(message: string,
-                type: TypeAbstract<any, any>,
-                payload: unknown,
-                fields: IReadableListField[]) {
+    constructor(message: string, type: TypeAbstract<any>, payload: unknown, fields: IReadableListField[]) {
         super(message, type, payload);
         this.#fields = fields;
     }

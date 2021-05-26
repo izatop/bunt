@@ -1,15 +1,13 @@
-import {MayNullable, Promisify} from "@bunt/util";
-import {MayInput} from "../interfaces";
+import {Promisify} from "@bunt/util";
 import {TypeAbstract} from "../TypeAbstract";
 
-export type UnionSelector<TInput extends MayInput> =
-    (input: MayNullable<TInput>) => TypeAbstract<unknown> | undefined;
+export type UnionSelector = (input: unknown) => TypeAbstract<unknown> | undefined;
 
-export class Union<TValue, TInput extends MayInput = MayInput> extends TypeAbstract<TValue, TInput> {
-    readonly #selector: UnionSelector<TInput>;
+export class Union<TValue> extends TypeAbstract<TValue> {
+    readonly #selector: UnionSelector;
     readonly #name: string;
 
-    constructor(selector: UnionSelector<TInput>, name = "Union") {
+    constructor(selector: UnionSelector, name = "Union") {
         super();
         this.#selector = selector;
         this.#name = name;
@@ -19,9 +17,10 @@ export class Union<TValue, TInput extends MayInput = MayInput> extends TypeAbstr
         return this.#name;
     }
 
-    public validate(input: MayNullable<TInput>): Promisify<TValue> {
+    public validate(input: unknown): Promisify<TValue> {
         const type = this.#selector(input);
         this.assert(!!type, `${this.name} detection was failed`, input);
+
         return type.validate(input) as Promisify<TValue>;
     }
 }

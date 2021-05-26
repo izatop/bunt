@@ -1,7 +1,7 @@
 import {isNumber, isString} from "@bunt/util";
 import {ScalarType} from "./ScalarType";
 
-export const Numeric = new ScalarType<number, string | number>({
+export const Numeric = new ScalarType<number>({
     name: "Numeric",
     validate(payload) {
         this.assert(isNumber(payload) || isString(payload), `Wrong payload: ${this.name} expected`, payload);

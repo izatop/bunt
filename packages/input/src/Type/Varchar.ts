@@ -6,7 +6,7 @@ interface IVarchar {
     readonly max?: number;
 }
 
-export class Varchar extends TypeAbstract<string, string> {
+export class Varchar extends TypeAbstract<string> {
     readonly #options: IVarchar;
 
     constructor(options: IVarchar = {}) {

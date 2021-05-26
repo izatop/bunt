@@ -1,5 +1,4 @@
-import {isString, MayNullable, Promisify} from "@bunt/util";
-import {MayInput} from "../interfaces";
+import {isString, Promisify} from "@bunt/util";
 import {TypeAbstract} from "../TypeAbstract";
 
 export class Enum<T extends string | number> extends TypeAbstract<T> {
@@ -10,7 +9,7 @@ export class Enum<T extends string | number> extends TypeAbstract<T> {
         this.#value = value;
     }
 
-    public validate(input: MayNullable<MayInput>): Promisify<T> {
+    public validate(input: unknown): Promisify<T> {
         this.assert(isString(input), "Wrong type", input);
         this.assert(!/^\d+$/.test(input), "Wrong value", input);
         this.assert(input in this.#value, "Wrong value", input);

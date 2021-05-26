@@ -9,9 +9,9 @@ export interface IReadableTypeError {
 
 export class AssertionTypeError extends Error implements IReadableError, ILogable<IReadableTypeError> {
     readonly #payload: unknown;
-    readonly #type: TypeAbstract<any, any>;
+    readonly #type: TypeAbstract<any>;
 
-    constructor(message: string, type: TypeAbstract<any, any>, payload: unknown) {
+    constructor(message: string, type: TypeAbstract<any>, payload: unknown) {
         super(message);
         this.#payload = payload;
         this.#type = type;

@@ -1,13 +1,12 @@
 import {ActionAny} from "@bunt/unit";
 import {Ctor, ILogable, isFunction, isString} from "@bunt/util";
-import {Payload} from "../Payload";
-import {IRoute, IRouteMatcher, RouteFactory, RouteMatcherFactory, RouteRuleArg} from "./interfaces";
+import {IRoute, IRouteMatcher, RouteFactory, RouteMatcherFactory, RouteRuleArg, RouteRuleVariants} from "./interfaces";
 import {RouteRule} from "./RouteRule";
 
 export class Route<A extends ActionAny> implements IRoute<A>, ILogable<{ route: string }> {
     public readonly route: string;
     public readonly action: Ctor<A>;
-    public readonly payload?: Payload<A>;
+    public readonly payload?: RouteRule<A>;
     readonly #matcher: IRouteMatcher;
 
     constructor(matcher: RouteMatcherFactory, action: Ctor<A>, rule: RouteRuleArg<A>) {
@@ -37,7 +36,7 @@ export class Route<A extends ActionAny> implements IRoute<A>, ILogable<{ route: 
         return this.#matcher.match(route);
     }
 
-    private getRuleArgs(rule: string | RouteRule<A>): { route: string, payload?: Payload<A> } {
+    private getRuleArgs(rule: RouteRuleArg<A>): RouteRuleVariants<A> {
         if (isString(rule)) {
             return {route: rule, payload: undefined};
         }

@@ -1,17 +1,16 @@
-import {isFunction, isNull, isUndefined, MayNullable, Promisify} from "@bunt/util";
-import {MayInput} from "../interfaces";
+import {isFunction, isNull, isUndefined, Promisify} from "@bunt/util";
 import {SuperType} from "../SuperType";
 import {TypeAbstract} from "../TypeAbstract";
 
-export class NonNull<TValue, TInput extends MayInput> extends SuperType<TValue, TValue, TInput, TInput> {
+export class NonNull<TValue> extends SuperType<TValue, TValue> {
     readonly #defaultValue: TValue | (() => TValue);
 
-    constructor(type: TypeAbstract<TValue, TInput>, defaultValue: TValue | (() => TValue)) {
+    constructor(type: TypeAbstract<TValue>, defaultValue: TValue | (() => TValue)) {
         super(type);
         this.#defaultValue = defaultValue;
     }
 
-    public validate(payload: MayNullable<TInput>): Promisify<TValue> {
+    public validate(payload: unknown): Promisify<TValue> {
         if (isNull(payload) || isUndefined(payload)) {
             if (isFunction(this.#defaultValue)) {
                 return this.#defaultValue();

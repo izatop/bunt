@@ -9,7 +9,7 @@ export class AssertionObjectError extends AssertionTypeError {
     readonly #fields: Record<string, any>;
 
     constructor(message: string,
-                type: TypeAbstract<any, any>,
+                type: TypeAbstract<any>,
                 payload: unknown,
                 fields: Record<string, IReadableTypeError>) {
         super(message, type, payload);

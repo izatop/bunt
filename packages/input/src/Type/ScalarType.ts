@@ -1,16 +1,15 @@
-import {MayNullable, Promisify} from "@bunt/util";
-import {MayInput} from "../interfaces";
+import {Promisify} from "@bunt/util";
 import {TypeAbstract} from "../TypeAbstract";
 
-export interface IScalarType<TValue, TInput extends MayInput> {
+export interface IScalarType<TValue> {
     name: string;
-    validate: (this: ScalarType<TValue, TInput>, payload: MayNullable<TInput>) => Promisify<TValue>;
+    validate: (this: ScalarType<TValue>, payload: unknown) => Promisify<TValue>;
 }
 
-export class ScalarType<TValue, TInput extends MayInput> extends TypeAbstract<TValue, TInput> {
-    readonly #type: IScalarType<TValue, TInput>;
+export class ScalarType<TValue> extends TypeAbstract<TValue> {
+    readonly #type: IScalarType<TValue>;
 
-    public constructor(type: IScalarType<TValue, TInput>) {
+    public constructor(type: IScalarType<TValue>) {
         super();
         this.#type = type;
     }
@@ -19,7 +18,7 @@ export class ScalarType<TValue, TInput extends MayInput> extends TypeAbstract<TV
         return this.#type.name;
     }
 
-    public validate(payload: MayNullable<TInput>): Promisify<TValue> {
+    public validate(payload: unknown): Promisify<TValue> {
         return this.#type.validate.call(this, payload);
     }
 }
