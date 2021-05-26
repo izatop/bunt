@@ -1,5 +1,6 @@
 import {AsyncState, Logger, logger} from "@bunt/util";
 import {HeartbeatDisposer, IRunnable} from "./interfaces";
+import {isRunnable} from "./internal";
 
 const registry = new WeakMap<IRunnable, Heartbeat>();
 
@@ -7,7 +8,6 @@ export class Heartbeat {
     @logger
     protected readonly logger!: Logger;
 
-    #beats = true;
     readonly #pending: Promise<void>;
 
     constructor(label: string, disposer?: HeartbeatDisposer) {
@@ -20,7 +20,7 @@ export class Heartbeat {
     }
 
     public get beats(): boolean {
-        return this.#beats;
+        return !AsyncState.isReleased(this.#pending);
     }
 
     /**
@@ -38,9 +38,11 @@ export class Heartbeat {
         return heartbeat;
     }
 
-    public static async watch(runnable: IRunnable): Promise<void> {
-        const heartbeat = runnable.getHeartbeat();
-        return heartbeat.watch();
+    public static async watch(runnable: IRunnable | unknown): Promise<void> {
+        if (isRunnable(runnable)) {
+            const heartbeat = runnable.getHeartbeat();
+            return heartbeat.watch();
+        }
     }
 
     public static destroy(target: IRunnable): void {
@@ -49,6 +51,10 @@ export class Heartbeat {
     }
 
     public destroy(error?: Error): void {
+        if (!this.beats) {
+            return;
+        }
+
         if (error) {
             return AsyncState.reject(this.#pending, error);
         }

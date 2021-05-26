@@ -28,6 +28,6 @@ export class Commander<C extends CommandContext> implements IRunnable, IDisposab
     }
 
     public getHeartbeat(): Heartbeat {
-        return Heartbeat.create(this, (fn) => Disposable.attach(this, fn));
+        return Heartbeat.create(this);
     }
 }

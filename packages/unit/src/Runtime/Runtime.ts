@@ -1,5 +1,5 @@
-import {assert, isNull, isUndefined, Logger, logger, Promisify, SingleRef} from "@bunt/util";
-import {Disposable, dispose} from "../Application";
+import {isNull, isUndefined, Logger, logger, Promisify, SingleRef} from "@bunt/util";
+import {Disposable, dispose} from "../Dispose";
 import {Heartbeat} from "./Heartbeat";
 import {DisposableFn, IDisposable} from "./interfaces";
 import {isDisposable, isRunnable, Signals} from "./internal";
@@ -15,8 +15,6 @@ export class Runtime implements IDisposable {
     protected readonly queue: Heartbeat[] = [];
     private readonly created: Date;
 
-    #disposed = false;
-
     private constructor() {
         this.created = new Date();
         this.logger.info("register", {ENV, DEBUG});
@@ -24,12 +22,8 @@ export class Runtime implements IDisposable {
         // @TODO Send an event when a signal has been received.
         for (const signal of Signals) {
             this.logger.debug("listen", signal);
-            process.on(signal, async () => this.online && this.dispose());
+            process.on(signal, async () => this.dispose());
         }
-    }
-
-    public get online(): boolean {
-        return !this.#disposed;
     }
 
     public static on(event: "release", callback: DisposableFn): void {
@@ -58,24 +52,23 @@ export class Runtime implements IDisposable {
         return runtime.run(...chain);
     }
 
-    public async accept(result: unknown): Promise<void> {
-        const done = await result;
-        if (isUndefined(done) || isNull(done)) {
+    public async handle(result: unknown): Promise<void> {
+        const object = await result;
+        if (isUndefined(object) || isNull(object)) {
             return;
         }
 
-        if (isDisposable(done)) {
-            Disposable.attach(this, done);
+        if (isRunnable(object)) {
+            this.queue.push(object.getHeartbeat());
         }
 
-        if (isRunnable(done)) {
-            this.queue.push(done.getHeartbeat());
+        if (isDisposable(object)) {
+            Disposable.attach(this, object);
         }
     }
 
     public async dispose(): Promise<void> {
         this.logger.info("dispose");
-        assert(this.online, "Runtime has been already released");
         process.exit(0);
     }
 
@@ -83,7 +76,7 @@ export class Runtime implements IDisposable {
         const finish = this.logger.perf("run");
         try {
             for (const callback of chain) {
-                await this.accept(callback(this));
+                await this.handle(callback(this));
             }
 
             await Promise.allSettled(this.queue.map((hb) => hb.watch()));
@@ -93,8 +86,7 @@ export class Runtime implements IDisposable {
             finish();
         }
 
-        if (this.online) {
-            process.nextTick(() => dispose(this));
-        }
+        await dispose(this);
+        await Disposable.disposeAll();
     }
 }

@@ -35,7 +35,7 @@ export class WebServer<C extends Context> extends Application<C>
     }
 
     public getHeartbeat(): Heartbeat {
-        return Heartbeat.create(this, (resolve) => this.#server.once("close", resolve));
+        return Heartbeat.create(this);
     }
 
     public listen(port: number, backlog?: number): this {

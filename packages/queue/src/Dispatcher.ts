@@ -27,7 +27,7 @@ export class Dispatcher<C extends Context> implements IDisposable, IRunnable {
     }
 
     public getHeartbeat(): Heartbeat {
-        return Heartbeat.create(this, (resolve) => Disposable.attach(this, resolve));
+        return Heartbeat.create(this);
     }
 
     public subscribe<M extends Incoming, H extends Handler<C, M>>(type: MessageCtor<M>, action: Ctor<H>): this {

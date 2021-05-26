@@ -73,7 +73,7 @@ export class Unit<C extends Context> {
 
     public async run<A extends Action<C, S, R>, S extends StateType | null, R = unknown>(
         ctor: ActionCtor<C, S, R, A>,
-        state: ActionState<A>): Promise<ActionReturn<Action<C, any>>> {
+        state: ActionState<A>): Promise<ActionReturn<Action<C, S, R>>> {
         const finish = this.logger.perf("action", {action: ctor.name});
         assert(isClass(ctor), "Wrong the Action type");
         assert(this.#registry.has(ctor), `Unknown action ${ctor.name}`);

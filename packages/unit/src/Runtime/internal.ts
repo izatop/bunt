@@ -4,12 +4,12 @@ import {Runtime} from "./Runtime";
 
 export const Signals: NodeJS.Signals[] = ["SIGINT", "SIGQUIT", "SIGTERM"];
 
-export function isDisposable(candidate: unknown): candidate is IDisposable {
-    return isObject(candidate) && "dispose" in candidate;
+export function isDisposable(target: unknown): target is IDisposable {
+    return isObject(target) && "dispose" in target;
 }
 
-export function isRunnable(candidate: unknown): candidate is IRunnable {
-    return isObject(candidate) && "getHeartbeat" in candidate;
+export function isRunnable(target: unknown): target is IRunnable {
+    return isObject(target) && "getHeartbeat" in target;
 }
 
 export function main(...chain: ((runtime: Runtime) => Promisify<unknown>)[]): void {

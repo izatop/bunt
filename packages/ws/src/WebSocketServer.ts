@@ -70,7 +70,7 @@ export class WebSocketServer<C extends Context> implements IDisposable, IRunnabl
     }
 
     public getHeartbeat(): Heartbeat {
-        return Heartbeat.create(this, (resolve) => this.#state.finally(resolve));
+        return Heartbeat.create(this);
     }
 
     public async dispose(): Promise<void> {

@@ -11,6 +11,7 @@ export interface IDisposable {
 
 export interface IDisposedHistory {
     error?: Error;
+    label: string;
     timeout: number;
     target: string;
     date: Date;
