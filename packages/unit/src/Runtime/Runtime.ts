@@ -1,4 +1,5 @@
 import {isNull, isUndefined, Logger, logger, Promisify, SingleRef} from "@bunt/util";
+import {run} from "jest";
 import {Disposable, dispose} from "../Dispose";
 import {Heartbeat} from "./Heartbeat";
 import {DisposableFn, IDisposable} from "./interfaces";
@@ -46,47 +47,60 @@ export class Runtime implements IDisposable {
         return ENV === "test";
     }
 
-    public static run(...chain: ((runtime: Runtime) => Promisify<unknown>)[]): Promise<void> {
-        const runtime = ref.create(() => new Runtime());
-
-        return runtime.run(...chain);
+    public static run(...chain: (() => Promisify<unknown>)[]): Promise<void> {
+        const queue = this.createQueue(chain);
+        return ref.create(() => new Runtime())
+            .watch(queue);
     }
 
-    public async handle(result: unknown): Promise<void> {
-        const object = await result;
-        if (isUndefined(object) || isNull(object)) {
-            return;
+    public static createQueue(chain: (() => Promisify<unknown>)[]): Promise<unknown>[] {
+        const queue = [];
+        for (const callback of chain) {
+            queue.push(new Promise<unknown>((resolve) => resolve(callback())));
         }
 
-        if (isRunnable(object)) {
-            this.queue.push(object.getHeartbeat());
-        }
-
-        if (isDisposable(object)) {
-            Disposable.attach(this, object);
-        }
+        return queue;
     }
 
     public async dispose(): Promise<void> {
         this.logger.info("dispose");
+        await Disposable.disposeAll();
         process.exit(0);
     }
 
-    private async run(...chain: ((runtime: Runtime) => Promisify<unknown>)[]): Promise<void> {
+    private async watch(chain: Promise<unknown>[]): Promise<void> {
         const finish = this.logger.perf("run");
         try {
-            for (const callback of chain) {
-                await this.handle(callback(this));
+            for (const pending of chain) {
+                await this.handle(pending);
             }
 
-            await Promise.allSettled(this.queue.map((hb) => hb.watch()));
+            await Promise.allSettled(this.queue.map((heartbeat) => heartbeat.watch()));
         } catch (error) {
             this.logger.emergency(error.message, error.stack);
         } finally {
             finish();
         }
 
-        await dispose(this);
-        await Disposable.disposeAll();
+        dispose(this);
+    }
+
+    private async handle(result: unknown): Promise<void> {
+        try {
+            const object = await result;
+            if (isUndefined(object) || isNull(object)) {
+                return;
+            }
+
+            if (isRunnable(object)) {
+                this.queue.push(object.getHeartbeat());
+            }
+
+            if (isDisposable(object)) {
+                Disposable.attach(this, object);
+            }
+        } catch (error) {
+            this.logger.error("reject", error);
+        }
     }
 }

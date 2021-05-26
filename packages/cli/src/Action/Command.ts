@@ -1,10 +1,9 @@
-import {Action, Disposable, Heartbeat, IDisposable, IRunnable, StateType} from "@bunt/unit";
+import {Action, IRunnable, StateType} from "@bunt/unit";
 import {Argv, Logger, logger, Program} from "@bunt/util";
 import {CommandContext} from "../Context/CommandContext";
 
 export abstract class Command<C extends CommandContext,
-    S extends StateType | null = null> extends Action<C, S, IRunnable | void>
-    implements IDisposable, IRunnable {
+    S extends StateType | null = null> extends Action<C, S, IRunnable | void> {
 
     @logger
     protected logger!: Logger;
@@ -15,13 +14,5 @@ export abstract class Command<C extends CommandContext,
 
     public get program(): Program {
         return this.context.program;
-    }
-
-    public getHeartbeat(): Heartbeat {
-        return Heartbeat.create(this);
-    }
-
-    public async dispose(): Promise<void> {
-        return;
     }
 }

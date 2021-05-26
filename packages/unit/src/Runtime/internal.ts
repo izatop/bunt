@@ -12,7 +12,7 @@ export function isRunnable(target: unknown): target is IRunnable {
     return isObject(target) && "getHeartbeat" in target;
 }
 
-export function main(...chain: ((runtime: Runtime) => Promisify<unknown>)[]): void {
+export function main(...chain: (() => Promisify<unknown>)[]): void {
     process.nextTick(async () => {
         await Runtime.run(...chain);
     });
