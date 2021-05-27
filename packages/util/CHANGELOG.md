@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.19.2](https://github.com/izatop/bunt/compare/v0.19.1...v0.19.2) (2021-05-27)
+
+
+### Bug Fixes
+
+* lint ([32f1ce5](https://github.com/izatop/bunt/commit/32f1ce542e6db7a23c5ad8ef7a315a047963c327))
+* tests ([64f5a1a](https://github.com/izatop/bunt/commit/64f5a1a38d3207d73aac6b6ed99af0defa57602b))
+
+
+
+
+
 # [0.19.0](https://github.com/izatop/bunt/compare/v0.18.3...v0.19.0) (2021-05-26)
 
 **Note:** Version bump only for package @bunt/util

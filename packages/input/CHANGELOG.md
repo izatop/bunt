@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.19.2](https://github.com/izatop/bunt/compare/v0.19.1...v0.19.2) (2021-05-27)
+
+
+### Bug Fixes
+
+* update deps and type fixes ([c9c88b1](https://github.com/izatop/bunt/commit/c9c88b13887e214593a0d03ad12e1f2edb9b9eef))
+
+
+
+
+
 # [0.19.0](https://github.com/izatop/bunt/compare/v0.18.3...v0.19.0) (2021-05-26)
 
 **Note:** Version bump only for package @bunt/input
