@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.19.3](https://github.com/izatop/bunt/compare/v0.19.2...v0.19.3) (2021-05-27)
+
+
+### Bug Fixes
+
+* a program exit behavior ([55a6e94](https://github.com/izatop/bunt/commit/55a6e94aee7286455fb19dfbf7f3760e490976d6))
+
+
+
+
+
 ## [0.19.2](https://github.com/izatop/bunt/compare/v0.19.1...v0.19.2) (2021-05-27)
 
 
