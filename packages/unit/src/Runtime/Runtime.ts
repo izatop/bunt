@@ -63,10 +63,11 @@ export class Runtime implements IDisposable {
 
     public async dispose(): Promise<void> {
         this.logger.info("dispose");
-        process.nextTick(async () => {
-            this.logger.info("dispose all");
+
+        setImmediate(async () => {
             await Disposable.disposeAll()
-                .finally(() => process.exit(0));
+                .finally(() => this.logger.info("exit"))
+                .finally(() => process.nextTick(() => process.exit(0)));
         });
     }
 
