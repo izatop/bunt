@@ -1,5 +1,4 @@
 import {isNull, isUndefined, Logger, logger, Promisify, SingleRef} from "@bunt/util";
-import {run} from "jest";
 import {Disposable, dispose} from "../Dispose";
 import {Heartbeat} from "./Heartbeat";
 import {DisposableFn, IDisposable} from "./interfaces";
@@ -64,8 +63,11 @@ export class Runtime implements IDisposable {
 
     public async dispose(): Promise<void> {
         this.logger.info("dispose");
-        await Disposable.disposeAll();
-        process.exit(0);
+        process.nextTick(async () => {
+            this.logger.info("dispose all");
+            await Disposable.disposeAll()
+                .finally(() => process.exit(0));
+        });
     }
 
     private async watch(chain: Promise<unknown>[]): Promise<void> {
@@ -82,7 +84,7 @@ export class Runtime implements IDisposable {
             finish();
         }
 
-        dispose(this);
+        await dispose(this);
     }
 
     private async handle(result: unknown): Promise<void> {

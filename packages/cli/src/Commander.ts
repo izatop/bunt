@@ -1,5 +1,5 @@
 import {Application, IRoute} from "@bunt/app";
-import {Action, ContextArg, Disposable, Heartbeat, IDisposable, IRunnable} from "@bunt/unit";
+import {Action, ContextArg, Heartbeat, IDisposable, IRunnable} from "@bunt/unit";
 import {CommandContext} from "./Context/CommandContext";
 import {RequestCommand} from "./Request";
 
@@ -11,12 +11,12 @@ export class Commander<C extends CommandContext> implements IRunnable, IDisposab
     }
 
     public static async execute<C extends CommandContext>(
-        context: ContextArg<C>, routes: IRoute<Action<C, any, IRunnable>>[] = []): Promise<Commander<C>> {
+        context: ContextArg<C>, routes: IRoute<Action<C, any, IRunnable>>[] = []): Promise<IRunnable | undefined> {
         const command = new this<C>(await Application.factory<C>(context, routes));
         return command.handle();
     }
 
-    public async handle(): Promise<Commander<C>> {
+    public async handle(): Promise<IRunnable | undefined> {
         const {context} = this.#application;
         const request = new RequestCommand(context.program.args);
 

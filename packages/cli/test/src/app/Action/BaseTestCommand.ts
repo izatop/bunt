@@ -1,6 +1,6 @@
-import {Disposable, Heartbeat, IDisposable, IRunnable} from "@bunt/unit";
-import {Command} from "../../../src";
-import {BaseContext} from "../context/BaseContext";
+import {Heartbeat, IDisposable, IRunnable} from "@bunt/unit";
+import {Command} from "../../../../src";
+import {BaseContext} from "../Context/BaseContext";
 
 export class BaseTestCommand extends Command<BaseContext, { name?: string }> {
     public run(): void | Result {

@@ -1,3 +1,5 @@
+import {isDefined} from "../is";
+
 export interface IAsyncStateMap<T> {
     resolve: (value: T | PromiseLike<T>) => void;
     reject: (error?: Error) => void;
@@ -43,6 +45,10 @@ export class AsyncState {
     }
 
     public static isReleased<T>(pending: Promise<T> | undefined): boolean {
-        return !pending || (registry.get(pending)?.done ?? true);
+        return isDefined(pending) && (registry.get(pending)?.done ?? true);
+    }
+
+    public static has<T>(pending: Promise<T> | undefined): boolean {
+        return isDefined(pending) && registry.has(pending);
     }
 }

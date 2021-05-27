@@ -1,5 +1,5 @@
 import {ApplyContext} from "@bunt/unit";
-import {CommandContext} from "../../../src";
+import {CommandContext} from "../../../../src";
 
 export class BaseContext extends CommandContext {
 }
