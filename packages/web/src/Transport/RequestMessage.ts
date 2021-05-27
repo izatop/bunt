@@ -1,4 +1,4 @@
-import {Application, IHeaders, RequestAbstract, RequestMessageAbstract, RequestValidatorAbstract} from "@bunt/app";
+import {Application, IHeaders, RequestAbstract, RequestValidatorAbstract} from "@bunt/app";
 import {isString, toArray} from "@bunt/util";
 import {IncomingMessage} from "http";
 import {URL} from "url";

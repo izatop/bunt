@@ -1,7 +1,7 @@
 import {Context} from "@bunt/unit";
 import * as HTTP from "http-status";
 import {JSONResponse, NoContentResponse, RedirectResponse, WebServer} from "../../src";
-import HelloWorldRoute from "./actions/HelloWorldRoute";
+import HelloWorldRoute from "./app/Action/HelloWorldRoute";
 
 describe("Response", () => {
     test("Main", async () => {

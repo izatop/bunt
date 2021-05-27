@@ -7,16 +7,16 @@ export class KeyValueMap implements IKeyValueMap {
         this.#map = new Map(values);
     }
 
+    public static fromObject(input: Record<string, string>): IKeyValueMap {
+        return new this(Object.entries(input));
+    }
+
     public delete(name: string): void {
         this.#map.delete(name);
     }
 
     public entries(): [string, string][] {
         return [...this.#map.entries()];
-    }
-
-    public static fromObject(input: Record<string, string>): IKeyValueMap {
-        return new this(Object.entries(input));
     }
 
     public has(name: string): boolean {

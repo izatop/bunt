@@ -1,4 +1,4 @@
-import {dispose, isDisposable, isRunnable} from "@bunt/unit";
+import {Disposable, dispose, isDisposable, isRunnable} from "@bunt/unit";
 import {AsyncState} from "@bunt/util";
 import {ok} from "assert";
 import {Commander} from "../../src";
@@ -25,4 +25,5 @@ test("Runnable Command", async () => {
 
     await dispose(result);
     await expect(heartbeat.beats).toBe(false);
+    expect(Disposable.size).toBe(0);
 });

@@ -61,8 +61,11 @@ describe("Disposable", () => {
 
         Disposable.resolve(disposable5);
         Disposable.resolve(disposable6);
+
+        expect(Disposable.size).toBe(2);
         await Disposable.disposeAll();
 
+        expect(Disposable.size).toBe(0);
         expect(pending).toEqual([1, 2]);
     });
 });

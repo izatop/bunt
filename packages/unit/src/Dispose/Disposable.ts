@@ -4,6 +4,10 @@ import {Disposer} from "./Disposer";
 const collection = new Map<IDisposable, Disposer>();
 
 export class Disposable {
+    public static get size(): number {
+        return collection.size;
+    }
+
     public static attach(target: IDisposable, disposable: DisposableType): void {
         const disposer = this.resolve(target);
         disposer.attach(disposable);

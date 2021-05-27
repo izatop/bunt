@@ -24,11 +24,11 @@ export class FsBucket {
         return this.#fs.getDriver().getBucketPolicy(this.name);
     }
 
-    public getPresignedUrl(file: string, expire: number = 7*24*60*60): Promise<string> {
+    public getPresignedUrl(file: string, expire: number = 7 * 24 * 60 * 60): Promise<string> {
         return this.#fs.getDriver().getPresignedUrl(this.name, file, expire);
     }
 
-    public putPresignedUrl(file: string, expire: number = 60*60): Promise<string> {
+    public putPresignedUrl(file: string, expire: number = 60 * 60): Promise<string> {
         return this.#fs.getDriver().putPresignedUrl(this.name, file, expire);
     }
 
@@ -36,7 +36,7 @@ export class FsBucket {
         return this.#fs.getDriver().removeObject(this.name, file);
     }
 
-    public deletePresignedUrl(file: string, expire: number = 60*60): Promise<string> {
+    public deletePresignedUrl(file: string, expire: number = 60 * 60): Promise<string> {
         return this.#fs.getDriver().deletePresignedUrl(this.name, file, expire);
     }
 

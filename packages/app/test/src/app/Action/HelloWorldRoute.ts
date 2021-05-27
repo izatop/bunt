@@ -25,7 +25,7 @@ export default route(
         "/u/:id",
         () => new Fields({
             id: new ToNumber(Int),
-            payload: new Fields({name: Text}),
+            payload: () => new Fields({name: Text}),
             option: Bool,
         }),
         new Resolver({

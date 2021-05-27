@@ -33,9 +33,8 @@ export class Logger {
     protected static notice = Logger.make(SeverityLevel.NOTICE);
     protected static info = Logger.make(SeverityLevel.INFO);
     protected static debug = Logger.make(SeverityLevel.DEBUG);
-
-    #label: string;
     public groupId?: string;
+    #label: string;
 
     constructor(label: string, groupId?: string | number) {
         this.#label = label;
@@ -50,10 +49,6 @@ export class Logger {
 
     public get severity(): SeverityLevel {
         return Logger.severity;
-    }
-
-    public setLabel(label: string): void {
-        this.#label = label;
     }
 
     public static setSeverity(severity: SeverityLevel): void {
@@ -170,6 +165,10 @@ export class Logger {
         return (logger: Logger, message: string, ...args: LogableType[]): void => {
             this.write(logger, severity, message, ...args);
         };
+    }
+
+    public setLabel(label: string): void {
+        this.#label = label;
     }
 
     public async dispose(): Promise<void> {

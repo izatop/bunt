@@ -36,15 +36,15 @@ export class MinIO extends FsDriverAbstract {
     }
 
     public getPresignedUrl(bucket: string, file: string, expire: number): Promise<string> {
-        return this.#client.presignedUrl('GET', bucket, file, expire);
+        return this.#client.presignedUrl("GET", bucket, file, expire);
     }
 
     public putPresignedUrl(bucket: string, file: string, expire: number): Promise<string> {
-        return this.#client.presignedUrl('PUT', bucket, file, expire);
+        return this.#client.presignedUrl("PUT", bucket, file, expire);
     }
 
     public deletePresignedUrl(bucket: string, file: string, expire: number): Promise<string> {
-        return this.#client.presignedUrl('DELETE', bucket, file, expire);
+        return this.#client.presignedUrl("DELETE", bucket, file, expire);
     }
 
     public removeObject(bucket: string, file: string): Promise<void> {

@@ -1,15 +1,15 @@
 import {Resolver, RouteRule} from "@bunt/app";
 import {Bool, Fields, Int, Text, ToNumber} from "@bunt/input";
-import {pathRoute} from "../route";
+import {route} from "../route";
 import {HelloWorldAction} from "./HelloWorldAction";
 
-export default pathRoute(
+export default route(
     HelloWorldAction,
     new RouteRule(
         "/u/:id",
         () => new Fields({
             id: new ToNumber(Int),
-            payload: new Fields({name: Text}),
+            payload: () => new Fields({name: Text}),
             option: Bool,
         }),
         new Resolver({

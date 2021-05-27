@@ -1,6 +1,6 @@
 import {Disposable, IDisposable} from "@bunt/unit";
 import {ITransport} from "../interfaces";
-import {IQueueList, Message, MessageCtor, MessageHandler, Incoming, Task} from "./interfaces";
+import {Incoming, IQueueList, Message, MessageCtor, MessageHandler} from "./interfaces";
 
 export abstract class QueueAbstract<Q extends ITransport> implements IDisposable {
     readonly #transport: Q;
