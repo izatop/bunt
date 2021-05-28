@@ -36,7 +36,7 @@ describe("Test Input", () => {
 
     const samples: [any, any, TypeAbstract<any>][] = [
         [1, 1, Int],
-        ["1", 1, new ToNumber(Int)],
+        ["1", 1, ToNumber],
         [false, false, Bool],
         [true, true, Bool],
         [rand, rand, Float],

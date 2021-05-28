@@ -1,10 +1,12 @@
-import {isNumber, isString, Promisify} from "@bunt/util";
-import {SuperType} from "../SuperType";
+import {isNumber, isString} from "@bunt/util";
+import {Int} from "./Int";
+import {ScalarType} from "./ScalarType";
 
-export class ToNumber extends SuperType<number, number> {
-    public validate(payload: unknown): Promisify<number> {
+export const ToNumber = new ScalarType<number>({
+    name: "Int",
+    validate(payload) {
         this.assert(isNumber(payload) || isString(payload), `Wrong payload type`, payload);
 
-        return this.type.validate(+payload);
-    }
-}
+        return Int.validate(+payload);
+    },
+});
