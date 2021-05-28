@@ -1,4 +1,4 @@
-import {Bool, Fields, Int, Text, ToNumber} from "@bunt/input";
+import {Bool, Fields, Text, ToNumber} from "@bunt/input";
 import {Action} from "@bunt/unit";
 import {Resolver, RouteRule} from "../../../../src";
 import {route} from "../../route";
@@ -24,7 +24,7 @@ export default route(
     new RouteRule(
         "/u/:id",
         () => new Fields({
-            id: new ToNumber(Int),
+            id: ToNumber,
             payload: () => new Fields({name: Text}),
             option: Bool,
         }),
