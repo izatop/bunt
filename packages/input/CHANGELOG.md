@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.19.5](https://github.com/izatop/bunt/compare/v0.19.4...v0.19.5) (2021-05-28)
+
+
+### Bug Fixes
+
+* toNumber ([a09987c](https://github.com/izatop/bunt/commit/a09987cca7aee572c084c8bc257c66d3a9e96fc7))
+
+
+
+
+
 ## [0.19.2](https://github.com/izatop/bunt/compare/v0.19.1...v0.19.2) (2021-05-27)
 
 
