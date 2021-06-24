@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.19.8](https://github.com/izatop/bunt/compare/v0.19.7...v0.19.8) (2021-06-24)
+
+
+### Bug Fixes
+
+* update deps ([5b17f6c](https://github.com/izatop/bunt/commit/5b17f6c3621b060f7b12c44b1ce656566f32d7a0))
+
+
+
+
+
 ## [0.19.5](https://github.com/izatop/bunt/compare/v0.19.4...v0.19.5) (2021-05-28)
 
 **Note:** Version bump only for package @bunt/ws
