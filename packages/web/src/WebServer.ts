@@ -82,7 +82,15 @@ export class WebServer<C extends Context> extends Application<C>
             const response = await this.run(request);
             await request.respond(response);
         } catch (error) {
-            await request.respond(error);
+            this.logger.error(error.message, error);
+
+            try {
+                await request.respond(error);
+            } catch (error) {
+                this.logger.emergency(error.message, error);
+
+                process.nextTick(() => this.dispose());
+            }
         } finally {
             finish();
         }
