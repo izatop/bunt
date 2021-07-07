@@ -30,12 +30,12 @@
         "@bunt/unit": "^0.19.3",
         "@bunt/util": "^0.19.2",
         "@bunt/web": "^0.19.9",
-        "@types/ws": "^7.4.5",
-        "ws": "^7.5.1"
+        "@types/ws": "^7.4.6",
+        "ws": "^7.5.2"
     },
     "license": "MIT",
     "devDependencies": {
-        "@types/websocket": "^1.0.2",
+        "@types/websocket": "^1.0.3",
         "websocket": "^1.0.34"
     }
 }
