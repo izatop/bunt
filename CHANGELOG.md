@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.19.11](https://github.com/izatop/bunt/compare/v0.19.10...v0.19.11) (2021-07-28)
+
+
+### Bug Fixes
+
+* transform error ([68ca598](https://github.com/izatop/bunt/commit/68ca598d73af121cea69b532f9fb393af095eaeb))
+* update deps ([a18cdc5](https://github.com/izatop/bunt/commit/a18cdc59c8963fcbbd7a935b974b5243eb916836))
+
+
+
+
+
 ## [0.19.10](https://github.com/izatop/bunt/compare/v0.19.9...v0.19.10) (2021-07-07)
 
 
