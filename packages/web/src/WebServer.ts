@@ -14,7 +14,7 @@ export class WebServer<C extends Context> extends Application<C>
     readonly #options: IResponderOptions;
     readonly #server: http.Server;
     readonly #acceptors = new Map<string, IProtocolAcceptor>();
-    readonly #errorsHeadersMap = new Map<Ctor<Error>, IErrorResponseHeaders>();
+    readonly #errorCodeMap = new Map<Ctor<Error>, IErrorResponseHeaders>();
 
     protected constructor(unit: Unit<C>, routes: IRoute<ActionAny<C>>[] = [], options?: IResponderOptions) {
         super(unit, routes);
@@ -61,10 +61,12 @@ export class WebServer<C extends Context> extends Application<C>
         return () => this.#acceptors.delete(protocol);
     }
 
-    public setExceptionResponseHeaders(...map: [error: Ctor<Error>, options: IErrorResponseHeaders][]): void {
+    public setExceptionResponseHeaders(...map: [error: Ctor<Error>, options: IErrorResponseHeaders][]): this {
         for (const [error, options] of map) {
-            this.#errorsHeadersMap.set(error, options);
+            this.#errorCodeMap.set(error, options);
         }
+
+        return this;
     }
 
     public async dispose(): Promise<void> {
@@ -75,7 +77,7 @@ export class WebServer<C extends Context> extends Application<C>
 
     protected async handle(req: IncomingMessage, res: ServerResponse): Promise<void> {
         const finish = this.logger.perf("handle", req.url);
-        const request = new Responder(req, res, this.#errorsHeadersMap, this.#options);
+        const request = new Responder(req, res, this.#errorCodeMap, this.#options);
 
         try {
             assert(request.validate(this), "Invalid Request");

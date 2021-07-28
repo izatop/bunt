@@ -20,18 +20,18 @@ import {IErrorResponseHeaders, TransformError} from "./TransformError";
 export class Responder extends RequestMessage {
     readonly #options: IResponderOptions;
     readonly #response: ServerResponse;
+    readonly #errorCodeMap: Map<Ctor<Error>, IErrorResponseHeaders>;
 
     #complete = false;
-    #errorHeadersMap: Map<Ctor<Error>, IErrorResponseHeaders>;
 
     constructor(incomingMessage: IncomingMessage,
                 serverResponse: ServerResponse,
-                errorHeadersMap: Map<Ctor<Error>, IErrorResponseHeaders>,
+                errorCodeMap: Map<Ctor<Error>, IErrorResponseHeaders>,
                 options?: IResponderOptions) {
         super(incomingMessage, options);
         this.#options = options ?? {};
         this.#response = serverResponse;
-        this.#errorHeadersMap = errorHeadersMap;
+        this.#errorCodeMap = errorCodeMap;
     }
 
     public get complete(): boolean {
@@ -74,7 +74,7 @@ export class Responder extends RequestMessage {
             }
 
             if (isError(response)) {
-                const transform = new TransformError(response, this.#errorHeadersMap);
+                const transform = new TransformError(response, this.#errorCodeMap);
                 const accept = this.headers.get("accept");
                 const {body: transformed, ...props} = accept.includes("application/json")
                     ? transform.toJSON()

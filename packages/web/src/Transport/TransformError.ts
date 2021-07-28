@@ -16,11 +16,11 @@ export interface IErrorResponseHeaders {
 export class TransformError {
     readonly #error: Error;
 
-    readonly #errorHeadersMap: Map<Ctor<Error>, IErrorResponseHeaders>;
+    readonly #errorCodeMap: Map<Ctor<Error>, IErrorResponseHeaders>;
 
-    constructor(error: Error, errorHeadersMap: Map<Ctor<Error>, IErrorResponseHeaders>) {
+    constructor(error: Error, errorCodeMap: Map<Ctor<Error>, IErrorResponseHeaders>) {
         this.#error = error;
-        this.#errorHeadersMap = errorHeadersMap;
+        this.#errorCodeMap = errorCodeMap;
     }
 
     public toString(): IErrorResponse {
@@ -43,8 +43,9 @@ export class TransformError {
             return {code, status};
         }
 
-        for (const [type, {code, status}] of this.#errorHeadersMap.entries()) {
-            if (type.isPrototypeOf(this.#error.constructor)) {
+        const ctor = this.#error.constructor;
+        for (const [type, {code, status}] of this.#errorCodeMap.entries()) {
+            if (type === ctor || type.isPrototypeOf(ctor)) {
                 return {code, status};
             }
         }
