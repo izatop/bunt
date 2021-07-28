@@ -1,4 +1,4 @@
-import {ILogable, IReadableError} from "@bunt/util";
+import {ILogable, IReadableError, ValidationError} from "@bunt/util";
 import {TypeAbstract} from "../TypeAbstract";
 
 export interface IReadableTypeError {
@@ -7,7 +7,7 @@ export interface IReadableTypeError {
     payload: unknown;
 }
 
-export class AssertionTypeError extends Error implements IReadableError, ILogable<IReadableTypeError> {
+export class AssertionTypeError extends ValidationError implements IReadableError, ILogable<IReadableTypeError> {
     readonly #payload: unknown;
     readonly #type: TypeAbstract<any>;
 

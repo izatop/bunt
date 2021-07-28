@@ -1,6 +1,7 @@
-import {Application, IRoute, RouteNotFound} from "@bunt/app";
+import {Application, IRoute} from "@bunt/app";
 import {ActionAny, Context, ContextArg, Heartbeat, IDisposable, IRunnable, unit, Unit} from "@bunt/unit";
-import {assert, AssertionError, Ctor, logger, Logger} from "@bunt/util";
+import {assert, Ctor, logger, Logger, PermissionError, ValidationError} from "@bunt/util";
+import {NotFound} from "@bunt/util/dist/Exception/NotFound";
 import * as http from "http";
 import {IncomingMessage, ServerResponse} from "http";
 import {Socket} from "net";
@@ -22,8 +23,9 @@ export class WebServer<C extends Context> extends Application<C>
         this.#options = options ?? {};
 
         this.setExceptionResponseHeaders(
-            [AssertionError, {code: 400}],
-            [RouteNotFound, {code: 404, status: "Not found"}],
+            [PermissionError, {code: 403, status: "Permission denied"}],
+            [ValidationError, {code: 400, status: "Validation error"}],
+            [NotFound, {code: 404, status: "Not found"}],
         );
     }
 
