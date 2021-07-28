@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.19.12](https://github.com/izatop/bunt/compare/v0.19.11...v0.19.12) (2021-07-28)
+
+
+### Bug Fixes
+
+* error handling ([1fa284f](https://github.com/izatop/bunt/commit/1fa284f20c47a1899ea677262ddf15c71dd59f93))
+
+
+
+
+
 ## [0.19.2](https://github.com/izatop/bunt/compare/v0.19.1...v0.19.2) (2021-05-27)
 
 
