@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.19.15](https://github.com/izatop/bunt/compare/v0.19.14...v0.19.15) (2021-08-26)
+
+
+### Bug Fixes
+
+* update deps ([5f4e5f6](https://github.com/izatop/bunt/commit/5f4e5f64a10b6ca644d53b0589411fb7bce05323))
+
+
+
+
+
 ## [0.19.12](https://github.com/izatop/bunt/compare/v0.19.11...v0.19.12) (2021-07-28)
 
 **Note:** Version bump only for package @bunt/fs
