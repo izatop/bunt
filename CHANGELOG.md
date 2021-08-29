@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.19.16](https://github.com/izatop/bunt/compare/v0.19.15...v0.19.16) (2021-08-29)
+
+
+### Bug Fixes
+
+* add publish ([47721b4](https://github.com/izatop/bunt/commit/47721b48598a935662cc92d82128467f389263a4))
+* migrate to typescript 4.4 ([4d993a1](https://github.com/izatop/bunt/commit/4d993a1581cb320d25dd9749bb23bf94d750ef1a))
+
+
+
+
+
 ## [0.19.15](https://github.com/izatop/bunt/compare/v0.19.14...v0.19.15) (2021-08-26)
 
 
