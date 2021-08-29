@@ -1,4 +1,4 @@
-import {entriesReverse, isFunction, isInstanceOf, isObject} from "@bunt/util";
+import {entriesReverse, isFunction, isInstanceOf, isObject, toError} from "@bunt/util";
 import {AssertionObjectError, AssertionTypeError, IReadableTypeError} from "../Assertion";
 import {ObjectFields, ObjectTypeMerge} from "../interfaces";
 import {TypeAbstract} from "../TypeAbstract";
@@ -56,7 +56,7 @@ export class Fields<TValue extends Record<string, any>> extends TypeAbstract<TVa
 
                 validations.set(field, {
                     payload: payload[field],
-                    message: error.message,
+                    message: toError(error, "Unknown").message,
                     type: "Unknown",
                 });
             }

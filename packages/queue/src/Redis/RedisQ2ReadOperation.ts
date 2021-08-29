@@ -1,3 +1,4 @@
+import {toError} from "@bunt/util";
 import {IReadOperationFail, Message, OperationReleaseState, ReadOperation} from "../Queue";
 
 export class RedisQ2ReadOperation<M extends Message> extends ReadOperation<M> {
@@ -14,7 +15,7 @@ export class RedisQ2ReadOperation<M extends Message> extends ReadOperation<M> {
         try {
             await this.#commit();
         } catch (error) {
-            return this.release(error);
+            return this.release(toError(error, "Unknown"));
         }
 
         return this.release();
@@ -24,7 +25,7 @@ export class RedisQ2ReadOperation<M extends Message> extends ReadOperation<M> {
         try {
             await this.#rollback();
         } catch (error) {
-            return this.release(error);
+            return this.release(toError(error, "Unexpected error"));
         }
 
         return this.release(reason ?? new Error("Unknown reason"));

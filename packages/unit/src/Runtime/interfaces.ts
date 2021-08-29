@@ -10,7 +10,7 @@ export interface IDisposable {
 }
 
 export interface IDisposedHistory {
-    error?: Error;
+    error?: Error | unknown;
     label: string;
     timeout: number;
     target: string;

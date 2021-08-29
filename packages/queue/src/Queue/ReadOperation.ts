@@ -1,3 +1,4 @@
+import {toError} from "@bunt/util";
 import {createReleaseState} from "./fn";
 import {IHandleReleaseFactory, IReadOperation, IReadOperationFail, Message, OperationReleaseState} from "./interfaces";
 
@@ -22,7 +23,7 @@ export class ReadOperation<M extends Message> implements IReadOperation<M> {
         try {
             return this.release();
         } catch (error) {
-            return this.release(error);
+            return this.release(toError(error, "Unexpected error"));
         }
     }
 

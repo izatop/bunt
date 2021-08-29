@@ -33,3 +33,15 @@ export function pass<T>(value: unknown, transform: (v: any) => T, validator: (v:
 
     return nextValue;
 }
+
+export function toError(error: unknown, alt: Error | string = "Unexpected error"): Error {
+    if (error instanceof Error) {
+        return error;
+    }
+
+    if (typeof alt === "string") {
+        return new Error(alt);
+    }
+
+    return alt;
+}

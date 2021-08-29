@@ -80,7 +80,7 @@ export class Runtime implements IDisposable {
 
             await Promise.allSettled(this.queue.map((heartbeat) => heartbeat.watch()));
         } catch (error) {
-            this.logger.emergency(error.message, error.stack);
+            this.logger.emergency("Unexpected error", error);
         } finally {
             finish();
         }

@@ -36,7 +36,8 @@ export type LogableType = string
     | null
     | undefined
     | boolean
-    | Date;
+    | Date
+    | unknown;
 
 export interface ILogable<T extends LogableType> {
     getLogValue(): T;

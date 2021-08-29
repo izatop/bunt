@@ -60,6 +60,7 @@ export class MinIO extends FsDriverAbstract {
     }
 
     public write(bucket: string, name: string, file: string, metadata: Record<any, any>): Promise<string> {
-        return this.#client.fPutObject(bucket, name, file, metadata);
+        return this.#client.fPutObject(bucket, name, file, metadata)
+            .then((res) => res.etag);
     }
 }

@@ -1,4 +1,4 @@
-import {isArray, isInstanceOf} from "@bunt/util";
+import {isArray, isInstanceOf, toError} from "@bunt/util";
 import {AssertionListError, AssertionTypeError, IReadableListField} from "../Assertion";
 import {SuperType} from "../SuperType";
 
@@ -19,7 +19,7 @@ export class List<TValue> extends SuperType<TValue[], TValue> {
                     validations.add({
                         index,
                         payload: item,
-                        message: error.message,
+                        message: toError(error, "Unknown").message,
                         type: this.type.name,
                     });
                 }

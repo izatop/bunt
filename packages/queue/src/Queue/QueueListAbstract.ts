@@ -1,5 +1,5 @@
 import {Disposable} from "@bunt/unit";
-import {assert, isDefined, isInstanceOf} from "@bunt/util";
+import {assert, isDefined, isInstanceOf, toError} from "@bunt/util";
 import {ITransport} from "../interfaces";
 import {
     IQueueList,
@@ -81,7 +81,7 @@ export abstract class QueueListAbstract<M extends Message> implements IQueueList
 
             await this.fire(operation.commit());
         } catch (error) {
-            await this.fire(operation.rollback(error));
+            await this.fire(operation.rollback(toError(error, "Unexpected error")));
         }
     }
 

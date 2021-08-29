@@ -1,7 +1,6 @@
 import {Application, IRoute} from "@bunt/app";
 import {ActionAny, Context, ContextArg, Heartbeat, IDisposable, IRunnable, unit, Unit} from "@bunt/unit";
-import {assert, Ctor, logger, Logger, PermissionError, ValidationError} from "@bunt/util";
-import {NotFound} from "@bunt/util/dist/Exception/NotFound";
+import {assert, Ctor, logger, Logger, PermissionError, toError, NotFound, ValidationError} from "@bunt/util";
 import * as http from "http";
 import {IncomingMessage, ServerResponse} from "http";
 import {Socket} from "net";
@@ -86,7 +85,7 @@ export class WebServer<C extends Context> extends Application<C>
             const response = await this.run(request);
             await request.respond(response);
         } catch (error) {
-            this.logger.error(error.message, error);
+            this.logger.error(toError(error).message, error);
 
             await request.respond(error);
         } finally {
@@ -104,9 +103,9 @@ export class WebServer<C extends Context> extends Application<C>
             assert(acceptor, `Unsupported protocol ${protocol}`);
             acceptor.handle(req, socket, head);
         } catch (error) {
-            this.logger.warning(error.message, error);
+            this.logger.warning("Unexpected error", error);
             socket.write(`HTTP/1.1 400 Bad request\r\nContent-Type: text/plain\r\nConnection: close\r\n\r\n`);
-            socket.destroy(error);
+            socket.destroy(toError(error));
         }
     };
 
@@ -120,7 +119,7 @@ export class WebServer<C extends Context> extends Application<C>
             const request = {url, method, headers};
             const response = {writable: res.writable, headersSent: res.headersSent, headers: res.getHeaders()};
             this.logger.critical("Uncaught error", error);
-            this.logger.debug(error.message, error, {request, response});
+            this.logger.debug("Uncaught error", error, {request, response});
 
             if (!res.headersSent) {
                 res.writeHead(500, "Internal Server Error");
