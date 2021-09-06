@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.19.17](https://github.com/izatop/bunt/compare/v0.19.16...v0.19.17) (2021-09-06)
+
+
+### Bug Fixes
+
+* minio, deps ([cf90947](https://github.com/izatop/bunt/commit/cf9094701268b5faca939cb7c3509086c9552e60))
+
+
+
+
+
 ## [0.19.16](https://github.com/izatop/bunt/compare/v0.19.15...v0.19.16) (2021-08-29)
 
 
