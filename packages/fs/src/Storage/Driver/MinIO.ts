@@ -1,6 +1,6 @@
 import {assert} from "@bunt/util";
 import {Client} from "minio";
-import {parse} from "url";
+import {URL} from "url";
 import {FsDriverAbstract} from "./FsDriverAbstract";
 import {MinIOBucketPolicy} from "./MinIOBucketPolicy";
 
@@ -12,15 +12,13 @@ export class MinIO extends FsDriverAbstract {
 
     constructor(dsn: string) {
         super();
-        const {auth, hostname: endPoint, port, protocol} = parse(dsn);
-        assert(auth, "Authorization is required");
+        const {username: accessKey, password: secretKey, hostname: endPoint, port, protocol} = new URL(dsn);
+        assert(accessKey && secretKey, "Authorization is required");
         assert(endPoint, "Endpoint is required");
-        assert(port, "Port is required");
 
-        const [accessKey, secretKey] = auth?.split(":");
         this.#client = new Client({
             useSSL: protocol?.startsWith("https"),
-            port: parseInt(port),
+            port: port ? parseInt(port) : (protocol?.startsWith("https") ? 443 : 80),
             endPoint,
             accessKey,
             secretKey,

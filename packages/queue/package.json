@@ -28,8 +28,8 @@
     "dependencies": {
         "@bunt/unit": "^0.19.16",
         "@bunt/util": "^0.19.16",
-        "@types/ioredis": "^4.27.1",
-        "ioredis": "^4.27.8"
+        "@types/ioredis": "^4.27.2",
+        "ioredis": "^4.27.9"
     },
     "license": "MIT"
 }
