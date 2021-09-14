@@ -37,6 +37,7 @@ export class CorsValidation extends RequestValidatorAbstract<ICorsOptions> {
             assert(found, () => new RouteNotFound("Not Found"));
             const methods = [...AccessControlAllowMethods.values()];
             const headers = this.getAccessControlHeaders(request, methods);
+
             throw new NoContentResponse({headers: new Headers(headers)});
         }
 

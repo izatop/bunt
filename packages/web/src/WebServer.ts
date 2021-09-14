@@ -4,7 +4,7 @@ import {assert, Ctor, logger, Logger, PermissionError, toError, NotFound, Valida
 import * as http from "http";
 import {IncomingMessage, ServerResponse} from "http";
 import {Socket} from "net";
-import {IErrorResponseHeaders, IProtocolAcceptor, IResponderOptions, Responder} from "./Transport";
+import {IErrorResponseHeaders, IProtocolAcceptor, IResponderOptions, Responder, ResponseAbstract} from "./Transport";
 
 export class WebServer<C extends Context> extends Application<C>
     implements IDisposable, IRunnable {
@@ -85,8 +85,12 @@ export class WebServer<C extends Context> extends Application<C>
             const response = await this.run(request);
             await request.respond(response);
         } catch (error) {
-            this.logger.error(toError(error).message, error);
+            if (error instanceof ResponseAbstract) {
+                await request.respond(error);
+                return;
+            }
 
+            this.logger.error(toError(error).message, error);
             await request.respond(error);
         } finally {
             finish();
