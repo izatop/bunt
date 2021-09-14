@@ -1,6 +1,6 @@
 {
     "name": "@bunt/project",
-    "version": "0.19.16",
+    "version": "0.19.18",
     "keywords": [
         "typescript"
     ],
@@ -29,10 +29,10 @@
         "access": "public"
     },
     "dependencies": {
-        "@bunt/app": "^0.19.16",
-        "@bunt/cli": "^0.19.16",
-        "@bunt/unit": "^0.19.16",
-        "@bunt/util": "^0.19.16"
+        "@bunt/app": "^0.19.18",
+        "@bunt/cli": "^0.19.18",
+        "@bunt/unit": "^0.19.18",
+        "@bunt/util": "^0.19.18"
     },
     "license": "MIT"
 }
