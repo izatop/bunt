@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.19.21](https://github.com/izatop/bunt/compare/v0.19.20...v0.19.21) (2021-09-14)
+
+
+### Bug Fixes
+
+* serialize to string ([daf7c7b](https://github.com/izatop/bunt/commit/daf7c7b23b973fa6995dcfae397cd33d46fea228))
+
+
+
+
+
 ## [0.19.20](https://github.com/izatop/bunt/compare/v0.19.19...v0.19.20) (2021-09-14)
 
 
