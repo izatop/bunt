@@ -134,7 +134,7 @@ export class Logger {
             log.args = [];
             for (const arg of args) {
                 if (isInstanceOf(arg, Error)) {
-                    const error: Record<any, any> = {error: {message: arg.message, stack: arg.stack}};
+                    const error: Record<any, any> = {message: arg.message, stack: arg.stack};
                     if (isLogable(arg)) {
                         const logValue = arg.getLogValue();
                         if (isDefined(logValue)) {
@@ -142,7 +142,9 @@ export class Logger {
                         }
                     }
 
-                    log.args.push(error);
+                    const {constructor: {name}} = arg;
+
+                    log.args.push({error: {name, ...error}});
 
                     continue;
                 }

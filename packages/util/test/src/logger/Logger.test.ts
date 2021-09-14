@@ -42,12 +42,14 @@ describe("Logger", () => {
     });
 
     test("should log logable error", () => {
-        const value = {test: "value"};
+        const extra = {test: "value"};
         const logger = new Logger("Test");
-        const error = new AssertionError("Error", {value});
+        const error = new AssertionError("Error", extra);
+        error.stack = "Error stack";
         logger.error("Error", error);
+
+        const {message, stack, constructor: {name}} = error;
         const {args = []} = logs.pop() ?? {args: []};
-        expect(args.pop()).toEqual({value});
-        expect(args.pop()).toBe(error.stack);
+        expect(args.pop()).toEqual({error: {name, message, stack, extra}});
     });
 });
