@@ -6,7 +6,7 @@ export class GQLClientConnection extends ClientConnectionAbstract<GQLOperationMe
         return JSON.parse(payload.toString("utf-8"));
     }
 
-    protected serialize(payload: GQLOperationMessage): Buffer {
-        return Buffer.from(JSON.stringify(payload));
+    protected serialize(payload: GQLOperationMessage): string {
+        return JSON.stringify(payload);
     }
 }

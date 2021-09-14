@@ -5,8 +5,8 @@ export class ClientConnection extends ClientConnectionAbstract<string> {
         return payload.toString("utf-8");
     }
 
-    protected serialize(payload: string): Buffer {
-        return Buffer.from(payload);
+    protected serialize(payload: string): string {
+        return payload;
     }
 
 }

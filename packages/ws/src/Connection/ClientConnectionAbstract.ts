@@ -37,7 +37,7 @@ export abstract class ClientConnectionAbstract<T> implements IClientConnection<T
         return asyncCallback[Symbol.asyncIterator]();
     }
 
-    protected abstract serialize(payload: T): Buffer;
+    protected abstract serialize(payload: T): string | Buffer;
 
     protected abstract parse(payload: Buffer): T;
 }
