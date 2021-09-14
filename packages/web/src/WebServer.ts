@@ -1,6 +1,6 @@
 import {Application, IRoute} from "@bunt/app";
 import {ActionAny, Context, ContextArg, Heartbeat, IDisposable, IRunnable, unit, Unit} from "@bunt/unit";
-import {assert, Ctor, logger, Logger, PermissionError, toError, NotFound, ValidationError} from "@bunt/util";
+import {assert, Ctor, logger, Logger, PermissionError, toError, NotFound, ValidationError, isError} from "@bunt/util";
 import * as http from "http";
 import {IncomingMessage, ServerResponse} from "http";
 import {Socket} from "net";
@@ -85,12 +85,10 @@ export class WebServer<C extends Context> extends Application<C>
             const response = await this.run(request);
             await request.respond(response);
         } catch (error) {
-            if (error instanceof ResponseAbstract) {
-                await request.respond(error);
-                return;
+            if (isError(error)) {
+                this.logger.error(error.message, error);
             }
 
-            this.logger.error(toError(error).message, error);
             await request.respond(error);
         } finally {
             finish();

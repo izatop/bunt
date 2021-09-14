@@ -64,6 +64,7 @@ export class WebSocketServer<C extends Context> implements IDisposable, IRunnabl
 
     public route<A extends ProtoHandleAbstract<C, any>>(action: HandleProtoType<C, A>, rule: RouteRuleArg<A>): void {
         const route = new Route<A>((route) => RegexpMatcher.factory(route), action, rule);
+
         assert(!this.#handles.has(route.route), "Route must be unique");
         this.#handles.set(route.route, route);
         this.#unit.add(action);

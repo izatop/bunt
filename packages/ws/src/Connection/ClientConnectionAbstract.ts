@@ -1,5 +1,5 @@
-import {assert, AsyncCallback, filterValueCallback, isString, resolveOrReject} from "@bunt/util";
 import ws from "ws";
+import {assert, AsyncCallback, filterValueCallback, resolveOrReject} from "@bunt/util";
 import {IClientConnection} from "./interface";
 
 export abstract class ClientConnectionAbstract<T> implements IClientConnection<T> {
@@ -14,7 +14,8 @@ export abstract class ClientConnectionAbstract<T> implements IClientConnection<T
     }
 
     public on(event: "close", listener: () => void): this {
-        this.#connection.once("close", listener);
+        this.#connection.once(event, listener);
+
         return this;
     }
 
@@ -27,15 +28,16 @@ export abstract class ClientConnectionAbstract<T> implements IClientConnection<T
 
     public [Symbol.asyncIterator](): AsyncIterator<T> {
         const asyncCallback = new AsyncCallback<T>((emit) => {
-            const listener = filterValueCallback<string>(isString, (message) => emit(this.parse(message)));
+            const listener = filterValueCallback<Buffer>(Buffer.isBuffer, (message) => emit(this.parse(message)));
             this.#connection.on("message", listener);
+
             return () => this.#connection.removeListener("message", listener);
         });
 
         return asyncCallback[Symbol.asyncIterator]();
     }
 
-    protected abstract serialize(payload: T): string;
+    protected abstract serialize(payload: T): Buffer;
 
-    protected abstract parse(payload: string): T;
+    protected abstract parse(payload: Buffer): T;
 }

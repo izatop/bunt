@@ -16,11 +16,9 @@ export abstract class GQLProtoHandle<C extends Context,
         await this.connect();
         this.#connection.on("close", () => this.close());
 
-        const layer = new GQLProtoLayer(
-            this.#connection,
-            (params) => this.initialize(params),
-            (payload, params) => this.subscribe(payload, params),
-        );
+        const initialize = this.initialize.bind(this);
+        const subscribe = this.subscribe.bind(this);
+        const layer = new GQLProtoLayer(this.#connection, initialize, subscribe);
 
         for await (const operation of this.#connection) {
             await layer.handle(operation);
