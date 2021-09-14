@@ -85,7 +85,7 @@ export class WebSocketServer<C extends Context> implements IDisposable, IRunnabl
                         webSocket.close(resolveOrReject(resolve, reject));
                     }));
                 } catch (error) {
-                    this.logger.error("Unexpected error", {error});
+                    this.logger.error("Unexpected error", error);
                 }
             }
 
@@ -214,7 +214,7 @@ export class WebSocketServer<C extends Context> implements IDisposable, IRunnabl
                 this.handle(connection, () => this.#unit.run(route.action, state));
             });
         } catch (error) {
-            this.logger.error("Unexpected error", {error});
+            this.logger.error("Unexpected error", error);
             socket.destroy(toError(error, "Unknown"));
         }
     };
@@ -224,7 +224,7 @@ export class WebSocketServer<C extends Context> implements IDisposable, IRunnabl
             await action();
             connection.close(WebSocketCloseReason.NORMAL_CLOSURE);
         } catch (error) {
-            this.logger.error("Unexpected error", {error});
+            this.logger.error("Unexpected error", error);
             connection.close(WebSocketCloseReason.INTERNAL_ERROR);
         }
     }
