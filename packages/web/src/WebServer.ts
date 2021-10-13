@@ -4,7 +4,7 @@ import {assert, Ctor, logger, Logger, PermissionError, toError, NotFound, Valida
 import * as http from "http";
 import {IncomingMessage, ServerResponse} from "http";
 import {Socket} from "net";
-import {IErrorResponseHeaders, IProtocolAcceptor, IResponderOptions, Responder, ResponseAbstract} from "./Transport";
+import {IErrorResponseHeaders, IProtocolAcceptor, IResponderOptions, Responder} from "./Transport";
 
 export class WebServer<C extends Context> extends Application<C>
     implements IDisposable, IRunnable {
