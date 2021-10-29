@@ -1,3 +1,4 @@
+import {Promisify} from "..";
 import {bind} from "../decorator";
 import {Fn} from "../interfaces";
 import {isUndefined} from "../is";
@@ -7,8 +8,13 @@ export class AsyncCallback<T> implements AsyncIterable<T> {
     readonly #pipeline: Fn<[T | undefined]>[] = [];
     readonly #queue: T[] = [];
 
-    constructor(link: (emit: Fn<[data: T]>) => () => void) {
-        this.#disposables.push(link(this.push), this.pipe);
+    constructor(link: (emit: Fn<[data: T]>) => Promisify<() => void>) {
+        this.#disposables.push(this.pipe);
+
+        Promise.resolve(link(this.push))
+            .then((dispose) => {
+                this.#disposables.push(dispose);
+            });
     }
 
     @bind
@@ -37,12 +43,14 @@ export class AsyncCallback<T> implements AsyncIterable<T> {
                     .then(this.asResult);
             },
             return: async (value?: T | PromiseLike<T>): Promise<IteratorResult<T>> => {
-                this.dispose();
+                await this.dispose();
+
                 return Promise.resolve(value)
                     .then(this.asResult);
             },
             throw: async (e?): Promise<IteratorResult<T>> => {
-                this.dispose();
+                await this.dispose();
+
                 return Promise.reject(e);
             },
         };
@@ -52,8 +60,12 @@ export class AsyncCallback<T> implements AsyncIterable<T> {
         return this[Symbol.asyncIterator]();
     }
 
-    public dispose(): void {
-        this.#disposables.forEach((fn) => fn());
+    public async dispose(): Promise<void> {
+        const pending = this.#disposables.map((fn) => Promise.resolve(fn()));
+
+        return Promise
+            .all(pending)
+            .then(() => void 0);
     }
 
     @bind
