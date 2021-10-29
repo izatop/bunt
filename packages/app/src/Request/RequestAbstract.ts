@@ -3,7 +3,7 @@ import {Application} from "../Application";
 import {IHeaders, IRequest, IRequestTransform, RequestTransformType} from "../interfaces";
 import {fromJsonRequest, fromTextRequest} from "../TransformRequest";
 
-export abstract class RequestAbstract implements IRequest, ILogable<{ route: string }> {
+export abstract class RequestAbstract implements IRequest, ILogable<{route: string}> {
     public abstract readonly route: string;
     public abstract readonly headers: IHeaders;
 
@@ -61,7 +61,7 @@ export abstract class RequestAbstract implements IRequest, ILogable<{ route: str
 
     public abstract createReadableStream(): Promisify<NodeJS.ReadableStream>;
 
-    public getLogValue(): { route: string } {
+    public getLogValue(): {route: string} {
         return {route: this.route};
     }
 }

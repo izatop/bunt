@@ -11,7 +11,7 @@ class TestContext extends Context {}
 
 type ITestContext = ApplyContext<TestContext>;
 
-class TestHandle extends EchoProtoHandle<ITestContext, { authorization: string }> {
+class TestHandle extends EchoProtoHandle<ITestContext, {authorization: string}> {
     public async run(): Promise<void> {
         for await (const message of this.connection) {
             this.send("hello");
@@ -24,6 +24,7 @@ function conn() {
     return new Promise<websocket.connection>((resolve, reject) => {
         const client = new websocket.client();
         client.on("connectFailed", function (error) {
+            // eslint-disable-next-line
             console.log("[CLIENT] Connect Error: " + error.toString());
             reject(error);
         });
@@ -33,10 +34,12 @@ function conn() {
             resolve(connection);
 
             connection.on("error", function (error) {
+                // eslint-disable-next-line
                 console.log("[CLIENT] Connection Error: " + error.toString());
             });
 
             connection.on("close", function (code, reason = "None") {
+                // eslint-disable-next-line
                 console.log(`[CLIENT] close: { code: ${code}, reason: ${reason} }`);
             });
 
@@ -107,6 +110,7 @@ async function main() {
                 continue;
             }
 
+            // eslint-disable-next-line
             console.log("stat", {
                 all: all.length,
                 ready: ready.length,
@@ -118,12 +122,14 @@ async function main() {
 
         await Promise.allSettled(all);
 
+        // eslint-disable-next-line
         console.log("finish", {
             all: all.length,
             ready: ready.length,
             error: errors.length,
         });
     } catch (error) {
+        // eslint-disable-next-line
         console.error(error);
     }
 }

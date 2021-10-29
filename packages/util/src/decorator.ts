@@ -36,7 +36,7 @@ export function memoize(target: DecoratorTarget, key: string): PropertyDescripto
     return descriptor;
 }
 
-export function bind<T extends (...args: any[]) => any>(
+export function bind<T extends(...args: any[]) => any>(
     target: Record<any, any>,
     propertyKey: string,
     descriptor: TypedPropertyDescriptor<T>): TypedPropertyDescriptor<T> | void {

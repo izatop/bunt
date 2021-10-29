@@ -37,7 +37,7 @@ export class Unit<C extends Context> {
             return this.getContext(await context());
         }
 
-        assert(isInstanceOf(context, Context), `Wrong context type`);
+        assert(isInstanceOf(context, Context), "Wrong context type");
         return Context.apply(await context);
     }
 

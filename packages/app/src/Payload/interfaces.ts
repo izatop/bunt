@@ -9,4 +9,4 @@ export type ResolverList<A extends ActionAny> = {
 };
 
 export type ResolverResolvers<A extends ActionAny> = ResolverFn<A>
-    | ResolverList<A>;
+| ResolverList<A>;

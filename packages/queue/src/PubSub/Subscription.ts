@@ -89,11 +89,11 @@ class SubscriptionGenerator<T, TNext = unknown> implements AsyncGenerator<T, und
 }
 
 class Defer<T> extends Promise<T> {
-    #resolve = (value: T | PromiseLike<T>) => {
+    #resolve = (_value: T | PromiseLike<T>) => {
         // noop
     };
 
-    #reject = (error: Error) => {
+    #reject = (_error: Error) => {
         // noop
     };
 

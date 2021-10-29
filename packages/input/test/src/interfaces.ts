@@ -5,7 +5,7 @@ export interface ITestDescription {
 }
 
 export interface ITestHobby {
-    type: string,
+    type: string;
     description?: ITestDescription;
 }
 

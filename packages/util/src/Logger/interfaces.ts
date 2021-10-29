@@ -30,14 +30,14 @@ export interface ILogger {
 
 export type LoggerOwner = Record<any, any> | ILogger | Func;
 export type LogableType = string
-    | Record<any, any>
-    | number
-    | bigint
-    | null
-    | undefined
-    | boolean
-    | Date
-    | unknown;
+| Record<any, any>
+| number
+| bigint
+| null
+| undefined
+| boolean
+| Date
+| unknown;
 
 export interface ILogable<T extends LogableType> {
     getLogValue(): T;

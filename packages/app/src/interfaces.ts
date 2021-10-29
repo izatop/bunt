@@ -2,16 +2,16 @@ import {Promisify} from "@bunt/util";
 import {Application} from "./Application";
 
 export type ActionResponse = Error
-    | { stringify(): string }
-    | NodeJS.ReadableStream
-    | Buffer
-    | string
-    | number
-    | boolean
-    | null
-    | undefined
-    | void
-    | any;
+| {stringify(): string}
+| NodeJS.ReadableStream
+| Buffer
+| string
+| number
+| boolean
+| null
+| undefined
+| void
+| any;
 
 export interface IKeyValueMap {
     has(name: string): boolean;
@@ -24,7 +24,7 @@ export interface IKeyValueMap {
 
     entries(): [string, string][];
 
-    toJSON(): { [key: string]: string };
+    toJSON(): {[key: string]: string};
 }
 
 export interface IRequestBodyTransform<T> {
@@ -59,9 +59,9 @@ export interface IRequest {
 }
 
 export type HeaderAssertValue = |
-    string |
-    string[] |
-    ((value: string) => boolean | void);
+string |
+string[] |
+((value: string) => boolean | void);
 
 export interface IHeaders extends IKeyValueMap {
     assert(header: string, values: HeaderAssertValue): void;

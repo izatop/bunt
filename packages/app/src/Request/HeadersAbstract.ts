@@ -3,7 +3,7 @@ import {HeaderAssertValue, IHeaders} from "../interfaces";
 import {StrictKeyValueMap} from "./StrictKeyValueMap";
 
 export abstract class HeadersAbstract extends StrictKeyValueMap
-    implements IHeaders, ILogable<{ [key: string]: string }> {
+    implements IHeaders, ILogable<{[key: string]: string}> {
 
     public assert(header: string, expected: HeaderAssertValue): void {
         const clientValue = this.get(header.toLowerCase());

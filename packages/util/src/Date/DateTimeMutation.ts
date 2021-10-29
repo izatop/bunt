@@ -26,8 +26,8 @@ export class DateTimeMutation {
     }
 
     protected static apply(map: Map<DateTimeKind, TimeMutateFn>,
-                           time: number,
-                           values: [DateTimeKind, number][]): number {
+        time: number,
+        values: [DateTimeKind, number][]): number {
         for (const [interval, value] of values) {
             const fn = map.get(interval);
             assert(isFunction(fn));

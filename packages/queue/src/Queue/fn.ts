@@ -37,6 +37,7 @@ export function tryUnserialize<T = unknown>(message?: string): T | undefined {
         return unserialize(message);
     } catch (error) {
         // skip serialization error
+        // eslint-disable-next-line
         console.warn(error);
     }
 }

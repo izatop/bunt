@@ -5,7 +5,7 @@ export enum MinIOBucketPolicyEnum {
 }
 
 export class MinIOBucketPolicy {
-    readonly #policies = new Map<MinIOBucketPolicyEnum, (bucket: string) => string>();
+    readonly #policies = new Map<MinIOBucketPolicyEnum,(bucket: string) => string>();
 
     public constructor() {
         this.#policies.set(MinIOBucketPolicyEnum.READONLY, this.publicReadOnlyPolicy);

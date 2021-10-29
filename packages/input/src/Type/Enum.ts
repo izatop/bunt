@@ -4,7 +4,7 @@ import {TypeAbstract} from "../TypeAbstract";
 export class Enum<T extends string | number> extends TypeAbstract<T> {
     readonly #value: any;
 
-    constructor(value: { [key: string]: T }) {
+    constructor(value: {[key: string]: T}) {
         super();
         this.#value = value;
     }

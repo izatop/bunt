@@ -84,20 +84,20 @@ export interface IGQLOperationStop {
 }
 
 export type GQLClientOperation = IGQLOperationConnectionInit
-    | IGQLOperationConnectionTerminate
-    | IGQLOperationStart
-    | IGQLOperationStop;
+| IGQLOperationConnectionTerminate
+| IGQLOperationStart
+| IGQLOperationStop;
 
 export type GQLServerOperation = IGQLOperationConnectionAsk
-    | IGQLOperationConnectionError
-    | IGQLOperationConnectionKeepAlive
-    | IGQLOperationData
-    | IGQLOperationError
-    | IGQLOperationComplete;
+| IGQLOperationConnectionError
+| IGQLOperationConnectionKeepAlive
+| IGQLOperationData
+| IGQLOperationError
+| IGQLOperationComplete;
 
 export type GQLOperationMessage = GQLClientOperation | GQLServerOperation;
 
 export type GQLSubscribeFunction = (payload: GQLClientPayload,
-                                    params: Record<string, any>) => Promisify<AsyncIterableIterator<any>>;
+    params: Record<string, any>) => Promisify<AsyncIterableIterator<any>>;
 
 export type GQLInitFunction = (params: Record<string, any>) => unknown;

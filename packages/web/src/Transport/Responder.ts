@@ -25,9 +25,9 @@ export class Responder extends RequestMessage {
     #complete = false;
 
     constructor(incomingMessage: IncomingMessage,
-                serverResponse: ServerResponse,
-                errorCodeMap: Map<Ctor<Error>, IErrorResponseHeaders>,
-                options?: IResponderOptions) {
+        serverResponse: ServerResponse,
+        errorCodeMap: Map<Ctor<Error>, IErrorResponseHeaders>,
+        options?: IResponderOptions) {
         super(incomingMessage, options);
         this.#options = options ?? {};
         this.#response = serverResponse;
@@ -48,7 +48,7 @@ export class Responder extends RequestMessage {
      * @param response
      */
     public async respond(response: ActionResponse): Promise<void> {
-        assert(!this.complete, `Response was already sent`);
+        assert(!this.complete, "Response was already sent");
         if (isUndefined(response)) {
             return this.send("");
         }

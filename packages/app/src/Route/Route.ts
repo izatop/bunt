@@ -3,7 +3,7 @@ import {Ctor, ILogable, isFunction, isString} from "@bunt/util";
 import {IRoute, IRouteMatcher, RouteFactory, RouteMatcherFactory, RouteRuleArg, RouteRuleVariants} from "./interfaces";
 import {RouteRule} from "./RouteRule";
 
-export class Route<A extends ActionAny> implements IRoute<A>, ILogable<{ route: string }> {
+export class Route<A extends ActionAny> implements IRoute<A>, ILogable<{route: string}> {
     public readonly route: string;
     public readonly action: Ctor<A>;
     public readonly payload?: RouteRule<A>;
@@ -24,7 +24,7 @@ export class Route<A extends ActionAny> implements IRoute<A>, ILogable<{ route: 
         );
     }
 
-    public getLogValue(): { route: string } {
+    public getLogValue(): {route: string} {
         return {route: this.route};
     }
 

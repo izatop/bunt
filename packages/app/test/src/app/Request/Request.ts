@@ -7,7 +7,7 @@ export class Request extends RequestAbstract {
     public readonly route: string;
     public readonly body: string;
 
-    constructor(route: string, headers: { [key: string]: string }, body = "") {
+    constructor(route: string, headers: {[key: string]: string}, body = "") {
         super();
         this.route = route;
         this.headers = new Headers(Object.entries(headers));

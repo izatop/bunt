@@ -7,15 +7,15 @@ export class Program {
         this.args = new Argv(argv || process.argv.slice(2));
     }
 
-    public get stdin(): NodeJS.ReadStream & { fd: 0 } {
+    public get stdin(): NodeJS.ReadStream & {fd: 0} {
         return process.stdin;
     }
 
-    public get stdout(): NodeJS.WriteStream & { fd: 1 } {
+    public get stdout(): NodeJS.WriteStream & {fd: 1} {
         return process.stdout;
     }
 
-    public get stderr(): NodeJS.WriteStream & { fd: 2 } {
+    public get stderr(): NodeJS.WriteStream & {fd: 2} {
         return process.stderr;
     }
 }

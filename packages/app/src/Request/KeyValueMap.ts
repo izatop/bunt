@@ -27,8 +27,8 @@ export class KeyValueMap implements IKeyValueMap {
         return this.#map.get(name) || defaultValue || "";
     }
 
-    public toJSON(): { [p: string]: string } {
-        const object: { [p: string]: string } = {};
+    public toJSON(): {[p: string]: string} {
+        const object: {[p: string]: string} = {};
         for (const [key, value] of this.#map.entries()) {
             object[key] = value;
         }

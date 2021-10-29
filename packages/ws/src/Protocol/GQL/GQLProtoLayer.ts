@@ -35,7 +35,7 @@ export class GQLProtoLayer {
     }
 
     public async handle(operation: GQLOperationMessage): Promise<void> {
-        assert(this.isClientOperation(operation), `Wrong the Operation Message`);
+        assert(this.isClientOperation(operation), "Wrong the Operation Message");
         switch (operation.type) {
             case GQLClientOperationType.CONNECTION_INIT:
                 Object.assign(this.#params, operation.payload);
@@ -48,6 +48,7 @@ export class GQLProtoLayer {
                 break;
             case GQLClientOperationType.START:
                 this.createSubscription(operation.id, operation.payload)
+                    // eslint-disable-next-line
                     .catch(console.error);
                 break;
             case GQLClientOperationType.STOP:

@@ -11,7 +11,7 @@ export class EqualMatcher implements IRouteMatcher {
         return new EqualMatcher(route);
     };
 
-    public match(route: string): { route: string } {
+    public match(route: string): {route: string} {
         return {route};
     }
 

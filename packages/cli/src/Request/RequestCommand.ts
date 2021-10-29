@@ -9,7 +9,7 @@ export class RequestCommand extends RequestAbstract {
     constructor(args: Argv) {
         super();
         const [command] = args.getArgs();
-        assert(command, `Command should be defined`);
+        assert(command, "Command should be defined");
 
         this.route = command;
     }

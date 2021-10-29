@@ -5,14 +5,14 @@ import {Headers} from "../Headers";
 export interface IResponseOptions {
     code?: number;
     status?: string;
-    headers?: { [key: string]: string } | Headers;
+    headers?: {[key: string]: string} | Headers;
 }
 
 export interface IResponseAnswer {
     code: number;
     status?: string;
     body: string | Buffer;
-    headers: { [key: string]: string };
+    headers: {[key: string]: string};
 }
 
 export abstract class ResponseAbstract<T> {
@@ -21,7 +21,7 @@ export abstract class ResponseAbstract<T> {
     public readonly type: string = "text/plain";
     public readonly encoding: string = "utf-8";
     readonly #data: Promisify<T>;
-    readonly #headers: { [key: string]: string };
+    readonly #headers: {[key: string]: string};
 
     constructor(data: Promisify<T> | (() => Promisify<T>), options: IResponseOptions = {}) {
         this.#data = isFunction(data) ? data() : data;

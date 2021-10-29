@@ -1,7 +1,6 @@
 import {isArray} from "./is";
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const noop = (...args: any[]): void => void 0;
+export const noop = (..._args: any[]): void => void 0;
 
 export function not<A extends any[]>(fn: (...args: A) => boolean) {
     return (...args: A): boolean => {

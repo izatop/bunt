@@ -9,7 +9,7 @@ export type HandlerReturn<M extends Message> = M extends TaskAbstract<any, infer
     ? Promisify<R>
     : Promisify<void>;
 
-export type HandlerState<M extends Message> = { payload: MessagePayload<M> };
+export type HandlerState<M extends Message> = {payload: MessagePayload<M>};
 
 export interface ITransport extends IDisposable {
     send<M extends Message>(message: M): Promisify<void>;

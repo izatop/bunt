@@ -4,10 +4,10 @@ import {JSONInput, Transformable, TransformOut, TransformSchema} from "./interfa
 
 export class TransformInput {
     public static transform<T extends Transformable>(data: JSONInput<T>,
-                                                     scheme: TransformSchema<T>): Promise<TransformOut<T>>;
+        scheme: TransformSchema<T>): Promise<TransformOut<T>>;
 
     public static async transform<T extends Transformable>(data: JSONInput<T>,
-                                                           schema: TransformSchema<T>): Promise<TransformOut<T>> {
+        schema: TransformSchema<T>): Promise<TransformOut<T>> {
         if (isArray(data)) {
             return Promise.all(data.map((item: any) => this.transform<T>(item, schema))) as any;
         }

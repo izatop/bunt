@@ -31,5 +31,5 @@ export type JSONInput<T> = T extends Array<infer E>
 export type Transformable = Record<any, any> | Record<any, any>[];
 
 export type TransformOut<T, S extends TransformSchema<T> = TransformSchema<T>> = T extends Array<infer E>
-    ? { [K in keyof E]: K extends keyof S ? S[K] extends () => infer R ? R : E[K] : E[K] }[]
-    : { [K in keyof T]: K extends keyof S ? S[K] extends () => infer R ? R : T[K] : T[K] };
+    ? {[K in keyof E]: K extends keyof S ? S[K] extends () => infer R ? R : E[K] : E[K]}[]
+    : {[K in keyof T]: K extends keyof S ? S[K] extends () => infer R ? R : T[K] : T[K]};

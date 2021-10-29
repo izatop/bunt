@@ -106,7 +106,7 @@ export class WebServer<C extends Context> extends Application<C>
             acceptor.handle(req, socket, head);
         } catch (error) {
             this.logger.warning("Unexpected error", error);
-            socket.write(`HTTP/1.1 400 Bad request\r\nContent-Type: text/plain\r\nConnection: close\r\n\r\n`);
+            socket.write("HTTP/1.1 400 Bad request\r\nContent-Type: text/plain\r\nConnection: close\r\n\r\n");
             socket.destroy(toError(error));
         }
     };

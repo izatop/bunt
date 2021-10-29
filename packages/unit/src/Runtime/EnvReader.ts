@@ -5,7 +5,7 @@ export type EnvRecord = Record<string, string>;
 export class EnvReader<T extends EnvRecord> {
     readonly #map: Map<keyof T | string, string>;
 
-    constructor(config: { [key: string]: string | undefined }) {
+    constructor(config: {[key: string]: string | undefined}) {
         this.#map = new Map(
             Object.entries(config)
                 .map<[keyof T | string, string]>(([k, v]) => [k, v || ""]),
@@ -13,7 +13,7 @@ export class EnvReader<T extends EnvRecord> {
     }
 
     public static from<T extends EnvRecord>(target: Partial<T>,
-                                            ...envs: Record<string, string | undefined>[]): EnvReader<T> {
+        ...envs: Record<string, string | undefined>[]): EnvReader<T> {
         for (const next of envs) {
             Object.assign(target, next);
         }

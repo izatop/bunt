@@ -116,7 +116,7 @@ export class WebSocketServer<C extends Context> implements IDisposable, IRunnabl
     protected factoryWebSocketServer(): ws.Server {
         const webSocketServer = new ws.Server({noServer: true});
         const live = new WeakSet<ws>();
-        const queue: { connection: ws, expire: number }[] = [];
+        const queue: {connection: ws; expire: number}[] = [];
         const getExpireTime = () => Date.now() + this.#limits.pingTimeout;
         webSocketServer.on("connection", (connection) => {
             live.add(connection);

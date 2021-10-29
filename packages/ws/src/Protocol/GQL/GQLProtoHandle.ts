@@ -28,7 +28,7 @@ export abstract class GQLProtoHandle<C extends Context,
     }
 
     protected abstract subscribe(payload: GQLClientPayload,
-                                 params: Record<string, any>): Promisify<AsyncIterableIterator<any>>;
+        params: Record<string, any>): Promisify<AsyncIterableIterator<any>>;
 
     protected connect(): Promisify<void> {
         // handle connection event

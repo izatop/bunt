@@ -7,12 +7,12 @@ type TestEntry = {
         date: Date;
         num: number;
     };
-    arr: { f: number }[];
+    arr: {f: number}[];
 };
 
 describe("Transform", () => {
     test("Array", async () => {
-        const transform = TransformInput.create<{ foo: number }[]>({
+        const transform = TransformInput.create<{foo: number}[]>({
             foo: (v) => +v,
         });
 

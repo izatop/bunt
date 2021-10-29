@@ -10,10 +10,10 @@ export type ActionCtor<C extends Context,
     S extends StateType | null = any,
     R = unknown,
     A extends Action<C, S, R> = Action<C, S, R>> = {
-    new(context: ApplyContext<C>, state: S): A;
+        new(context: ApplyContext<C>, state: S): A;
 
-    prototype: A;
-};
+        prototype: A;
+    };
 
 export type ActionContext<A> = A extends ActionAny<infer T> ? T : never;
 export type ActionState<A> = A extends ActionAny<any, infer T> ? T : never;

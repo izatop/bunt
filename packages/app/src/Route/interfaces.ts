@@ -19,8 +19,8 @@ export interface IRoute<A extends ActionAny> {
 
 export type RouteMatcherFactory = IRouteMatcher | ((route: string) => IRouteMatcher);
 
-export type RouteRuleVariants<A extends ActionAny> = { route: string, payload: undefined }
-    | { route: string, payload: RouteRule<A> };
+export type RouteRuleVariants<A extends ActionAny> = {route: string; payload: undefined}
+| {route: string; payload: RouteRule<A>};
 
 export type RouteRuleArg<A extends ActionAny> = ActionState<A> extends null
     ? string : RouteRule<A>;

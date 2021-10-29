@@ -51,7 +51,7 @@ describe("Test Input", () => {
         [false, false, union],
         ["2020-01-01", new Date("2020-01-01"), union],
         [new Date("2020-01-01").getTime(), new Date("2020-01-01"), union],
-        [`{"foo": "bar"}`, {foo: "bar"}, JSONString],
+        ["{\"foo\": \"bar\"}", {foo: "bar"}, JSONString],
         ["true", true, JSONString],
         ["1", 1, JSONString],
         ["[1]", [1], JSONString],

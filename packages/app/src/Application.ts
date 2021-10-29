@@ -34,7 +34,7 @@ export class Application<C extends Context> {
 
     public add(route: IRoute<ActionAny<C>>): this {
         this.logger.debug("add", route);
-        assert(!this.#unit.has(route.action), `This route was already added`);
+        assert(!this.#unit.has(route.action), "This route was already added");
         this.#unit.add(route.action);
         this.#routes.push(route);
         return this;
