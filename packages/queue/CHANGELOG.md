@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.21.1](https://github.com/izatop/bunt/compare/v0.21.0...v0.21.1) (2021-11-12)
+
+
+### Bug Fixes
+
+* **break:** subscriptions ([c0d6dd0](https://github.com/izatop/bunt/commit/c0d6dd0ca649f3ff83a6794a991c42f5bda40bc4))
+
+
+
+
+
 # [0.21.0](https://github.com/izatop/bunt/compare/v0.20.0...v0.21.0) (2021-10-29)
 
 
