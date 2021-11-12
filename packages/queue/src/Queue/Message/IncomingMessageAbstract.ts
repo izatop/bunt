@@ -6,7 +6,7 @@ export abstract class IncomingMessageAbstract<T> {
     }
 
     public static get channel(): string {
-        return this.prototype.channel;
+        return this.name;
     }
 
     public get channel(): string {

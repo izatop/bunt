@@ -28,7 +28,7 @@
     "dependencies": {
         "@bunt/unit": "^0.21.0",
         "@bunt/util": "^0.21.0",
-        "@types/ioredis": "^4.27.7",
+        "@types/ioredis": "^4.28.1",
         "ioredis": "^4.27.11"
     },
     "license": "MIT"

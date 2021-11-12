@@ -1,4 +1,6 @@
 import * as os from "os";
+import {format} from "util";
+import {assert} from "..";
 import {fn} from "../function";
 import {isDefined, isFunction, isInstanceOf, isNumber, isUndefined} from "../is";
 import {Perf} from "../Perf";
@@ -109,6 +111,21 @@ export class Logger {
         return logger;
     }
 
+    protected static format(message: string, args: LogableType[]) {
+        const placeholderRegex = /(%[sdo])/g;
+        if (message.includes("%") && args.length > 0 && placeholderRegex.test(message)) {
+            const matched = [...message.match(placeholderRegex) ?? []];
+            assert(matched.length <= args.length, "Logger.format(message, ...args): args count less than placeholders");
+
+            return {
+                message: format(message, ...args.slice(0, matched.length)),
+                args: args.slice(matched.length),
+            };
+        }
+
+        return {message, args};
+    }
+
     protected static write(logger: Logger, severity: SeverityLevel, message: string, ...args: LogableType[]): void {
         const {label} = logger;
         const timestamp = Date.now();
@@ -167,7 +184,8 @@ export class Logger {
         }
 
         return (logger: Logger, message: string, ...args: LogableType[]): void => {
-            this.write(logger, severity, message, ...args);
+            const formatted = this.format(message, args);
+            this.write(logger, severity, formatted.message, ...formatted.args);
         };
     }
 
@@ -193,10 +211,10 @@ export class Logger {
             return (): void => void 0;
         }
 
-        const perf = new Perf(this.label, message);
+        const perf = new Perf(this.#label);
         return (): void => {
             perf.finish();
-            this.debug("perf", perf, ...args);
+            this.debug(message, ...args, perf);
         };
     }
 

@@ -19,9 +19,9 @@ describe("Dispatcher", () => {
 
         expect(reply).toBe("Hello, Test");
 
-        const heartbeat = dispatcher.getHeartbeat();
         await dispose(dispatcher);
 
+        const heartbeat = dispatcher.getHeartbeat();
         await expect(heartbeat.watch()).resolves.toBeUndefined();
     });
 });

@@ -1,4 +1,4 @@
-import {Disposable} from "@bunt/unit";
+import {Disposer} from "@bunt/unit";
 import {assert, isDefined, isInstanceOf, toError} from "@bunt/util";
 import {ITransport} from "../interfaces";
 import {
@@ -13,7 +13,7 @@ import {
 } from "./interfaces";
 import {TaskAbstract} from "./Message";
 
-export abstract class QueueListAbstract<M extends Message> implements IQueueList<M> {
+export abstract class QueueListAbstract<M extends Message> extends Disposer implements IQueueList<M> {
     readonly #type: MessageCtor<M>;
     readonly #reader: IQueueReader<M>;
     readonly #transport: ITransport;
@@ -24,15 +24,17 @@ export abstract class QueueListAbstract<M extends Message> implements IQueueList
     #state?: Promise<void>;
 
     constructor(transport: ITransport, type: MessageCtor<M>, handler: MessageHandler<M>) {
+        super();
+
         this.#type = type;
-        this.#reader = transport.createQueueReader(type);
+        this.#reader = transport.getQueueReader(type);
         this.#handler = handler;
         this.#transport = transport;
         this.#state = this.listen();
 
-        Disposable.attach(this, this.#reader);
-        Disposable.attach(this, () => this.unsubscribe());
-        Disposable.attach(this, () => this.reset());
+        this.onDispose(this.#reader);
+        this.onDispose(() => this.unsubscribe());
+        this.onDispose(() => this.reset());
     }
 
     public get subscribed(): boolean {
@@ -56,10 +58,6 @@ export abstract class QueueListAbstract<M extends Message> implements IQueueList
         return () => {
             this.#watchers.splice(this.#watchers.indexOf(fn), 1);
         };
-    }
-
-    public async dispose(): Promise<void> {
-        return;
     }
 
     protected async listen(): Promise<void> {

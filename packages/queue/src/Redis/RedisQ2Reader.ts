@@ -1,14 +1,9 @@
 import {ITransactionType, Message, MessageCtor} from "../Queue";
 import {RedisQ2ReadOperation} from "./RedisQ2ReadOperation";
 import {RedisQueueReader} from "./RedisQueueReader";
-import {RedisTransport} from "./RedisTransport";
 
 export class RedisQ2Reader<M extends Message,
     MC extends MessageCtor<M> & ITransactionType> extends RedisQueueReader<M, MC> {
-    constructor(transport: RedisTransport, type: MC) {
-        super(transport, type);
-    }
-
     public get backup(): string {
         return this.type.getBackupKey();
     }

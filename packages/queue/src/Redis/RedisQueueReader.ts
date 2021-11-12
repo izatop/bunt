@@ -5,13 +5,13 @@ import {RedisTransport} from "./RedisTransport";
 export class RedisQueueReader<M extends Message, MC extends MessageCtor<M>>
     extends QueueReaderAbstract<M, MC, ReadOperation<M>> {
     protected readonly timeout = 100;
-    readonly #transport: RedisTransport;
     readonly #connection: Redis;
+    readonly #transport: RedisTransport;
 
     constructor(transport: RedisTransport, type: MC) {
         super(type);
-        this.#transport = transport;
         this.#connection = transport.duplicate();
+        this.#transport = transport;
     }
 
     protected get connection(): Redis {
@@ -19,7 +19,8 @@ export class RedisQueueReader<M extends Message, MC extends MessageCtor<M>>
     }
 
     public async dispose(): Promise<void> {
-        await this.#connection.disconnect();
+        this.#connection.disconnect();
+        await this.#transport.getConnectionState(this.#connection);
     }
 
     public async cancel(): Promise<void> {

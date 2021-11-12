@@ -31,5 +31,5 @@ export const debugLogFormat: LogFormat<string> = (log: LogMessage) => {
         return JSON.stringify(args, null, 2);
     }));
 
-    return debug.join("\n") + "\n";
+    return debug.join("\n") + "\n\n";
 };

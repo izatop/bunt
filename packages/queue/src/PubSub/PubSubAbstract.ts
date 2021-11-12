@@ -1,16 +1,16 @@
-import {Disposable, IDisposable} from "@bunt/unit";
+import {Disposer} from "@bunt/unit";
 import {isArray} from "@bunt/util";
 import {IPubSubTransport, PubSubChannel} from "./interfaces";
 import {Subscription} from "./Subscription";
 
-export abstract class PubSubAbstract<S extends Record<string, any>>
-implements IDisposable {
+export abstract class PubSubAbstract<S extends Record<string, any>> extends Disposer {
     readonly #transport: IPubSubTransport;
 
     public constructor(transport: IPubSubTransport) {
-        this.#transport = transport;
+        super();
 
-        Disposable.attach(this, transport);
+        this.#transport = transport;
+        this.onDispose(this.#transport);
     }
 
     public key<K extends keyof S>(channel: PubSubChannel<K>): string {
@@ -27,10 +27,6 @@ implements IDisposable {
             await this.#transport.getSubscriptionManager(),
             (message) => this.parse<K>(message),
         );
-    }
-
-    public async dispose(): Promise<void> {
-        return;
     }
 
     protected abstract serialize<K extends keyof S>(message: S[K]): string;

@@ -14,6 +14,16 @@ export function curry<A extends any[], T, S>(fn: (arg1: T, ...args: A) => S, val
     };
 }
 
+export function safeSync<A extends any[], R>(fn: (...args: A) => R) {
+    return (...args: A): R | undefined => {
+        try {
+            return fn(...args);
+        } catch (error) {
+            // do something
+        }
+    };
+}
+
 export function safe<A extends any[], R extends Promise<any>>(fn: (...args: A) => R) {
     return async (...args: A): Promise<R> => {
         try {
@@ -40,9 +50,15 @@ export function toArray<T>(value: T): ValueToArray<T> {
     return [value] as ValueToArray<T>;
 }
 
+
+export function voidify<T extends Promise<unknown>>(value: T): Promise<void> {
+    return value.then(() => undefined);
+}
+
 export const fn = {
     noop,
     curry,
     safe,
     isolate,
+    voidify,
 };

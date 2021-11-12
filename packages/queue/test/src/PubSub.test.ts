@@ -1,32 +1,24 @@
 import {dispose} from "@bunt/unit";
 import {PubSubChannel, PubSubSimple, RedisTransport} from "../../src";
 
-describe.skip("PubSub", () => {
+describe("PubSub", () => {
     test("Main", async () => {
-        const channel: PubSubChannel<"foo"> = ["foo", 1];
-        const transport = new RedisTransport("redis://127.0.0.1:6379");
+        const value = {bar: "baz"};
+        const channel: PubSubChannel<"foo"> = ["foo", 123];
+        const transport = new RedisTransport();
+        const pubSub = new PubSubSimple<{foo: {bar: string}}>(transport);
 
-        const pubSub = new PubSubSimple<{foo: string}>(transport);
         const subscription = await pubSub.subscribe(channel);
-        const iterator = subscription.subscribe();
+        expect(subscription.channel).toBe(pubSub.key(channel));
+        const iterator = subscription[Symbol.asyncIterator]();
 
-        const value = "bar";
+        await subscription.ensure();
         await expect(pubSub.publish(channel, value)).resolves.not.toThrow();
-        for await (const item of iterator) {
-            expect(item).toEqual(value);
-            break;
-        }
+        await expect(iterator.next()).resolves.toEqual({value, done: false});
 
         const manager = await transport.getSubscriptionManager();
-        expect(manager.getChannelKeys()).toEqual([]);
+        expect(manager.channels()).toEqual([pubSub.key(channel)]);
         expect(transport.connections).toBe(2);
-
-        const s2 = await pubSub.subscribe(channel);
-        const i2 = s2.subscribe();
-
-        expect(transport.connections).toBe(2);
-
-        i2.return(undefined);
 
         await dispose(pubSub);
 

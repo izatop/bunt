@@ -14,17 +14,16 @@
         }
     },
     "rules": {
-        "semi": "off",
-        "quotes": "off",
-        "no-console": "error",
-        "no-debugger": "error",
+        "semi": [
+            "error",
+            "always"
+        ],
         "@typescript-eslint/explicit-function-return-type": "off",
         "@typescript-eslint/no-explicit-any": "off",
         "@typescript-eslint/no-empty-interface": "warn",
         "@typescript-eslint/interface-name-prefix": "off",
         "@typescript-eslint/explicit-module-boundary": "off",
         "@typescript-eslint/explicit-module-boundary-types": "off",
-        "@typescript-eslint/quotes": "error",
         "@typescript-eslint/camelcase": "off",
         "@typescript-eslint/member-delimiter-style": [
             "error",

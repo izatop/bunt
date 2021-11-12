@@ -1,114 +1,59 @@
-import {AsyncCallback} from "@bunt/util";
-import {ISubscriptionManager} from "./interfaces";
+import {Disposable} from "@bunt/unit";
+import {all} from "@bunt/util";
+import {SubscriptionManager} from "./SubscriptionManager";
+import {SubscriptionIterator} from "./SubscriptionIterator";
 
-export class Subscription<T> implements AsyncIterable<T> {
+export class Subscription<T> implements AsyncIterable<T>, Disposable {
     public readonly channel: string;
 
     readonly #parser: (message: string) => T;
-    readonly #manager: ISubscriptionManager;
-    readonly #subscriptions = new Set<AsyncCallback<T>>();
+    readonly #manager: SubscriptionManager;
+    readonly #subscriptions = new Set<SubscriptionIterator<T>>();
 
-    constructor(channel: string, manager: ISubscriptionManager, parser: (message: string) => T) {
+    constructor(channel: string, manager: SubscriptionManager, parser: (message: string) => T) {
         this.channel = channel;
         this.#manager = manager;
         this.#parser = parser;
     }
 
-    public async *subscribe(): AsyncGenerator<T> {
-        return this[Symbol.asyncIterator];
+    public get size() {
+        return this.#subscriptions.size;
     }
 
+    public ensure(): Promise<void> {
+        return this.#manager.ensure(this.channel);
+    }
+
+    /**
+     * Unsubscribe all active subscriptions
+     */
     public async unsubscribe() {
+        const pending: Promise<void>[] = [];
         for (const iterator of this.#subscriptions.values()) {
-            iterator.dispose();
+            pending.push(iterator.destroy());
         }
+
+        await all(pending);
     }
 
-    public async* [Symbol.asyncIterator](): AsyncGenerator<T> {
-        const generator = new SubscriptionGenerator<T>();
-        const id = await this.#manager.subscribe(
+    public [Symbol.asyncIterator](): SubscriptionIterator<T> {
+        const iterator = new SubscriptionIterator<T>();
+        const id = this.#manager.on(
             this.channel,
-            (message) => generator.push(this.#parser(message)),
+            (message) => iterator.push(this.#parser(message)),
         );
 
-        generator.stop = async () => {
-            await this.#manager.unsubscribe(id);
-        };
-
-        return generator;
-    }
-}
-
-class SubscriptionGenerator<T, TNext = unknown> implements AsyncGenerator<T, undefined, TNext> {
-    readonly #queue: Defer<T | undefined>[] = [];
-    #done = false;
-
-    public pull(): Defer<T | undefined> {
-        const pending = new Defer<T | undefined>();
-        this.#queue.push(pending);
-
-        return pending;
-    }
-
-    public push(value: T | undefined): void {
-        this.#queue.splice(0, this.#queue.length)
-            .forEach((pending) => pending.resolve(value));
-    }
-
-    public async next(): Promise<IteratorResult<T, undefined>> {
-        const value = await this.pull();
-        if (value) {
-            return {value};
-        }
-
-        return {value: undefined, done: true};
-    }
-
-    public async return(): Promise<IteratorResult<T, undefined>> {
-        this.close();
-
-        return {value: undefined, done: true};
-    }
-
-    public async throw(): Promise<IteratorResult<T, undefined>> {
-        this.close();
-
-        return {value: undefined, done: true};
-    }
-
-    public [Symbol.asyncIterator](): AsyncGenerator<T, undefined, TNext> {
-        return this;
-    }
-
-    public stop?(): unknown;
-
-    private async close() {
-        await this.stop?.();
-        this.push(undefined);
-    }
-}
-
-class Defer<T> extends Promise<T> {
-    #resolve = (_value: T | PromiseLike<T>) => {
-        // noop
-    };
-
-    #reject = (_error: Error) => {
-        // noop
-    };
-
-    constructor() {
-        super((resolve, reject) => {
-            this.#resolve = resolve;
-            this.#reject = reject;
+        iterator.unsubscribe(() => {
+            this.#manager.off(id);
+            this.#subscriptions.delete(iterator);
         });
+
+        this.#subscriptions.add(iterator);
+
+        return iterator;
     }
 
-    public resolve(value: T | PromiseLike<T>) {
-        this.#resolve(value);
-    }
-
-    public reject(error: Error) {
-        this.#reject(error);
+    public async dispose() {
+        await this.unsubscribe();
     }
 }

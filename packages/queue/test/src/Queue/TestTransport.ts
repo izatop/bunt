@@ -15,11 +15,11 @@ export class TestTransport implements ITransport {
     public readonly pending: Promise<unknown>[] = [];
     readonly #messages = new Map<string, Message[]>();
 
-    public createQueueList<M extends Message>(type: MessageCtor<M>, handler: MessageHandler<M>): IQueueList<M> {
+    public getQueueList<M extends Message>(type: MessageCtor<M>, handler: MessageHandler<M>): IQueueList<M> {
         return new QueueList(this, type, handler);
     }
 
-    public createQueueReader<M extends Message>(type: MessageCtor<M>): IQueueReader<M> {
+    public getQueueReader<M extends Message>(type: MessageCtor<M>): IQueueReader<M> {
         const queue = this.ensure<M>(type.channel);
         const cancel = () => this.resolve();
         const listenNext = () => {

@@ -1,13 +1,45 @@
-import RedisClient, {Redis} from "ioredis";
+import {isString} from "@bunt/util";
+import RedisClient, {Redis, RedisOptions} from "ioredis";
 import {parse} from "url";
 
-export function createConnection(dsn?: string): Redis {
+const toBoolean = (value: string) => {
+    return ["Y", "y", "1", "true"].includes(value);
+};
+
+const normalize: Record<string, (v: string) => any> = {
+    db: Number,
+    dropBufferSupport: toBoolean,
+    enableReadyCheck: toBoolean,
+    enableOfflineQueue: toBoolean,
+    connectTimeout: Number,
+    disconnectTimeout: Number,
+    commandTimeout: Number,
+    autoResubscribe: toBoolean,
+    autoResendUnfulfilledCommands: toBoolean,
+    lazyConnect: toBoolean,
+    maxRetriesPerRequest: Number,
+    readOnly: toBoolean,
+    stringNumbers: toBoolean,
+    enableAutoPipelining: toBoolean,
+    maxScriptsCachingTime: Number,
+};
+
+export function createConnection(dsn?: string, options?: RedisOptions): Redis {
     if (dsn) {
         const {hostname, port, query} = parse(dsn, true);
+        const queryOptions = {};
+
+        for (const [key, value] of Object.entries(query)) {
+            if (isString(value) && Reflect.has(normalize, key)) {
+                Reflect.set(queryOptions, key, normalize[key](value));
+            }
+        }
+
         return new RedisClient({
             host: hostname ?? "localhost",
             port: +(port ?? 6379),
-            db: +(query.db ?? 0),
+            ...queryOptions,
+            ...options,
         });
     }
 

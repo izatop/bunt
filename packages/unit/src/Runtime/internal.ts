@@ -1,4 +1,4 @@
-import {isObject, Promisify} from "@bunt/util";
+import {isObject, Logger, Promisify} from "@bunt/util";
 import {IDisposable, IRunnable} from "./interfaces";
 import {Runtime} from "./Runtime";
 
@@ -17,3 +17,5 @@ export function main(...chain: (() => Promisify<unknown>)[]): void {
         await Runtime.run(...chain);
     });
 }
+
+export const SystemLogger = new Logger("System");

@@ -1,14 +1,14 @@
 import {isNull, isUndefined, Logger, logger, Promisify, SingleRef} from "@bunt/util";
-import {Disposable, dispose} from "../Dispose";
+import {Disposer, dispose} from "../Dispose";
 import {Heartbeat} from "./Heartbeat";
-import {DisposableFn, IDisposable} from "./interfaces";
+import {DisposableFn} from "./interfaces";
 import {isDisposable, isRunnable, Signals} from "./internal";
 
 const ref = new SingleRef<Runtime>();
 const DEBUG = !!process.env.DEBUG;
 const ENV = process.env.NODE_ENV || "production";
 
-export class Runtime implements IDisposable {
+export class Runtime extends Disposer {
     @logger
     public readonly logger!: Logger;
 
@@ -16,6 +16,8 @@ export class Runtime implements IDisposable {
     private readonly created: Date;
 
     private constructor() {
+        super();
+
         this.created = new Date();
         this.logger.info("register", {ENV, DEBUG});
 
@@ -27,7 +29,8 @@ export class Runtime implements IDisposable {
     }
 
     public static on(event: "release", callback: DisposableFn): void {
-        Disposable.attach(ref.ensure(), callback);
+        const runtime = ref.ensure();
+        runtime.onDispose(callback);
     }
 
     public static isDebugEnable(): boolean {
@@ -48,8 +51,9 @@ export class Runtime implements IDisposable {
 
     public static run(...chain: (() => Promisify<unknown>)[]): Promise<void> {
         const queue = this.createQueue(chain);
-        return ref.create(() => new Runtime())
-            .watch(queue);
+        const runtime = ref.create(() => new Runtime());
+
+        return runtime.watch(queue);
     }
 
     public static createQueue(chain: (() => Promisify<unknown>)[]): Promise<unknown>[] {
@@ -59,16 +63,6 @@ export class Runtime implements IDisposable {
         }
 
         return queue;
-    }
-
-    public async dispose(): Promise<void> {
-        this.logger.info("dispose");
-
-        setImmediate(async () => {
-            await Disposable.disposeAll()
-                .finally(() => this.logger.info("exit"))
-                .finally(() => process.nextTick(() => process.exit(0)));
-        });
     }
 
     private async watch(chain: Promise<unknown>[]): Promise<void> {
@@ -100,7 +94,7 @@ export class Runtime implements IDisposable {
             }
 
             if (isDisposable(object)) {
-                Disposable.attach(this, object);
+                this.onDispose(object);
             }
         } catch (error) {
             this.logger.error("reject", error);

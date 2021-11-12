@@ -1,9 +1,9 @@
 import {Application, IRoute} from "@bunt/app";
-import {Action, ContextArg, Heartbeat, IDisposable, IRunnable} from "@bunt/unit";
+import {Action, ContextArg, Heartbeat, IRunnable} from "@bunt/unit";
 import {CommandContext} from "./Context/CommandContext";
 import {RequestCommand} from "./Request";
 
-export class Commander<C extends CommandContext> implements IRunnable, IDisposable {
+export class Commander<C extends CommandContext> implements IRunnable {
     readonly #application: Application<C>;
 
     protected constructor(application: Application<C>) {
@@ -13,6 +13,7 @@ export class Commander<C extends CommandContext> implements IRunnable, IDisposab
     public static async execute<C extends CommandContext>(
         context: ContextArg<C>, routes: IRoute<Action<C, any, IRunnable>>[] = []): Promise<IRunnable | undefined> {
         const command = new this<C>(await Application.factory<C>(context, routes));
+
         return command.handle();
     }
 
@@ -21,10 +22,6 @@ export class Commander<C extends CommandContext> implements IRunnable, IDisposab
         const request = new RequestCommand(context.program.args);
 
         return this.#application.run(request);
-    }
-
-    public async dispose(): Promise<void> {
-        return;
     }
 
     public getHeartbeat(): Heartbeat {

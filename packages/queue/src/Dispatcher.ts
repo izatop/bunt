@@ -1,10 +1,10 @@
-import {ActionCtor, Context, ContextArg, Disposable, Heartbeat, IDisposable, IRunnable, unit, Unit} from "@bunt/unit";
+import {ActionCtor, Context, ContextArg, Disposer, Heartbeat, IRunnable, unit, Unit} from "@bunt/unit";
 import {Ctor, logger, Logger} from "@bunt/util";
 import {Handler} from "./Handler";
 import {ITransport} from "./interfaces";
 import {Incoming, MessageCtor, Queue, QueueAbstract} from "./Queue";
 
-export class Dispatcher<C extends Context> implements IDisposable, IRunnable {
+export class Dispatcher<C extends Context> extends Disposer implements IRunnable {
     @logger
     public logger!: Logger;
 
@@ -13,8 +13,11 @@ export class Dispatcher<C extends Context> implements IDisposable, IRunnable {
     readonly #route = new Map<MessageCtor<any>, ActionCtor<C>>();
 
     protected constructor(u: Unit<C>, queue: QueueAbstract<ITransport>) {
-        this.#queue = queue;
+        super();
+
         this.#unit = u;
+        this.#queue = queue;
+        this.onDispose(queue);
     }
 
     public get size(): number {
@@ -23,6 +26,7 @@ export class Dispatcher<C extends Context> implements IDisposable, IRunnable {
 
     public static async factory<C extends Context>(
         context: ContextArg<C>, queue: Queue<ITransport>): Promise<Dispatcher<C>> {
+
         return new this(await unit(context), queue);
     }
 
@@ -35,13 +39,9 @@ export class Dispatcher<C extends Context> implements IDisposable, IRunnable {
             this.#unit.add(action);
         }
 
-        const subscription = this.#queue.subscribe<any>(type, ({payload}) => this.#unit.run(action, {payload}));
-        Disposable.attach(this, subscription);
+        const subscription = this.#queue.on<any>(type, ({payload}) => this.#unit.run(action, {payload}));
+        this.onDispose(subscription);
 
         return this;
-    }
-
-    public async dispose(): Promise<void> {
-        return;
     }
 }

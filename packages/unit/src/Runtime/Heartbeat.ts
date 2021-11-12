@@ -1,4 +1,4 @@
-import {AsyncState, Logger, logger} from "@bunt/util";
+import {Defer, Logger, logger} from "@bunt/util";
 import {HeartbeatDisposer, IRunnable} from "./interfaces";
 import {isRunnable} from "./internal";
 
@@ -8,11 +8,10 @@ export class Heartbeat {
     @logger
     protected readonly logger!: Logger;
 
-    readonly #pending: Promise<void>;
+    readonly #life = new Defer<void>();
 
     constructor(label: string, disposer?: HeartbeatDisposer) {
         this.logger.debug("create", {label});
-        this.#pending = AsyncState.acquire<void>();
 
         if (disposer) {
             disposer((error) => this.destroy(error));
@@ -20,7 +19,7 @@ export class Heartbeat {
     }
 
     public get beats(): boolean {
-        return !AsyncState.isReleased(this.#pending);
+        return !this.#life.settled;
     }
 
     /**
@@ -30,7 +29,12 @@ export class Heartbeat {
      * @param disposer
      */
     public static create(target: IRunnable, disposer?: HeartbeatDisposer): Heartbeat {
-        const heartbeat = registry.get(target) ?? new Heartbeat(target.constructor.name, disposer);
+        const heartbeat = registry.get(target) ?? new Heartbeat(target.constructor.name, (resolve) => {
+            registry.delete(target);
+
+            disposer?.(resolve);
+        });
+
         if (!registry.has(target)) {
             registry.set(target, heartbeat);
         }
@@ -40,29 +44,31 @@ export class Heartbeat {
 
     public static async watch(runnable: IRunnable | unknown): Promise<void> {
         if (isRunnable(runnable)) {
-            const heartbeat = runnable.getHeartbeat();
-            return heartbeat.watch();
+            return runnable
+                .getHeartbeat()
+                .watch();
         }
     }
 
     public static destroy(target: IRunnable): void {
-        const heartbeat = registry.get(target);
-        heartbeat?.destroy();
+        registry
+            .get(target)
+            ?.destroy();
     }
 
     public destroy(error?: Error): void {
-        if (!this.beats) {
+        if (this.#life.settled) {
             return;
         }
 
         if (error) {
-            return AsyncState.reject(this.#pending, error);
+            return this.#life.reject(error);
         }
 
-        AsyncState.resolve(this.#pending);
+        this.#life.resolve();
     }
 
     public watch(): Promise<void> {
-        return this.#pending;
+        return Promise.resolve(this.#life);
     }
 }
