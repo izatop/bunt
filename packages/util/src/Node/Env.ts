@@ -1,15 +1,17 @@
-import {assert} from "..";
+import {Dict} from "./interfaces";
+import {assert} from "../assert";
 
+export type EnvKey = string | number | symbol;
 export type EnvDefaultValue = string | undefined;
 
-export class Env<T extends Record<string, EnvDefaultValue>> {
+export class Env<T extends Dict<string>> {
     readonly #store: Map<keyof T, EnvDefaultValue>;
 
-    constructor(env: Record<string, EnvDefaultValue>) {
+    constructor(env: Dict<string>) {
         this.#store = new Map(Object.entries(env));
     }
 
-    public static factory<T extends Record<string, EnvDefaultValue>>(env = process.env) {
+    public static factory<T extends Dict<string>>(env = process.env) {
         return new this<T>(env);
     }
 

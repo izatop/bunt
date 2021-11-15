@@ -1,6 +1,6 @@
 import * as os from "os";
 import {format} from "util";
-import {assert} from "..";
+import {assert} from "../assert";
 import {fn} from "../function";
 import {isDefined, isFunction, isInstanceOf, isNumber, isUndefined} from "../is";
 import {Perf} from "../Perf";

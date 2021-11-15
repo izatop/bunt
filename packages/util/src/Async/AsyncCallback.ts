@@ -1,6 +1,5 @@
-import {Promisify} from "..";
 import {bind} from "../decorator";
-import {Fn} from "../interfaces";
+import {Promisify, Fn} from "../interfaces";
 import {isUndefined} from "../is";
 
 export class AsyncCallback<T> implements AsyncIterable<T> {

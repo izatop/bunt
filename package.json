@@ -4,7 +4,7 @@
     "description": "TypeSafe unit style Application Framework written in TypeScript for Node.js.",
     "main": "index.js",
     "scripts": {
-        "test": "jest",
+        "test": "./run-tests $@",
         "test:watch": "yarn test --watch",
         "clean": "lerna run clean",
         "lint": "eslint 'packages/*/{src,test}/**/*.ts'",

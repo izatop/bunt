@@ -2,6 +2,6 @@
 
 docker run --rm --name redis-test -p 6379:6379 -d redis:alpine || exit 1
 
-yarn test
+jest $@
 
 docker stop redis-test

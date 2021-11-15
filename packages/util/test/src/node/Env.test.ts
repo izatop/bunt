@@ -1,8 +1,13 @@
-import {Env} from "../../../src";
+import {Dict, Env} from "../../../src";
+
+interface ITestEnv extends Dict<string> {
+    foo: string;
+    baz?: string;
+}
 
 describe("Env", () => {
     test("get/ensure", () => {
-        const env = Env.factory<{foo: string; baz?: string}>({foo: "bar", baz: undefined});
+        const env = Env.factory<ITestEnv>({foo: "bar", baz: undefined});
 
         expect(env.get("foo")).toBe("bar");
         expect(env.get("baz")).toBeUndefined();
