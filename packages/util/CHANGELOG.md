@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.21.5](https://github.com/izatop/bunt/compare/v0.21.4...v0.21.5) (2021-11-15)
+
+
+### Bug Fixes
+
+* types, tests ([bbf1785](https://github.com/izatop/bunt/commit/bbf17858a20e036a334e772aa74b61e2a8ce46db))
+
+
+
+
+
 ## [0.21.4](https://github.com/izatop/bunt/compare/v0.21.3...v0.21.4) (2021-11-15)
 
 
