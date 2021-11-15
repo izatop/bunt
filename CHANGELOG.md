@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.21.4](https://github.com/izatop/bunt/compare/v0.21.3...v0.21.4) (2021-11-15)
+
+
+### Bug Fixes
+
+* lost files ([2416371](https://github.com/izatop/bunt/commit/2416371bc4c85360099bb2b5fd41ba5ca96c8a54))
+
+
+
+
+
 ## [0.21.3](https://github.com/izatop/bunt/compare/v0.21.2...v0.21.3) (2021-11-15)
 
 
