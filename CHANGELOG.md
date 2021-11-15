@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.21.2](https://github.com/izatop/bunt/compare/v0.21.1...v0.21.2) (2021-11-15)
+
+
+### Bug Fixes
+
+* add AsyncLoader ([9e6004c](https://github.com/izatop/bunt/commit/9e6004c14150841d6940b4b78aff985dce23fd1a))
+* run-tests ([3452f59](https://github.com/izatop/bunt/commit/3452f5970675991f57ad97dfc59ccf25731b72b7))
+
+
+
+
+
 ## [0.21.1](https://github.com/izatop/bunt/compare/v0.21.0...v0.21.1) (2021-11-12)
 
 
