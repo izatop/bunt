@@ -28,8 +28,6 @@ export class Runtime extends Disposer {
             this.logger.debug("watch", signal);
             process.on(signal, async () => Runtime.kill(0, `Signal ${signal} has been received`));
         }
-
-        this.onDispose(Logger);
     }
 
     public static kill(code = 0, reason?: unknown): Promise<void> {
@@ -44,7 +42,7 @@ export class Runtime extends Disposer {
 
         await Promise.allSettled(this.#pending);
         await dispose(this);
-
+        await dispose(Logger);
         if (!Runtime.isTest()) {
             process.exit(code);
         }
