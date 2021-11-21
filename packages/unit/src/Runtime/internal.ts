@@ -1,4 +1,5 @@
-import {isObject, Logger, Promisify} from "@bunt/util";
+import {isObject, Logger} from "@bunt/util";
+import {RuntimeTask} from ".";
 import {IDisposable, IRunnable} from "./interfaces";
 import {Runtime} from "./Runtime";
 
@@ -12,10 +13,9 @@ export function isRunnable(target: unknown): target is IRunnable {
     return isObject(target) && "getHeartbeat" in target;
 }
 
-export function main(...chain: (() => Promisify<unknown>)[]): void {
-    process.nextTick(async () => {
-        await Runtime.run(...chain);
-    });
+export function main(...tasks: RuntimeTask[]): void {
+    Runtime.run(tasks)
+        .watch();
 }
 
 export const SystemLogger = new Logger("System");

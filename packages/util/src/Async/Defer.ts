@@ -7,11 +7,11 @@ export class Defer<T> implements PromiseLike<T> {
     readonly #event = new EventEmitter();
     readonly #pending: Promise<T>;
 
-    #settled = false;
+    #state: "rejected" | "fulfilled" | "pending" = "pending";
 
     constructor() {
-        this.#event.once("resolve", () => this.#settled = true);
-        this.#event.once("reject", () => this.#settled = true);
+        this.#event.once("resolve", () => this.#state = "fulfilled");
+        this.#event.once("reject", () => this.#state = "rejected");
 
         this.#pending = new Promise<T>((resolve, reject) => {
             this.#event.once("resolve", resolve);
@@ -20,7 +20,15 @@ export class Defer<T> implements PromiseLike<T> {
     }
 
     public get settled() {
-        return this.#settled;
+        return this.#state !== "pending";
+    }
+
+    public get rejected() {
+        return this.settled && this.#state === "rejected";
+    }
+
+    public get fulfilled() {
+        return this.settled && this.#state === "fulfilled";
     }
 
     public then = <TResult1 = T, TResult2 = never>(onfulfilled?: DeferOnFulfilled<T, TResult1>,

@@ -39,7 +39,6 @@ export class Heartbeat extends Disposer {
 
     public static create(target: IRunnable): Heartbeat {
         const heartbeat = registry.get(target) ?? new Heartbeat(target);
-
         if (!registry.has(target)) {
             // prevent the getHeartbeat() function to be called more than one time
             Object.defineProperty(target, "getHeartbeat", {value: () => heartbeat});

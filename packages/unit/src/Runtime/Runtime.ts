@@ -1,4 +1,4 @@
-import {Defer, isNull, isUndefined, Logger, logger, SingleRef} from "@bunt/util";
+import {Defer, isNull, isUndefined, LogFn, Logger, logger, SingleRef} from "@bunt/util";
 import {Disposer, dispose} from "../Dispose";
 import {Heartbeat} from "./Heartbeat";
 import {RuntimeTask} from "./interfaces";
@@ -13,7 +13,7 @@ export class Runtime extends Disposer {
     public readonly logger!: Logger;
 
     readonly #running: Heartbeat[] = [];
-    readonly #working: Promise<unknown>[] = [];
+    readonly #pending: Promise<unknown>[] = [];
     readonly #state = new Defer<void>();
 
     private readonly created: Date;
@@ -22,21 +22,30 @@ export class Runtime extends Disposer {
         super();
 
         this.created = new Date();
-        this.logger.info("register", {ENV, DEBUG});
+        this.logger.info("run", {ENV, DEBUG, date: this.created});
 
-        // @TODO Send an event when a signal has been received.
         for (const signal of Signals) {
-            this.logger.debug("listen", signal);
-            process.on(signal, async () => Runtime.kill());
+            this.logger.debug("watch", signal);
+            process.on(signal, async () => Runtime.kill(0, `Signal ${signal} has been received`));
         }
+
+        this.onDispose(Logger);
     }
 
-    public static async kill(code = 0) {
-        const runtime = ref.ensure();
-        await Promise.allSettled(runtime.#working);
-        await dispose(runtime);
+    public static kill(code = 0, reason?: unknown): Promise<void> {
+        return ref
+            .ensure()
+            .kill(code, reason);
+    }
 
-        if (!this.isTest()) {
+    public async kill(code = 0, reason?: unknown) {
+        const fn: LogFn = code > 0 ? this.logger.error : this.logger.info;
+        fn("Kill { code: %d, reason: %s }", code, reason);
+
+        await Promise.allSettled(this.#pending);
+        await dispose(this);
+
+        if (!Runtime.isTest()) {
             process.exit(code);
         }
     }
@@ -57,7 +66,7 @@ export class Runtime extends Disposer {
         return ENV === "test";
     }
 
-    public static run(...tasks: RuntimeTask[]): Runtime {
+    public static run(tasks: RuntimeTask[]): Runtime {
         return ref
             .once(() => new Runtime())
             .run(tasks);
@@ -65,20 +74,16 @@ export class Runtime extends Disposer {
 
     private run(tasks: RuntimeTask[]): this {
         for (const task of tasks) {
-            try {
-                this.#working.push(Promise.resolve(task()));
-            } catch (error) {
-                this.#working.push(Promise.reject(error));
-            }
+            this.#pending.push(this.handle(task));
         }
 
         return this;
     }
 
-    private async watch(): Promise<void> {
+    public async watch(): Promise<void> {
         const finish = this.logger.perf("run");
         try {
-            await Promise.allSettled(this.#working.map((job) => this.handle(job)));
+            await Promise.allSettled(this.#pending);
             await Promise.all(this.#running.map((heartbeat) => heartbeat.watch()));
         } catch (error) {
             this.error(error);
@@ -86,14 +91,16 @@ export class Runtime extends Disposer {
             finish();
         }
 
-        await dispose(this);
+        const code = this.#state.rejected ? 1 : 0;
+        const reason = this.#state.rejected ? "Some tasks were rejected" : "As expected";
+        await this.kill(code, reason);
     }
 
-    private async handle(result: unknown): Promise<void> {
+    private async handle(task: RuntimeTask): Promise<void> {
         try {
-            const object = await result;
-            this.logger.debug("handle", {object});
+            this.logger.debug("Run task");
 
+            const object = await task();
             if (isUndefined(object) || isNull(object)) {
                 return;
             }

@@ -193,7 +193,7 @@ export class Logger {
         this.#label = label;
     }
 
-    public async dispose(): Promise<void> {
+    public static async dispose(): Promise<void> {
         writers.splice(0, writers.length);
         await Promise.allSettled(transports.map((transport) => transport.close()));
     }
