@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.21.6](https://github.com/izatop/bunt/compare/v0.21.5...v0.21.6) (2021-11-21)
+
+
+### Bug Fixes
+
+* **breaks:** runtime & runnable ([2f005f0](https://github.com/izatop/bunt/commit/2f005f07b0c3a15ac9272288ce7e00c9a3c325e1))
+
+
+
+
+
 ## [0.21.5](https://github.com/izatop/bunt/compare/v0.21.4...v0.21.5) (2021-11-15)
 
 **Note:** Version bump only for package @bunt/queue
