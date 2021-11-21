@@ -1,18 +1,30 @@
 import {Application, IRoute} from "@bunt/app";
 import {ActionAny, Context, ContextArg, Heartbeat, IDisposable, IRunnable, unit, Unit} from "@bunt/unit";
-import {assert, Ctor, logger, Logger, PermissionError, toError, NotFound, ValidationError, isError} from "@bunt/util";
+import {
+    assert,
+    Ctor,
+    logger,
+    Logger,
+    PermissionError,
+    toError,
+    NotFound,
+    ValidationError,
+    isError,
+    Defer,
+} from "@bunt/util";
 import * as http from "http";
 import {IncomingMessage, ServerResponse} from "http";
 import {Socket} from "net";
 import {IErrorResponseHeaders, IProtocolAcceptor, IResponderOptions, Responder} from "./Transport";
 
-export class WebServer<C extends Context> extends Application<C>
-    implements IDisposable, IRunnable {
+export class WebServer<C extends Context> extends Application<C> implements IDisposable, IRunnable {
     @logger
     public readonly logger!: Logger;
 
-    readonly #options: IResponderOptions;
     readonly #server: http.Server;
+    readonly #state = new Defer<void>();
+
+    readonly #options: IResponderOptions;
     readonly #acceptors = new Map<string, IProtocolAcceptor>();
     readonly #errorCodeMap = new Map<Ctor<Error>, IErrorResponseHeaders>();
 
@@ -21,6 +33,7 @@ export class WebServer<C extends Context> extends Application<C>
         this.#server = new http.Server();
         this.#options = options ?? {};
 
+        this.#server.once("close", () => this.#state.resolve());
         this.setExceptionResponseHeaders(
             [PermissionError, {code: 403, status: "Permission denied"}],
             [ValidationError, {code: 400, status: "Validation error"}],
@@ -36,7 +49,9 @@ export class WebServer<C extends Context> extends Application<C>
     }
 
     public getHeartbeat(): Heartbeat {
-        return Heartbeat.create(this);
+        return Heartbeat.create(this)
+            .enqueue(this.#state)
+            .onDispose(this);
     }
 
     public listen(port: number, backlog?: number): this {
@@ -59,6 +74,7 @@ export class WebServer<C extends Context> extends Application<C>
 
         this.logger.info("Set upgrade protocol acceptor", {protocol});
         this.#acceptors.set(protocol, acceptor);
+
         return () => this.#acceptors.delete(protocol);
     }
 
@@ -71,9 +87,11 @@ export class WebServer<C extends Context> extends Application<C>
     }
 
     public async dispose(): Promise<void> {
-        this.logger.info("destroy");
         assert(this.#server.listening, "Server was destroyed");
-        await new Promise<void>((resolve) => this.#server.close(() => resolve));
+        this.logger.info("close");
+        this.#server.close();
+
+        return this.#state;
     }
 
     protected async handle(req: IncomingMessage, res: ServerResponse): Promise<void> {

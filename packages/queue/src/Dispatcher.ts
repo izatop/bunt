@@ -1,5 +1,5 @@
 import {ActionCtor, Context, ContextArg, Disposer, Heartbeat, IRunnable, unit, Unit} from "@bunt/unit";
-import {Ctor, logger, Logger} from "@bunt/util";
+import {Ctor, Defer, logger, Logger} from "@bunt/util";
 import {Handler} from "./Handler";
 import {ITransport} from "./interfaces";
 import {Incoming, MessageCtor, Queue, QueueAbstract} from "./Queue";
@@ -31,7 +31,12 @@ export class Dispatcher<C extends Context> extends Disposer implements IRunnable
     }
 
     public getHeartbeat(): Heartbeat {
-        return Heartbeat.create(this);
+        const running = new Defer<void>();
+        this.onDispose(() => running.resolve());
+
+        return Heartbeat.create(this)
+            .enqueue(running)
+            .onDispose(this);
     }
 
     public subscribe<M extends Incoming, H extends Handler<C, M>>(type: MessageCtor<M>, action: Ctor<H>): this {

@@ -35,3 +35,11 @@ export type IIS<T> = T extends Ctor<infer S> ? S : T extends Newable<infer S> ? 
 export const isInstanceOf = <C extends (Ctor | Newable)>(value: unknown, type: C): value is IIS<C> => {
     return isObject(value) && value instanceof type;
 };
+
+export function isRejected<T>(item: PromiseSettledResult<T>): item is PromiseRejectedResult {
+    return item.status === "rejected";
+}
+
+export function isFulfilled<T>(item: PromiseSettledResult<T>): item is PromiseFulfilledResult<T> {
+    return item.status === "fulfilled";
+}

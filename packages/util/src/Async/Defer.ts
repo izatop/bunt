@@ -10,12 +10,12 @@ export class Defer<T> implements PromiseLike<T> {
     #settled = false;
 
     constructor() {
-        this.#event.on("resolve", () => this.#settled = true);
-        this.#event.on("reject", () => this.#settled = true);
+        this.#event.once("resolve", () => this.#settled = true);
+        this.#event.once("reject", () => this.#settled = true);
 
         this.#pending = new Promise<T>((resolve, reject) => {
-            this.#event.on("resolve", resolve);
-            this.#event.on("reject", reject);
+            this.#event.once("resolve", resolve);
+            this.#event.once("reject", reject);
         });
     }
 
@@ -32,7 +32,7 @@ export class Defer<T> implements PromiseLike<T> {
         this.#event.emit("resolve", value);
     };
 
-    public reject = (error: Error) => {
+    public reject = (error: unknown) => {
         this.#event.emit("reject", error);
     };
 }

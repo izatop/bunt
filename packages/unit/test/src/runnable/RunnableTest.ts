@@ -1,18 +1,20 @@
-import {EventEmitter} from "events";
-import {Heartbeat, IRunnable} from "../../../src";
+import {Defer} from "@bunt/util";
+import {Heartbeat, IDisposable, IRunnable} from "../../../src";
 
-export class RunnableTest extends EventEmitter implements IRunnable {
-    declare on: (event: "resolve", fn: (error?: Error) => void) => this;
+export class RunnableTest implements IRunnable, IDisposable {
+    readonly running = new Defer<void>();
 
     public getHeartbeat(): Heartbeat {
-        return Heartbeat.create(this, (resolve) => this.on("resolve", resolve));
+        return Heartbeat.create(this)
+            .onDispose(this)
+            .enqueue(this.running);
     }
 
     public crash(): void {
-        this.emit("resolve", new Error("Crashes"));
+        this.running.reject(new Error("Unexpected error"));
     }
 
-    public destroy(): void {
-        this.emit("resolve");
+    public async dispose(): Promise<void> {
+        this.running.resolve();
     }
 }

@@ -1,41 +1,53 @@
 import {Defer, Logger, logger} from "@bunt/util";
-import {HeartbeatDisposer, IRunnable} from "./interfaces";
+import {HeartbeatRunningQueue} from ".";
+import {Disposer} from "../Dispose";
+import {IRunnable} from "./interfaces";
 import {isRunnable} from "./internal";
 
 const registry = new WeakMap<IRunnable, Heartbeat>();
 
-export class Heartbeat {
+export class Heartbeat extends Disposer {
+    public readonly name: string;
+
     @logger
     protected readonly logger!: Logger;
 
+    readonly #running = new Set<HeartbeatRunningQueue>();
     readonly #life = new Defer<void>();
 
-    constructor(label: string, disposer?: HeartbeatDisposer) {
-        this.logger.debug("create", {label});
+    private constructor(target: IRunnable) {
+        super();
+        this.name = target.constructor.name;
+        this.logger.debug("create", {label: this.name});
+    }
 
-        if (disposer) {
-            disposer((error) => this.destroy(error));
+    public enqueue(...running: HeartbeatRunningQueue[]): this {
+        for (const job of running) {
+            this.#running.add(job);
+
+            Promise.resolve(job)
+                .catch((error) => this.reject(error))
+                .finally(() => this.finalize(job));
         }
+
+        return this;
     }
 
     public get beats(): boolean {
         return !this.#life.settled;
     }
 
-    /**
-     * Always getting an unique Heartbeat of the target
-     *
-     * @param target
-     * @param disposer
-     */
-    public static create(target: IRunnable, disposer?: HeartbeatDisposer): Heartbeat {
-        const heartbeat = registry.get(target) ?? new Heartbeat(target.constructor.name, (resolve) => {
-            registry.delete(target);
-
-            disposer?.(resolve);
-        });
+    public static create(target: IRunnable): Heartbeat {
+        const heartbeat = registry.get(target) ?? new Heartbeat(target);
 
         if (!registry.has(target)) {
+            // prevent the getHeartbeat() function to be called more than one time
+            Object.defineProperty(target, "getHeartbeat", {value: () => heartbeat});
+
+            heartbeat.onDispose(() => {
+                registry.delete(target);
+            });
+
             registry.set(target, heartbeat);
         }
 
@@ -50,25 +62,28 @@ export class Heartbeat {
         }
     }
 
-    public static destroy(target: IRunnable): void {
-        registry
-            .get(target)
-            ?.destroy();
-    }
-
-    public destroy(error?: Error): void {
+    public async dispose(): Promise<void> {
         if (this.#life.settled) {
             return;
         }
 
-        if (error) {
-            return this.#life.reject(error);
-        }
-
         this.#life.resolve();
+        await super.dispose();
     }
 
     public watch(): Promise<void> {
         return Promise.resolve(this.#life);
+    }
+
+    private reject(error: unknown) {
+        this.#running.clear();
+        this.#life.reject(error);
+    }
+
+    private finalize(running: HeartbeatRunningQueue) {
+        this.#running.delete(running);
+        if (this.#running.size === 0) {
+            this.#life.resolve();
+        }
     }
 }

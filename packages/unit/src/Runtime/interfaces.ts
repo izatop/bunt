@@ -17,7 +17,10 @@ export interface IDisposedHistory {
     date: Date;
 }
 
-export type HeartbeatDisposer = (resolve: (error?: Error) => any) => Promisify<any>;
+export type HeartbeatTarget = Record<any, any> | ((...args: unknown[]) => unknown);
+export type HeartbeatRunningQueue = PromiseLike<unknown>;
 
 export type DisposableFn = () => Promisify<void>;
 export type DisposableType = DisposableFn | IDisposable;
+
+export type RuntimeTask = () => Promisify<unknown>;

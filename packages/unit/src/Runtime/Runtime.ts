@@ -1,7 +1,7 @@
-import {isNull, isUndefined, Logger, logger, Promisify, SingleRef} from "@bunt/util";
+import {Defer, isNull, isUndefined, Logger, logger, SingleRef} from "@bunt/util";
 import {Disposer, dispose} from "../Dispose";
 import {Heartbeat} from "./Heartbeat";
-import {DisposableFn} from "./interfaces";
+import {RuntimeTask} from "./interfaces";
 import {isDisposable, isRunnable, Signals} from "./internal";
 
 const ref = new SingleRef<Runtime>();
@@ -12,7 +12,10 @@ export class Runtime extends Disposer {
     @logger
     public readonly logger!: Logger;
 
-    protected readonly queue: Heartbeat[] = [];
+    readonly #running: Heartbeat[] = [];
+    readonly #working: Promise<unknown>[] = [];
+    readonly #state = new Defer<void>();
+
     private readonly created: Date;
 
     private constructor() {
@@ -24,13 +27,18 @@ export class Runtime extends Disposer {
         // @TODO Send an event when a signal has been received.
         for (const signal of Signals) {
             this.logger.debug("listen", signal);
-            process.on(signal, async () => this.dispose());
+            process.on(signal, async () => Runtime.kill());
         }
     }
 
-    public static on(event: "release", callback: DisposableFn): void {
+    public static async kill(code = 0) {
         const runtime = ref.ensure();
-        runtime.onDispose(callback);
+        await Promise.allSettled(runtime.#working);
+        await dispose(runtime);
+
+        if (!this.isTest()) {
+            process.exit(code);
+        }
     }
 
     public static isDebugEnable(): boolean {
@@ -49,32 +57,31 @@ export class Runtime extends Disposer {
         return ENV === "test";
     }
 
-    public static run(...chain: (() => Promisify<unknown>)[]): Promise<void> {
-        const queue = this.createQueue(chain);
-        const runtime = ref.create(() => new Runtime());
-
-        return runtime.watch(queue);
+    public static run(...tasks: RuntimeTask[]): Runtime {
+        return ref
+            .once(() => new Runtime())
+            .run(tasks);
     }
 
-    public static createQueue(chain: (() => Promisify<unknown>)[]): Promise<unknown>[] {
-        const queue = [];
-        for (const callback of chain) {
-            queue.push(new Promise<unknown>((resolve) => resolve(callback())));
+    private run(tasks: RuntimeTask[]): this {
+        for (const task of tasks) {
+            try {
+                this.#working.push(Promise.resolve(task()));
+            } catch (error) {
+                this.#working.push(Promise.reject(error));
+            }
         }
 
-        return queue;
+        return this;
     }
 
-    private async watch(chain: Promise<unknown>[]): Promise<void> {
+    private async watch(): Promise<void> {
         const finish = this.logger.perf("run");
         try {
-            for (const pending of chain) {
-                await this.handle(pending);
-            }
-
-            await Promise.allSettled(this.queue.map((heartbeat) => heartbeat.watch()));
+            await Promise.allSettled(this.#working.map((job) => this.handle(job)));
+            await Promise.all(this.#running.map((heartbeat) => heartbeat.watch()));
         } catch (error) {
-            this.logger.emergency("Unexpected error", error);
+            this.error(error);
         } finally {
             finish();
         }
@@ -85,19 +92,30 @@ export class Runtime extends Disposer {
     private async handle(result: unknown): Promise<void> {
         try {
             const object = await result;
+            this.logger.debug("handle", {object});
+
             if (isUndefined(object) || isNull(object)) {
                 return;
             }
 
             if (isRunnable(object)) {
-                this.queue.push(object.getHeartbeat());
+                const heartbeat = object.getHeartbeat();
+                this.onDispose(heartbeat);
+                this.#running.push(heartbeat);
             }
 
             if (isDisposable(object)) {
                 this.onDispose(object);
             }
         } catch (error) {
-            this.logger.error("reject", error);
+            this.error(error);
+
+            throw error;
         }
+    }
+
+    private error(error: unknown) {
+        this.logger.alert("Unexpected error", error);
+        this.#state.reject(error);
     }
 }

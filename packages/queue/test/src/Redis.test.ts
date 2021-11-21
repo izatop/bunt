@@ -1,5 +1,5 @@
 import {dispose} from "@bunt/unit";
-import {assert, throttle, watch} from "@bunt/util";
+import {assert, throttle, wait, watch} from "@bunt/util";
 import {Queue, RedisTransport} from "../../src";
 import {createConnection} from "../../src";
 import {BarMessage} from "./Message/BarMessage";
@@ -26,6 +26,7 @@ describe("Redis", () => {
 
         await dispose(queue);
         expect(transport.connections).toBe(0);
+
     });
 
     test("Q2", async () => {
@@ -53,8 +54,11 @@ describe("Redis", () => {
         expect(await redis.llen(TestTransaction.getFallbackKey())).toBe(1);
         expect(res).toEqual([1, true, 2, true]);
 
-        await dispose(queue);
+        const close = wait((fn) => redis.once("end", fn));
         redis.disconnect();
+
+        await close;
+        await dispose(queue);
 
         expect(transport.connections).toBe(0);
     });

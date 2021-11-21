@@ -8,13 +8,15 @@ export abstract class Disposer implements IDisposable {
 
     readonly #disposables: DisposableType[] = [];
 
-    public onDispose(disposable: DisposableType) {
+    public onDispose(disposable: DisposableType): this {
         this.logger.debug("onDispose(%s)", disposable.constructor.name);
         this.#disposables.push(disposable);
+
+        return this;
     }
 
     public async dispose(): Promise<void> {
         this.logger.debug("dispose(%o)", this.#disposables.map(({constructor: {name}}) => name));
-        await safeMap(this.#disposables, dispose);
+        await safeMap(this.#disposables.splice(0), dispose);
     }
 }

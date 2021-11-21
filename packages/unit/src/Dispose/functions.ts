@@ -1,7 +1,15 @@
-import {all, isFunction, toError} from "@bunt/util";
+import {isFunction, safeMap, toError} from "@bunt/util";
 import {DisposableType, isRunnable, SystemLogger} from "../Runtime";
 
+const disposed = new WeakSet<DisposableType>();
+
 export async function dispose(disposable: DisposableType): Promise<void> {
+    if (disposed.has(disposable)) {
+        return;
+    }
+
+    disposed.add(disposable);
+
     const {constructor: {name}} = disposable;
     const perf = SystemLogger.perf("disposed %s", name);
     try {
@@ -12,9 +20,8 @@ export async function dispose(disposable: DisposableType): Promise<void> {
 
         if (isRunnable(disposable)) {
             SystemLogger.debug("destroy %s().getHeartbeat()", name);
-            disposable
-                .getHeartbeat()
-                .destroy();
+            const heartbeat = disposable.getHeartbeat();
+            await dispose(heartbeat);
         }
 
         SystemLogger.debug("%s.dispose()", name);
@@ -27,11 +34,6 @@ export async function dispose(disposable: DisposableType): Promise<void> {
 }
 
 export async function disposeAll(disposables: DisposableType[]) {
-    const ops: Promise<void>[] = [];
-    for(const disposable of disposables) {
-        ops.push(Promise.resolve(dispose(disposable)));
-    }
-
-    await all(ops);
+    await safeMap(disposables, (disposable) => dispose(disposable));
 }
 

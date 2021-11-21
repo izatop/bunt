@@ -23,6 +23,12 @@ export class SingleRef<T> {
         return ref;
     }
 
+    public once(fn: () => T): T {
+        assert(!this.has(), "Cannot getting twice");
+
+        return this.create(fn);
+    }
+
     public create(fn: () => T): T {
         const value = store.get(this.#ref) ?? fn();
         if (!this.has()) {

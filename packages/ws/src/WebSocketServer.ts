@@ -4,15 +4,15 @@ import {
     ActionCtor,
     Context,
     ContextArg,
+    Disposer,
     Heartbeat,
-    IDisposable,
     IRunnable,
     Runtime,
     ShadowState,
     unit,
     Unit,
 } from "@bunt/unit";
-import {assert, AsyncState, isDefined, isString, Logger, logger, noop, resolveOrReject, toError} from "@bunt/util";
+import {assert, Defer, isDefined, isString, Logger, logger, noop, resolveOrReject, toError} from "@bunt/util";
 import {RequestMessage, WebServer} from "@bunt/web";
 import {IncomingMessage} from "http";
 import {Socket} from "net";
@@ -21,13 +21,13 @@ import * as ws from "ws";
 import {WebSocketCloseReason} from "./const";
 import {HandleProtoType, ProtoHandleAbstract} from "./Protocol";
 
-export class WebSocketServer<C extends Context> implements IDisposable, IRunnable {
+export class WebSocketServer<C extends Context> extends Disposer implements IRunnable {
     @logger
     public readonly logger!: Logger;
 
     readonly #disposeAcceptor: () => void;
     readonly #servers = new Map<IRoute<ActionAny<C>>, ws.Server>();
-    readonly #state = AsyncState.acquire();
+    readonly #state = new Defer<void>();
     readonly #web: WebServer<C>;
 
     readonly #unit: Unit<C>;
@@ -39,12 +39,15 @@ export class WebSocketServer<C extends Context> implements IDisposable, IRunnabl
     };
 
     protected constructor(unit: Unit<C>, server: WebServer<any>) {
+        super();
         this.#web = server;
         this.#unit = unit;
         this.#disposeAcceptor = this.#web.setUpgradeProtocolAcceptor({
             protocol: "websocket",
             handle: this.handleUpgrade,
         });
+
+        this.onDispose(server);
     }
 
     public static async attachTo<C extends Context>(server: WebServer<C>): Promise<WebSocketServer<C>>;
@@ -71,7 +74,9 @@ export class WebSocketServer<C extends Context> implements IDisposable, IRunnabl
     }
 
     public getHeartbeat(): Heartbeat {
-        return Heartbeat.create(this);
+        return Heartbeat.create(this)
+            .enqueue(this.#state)
+            .onDispose(this);
     }
 
     public async dispose(): Promise<void> {
@@ -90,9 +95,10 @@ export class WebSocketServer<C extends Context> implements IDisposable, IRunnabl
                 }
             }
 
-            await Promise.all(operations);
+            await Promise.allSettled(operations);
+            await super.dispose();
         } finally {
-            AsyncState.resolve(this.#state);
+            this.#state.resolve();
         }
     }
 

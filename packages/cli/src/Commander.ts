@@ -1,9 +1,9 @@
 import {Application, IRoute} from "@bunt/app";
-import {Action, ContextArg, Heartbeat, IRunnable} from "@bunt/unit";
+import {Action, ContextArg, IRunnable} from "@bunt/unit";
 import {CommandContext} from "./Context/CommandContext";
 import {RequestCommand} from "./Request";
 
-export class Commander<C extends CommandContext> implements IRunnable {
+export class Commander<C extends CommandContext> {
     readonly #application: Application<C>;
 
     protected constructor(application: Application<C>) {
@@ -22,9 +22,5 @@ export class Commander<C extends CommandContext> implements IRunnable {
         const request = new RequestCommand(context.program.args);
 
         return this.#application.run(request);
-    }
-
-    public getHeartbeat(): Heartbeat {
-        return Heartbeat.create(this);
     }
 }

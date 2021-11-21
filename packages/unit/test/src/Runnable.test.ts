@@ -1,3 +1,4 @@
+import {dispose} from "../../src";
 import {RunnableTest} from "./runnable/RunnableTest";
 
 describe("Runnable", () => {
@@ -5,7 +6,7 @@ describe("Runnable", () => {
         const runnable = new RunnableTest();
         const heartbeat = runnable.getHeartbeat();
         expect(heartbeat.beats).toBeTruthy();
-        runnable.destroy();
+        await dispose(runnable);
 
         await expect(heartbeat.watch()).resolves.toBeUndefined();
         expect(heartbeat.beats).toBeFalsy();
