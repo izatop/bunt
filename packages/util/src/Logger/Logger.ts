@@ -22,6 +22,7 @@ type SafeLog = (log: LogMessage) => void;
 const pid = process.pid;
 const host = os.hostname();
 const writers: SafeLog[] = [];
+const writing = new Set<Promise<unknown>>();
 const transports: ILoggerTransport[] = [];
 const loggers = new WeakMap<LoggerOwner, Logger>();
 
@@ -75,7 +76,10 @@ export class Logger {
         transports.push(transport);
         const safeFn = makeSafe(async (log: LogMessage) => {
             if (transport.writable) {
-                await transport.write(log);
+                const pending = Promise.resolve(transport.write(log));
+                writing.add(pending);
+
+                await pending.finally(() => writing.delete(pending));
             }
         });
 
@@ -192,12 +196,16 @@ export class Logger {
         await this.reset();
     }
 
-    private static reset(): Promise<PromiseSettledResult<Promisify<void>>[]> {
+    private static reset(): Promise<PromiseSettledResult<Promisify<unknown>>[]> {
         writers.splice(0, writers.length);
+
         return Promise.allSettled(
-            transports
-                .splice(0, transports.length)
-                .map((transport) => transport.close()),
+            [
+                ...writing.values(),
+                ...transports
+                    .splice(0, transports.length)
+                    .map((transport) => transport.close()),
+            ],
         );
     }
 
