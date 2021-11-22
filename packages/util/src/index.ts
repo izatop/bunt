@@ -1,6 +1,5 @@
 export * from "./is";
 export * from "./stream";
-export * from "./array";
 export * from "./assert";
 export * from "./object";
 export * from "./string";

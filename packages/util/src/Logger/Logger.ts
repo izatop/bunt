@@ -1,7 +1,7 @@
 import * as os from "os";
 import {format} from "util";
+import {makeSafe, Promisify} from "..";
 import {assert} from "../assert";
-import {fn} from "../function";
 import {isDefined, isFunction, isInstanceOf, isNumber, isUndefined} from "../is";
 import {Perf} from "../Perf";
 import {isLogable, isLoggerOwner} from "./functions";
@@ -71,15 +71,15 @@ export class Logger {
         }
     }
 
-    public static add(transport: ILoggerTransport, unref = true): void {
+    public static add(transport: ILoggerTransport): void {
         transports.push(transport);
-        const safeFn = fn.safe(async (log: LogMessage) => {
+        const safeFn = makeSafe(async (log: LogMessage) => {
             if (transport.writable) {
                 await transport.write(log);
             }
         });
 
-        writers.push(unref ? fn.isolate(safeFn) : safeFn);
+        writers.push(safeFn);
     }
 
     public static set(list: ILoggerTransport[]): void {
@@ -87,11 +87,6 @@ export class Logger {
         for (const item of list) {
             this.add(item);
         }
-    }
-
-    public static reset(): void {
-        writers.splice(0, transports.length);
-        transports.splice(0, transports.length);
     }
 
     public static factory(target: LoggerOwner): Logger {
@@ -194,8 +189,16 @@ export class Logger {
     }
 
     public static async dispose(): Promise<void> {
+        await this.reset();
+    }
+
+    private static reset(): Promise<PromiseSettledResult<Promisify<void>>[]> {
         writers.splice(0, writers.length);
-        await Promise.allSettled(transports.map((transport) => transport.close()));
+        return Promise.allSettled(
+            transports
+                .splice(0, transports.length)
+                .map((transport) => transport.close()),
+        );
     }
 
     public add(child: ILogger): void {

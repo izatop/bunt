@@ -5,7 +5,7 @@ import {LoggerTestTransport} from "./src/LoggerTestTransport";
 
 describe("Logger", () => {
     const logs: LogMessage[] = [];
-    Logger.add(new LoggerTestTransport(logs), false);
+    Logger.add(new LoggerTestTransport(logs));
 
     beforeEach(() => {
         Logger.setSeverity(SeverityLevel.INFO);
