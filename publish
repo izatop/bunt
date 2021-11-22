@@ -1,6 +1,6 @@
 #!/bin/sh
 
 yarn lint \
-    && ./run-tests \
+    && yarn test \
     && yarn build \
     && yarn lerna publish --conventional-commits --yes
