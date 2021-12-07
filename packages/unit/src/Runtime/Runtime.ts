@@ -1,4 +1,5 @@
 import {Defer, isNull, isUndefined, LogFn, Logger, logger, SingleRef} from "@bunt/util";
+import {DisposableType} from ".";
 import {Disposer, dispose} from "../Dispose";
 import {Heartbeat} from "./Heartbeat";
 import {RuntimeTask} from "./interfaces";
@@ -46,6 +47,12 @@ export class Runtime extends Disposer {
         if (!Runtime.isTest()) {
             process.exit(code);
         }
+    }
+
+    public static onDispose(disposable: DisposableType) {
+        return ref
+            .ensure()
+            .onDispose(disposable);
     }
 
     public static isDebugEnable(): boolean {
