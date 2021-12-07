@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.21.11](https://github.com/izatop/bunt/compare/v0.21.10...v0.21.11) (2021-12-07)
+
+
+### Bug Fixes
+
+* update deps, add Runtime.onDispose ([b56ed51](https://github.com/izatop/bunt/commit/b56ed5172faedb905902245d4d38d5b87abe219c))
+
+
+
+
+
 ## [0.21.10](https://github.com/izatop/bunt/compare/v0.21.9...v0.21.10) (2021-11-22)
 
 **Note:** Version bump only for package @bunt/unit

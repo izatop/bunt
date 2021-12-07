@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.21.11](https://github.com/izatop/bunt/compare/v0.21.10...v0.21.11) (2021-12-07)
+
+
+### Bug Fixes
+
+* publish ([3702f24](https://github.com/izatop/bunt/commit/3702f24b16f5d2eb5b08b9606072ac5c1eece412))
+* run-tests ([b002806](https://github.com/izatop/bunt/commit/b0028063ca22b49f022d01888e781e968ec2c182))
+* update deps, add Runtime.onDispose ([b56ed51](https://github.com/izatop/bunt/commit/b56ed5172faedb905902245d4d38d5b87abe219c))
+
+
+
+
+
 ## [0.21.10](https://github.com/izatop/bunt/compare/v0.21.9...v0.21.10) (2021-11-22)
 
 
