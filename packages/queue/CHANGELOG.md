@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.21.12](https://github.com/izatop/bunt/compare/v0.21.11...v0.21.12) (2021-12-10)
+
+
+### Bug Fixes
+
+* update deps ([4749255](https://github.com/izatop/bunt/commit/47492554e5869b428a27e34ecdb39a23824f3666))
+
+
+
+
+
 ## [0.21.11](https://github.com/izatop/bunt/compare/v0.21.10...v0.21.11) (2021-12-07)
 
 
