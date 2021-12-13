@@ -24,12 +24,12 @@ export class Fields<TValue extends Record<string, any>> extends TypeAbstract<TVa
     public merge<F extends Record<string, any>>(from: ObjectTypeMerge<F>): Fields<TValue & F> {
         if (isInstanceOf(from, Fields)) {
             return new Fields<TValue & F>(
-                Object.assign({}, this.fields, from) as any,
+                Object.assign({}, this.fields, from.fields) as any,
             );
         }
 
         return new Fields<TValue & F>(
-            Object.assign({}, this.fields, from.fields) as any,
+            Object.assign({}, this.fields, from) as any,
         );
     }
 

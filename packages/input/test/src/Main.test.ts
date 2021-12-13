@@ -122,4 +122,12 @@ describe("Test Input", () => {
         expect(TestEnumType.validate("NUM")).toBe(TestEnum.NUM);
         expect(TestEnumType.validate("STR")).toBe(TestEnum.STR);
     });
+
+    test("Merge", async () => {
+        const foo = new Fields<{foo: number}>({foo: Int});
+        const foobar = foo.merge(new Fields<{bar: number}>({bar: Int}));
+        await expect(validate(foobar, {foo: 1, bar: 2}))
+            .resolves
+            .toEqual({foo: 1, bar: 2});
+    });
 });
