@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.21.13](https://github.com/izatop/bunt/compare/v0.21.12...v0.21.13) (2021-12-13)
+
+
+### Bug Fixes
+
+* Fields.merge, update deps ([5024d49](https://github.com/izatop/bunt/commit/5024d492762026eb5783005002b4d6285080f11c))
+
+
+
+
+
 ## [0.21.10](https://github.com/izatop/bunt/compare/v0.21.9...v0.21.10) (2021-11-22)
 
 **Note:** Version bump only for package @bunt/input
