@@ -28,8 +28,8 @@
     "dependencies": {
         "@bunt/unit": "^0.21.11",
         "@bunt/util": "^0.21.10",
-        "@types/minio": "^7.0.10",
-        "minio": "^7.0.25"
+        "@types/minio": "^7.0.12",
+        "minio": "^7.0.26"
     },
     "license": "MIT"
 }
