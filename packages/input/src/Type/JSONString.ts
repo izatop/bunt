@@ -5,7 +5,10 @@ export const JSONString = new ScalarType<any>({
     name: "JSON",
     validate(payload) {
         this.assert(isString(payload), "Wrong payload", payload);
-
-        return JSON.parse(payload);
+        try {
+            return JSON.parse(payload);
+        } catch (error) {
+            this.assert(false, "Wrong JSON", payload);
+        }
     },
 });

@@ -17,6 +17,7 @@ import {
     validate,
     Varchar,
 } from "../../src";
+import {RecordType} from "../../src/Type/RecordType";
 import {ITestDescription, ITestHobby, ITestType} from "./interfaces";
 import {TestEnum, TestEnumType} from "./Type/TestEnum";
 
@@ -129,5 +130,16 @@ describe("Test Input", () => {
         await expect(validate(foobar, {foo: 1, bar: 2}))
             .resolves
             .toEqual({foo: 1, bar: 2});
+    });
+
+    test("RecordType", async () => {
+        const plainObject = {foo: 1, bar: 2};
+        await expect(validate(RecordType, plainObject))
+            .resolves
+            .toEqual(plainObject);
+
+        await expect(validate(RecordType, null))
+            .rejects
+            .toThrow();
     });
 });
