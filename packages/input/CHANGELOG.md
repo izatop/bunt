@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.22.0](https://github.com/izatop/bunt/compare/v0.21.15...v0.22.0) (2022-02-07)
+
+
+### Bug Fixes
+
+* imports ([2d760d2](https://github.com/izatop/bunt/commit/2d760d216322663931bdc9853508458f5b0f1fad))
+
+
+### Features
+
+* drop deprecated, add new type ([4917680](https://github.com/izatop/bunt/commit/4917680a9b8f517e84c7dd82e6d1190a6b7d2705))
+
+
+
+
+
 ## [0.21.13](https://github.com/izatop/bunt/compare/v0.21.12...v0.21.13) (2021-12-13)
 
 
