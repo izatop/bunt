@@ -36,6 +36,7 @@ export class Fields<TValue extends Record<string, any>> extends TypeAbstract<TVa
     public async validate(payload: unknown): Promise<TValue> {
         this.assert(isObject(payload), `Wrong payload: ${this.name} expected`, payload);
 
+        const errorFields: string[] = [];
         const entries: [string, any][] = [];
         const validations = new Map<string, IReadableTypeError>();
         for (const [field, type] of Object.entries(this.#fields)) {
@@ -49,6 +50,8 @@ export class Fields<TValue extends Record<string, any>> extends TypeAbstract<TVa
 
                 entries.push([field, await validationType.validate(payload[field])]);
             } catch (error) {
+                errorFields.push(field);
+
                 if (isInstanceOf(error, AssertionTypeError)) {
                     validations.set(field, error.toSafeJSON());
                     continue;
@@ -64,7 +67,7 @@ export class Fields<TValue extends Record<string, any>> extends TypeAbstract<TVa
 
         if (validations.size > 0) {
             throw new AssertionObjectError(
-                "Assertion failed",
+                `Assertion failed: ${errorFields.join(", ")}`,
                 this,
                 payload,
                 entriesReverse([...validations.entries()]),

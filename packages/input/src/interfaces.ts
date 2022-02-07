@@ -1,4 +1,4 @@
-import {Fields, List, Union} from "./Type";
+import {Fields, List, Union, RecordType} from "./Type";
 import {TypeAbstract} from "./TypeAbstract";
 
 export type FieldFn<T> = () => T;
@@ -10,7 +10,7 @@ export type FieldsSchema<T> = {
         : T[K] extends Date
             ? FieldType<TypeAbstract<T[K]>>
             : T[K] extends Record<any, any>
-                ? FieldType<Fields<T[K]> | Union<T[K]>>
+                ? FieldType<Fields<T[K]> | Union<T[K]> | typeof RecordType>
                 : FieldType<TypeAbstract<T[K]>>;
 };
 

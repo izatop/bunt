@@ -19,7 +19,7 @@ Object {
             },
           },
           "index": 1,
-          "message": "Assertion failed",
+          "message": "Assertion failed: children, links",
           "payload": Object {
             "age": 12,
             "children": 1,
@@ -41,7 +41,7 @@ Object {
             },
           },
           "index": 2,
-          "message": "Assertion failed",
+          "message": "Assertion failed: name, links",
           "payload": Object {
             "age": 3,
           },
@@ -81,7 +81,7 @@ Object {
           "type": "Int",
         },
       },
-      "message": "Assertion failed",
+      "message": "Assertion failed: age",
       "payload": Object {
         "links": Array [
           "a",
@@ -91,7 +91,7 @@ Object {
       "type": "Human",
     },
   },
-  "message": "Assertion failed",
+  "message": "Assertion failed: name, children, parent",
   "payload": Object {
     "age": 32,
     "children": Array [

@@ -133,10 +133,15 @@ describe("Test Input", () => {
     });
 
     test("RecordType", async () => {
-        const plainObject = {foo: 1, bar: 2};
-        await expect(validate(RecordType, plainObject))
+        const dataset = {id: Math.random(), data: {foo: 1, bar: 2}};
+        const schema = new Fields<{id: number; data: Record<string, any>}>({
+            id: Float,
+            data: RecordType,
+        });
+
+        await expect(validate(schema, dataset))
             .resolves
-            .toEqual(plainObject);
+            .toEqual(dataset);
 
         await expect(validate(RecordType, null))
             .rejects

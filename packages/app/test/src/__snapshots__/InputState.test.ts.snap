@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Route Fails 1`] = `[Error: Assertion failed]`;
+exports[`Route Fails 1`] = `[Error: Assertion failed: payload]`;
 
 exports[`Route Success 1`] = `
 Object {
