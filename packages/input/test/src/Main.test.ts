@@ -16,8 +16,8 @@ import {
     Union,
     validate,
     Varchar,
+    RecordType,
 } from "../../src";
-import {RecordType} from "../../src/Type/RecordType";
 import {ITestDescription, ITestHobby, ITestType} from "./interfaces";
 import {TestEnum, TestEnumType} from "./Type/TestEnum";
 
