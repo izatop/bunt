@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.23.0](https://github.com/izatop/bunt/compare/v0.22.1...v0.23.0) (2022-02-10)
+
+
+### Features
+
+* **web:** add cookies and request handler ([5048096](https://github.com/izatop/bunt/commit/5048096ec56800e8d3a2dd1a973a12c1a368b9d2))
+
+
+
+
+
 ## [0.22.1](https://github.com/izatop/bunt/compare/v0.22.0...v0.22.1) (2022-02-07)
 
 **Note:** Version bump only for package @bunt/web
