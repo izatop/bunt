@@ -1,3 +1,4 @@
+export * from "./Cookie";
 export * from "./ResponseAbstract";
 export * from "./HTMLResponse";
 export * from "./JSONResponse";

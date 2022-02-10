@@ -1,11 +1,15 @@
 import {Application, IHeaders, RequestAbstract, RequestValidatorAbstract} from "@bunt/app";
+import {StateType} from "@bunt/unit";
 import {isString, toArray} from "@bunt/util";
 import {IncomingMessage} from "http";
 import {URL} from "url";
+import {Cookies} from "./Cookies";
 import {Headers} from "./Headers";
 import {IRequestMessageOptions} from "./interfaces";
+import {RequestProxy} from "./RequestProxy";
 
 export class RequestMessage extends RequestAbstract {
+    public readonly cookies: Cookies;
     public readonly headers: IHeaders;
     public readonly route: string;
 
@@ -29,9 +33,23 @@ export class RequestMessage extends RequestAbstract {
 
         this.route = this.getRoute();
         this.headers = new Headers(headers);
+        this.cookies = new Cookies(this.headers);
+
         if (this.#options.validators) {
             this.#validators = toArray(this.#options.validators);
         }
+    }
+
+    public get host(): string {
+        return this.headers.get("host", "");
+    }
+
+    public get userAgent(): string {
+        return this.headers.get("user-agent", "");
+    }
+
+    public get remoteAddress(): string {
+        return this.headers.get("x-real-ip", this.#message.socket.remoteAddress);
     }
 
     public get origin(): string {
@@ -40,6 +58,7 @@ export class RequestMessage extends RequestAbstract {
 
     public validate(app: Application<any>): boolean {
         this.#validators.forEach((validator) => validator.validate(app, this));
+
         return true;
     }
 
@@ -53,6 +72,10 @@ export class RequestMessage extends RequestAbstract {
 
     public getRequestMethod(): string {
         return this.#method;
+    }
+
+    public linkState(state: StateType) {
+        RequestProxy.linkState(state, new RequestProxy(this));
     }
 
     protected getRoute(): string {

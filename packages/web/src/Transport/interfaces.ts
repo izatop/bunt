@@ -2,6 +2,7 @@ import {RequestValidatorAbstract} from "@bunt/app";
 import {IncomingMessage} from "http";
 import {Socket} from "net";
 import {Responder} from "./Responder";
+import {Cookie} from "./Response/Cookie";
 
 export type ServerHeadersResolver = (request: Responder) => {[key: string]: string};
 
@@ -24,6 +25,7 @@ export interface IRequestSendOptions {
     code: number;
     status?: string;
     headers?: {[key: string]: string};
+    cookies?: Cookie[];
 }
 
 export interface IProtocolAcceptor {

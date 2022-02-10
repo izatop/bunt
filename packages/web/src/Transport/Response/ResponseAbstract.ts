@@ -1,6 +1,7 @@
 import {isFunction, isInstanceOf, isNumber, Promisify} from "@bunt/util";
 import * as HTTP from "http-status";
 import {Headers} from "../Headers";
+import {Cookie, CookieOptions} from "./Cookie";
 
 export interface IResponseOptions {
     code?: number;
@@ -13,6 +14,7 @@ export interface IResponseAnswer {
     status?: string;
     body: string | Buffer;
     headers: {[key: string]: string};
+    cookies: Cookie[];
 }
 
 export abstract class ResponseAbstract<T> {
@@ -20,6 +22,8 @@ export abstract class ResponseAbstract<T> {
     public readonly status?: string;
     public readonly type: string = "text/plain";
     public readonly encoding: string = "utf-8";
+    public readonly cookies: Cookie[] = [];
+
     readonly #data: Promisify<T>;
     readonly #headers: {[key: string]: string};
 
@@ -43,6 +47,10 @@ export abstract class ResponseAbstract<T> {
         }
     }
 
+    public setCookie(name: string, value: string, options: CookieOptions) {
+        this.cookies.push(new Cookie(name, value, options));
+    }
+
     public getHeaders(): Record<any, string> {
         return {
             ...this.#headers,
@@ -51,13 +59,14 @@ export abstract class ResponseAbstract<T> {
     }
 
     public async getResponse(): Promise<IResponseAnswer> {
-        const {status, code} = this;
+        const {status, code, cookies} = this;
         const headers = this.getHeaders();
 
         return {
             code,
             status,
             headers,
+            cookies,
             body: this.stringify(await this.#data),
         };
     }

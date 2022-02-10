@@ -56,6 +56,8 @@ export interface IRequest {
     transform<T>(transformer: RequestTransformType<T>): Promise<T>;
 
     validate(app: Application<any>): boolean;
+
+    readonly linkState?: <S extends Record<string, unknown>>(state: S) => Promisify<void>;
 }
 
 export type HeaderAssertValue = |

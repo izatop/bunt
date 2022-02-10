@@ -96,8 +96,9 @@ export class Responder extends RequestMessage {
             }
 
             if (response instanceof ResponseAbstract) {
-                const {code, status, body, headers} = await response.getResponse();
-                return this.send(body, {code, status, headers});
+                const {code, status, body, headers, cookies} = await response.getResponse();
+
+                return this.send(body, {code, status, headers, cookies});
             }
 
             return this.send(JSON.stringify(response));
@@ -110,7 +111,7 @@ export class Responder extends RequestMessage {
      */
     protected send(body: string | undefined | Buffer, options: IRequestSendOptions = {code: 200}): void {
         try {
-            const {code, status, headers = {}} = options;
+            const {code, status, headers = {}, cookies = []} = options;
             const headersMap = StrictKeyValueMap.fromObject(headers);
             if (!headersMap.has("content-type")) {
                 headersMap.set("content-type", "text/plain; charset=utf-8");
@@ -118,6 +119,10 @@ export class Responder extends RequestMessage {
 
             for (const [header, value] of headersMap.entries()) {
                 this.#response.setHeader(header, value);
+            }
+
+            for (const cookie of cookies) {
+                this.#response.setHeader("set-cookie", cookie.serialize());
             }
 
             this.applyServerOptions();

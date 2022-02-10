@@ -12,6 +12,7 @@ exports[`Response JSON 3`] = `
 Object {
   "body": "{\\"foo\\":\\"bar\\"}",
   "code": 200,
+  "cookies": Array [],
   "headers": Object {
     "content-type": "application/json; charset=utf-8",
   },
@@ -32,6 +33,7 @@ exports[`Response Main 3`] = `
 Object {
   "body": "",
   "code": 204,
+  "cookies": Array [],
   "headers": Object {
     "content-type": "text/plain; charset=utf-8",
     "foo": "123",
@@ -44,6 +46,7 @@ exports[`Response Redirect 1`] = `
 Object {
   "body": "",
   "code": 301,
+  "cookies": Array [],
   "headers": Object {
     "content-type": "text/plain; charset=utf-8",
     "location": "/redirect",
