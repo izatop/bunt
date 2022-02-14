@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.23.1](https://github.com/izatop/bunt/compare/v0.23.0...v0.23.1) (2022-02-14)
+
+
+### Bug Fixes
+
+* cors ([f9ba21f](https://github.com/izatop/bunt/commit/f9ba21f521664f1f7e5b921287bd24b9079584aa))
+
+
+
+
+
 # [0.23.0](https://github.com/izatop/bunt/compare/v0.22.1...v0.23.0) (2022-02-10)
 
 
