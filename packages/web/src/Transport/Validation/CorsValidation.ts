@@ -45,6 +45,10 @@ export class CorsValidation extends RequestValidatorAbstract<ICorsOptions> {
             ["access-control-allow-origin", this.getAccessControlOrigin(request)],
         ];
 
+        if (this.options.credentials) {
+            setHeaders.push(["access-control-allow-credentials", "true"]);
+        }
+
         const vary = this.getVary();
         if (vary) {
             setHeaders.push(["Vary", vary]);
