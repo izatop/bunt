@@ -1,6 +1,6 @@
 import {Application, IRoute, IRouteMatcher, RegexpMatcher, RequestValidatorAbstract, RouteNotFound} from "@bunt/app";
 import {ActionAny} from "@bunt/unit";
-import {assert, isDefined, isFunction, isString} from "@bunt/util";
+import {assert, isFunction, isString} from "@bunt/util";
 import {Headers} from "../Headers";
 import {ICorsOptions} from "../interfaces";
 import {Responder} from "../Responder";
@@ -71,8 +71,8 @@ export class CorsValidation extends RequestValidatorAbstract<ICorsOptions> {
             headers.push(["Vary", vary]);
         }
 
-        if (isDefined(this.options.credentials)) {
-            headers.push(["access-control-allow-credentials", this.options.credentials ? "true" : "false"]);
+        if (this.options.credentials) {
+            headers.push(["access-control-allow-credentials", "true"]);
         }
 
         return headers;
