@@ -1,22 +1,10 @@
-import {assert} from "@bunt/util";
+import {BucketPolicyAbstract} from "./BucketPolicyAbstract";
 
 export enum MinIOBucketPolicyEnum {
     READONLY = "public-readonly",
 }
 
-export class MinIOBucketPolicy {
-    readonly #policies = new Map<MinIOBucketPolicyEnum,(bucket: string) => string>();
-
-    public constructor() {
-        this.#policies.set(MinIOBucketPolicyEnum.READONLY, this.publicReadOnlyPolicy);
-    }
-
-    public getPolicy(bucket: string, maybe: string): string {
-        const policy = this.#policies.get(maybe as MinIOBucketPolicyEnum);
-        assert(policy, `Unknown bucket policy ${maybe}`);
-        return policy(bucket);
-    }
-
+export class MinIOBucketPolicy extends BucketPolicyAbstract {
     public publicReadOnlyPolicy(bucket: string): string {
         return JSON.stringify({
             "Version": "2012-10-17",
