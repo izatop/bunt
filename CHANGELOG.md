@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.23.4](https://github.com/izatop/bunt/compare/v0.23.3...v0.23.4) (2022-03-11)
+
+
+### Bug Fixes
+
+* bucket policy ([a65064f](https://github.com/izatop/bunt/commit/a65064f21f5b228040ff27dd20bf26e65b9198d4))
+
+
+
+
+
 ## [0.23.3](https://github.com/izatop/bunt/compare/v0.23.2...v0.23.3) (2022-03-11)
 
 
