@@ -1,11 +1,15 @@
 import {BucketPolicyAbstract} from "./BucketPolicyAbstract";
 
-export enum MinIOBucketPolicyEnum {
-    READONLY = "public-readonly",
-}
-
 export class MinIOBucketPolicy extends BucketPolicyAbstract {
-    public publicReadOnlyPolicy(bucket: string): string {
+    public static PUBLIC_READONLY = "public-readonly";
+
+    constructor() {
+        super();
+
+        this.policies.set(MinIOBucketPolicy.PUBLIC_READONLY, this.getPublicReadOnlyPolicy);
+    }
+
+    public getPublicReadOnlyPolicy(bucket: string): string {
         return JSON.stringify({
             "Version": "2012-10-17",
             "Statement": [
