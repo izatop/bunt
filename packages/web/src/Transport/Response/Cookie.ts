@@ -71,16 +71,16 @@ export class Cookie {
             string.push(`Max-Age=${maxAge}`);
         }
 
+        if (httpOnly) {
+            string.push("HttpOnly");
+        }
+
         if (sameSite) {
             string.push(`SameSite=${sameSite}`);
         }
 
         if (secure) {
             string.push("Secure");
-        }
-
-        if (httpOnly) {
-            string.push("HttpOnly");
         }
 
         return string.join("; ");
