@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.23.5](https://github.com/izatop/bunt/compare/v0.23.4...v0.23.5) (2022-03-27)
+
+**Note:** Version bump only for package @bunt/ws
+
+
+
+
+
 ## [0.23.3](https://github.com/izatop/bunt/compare/v0.23.2...v0.23.3) (2022-03-11)
 
 
