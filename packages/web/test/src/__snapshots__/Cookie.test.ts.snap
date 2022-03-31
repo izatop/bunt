@@ -1,3 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Cookies Serialize 1`] = `"name=value; Domain=example.com; Path=/path; Expires=Thu, 01 Jan 1970 00:00:00 GMT; Max-Age=123; SameSite=Lax; HttpOnly"`;
+exports[`Cookies Serialize 1`] = `"name=value; Domain=example.com; Path=/path; Expires=Thu, 01 Jan 1970 00:00:00 GMT; Max-Age=123; HttpOnly; SameSite=Lax"`;
