@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.23.6](https://github.com/izatop/bunt/compare/v0.23.5...v0.23.6) (2022-03-31)
+
+
+### Bug Fixes
+
+* update deps + fix cookie args order ([c1c798a](https://github.com/izatop/bunt/commit/c1c798a4e137b7674da94b81771381c39525f8fc))
+
+
+
+
+
 ## [0.23.5](https://github.com/izatop/bunt/compare/v0.23.4...v0.23.5) (2022-03-27)
 
 
