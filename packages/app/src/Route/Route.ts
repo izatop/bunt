@@ -1,15 +1,15 @@
-import {ActionAny} from "@bunt/unit";
+import {ActionAny, ActionFactory} from "@bunt/unit";
 import {Ctor, ILogable, isFunction, isString} from "@bunt/util";
 import {IRoute, IRouteMatcher, RouteFactory, RouteMatcherFactory, RouteRuleArg, RouteRuleVariants} from "./interfaces";
 import {RouteRule} from "./RouteRule";
 
 export class Route<A extends ActionAny> implements IRoute<A>, ILogable<{route: string}> {
     public readonly route: string;
-    public readonly action: Ctor<A>;
+    public readonly action: ActionFactory<any>;
     public readonly payload?: RouteRule<A>;
     readonly #matcher: IRouteMatcher;
 
-    constructor(matcher: RouteMatcherFactory, action: Ctor<A>, rule: RouteRuleArg<A>) {
+    constructor(matcher: RouteMatcherFactory, action: ActionFactory<any>, rule: RouteRuleArg<A>) {
         const {route, payload} = this.getRuleArgs(rule);
         this.route = route;
         this.action = action;

@@ -70,7 +70,6 @@ export class WebSocketServer<C extends Context> extends Disposer implements IRun
 
         assert(!this.#handles.has(route.route), "Route must be unique");
         this.#handles.set(route.route, route);
-        this.#unit.add(action);
     }
 
     public getHeartbeat(): Heartbeat {
@@ -197,8 +196,8 @@ export class WebSocketServer<C extends Context> extends Disposer implements IRun
             }
 
             const ws = this.getWebSocketServer(route);
-            ws.handleUpgrade(req, socket, head, (connection) => {
-                const {action} = route;
+            ws.handleUpgrade(req, socket, head, async (connection) => {
+                const action = await Unit.getAction(route.action);
                 if (!this.isHandleProto(action)) {
                     connection.close(WebSocketCloseReason.INTERNAL_ERROR);
                     return;

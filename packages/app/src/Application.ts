@@ -8,10 +8,11 @@ export class Application<C extends Context> {
     protected logger!: Logger;
 
     readonly #unit: Unit<C>;
-    readonly #routes: IRoute<ActionAny<C>>[] = [];
+    readonly #routes = new Set<IRoute<ActionAny<C>>>();
+    readonly #index: IRoute<ActionAny<C>>[] = [];
 
-    constructor(u: Unit<C>, routes: IRoute<ActionAny<C>>[] = []) {
-        this.#unit = u;
+    constructor(unit: Unit<C>, routes: IRoute<ActionAny<C>>[] = []) {
+        this.#unit = unit;
 
         if (routes.length > 0) {
             routes.forEach((route) => this.add(route));
@@ -23,7 +24,7 @@ export class Application<C extends Context> {
     }
 
     public get size(): number {
-        return this.#routes.length;
+        return this.#routes.size;
     }
 
     public static async factory<C extends Context>(
@@ -34,25 +35,25 @@ export class Application<C extends Context> {
 
     public add(route: IRoute<ActionAny<C>>): this {
         this.logger.debug("add", route);
-        assert(!this.#unit.has(route.action), "This route was already added");
-        this.#unit.add(route.action);
-        this.#routes.push(route);
+        assert(!this.#routes.has(route), `Duplicate route: ${route.route}`);
+        this.#routes.add(route);
+        this.#index.push(route);
+
         return this;
     }
 
     public remove(route: IRoute<ActionAny<C>>): this {
-        if (this.#unit.has(route.action)) {
-            this.logger.debug("remove", route);
-            this.#unit.remove(route.action);
-            const index = this.#routes.findIndex((item) => item === route);
-            this.#routes.splice(index, index + 1);
-        }
+        this.logger.debug("remove", route);
+        this.#routes.delete(route);
+
+        this.#index.length = 0;
+        this.#index.push(...this.#routes.values());
 
         return this;
     }
 
     public async run(request: IRequest): Promise<ActionResponse> {
-        const route = this.#routes.find((route) => route.test(request.route));
+        const route = this.#index.find((route) => route.test(request.route));
         assert(route, () => new RouteNotFound(request.route));
 
         this.logger.debug("match", route);
@@ -77,6 +78,6 @@ export class Application<C extends Context> {
     }
 
     public getRoutes(): IRoute<ActionAny<C>>[] {
-        return this.#routes;
+        return this.#index;
     }
 }

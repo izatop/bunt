@@ -1,4 +1,4 @@
-import {ActionAny, ActionContext, ActionCtor, ActionState, ApplyContext} from "@bunt/unit";
+import {ActionAny, ActionContext, ActionFactory, ActionState, ApplyContext} from "@bunt/unit";
 import {Ctor} from "@bunt/util";
 import {IRequest} from "../interfaces";
 import {Payload} from "../Payload";
@@ -8,7 +8,7 @@ import {RouteRule} from "./RouteRule";
 export interface IRoute<A extends ActionAny> {
     readonly route: string;
 
-    readonly action: ActionCtor<any>;
+    readonly action: ActionFactory<any>;
 
     readonly payload?: Payload<A>;
 

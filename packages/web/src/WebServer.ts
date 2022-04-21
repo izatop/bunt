@@ -45,7 +45,15 @@ export class WebServer<C extends Context> extends Application<C> implements IDis
         context: ContextArg<C>,
         routes: IRoute<ActionAny<C>>[] = [],
         options?: IResponderOptions): Promise<WebServer<C>> {
-        return new this(await unit(context), routes, options);
+        return new this(await unit(context), await this.preload(routes), options);
+    }
+
+    private static preload<C extends Context>(routes: IRoute<ActionAny<C>>[]) {
+        return Promise.all(
+            routes.map(async (route) => (
+                Object.assign(route, {action: await Unit.getAction(route.action)})
+            )),
+        );
     }
 
     public getHeartbeat(): Heartbeat {

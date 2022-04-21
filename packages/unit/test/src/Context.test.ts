@@ -19,7 +19,7 @@ test("Context", async () => {
     expect(context.randomBytes).not.toStrictEqual(context.randomBytes);
     expect(context.randomBytes).toBeInstanceOf(Buffer);
 
-    const unit = await Unit.factory(() => mainContext, [AsyncServiceTestAction]);
+    const unit = await Unit.factory(() => mainContext);
     const res = await unit.run(AsyncServiceTestAction, state);
     expect(memoryDb.get(state.key)).toBe(res);
 });

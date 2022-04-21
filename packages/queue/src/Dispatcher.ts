@@ -40,10 +40,6 @@ export class Dispatcher<C extends Context> extends Disposer implements IRunnable
     }
 
     public subscribe<M extends Incoming, H extends Handler<C, M>>(type: MessageCtor<M>, action: Ctor<H>): this {
-        if (!this.#unit.has(action)) {
-            this.#unit.add(action);
-        }
-
         const subscription = this.#queue.on<any>(type, ({payload}) => this.#unit.run(action, {payload}));
         this.onDispose(subscription);
 

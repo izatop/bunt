@@ -36,7 +36,7 @@ export class RedisQueueReader<M extends Message, MC extends MessageCtor<M>>
         return new ReadOperation(message);
     }
 
-    protected wrap(result: Promise<string | undefined>): Promise<string | undefined> {
-        return result.catch(() => undefined);
+    protected wrap(result: Promise<string | undefined | null>): Promise<string | undefined> {
+        return result.then((value) => value ?? undefined).catch(() => undefined);
     }
 }
