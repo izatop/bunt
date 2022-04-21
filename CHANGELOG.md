@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.24.0](https://github.com/izatop/bunt/compare/v0.23.6...v0.24.0) (2022-04-21)
+
+
+### Features
+
+* unit now supports async import for actions ([77c7751](https://github.com/izatop/bunt/commit/77c775133f9826103ea1fe3921e5f23bae40a6c3))
+
+
+
+
+
 ## [0.23.6](https://github.com/izatop/bunt/compare/v0.23.5...v0.23.6) (2022-03-31)
 
 
