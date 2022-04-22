@@ -217,7 +217,8 @@ export class WebSocketServer<C extends Context> extends Disposer implements IRun
                 ws.emit("connection", connection, req);
                 ShadowState.set(state, connection);
 
-                this.handle(connection, () => this.#unit.run(route.action, state));
+                // @todo
+                this.handle(connection, () => this.#unit.run(route.action as any, state));
             });
         } catch (error) {
             this.logger.error("Unexpected error", error);

@@ -1,4 +1,4 @@
-import {command} from "../route";
+import {command} from "@bunt/cli";
 import {BaseCommand} from "./BaseCommand";
 
 class UpdateLintCommand extends BaseCommand {

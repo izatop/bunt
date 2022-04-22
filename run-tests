@@ -1,6 +1,6 @@
 #!/bin/sh
 
-docker ps --filter name=redis-test -q || \
+test "$(docker ps --filter name=redis-test -q)" = "" && \
     docker run --rm --name redis-test -p 6379:6379 -d redis:alpine || exit 1
 
 yarn jest $@

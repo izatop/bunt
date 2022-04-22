@@ -5,3 +5,4 @@ export * from "./Context";
 export * from "./Service";
 export * from "./Runtime";
 export * from "./Dispose";
+export * from "./fn";

@@ -11,13 +11,14 @@ export class Commander<C extends CommandContext> {
     }
 
     public static async execute<C extends CommandContext>(
-        context: ContextArg<C>, routes: IRoute<Action<C, any, IRunnable>>[] = []): Promise<IRunnable | undefined> {
+        context: ContextArg<C>,
+        routes: IRoute<Action<C, any, IRunnable | void>>[] = []): Promise<IRunnable | void> {
         const command = new this<C>(await Application.factory<C>(context, routes));
 
         return command.handle();
     }
 
-    public async handle(): Promise<IRunnable | undefined> {
+    public async handle(): Promise<IRunnable | void> {
         const {context} = this.#application;
         const request = new RequestCommand(context.program.args);
 

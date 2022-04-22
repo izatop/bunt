@@ -1,10 +1,8 @@
-import {unit, Unit} from "../../src";
+import {asyncify, unit, Unit} from "../../src";
 import {BaseTestAction} from "./actions/BaseTestAction";
 import {ProfileTestAction} from "./actions/ProfileTestAction";
 import {TestExceptionAction} from "./actions/TestExceptionAction";
 import {BaseContext} from "./context/BaseContext";
-
-const ActionImport = () => import("./actions/BaseTestAction");
 
 test("Unit", async () => {
     const app = await unit(new BaseContext());
@@ -18,7 +16,8 @@ test("Unit", async () => {
     const helloWorldRun: string = await app.run(BaseTestAction, {name});
     expect(helloWorldRun).toBe(`Hello, ${name}!`);
 
-    const asyncTest = await app.run(ActionImport, {name: "AsyncTest"});
+    const AsyncBaseTestAction = asyncify(() => import("./actions/BaseTestAction"));
+    const asyncTest = await app.run(AsyncBaseTestAction, {name: "AsyncTest"});
     expect(asyncTest).toBe("Hello, AsyncTest!");
 
     await app.run(ProfileTestAction, null);

@@ -1,8 +1,7 @@
 import {dispose, isDisposable, isRunnable} from "@bunt/unit";
 import {ok} from "assert";
-import {Commander} from "../../src";
+import {command, Commander} from "../../src";
 import {RunnableTestCommand} from "./app/Action/RunnableTestCommand";
-import {command} from "./app/command";
 import {BaseContext} from "./app/Context/BaseContext";
 
 test("Runnable Command", async () => {

@@ -74,7 +74,8 @@ export class Application<C extends Context> {
         Object.freeze(state);
         await request.linkState?.(state);
 
-        return this.#unit.run(route.action, state);
+        // @todo
+        return this.#unit.run(route.action as any, state);
     }
 
     public getRoutes(): IRoute<ActionAny<C>>[] {

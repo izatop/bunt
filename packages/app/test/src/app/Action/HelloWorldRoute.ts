@@ -1,7 +1,6 @@
 import {Bool, Fields, Text, ToNumber} from "@bunt/input";
 import {Action} from "@bunt/unit";
-import {Resolver, RouteRule} from "../../../../src";
-import {route} from "../../route";
+import {Resolver, route, RouteRule} from "../../../../src";
 import {BaseContext} from "../Context/BaseContext";
 
 interface IHelloWorldActionState {

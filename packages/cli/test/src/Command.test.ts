@@ -2,9 +2,8 @@ import {Resolver, RouteRule} from "@bunt/app";
 import {Fields, Nullable, Text} from "@bunt/input";
 import {dispose, Heartbeat, isDisposable, isRunnable} from "@bunt/unit";
 import {ok} from "assert";
-import {Commander} from "../../src";
+import {command, Commander} from "../../src";
 import {BaseTestCommand} from "./app/Action/BaseTestCommand";
-import {command} from "./app/command";
 import {BaseContext} from "./app/Context/BaseContext";
 
 describe("Command", () => {

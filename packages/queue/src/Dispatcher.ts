@@ -1,4 +1,4 @@
-import {ActionCtor, Context, ContextArg, Disposer, Heartbeat, IRunnable, unit, Unit} from "@bunt/unit";
+import {ActionFactory, Context, ContextArg, Disposer, Heartbeat, IRunnable, unit, Unit} from "@bunt/unit";
 import {Ctor, Defer, logger, Logger} from "@bunt/util";
 import {Handler} from "./Handler";
 import {ITransport} from "./interfaces";
@@ -10,7 +10,7 @@ export class Dispatcher<C extends Context> extends Disposer implements IRunnable
 
     readonly #unit: Unit<C>;
     readonly #queue: QueueAbstract<ITransport>;
-    readonly #route = new Map<MessageCtor<any>, ActionCtor<C>>();
+    readonly #route = new Map<MessageCtor<any>, ActionFactory<C>>();
 
     protected constructor(u: Unit<C>, queue: QueueAbstract<ITransport>) {
         super();

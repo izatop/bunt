@@ -2,13 +2,13 @@ import {assert, isFunction, isInstanceOf, logger, Logger} from "@bunt/util";
 import {ApplyContext, Context} from "./Context";
 import {Action} from "./Action";
 import {
+    ActionAny,
     ActionCtor,
-    ActionCtorImport,
     ActionFactory,
     ActionReturn,
     ActionState,
+    AsyncActionFactory,
     ContextArg,
-    StateType,
 } from "./interfaces";
 
 export class Unit<C extends Context> {
@@ -44,10 +44,10 @@ export class Unit<C extends Context> {
         return Context.apply(syncContext);
     }
 
-    public async run<A extends Action<C, S, R>, S extends StateType, R = unknown>(
-        factory: ActionFactory<C, S, R, A>,
-        state: ActionState<A>): Promise<ActionReturn<Action<C, S, R>>> {
-        const ctor = await Unit.getAction(factory) as ActionCtor<C, S, R, A>;
+    public async run<A extends ActionAny<C>>(
+        factory: ActionFactory<A>,
+        state: ActionState<A>): Promise<ActionReturn<A>> {
+        const ctor = await Unit.getAction(factory);
         assert(Action.isPrototypeOf(ctor), "The 'ctor' hasn't prototype of the Action class");
 
         const finish = this.logger.perf("run", {action: ctor.name});
@@ -58,7 +58,7 @@ export class Unit<C extends Context> {
 
     public static async getAction(action: ActionFactory<any>): Promise<ActionCtor<any>> {
         if (this.isActionFactory(action)) {
-            const {default: ctor} = await action();
+            const {default: ctor} = await action.factory();
 
             return ctor;
         }
@@ -66,7 +66,7 @@ export class Unit<C extends Context> {
         return action;
     }
 
-    private static isActionFactory(action: ActionFactory<any>): action is ActionCtorImport<any> {
+    private static isActionFactory(action: ActionFactory<any>): action is AsyncActionFactory<any> {
         return !Action.isPrototypeOf(action);
     }
 }

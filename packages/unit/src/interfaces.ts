@@ -1,4 +1,4 @@
-import {Promisify} from "@bunt/util";
+import {Fn, Promisify} from "@bunt/util";
 import {Action} from "./Action";
 import {ApplyContext, Context} from "./Context";
 
@@ -6,25 +6,14 @@ export type ActionAny<C extends Context = Context, S extends StateType | null = 
 
 export type ContextArg<C extends Context> = (() => Promisify<C>) | Promisify<C>;
 
-export type ActionCtor<C extends Context,
-    S extends StateType | null = any,
-    R = unknown,
-    A extends Action<C, S, R> = Action<C, S, R>> = {
-        new(context: ApplyContext<C>, state: S): A;
+export type ActionCtor<A extends ActionAny> = {
+    new(context: ApplyContext<ActionContext<A>>, state: ActionState<A>): A;
+    prototype: A;
+};
 
-        prototype: A;
-    };
-
-export type ActionCtorImport<C extends Context,
-    S extends StateType | null = any,
-    R = unknown,
-    A extends Action<C, S, R> = Action<C, S, R>> = () => Promise<{default: ActionCtor<C, S, R, A>}>;
-
-export type ActionFactory<C extends Context,
-    S extends StateType | null = any,
-    R = unknown,
-    A extends Action<C, S, R> = Action<C, S, R>> = ActionCtor<C, S, R, A> | ActionCtorImport<C, S, R, A>;
-
+export type ActionImport<A extends ActionAny> = Fn<[], Promise<{default: ActionCtor<A>}>>;
+export type AsyncActionFactory<A extends ActionAny> = {factory: ActionImport<A>};
+export type ActionFactory<A extends ActionAny> = ActionCtor<A> | AsyncActionFactory<A>;
 
 export type ActionContext<A> = A extends ActionAny<infer T> ? T : never;
 export type ActionState<A> = A extends ActionAny<any, infer T> ? T : never;
@@ -41,3 +30,4 @@ export type StateType = Record<string, any> | null;
 export interface IShadowState<T> {
     getShadowState(): T;
 }
+

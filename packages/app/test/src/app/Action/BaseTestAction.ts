@@ -6,3 +6,5 @@ export class BaseTestAction extends Action<BaseContext, {name: string}> {
         return `Hello, ${this.state.name}!`;
     }
 }
+
+export default BaseTestAction;
