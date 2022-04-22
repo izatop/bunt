@@ -1,6 +1,6 @@
 {
     "name": "@bunt/web",
-    "version": "0.24.0",
+    "version": "0.24.1",
     "keywords": [
         "typescript"
     ],
@@ -26,7 +26,7 @@
         "access": "public"
     },
     "dependencies": {
-        "@bunt/app": "^0.24.0",
+        "@bunt/app": "^0.24.1",
         "@bunt/util": "^0.24.0",
         "http-status": "^1.5.1",
         "path-to-regexp": "^6.2.0"
