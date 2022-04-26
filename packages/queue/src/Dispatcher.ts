@@ -10,7 +10,7 @@ export class Dispatcher<C extends Context> extends Disposer implements IRunnable
 
     readonly #unit: Unit<C>;
     readonly #queue: QueueAbstract<ITransport>;
-    readonly #route = new Map<MessageCtor<any>, ActionFactory<C>>();
+    readonly #route = new Map<MessageCtor<any>, ActionFactory<any>>();
 
     protected constructor(u: Unit<C>, queue: QueueAbstract<ITransport>) {
         super();
