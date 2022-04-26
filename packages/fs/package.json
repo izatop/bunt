@@ -29,7 +29,7 @@
         "@bunt/unit": "^0.24.1",
         "@bunt/util": "^0.24.0",
         "@types/minio": "^7.0.13",
-        "minio": "^7.0.27"
+        "minio": "^7.0.28"
     },
     "license": "MIT"
 }
