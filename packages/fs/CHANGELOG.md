@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.24.2](https://github.com/izatop/bunt/compare/v0.24.1...v0.24.2) (2022-04-26)
+
+
+### Bug Fixes
+
+* udpate deps ([721d7f1](https://github.com/izatop/bunt/commit/721d7f1d27f779e1cb6c84f9b436127eda3c9b08))
+
+
+
+
+
 ## [0.24.1](https://github.com/izatop/bunt/compare/v0.24.0...v0.24.1) (2022-04-22)
 
 **Note:** Version bump only for package @bunt/fs

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.24.2](https://github.com/izatop/bunt/compare/v0.24.1...v0.24.2) (2022-04-26)
+
+
+### Bug Fixes
+
+* types ([fa27e81](https://github.com/izatop/bunt/commit/fa27e810a3e2c60adcd4a294ebcb7fdfd5f8870f))
+
+
+
+
+
 ## [0.24.1](https://github.com/izatop/bunt/compare/v0.24.0...v0.24.1) (2022-04-22)
 
 

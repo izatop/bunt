@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.24.2](https://github.com/izatop/bunt/compare/v0.24.1...v0.24.2) (2022-04-26)
+
+
+### Bug Fixes
+
+* publish ([120ea63](https://github.com/izatop/bunt/commit/120ea63d9e2de24a743c4c823a086c58f0072d59))
+* types ([fa27e81](https://github.com/izatop/bunt/commit/fa27e810a3e2c60adcd4a294ebcb7fdfd5f8870f))
+* udpate deps ([721d7f1](https://github.com/izatop/bunt/commit/721d7f1d27f779e1cb6c84f9b436127eda3c9b08))
+
+
+
+
+
 ## [0.24.1](https://github.com/izatop/bunt/compare/v0.24.0...v0.24.1) (2022-04-22)
 
 
