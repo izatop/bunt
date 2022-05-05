@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.24.3](https://github.com/izatop/bunt/compare/v0.24.2...v0.24.3) (2022-05-05)
+
+
+### Bug Fixes
+
+* update deps, add EmailAddress ([f534a16](https://github.com/izatop/bunt/commit/f534a162880a1a21ae4eabd497a9ef24bf056666))
+
+
+
+
+
 # [0.24.0](https://github.com/izatop/bunt/compare/v0.23.6...v0.24.0) (2022-04-21)
 
 **Note:** Version bump only for package @bunt/input

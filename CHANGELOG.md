@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.24.3](https://github.com/izatop/bunt/compare/v0.24.2...v0.24.3) (2022-05-05)
+
+
+### Bug Fixes
+
+* jest ([b9b435e](https://github.com/izatop/bunt/commit/b9b435e4ad383f77f6b5167015ca3154d0766fb7))
+* update deps, add EmailAddress ([f534a16](https://github.com/izatop/bunt/commit/f534a162880a1a21ae4eabd497a9ef24bf056666))
+
+
+
+
+
 ## [0.24.2](https://github.com/izatop/bunt/compare/v0.24.1...v0.24.2) (2022-04-26)
 
 
