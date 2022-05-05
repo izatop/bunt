@@ -1,7 +1,6 @@
 import {dispose} from "@bunt/unit";
 import {assert, throttle, wait, watch} from "@bunt/util";
-import {Queue, RedisTransport} from "../../src";
-import {createConnection} from "../../src";
+import {Queue, RedisTransport, createConnection} from "../../src";
 import {BarMessage} from "./Message/BarMessage";
 import {TestTransaction} from "./Message/TestTransaction";
 

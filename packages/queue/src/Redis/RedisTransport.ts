@@ -75,7 +75,7 @@ export class RedisTransport extends Disposer implements ITransport, IPubSubTrans
         await super.dispose();
     }
 
-    private watch(connection: Redis) {
+    private watch(connection: Redis): Redis {
         this.logger.debug("connection(watch)");
 
         const connectionState = new Defer<void>();

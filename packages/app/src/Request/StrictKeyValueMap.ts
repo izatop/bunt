@@ -1,6 +1,6 @@
 import {KeyValueMap} from "./KeyValueMap";
 
-const toStrictKey = (key: string) => key.toLowerCase();
+const toStrictKey = (key: string): string => key.toLowerCase();
 
 export class StrictKeyValueMap extends KeyValueMap {
     constructor(values: [string, string][]) {

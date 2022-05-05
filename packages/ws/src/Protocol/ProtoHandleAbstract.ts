@@ -23,6 +23,7 @@ export abstract class ProtoHandleAbstract<C extends Context, S extends StateType
     public getShadowState(): ws {
         const shadowState = ShadowState.get<ws>(this.state);
         assert(shadowState, "Shadow state should be defined");
+        
         return shadowState;
     }
 }

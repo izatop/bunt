@@ -1,8 +1,8 @@
+import {IncomingMessage} from "http";
+import {URL} from "url";
 import {Application, IHeaders, RequestAbstract, RequestValidatorAbstract} from "@bunt/app";
 import {StateType} from "@bunt/unit";
 import {isString, toArray} from "@bunt/util";
-import {IncomingMessage} from "http";
-import {URL} from "url";
 import {Cookies} from "./Cookies";
 import {Headers} from "./Headers";
 import {IRequestMessageOptions} from "./interfaces";
@@ -74,13 +74,14 @@ export class RequestMessage extends RequestAbstract {
         return this.#method;
     }
 
-    public linkState(state: StateType) {
+    public linkState(state: StateType): void {
         RequestProxy.linkState(state, new RequestProxy(this));
     }
 
     protected getRoute(): string {
         const {pathname} = new URL(this.#message.url || "/", "http://localhost");
         const {method = "GET"} = this.#message;
+
         return `${method.toUpperCase()} ${pathname}`;
     }
 }

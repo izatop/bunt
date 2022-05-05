@@ -55,6 +55,7 @@ export abstract class QueueListAbstract<M extends Message> extends Disposer impl
 
     public watch(fn: IQueueListWatcher<M>): () => void {
         this.#watchers.push(fn);
+
         return () => {
             this.#watchers.splice(this.#watchers.indexOf(fn), 1);
         };
@@ -83,12 +84,12 @@ export abstract class QueueListAbstract<M extends Message> extends Disposer impl
         }
     }
 
-    private async fire(operation: Promise<OperationReleaseState<M>>) {
+    private async fire(operation: Promise<OperationReleaseState<M>>): Promise<void> {
         const value = await operation;
         this.#watchers.forEach((fn) => fn(value));
     }
 
-    private reset() {
+    private reset(): void {
         this.#watchers.splice(0, this.#watchers.length);
     }
 }

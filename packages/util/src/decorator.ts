@@ -13,7 +13,7 @@ export function memoize(target: DecoratorTarget, key: string): PropertyDescripto
     const memoizeCache = new WeakMap();
     if (descriptor.value) {
         const fn = descriptor.value;
-        descriptor.value = function memoizeCacheFunction(this: any, ...args: any[]) {
+        descriptor.value = function memoizeCacheFunction(this: any, ...args: any[]): any {
             if (!memoizeCache.has(this)) {
                 memoizeCache.set(this, fn.call(this, args));
             }
@@ -24,7 +24,7 @@ export function memoize(target: DecoratorTarget, key: string): PropertyDescripto
 
     if (descriptor.get) {
         const fn = descriptor.get;
-        descriptor.get = function memoizeCacheFunction(this: any) {
+        descriptor.get = function memoizeCacheFunction(this: any): any {
             if (!memoizeCache.has(this)) {
                 memoizeCache.set(this, fn.call(this));
             }

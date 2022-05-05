@@ -2,6 +2,7 @@ export function resolveOrReject(resolve: (value: void | PromiseLike<void>) => vo
     return (error?: Error): void => {
         if (error) {
             reject(error);
+            
             return;
         }
 

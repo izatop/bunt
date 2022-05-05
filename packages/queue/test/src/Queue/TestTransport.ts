@@ -25,6 +25,7 @@ export class TestTransport implements ITransport {
         const listenNext = () => {
             const state = AsyncState.acquire();
             this.pending.push(state);
+            
             return state;
         };
 

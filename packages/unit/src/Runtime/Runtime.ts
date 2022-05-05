@@ -1,9 +1,9 @@
-import {Defer, isNull, isUndefined, LogFn, Logger, logger, SingleRef} from "@bunt/util";
-import {DisposableType} from ".";
+import {Defer, isNull, isUndefined, LogFn, Logger, logger, SingleRef, toError} from "@bunt/util";
 import {Disposer, dispose} from "../Dispose";
 import {Heartbeat} from "./Heartbeat";
 import {RuntimeTask} from "./interfaces";
 import {isDisposable, isRunnable, Signals} from "./internal";
+import {DisposableType} from ".";
 
 const ref = new SingleRef<Runtime>();
 const DEBUG = !!process.env.DEBUG;
@@ -37,7 +37,7 @@ export class Runtime extends Disposer {
             .kill(code, reason);
     }
 
-    public async kill(code = 0, reason?: unknown) {
+    public async kill(code = 0, reason?: unknown): Promise<void> {
         const fn: LogFn = code > 0 ? this.logger.error : this.logger.info;
         fn("Kill { code: %d, reason: %s }", code, reason);
 
@@ -49,7 +49,7 @@ export class Runtime extends Disposer {
         }
     }
 
-    public static onDispose(disposable: DisposableType) {
+    public static onDispose(disposable: DisposableType): Runtime {
         return ref
             .ensure()
             .onDispose(disposable);
@@ -126,8 +126,8 @@ export class Runtime extends Disposer {
         }
     }
 
-    private error(error: unknown) {
-        this.logger.alert("Unexpected error", error);
+    private error(error: unknown): void {
+        this.logger.alert(toError(error).message, error);
         this.#state.reject(error);
     }
 }

@@ -1,5 +1,6 @@
 import {StateType} from "@bunt/unit";
 import {assert} from "@bunt/util";
+import {Cookies} from "./Cookies";
 import {RequestMessage} from "./RequestMessage";
 
 const map = new WeakMap<any, RequestProxy>();
@@ -11,7 +12,7 @@ export class RequestProxy {
         this.#request = request;
     }
 
-    public static linkState(ref: StateType, proxy: RequestProxy) {
+    public static linkState(ref: StateType, proxy: RequestProxy): void {
         map.set(ref, proxy);
     }
 
@@ -22,23 +23,23 @@ export class RequestProxy {
         return proxy;
     }
 
-    public get cookies() {
+    public get cookies(): Cookies {
         return this.#request.cookies;
     }
 
-    public get host() {
+    public get host(): string {
         return this.#request.host;
     }
 
-    public get userAgent() {
+    public get userAgent(): string {
         return this.#request.userAgent;
     }
 
-    public get remoteAddress() {
+    public get remoteAddress(): string {
         return this.#request.remoteAddress;
     }
 
-    public get origin() {
+    public get origin(): string {
         return this.#request.origin;
     }
 }

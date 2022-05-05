@@ -40,6 +40,7 @@ export class TransformError {
     private getStatus(): {code: number; status?: string} {
         if (this.#error instanceof ServerError) {
             const {code, status} = this.#error;
+            
             return {code, status};
         }
 

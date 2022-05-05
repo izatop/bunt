@@ -1,3 +1,6 @@
+import {IncomingMessage} from "http";
+import {Socket} from "net";
+import {URL} from "url";
 import {IRoute, RegexpMatcher, Route, RouteNotFound, RouteRuleArg} from "@bunt/app";
 import {
     ActionAny,
@@ -14,9 +17,6 @@ import {
 } from "@bunt/unit";
 import {assert, Defer, isDefined, isString, Logger, logger, noop, resolveOrReject, toError} from "@bunt/util";
 import {RequestMessage, WebServer} from "@bunt/web";
-import {IncomingMessage} from "http";
-import {Socket} from "net";
-import {URL} from "url";
 import * as ws from "ws";
 import {WebSocketCloseReason} from "./const";
 import {HandleProtoType, ProtoHandleAbstract} from "./Protocol";
@@ -123,7 +123,8 @@ export class WebSocketServer<C extends Context> extends Disposer implements IRun
         const webSocketServer = new ws.Server({noServer: true});
         const live = new WeakSet<ws>();
         const queue: {connection: ws; expire: number}[] = [];
-        const getExpireTime = () => Date.now() + this.#limits.pingTimeout;
+        const getExpireTime = (): number => Date.now() + this.#limits.pingTimeout;
+
         webSocketServer.on("connection", (connection) => {
             live.add(connection);
             queue.unshift({connection, expire: getExpireTime()});
@@ -131,7 +132,7 @@ export class WebSocketServer<C extends Context> extends Disposer implements IRun
             connection.on("pong", () => live.add(connection));
         });
 
-        const test = () => {
+        const test = (): void => {
             const now = Date.now();
             const restore = [];
             const nextExpireTime = getExpireTime();
@@ -201,16 +202,19 @@ export class WebSocketServer<C extends Context> extends Disposer implements IRun
                 const action = await Unit.getAction(route.action);
                 if (!this.isHandleProto(action)) {
                     connection.close(WebSocketCloseReason.INTERNAL_ERROR);
+
                     return;
                 }
 
                 if (!action.isSupported(connection.protocol)) {
                     connection.close(WebSocketCloseReason.PROTOCOL_ERROR);
+
                     return;
                 }
 
                 if (ws.clients.size >= this.#limits.maxConnections) {
                     connection.close(WebSocketCloseReason.TRY_AGAIN_LATER);
+
                     return;
                 }
 

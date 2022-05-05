@@ -9,7 +9,7 @@ export class SubscriptionList {
         this.channel = channel;
     }
 
-    public get count() {
+    public get count(): number {
         return this.#listeners.size;
     }
 
@@ -25,13 +25,13 @@ export class SubscriptionList {
         return this;
     }
 
-    public emit(message: string) {
+    public emit(message: string): this {
         safeMap(this.#listeners.values(), (listener) => listener(message));
 
         return this;
     }
 
-    public dispose() {
+    public dispose(): void {
         this.#listeners.clear();
     }
 }

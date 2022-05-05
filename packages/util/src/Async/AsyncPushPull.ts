@@ -21,12 +21,14 @@ export class AsyncPushPull<T> {
         if (this.#pending?.settled) {
             // eslint-disable-next-line
             console.warn(`AsyncPushPull.push failed call in destroyed state`);
+
             return;
         }
 
         if (this.#pending) {
             this.#pending.resolve(value);
             this.#pending = null;
+
             return;
         }
 
@@ -49,7 +51,7 @@ export class AsyncPushPull<T> {
         return this.#pending = new Defer();
     }
 
-    public destroy() {
+    public destroy(): void {
         if (this.#pending) {
             this.#pending.resolve(undefined);
         }

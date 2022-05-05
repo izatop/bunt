@@ -40,6 +40,7 @@ export abstract class RequestAbstract implements IRequest, ILogable<{route: stri
      */
     public async to<T>(transform: IRequestTransform<T>): Promise<T> {
         this.headers.assert("content-type", [transform.type].flat(1));
+        
         return transform(await this.getBuffer());
     }
 

@@ -11,7 +11,7 @@ export abstract class SubscriptionManager implements IDisposable {
 
     readonly #subscriptions = new Map<string, SubscriptionManagerConfig>();
 
-    public channels() {
+    public channels(): string[] {
         return [...this.#subscriptions.keys()];
     }
 
@@ -64,7 +64,7 @@ export abstract class SubscriptionManager implements IDisposable {
         this.#subscriptions.clear();
     }
 
-    protected emit(channel: string, message: string) {
+    protected emit(channel: string, message: string): void {
         this.logger.debug("emit(%s, %s)", channel, message);
         const config = this.#subscriptions.get(channel);
         if (config) {

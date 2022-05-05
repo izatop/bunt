@@ -5,16 +5,19 @@ const day: TimeMutateFn = (time, value) => time + (value * TimeMultiply.DAY);
 
 const week: TimeMutateFn = (time, value) => {
     const date = new Date(time);
+    
     return date.setDate(date.getDate() + (value * 7));
 };
 
 const month: TimeMutateFn = (time, value) => {
     const date = new Date(time);
+    
     return date.setMonth(date.getMonth() + value);
 };
 
 const year: TimeMutateFn = (time, value) => {
     const date = new Date(time);
+    
     return date.setFullYear(date.getFullYear() + value);
 };
 

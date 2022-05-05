@@ -20,11 +20,11 @@ export class RedisQ2Reader<M extends Message,
         return new RedisQ2ReadOperation(message, this.commit, this.rollback);
     }
 
-    private commit = async () => {
+    private commit = async (): Promise<void> => {
         await this.connection.lpop(this.backup);
     };
 
-    private rollback = async () => {
+    private rollback = async (): Promise<void> => {
         await this.connection.rpoplpush(this.backup, this.fallback);
     };
 }

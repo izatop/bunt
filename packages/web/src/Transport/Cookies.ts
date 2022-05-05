@@ -6,15 +6,15 @@ export class Cookies extends StrictKeyValueMap {
     }
 
     public static parse(cookie = ""): [string, string][] {
-        const decode = (s: string) => decodeURIComponent(s);
-
         const entries: [string, string][] = cookie
             .split(";")
             .map((s) => s.trim())
             .map((s) => s.split("="))
             .filter((a) => a.length === 2)
-            .map(([k, v]) => [k, decode(v)]);
+            .map(([k, v]) => [k, this.decode(v)]);
 
         return entries;
     }
+
+    private static decode = (value: string): string => decodeURIComponent(value);
 }

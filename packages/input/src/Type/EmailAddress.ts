@@ -6,7 +6,7 @@ export const RE_EMAIL_RFC5222 = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%
 
 export const EmailAddress = new ScalarType<string>({
     name: "EmailAddress",
-    validate(payload) {
+    validate(payload): string {
         this.assert(isString(payload), `Wrong payload: ${this.name} expected`, payload);
         this.assert(RE_EMAIL_RFC5222.test(payload), `Wrong payload: ${this.name} expected`, payload);
 

@@ -3,8 +3,9 @@ import {ScalarType} from "./ScalarType";
 
 export const JSONString = new ScalarType<any>({
     name: "JSON",
-    validate(payload) {
+    validate(payload): any {
         this.assert(isString(payload), "Wrong payload", payload);
+
         try {
             return JSON.parse(payload);
         } catch (error) {

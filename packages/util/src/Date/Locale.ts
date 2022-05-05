@@ -1,7 +1,7 @@
 import {assert} from "../assert";
 import {DateConfig} from "./interface";
 
-function normalizeLocale(locale: string) {
+function normalizeLocale(locale: string): string {
     if (/^[a-z]{2}_.+$/.test(locale)) {
         return locale.substr(0, 2);
     }
@@ -18,6 +18,7 @@ export function getDefaultConfig(): DateConfig {
         : 1;
 
     Intl.DateTimeFormat(locale, {...system, timeZone} as Intl.DateTimeFormatOptions);
+
     return {locale, timeZone, weekBegins};
 }
 

@@ -9,7 +9,9 @@ export function wait<T = unknown>(fn: (re: (v: T) => void) => void): Promise<T> 
 }
 
 export async function watch<T>(expected: T, fn: () => Promise<T>, tries = Infinity): Promise<void> {
-    while (tries-- > 0 && expected !== await fn()) {}
+    while (tries-- > 0 && expected !== await fn()) {
+        // nothing
+    }
 }
 
 export function throttle<A extends any[], R>(fn: (...args: A) => R, t = 100): (...args: A) => Promise<R> {

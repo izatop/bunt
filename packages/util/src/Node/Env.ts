@@ -1,5 +1,5 @@
-import {Dict} from "./interfaces";
 import {assert} from "../assert";
+import {Dict} from "./interfaces";
 
 export type EnvKey = string | number | symbol;
 export type EnvDefaultValue = string | undefined;
@@ -11,7 +11,7 @@ export class Env<T extends Dict<string>> {
         this.#store = new Map(Object.entries(env));
     }
 
-    public static factory<T extends Dict<string>>(env = process.env) {
+    public static factory<T extends Dict<string>>(env = process.env): Env<T> {
         return new this<T>(env);
     }
 

@@ -1,6 +1,6 @@
+import {resolve} from "path";
 import {CommandContext} from "@bunt/cli";
 import {ApplyContext} from "@bunt/unit";
-import {resolve} from "path";
 import {ResourceStore} from "./Resource";
 
 export class ProjectContext extends CommandContext {

@@ -1,3 +1,4 @@
+import {IncomingMessage, ServerResponse} from "http";
 import {ActionResponse, StrictKeyValueMap} from "@bunt/app";
 import {
     assert,
@@ -11,7 +12,6 @@ import {
     isString,
     isUndefined,
 } from "@bunt/util";
-import {IncomingMessage, ServerResponse} from "http";
 import {IRequestSendOptions, IResponderOptions} from "./interfaces";
 import {RequestMessage} from "./RequestMessage";
 import {ResponseAbstract} from "./Response";
@@ -70,6 +70,7 @@ export class Responder extends RequestMessage {
 
             if (isReadableStream(response)) {
                 response.pipe(this.#response);
+                
                 return;
             }
 

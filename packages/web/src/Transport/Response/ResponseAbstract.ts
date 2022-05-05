@@ -1,5 +1,5 @@
 import {isFunction, isInstanceOf, isNumber, Promisify} from "@bunt/util";
-import * as HTTP from "http-status";
+import HTTP from "http-status";
 import {Headers} from "../Headers";
 import {Cookie, CookieOptions} from "./Cookie";
 
@@ -47,7 +47,7 @@ export abstract class ResponseAbstract<T> {
         }
     }
 
-    public setCookie(name: string, value: string, options: CookieOptions) {
+    public setCookie(name: string, value: string, options: CookieOptions): void {
         this.cookies.push(new Cookie(name, value, options));
     }
 

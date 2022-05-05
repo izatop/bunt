@@ -102,15 +102,17 @@ export class Logger {
         if (isLoggerOwner(target)) {
             const logger = new this(target.getLogLabel?.() ?? label, target.getLogGroupId?.());
             loggers.set(target, logger);
+
             return logger;
         }
 
         const logger = new this(label);
         loggers.set(target, logger);
+
         return logger;
     }
 
-    protected static format(message: string, args: LogableType[]) {
+    protected static format(message: string, args: LogableType[]): {message: string; args: any[]} {
         const placeholderRegex = /(%[sdo])/g;
         if (message.includes("%") && args.length > 0 && placeholderRegex.test(message)) {
             const matched = [...message.match(placeholderRegex) ?? []];
@@ -223,6 +225,7 @@ export class Logger {
         }
 
         const perf = new Perf(this.#label);
+
         return (): void => {
             perf.finish();
             this.debug(message, ...args, perf);

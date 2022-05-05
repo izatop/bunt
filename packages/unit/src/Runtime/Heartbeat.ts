@@ -1,8 +1,8 @@
 import {Defer, Logger, logger} from "@bunt/util";
-import {HeartbeatRunningQueue} from ".";
 import {Disposer} from "../Dispose";
 import {IRunnable} from "./interfaces";
 import {isRunnable} from "./internal";
+import {HeartbeatRunningQueue} from ".";
 
 const registry = new WeakMap<IRunnable, Heartbeat>();
 
@@ -74,12 +74,12 @@ export class Heartbeat extends Disposer {
         return Promise.resolve(this.#life);
     }
 
-    private reject(error: unknown) {
+    private reject(error: unknown): void {
         this.#running.clear();
         this.#life.reject(error);
     }
 
-    private finalize(running: HeartbeatRunningQueue) {
+    private finalize(running: HeartbeatRunningQueue): void {
         this.#running.delete(running);
         if (this.#running.size === 0) {
             this.#life.resolve();

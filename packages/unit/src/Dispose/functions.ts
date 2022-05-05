@@ -15,6 +15,7 @@ export async function dispose(disposable: DisposableType): Promise<void> {
     try {
         if (isFunction(disposable)) {
             SystemLogger.debug("dispose %s()", name);
+
             return Promise.resolve(disposable());
         }
 
@@ -33,7 +34,7 @@ export async function dispose(disposable: DisposableType): Promise<void> {
     }
 }
 
-export async function disposeAll(disposables: DisposableType[]) {
+export async function disposeAll(disposables: DisposableType[]): Promise<void> {
     await safeMap(disposables, (disposable) => dispose(disposable));
 }
 

@@ -55,6 +55,7 @@ describe("is", () => {
     const make = (skip: (v: any) => boolean) => {
         const negative = types.filter((testValue) => !skip(testValue));
         const positive = types.filter(skip);
+        
         return [
             ...negative.map((testValue) => [testValue, false]),
             ...positive.map((testValue) => [testValue, true]),

@@ -1,8 +1,8 @@
+import {parse} from "url";
 import {isString} from "@bunt/util";
 import RedisClient, {Redis, RedisOptions} from "ioredis";
-import {parse} from "url";
 
-const toBoolean = (value: string) => {
+const toBoolean = (value: string): boolean => {
     return ["Y", "y", "1", "true"].includes(value);
 };
 

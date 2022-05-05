@@ -46,7 +46,7 @@ export class Unit<C extends Context> {
         return Context.apply(syncContext);
     }
 
-    public on(handlers: ActionTransactionHandlers) {
+    public on(handlers: ActionTransactionHandlers): void {
         Object.assign(this.#handlers, handlers);
     }
 

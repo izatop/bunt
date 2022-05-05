@@ -19,15 +19,15 @@ export class Defer<T> implements PromiseLike<T> {
         });
     }
 
-    public get settled() {
+    public get settled(): boolean {
         return this.#state !== "pending";
     }
 
-    public get rejected() {
+    public get rejected(): boolean {
         return this.settled && this.#state === "rejected";
     }
 
-    public get fulfilled() {
+    public get fulfilled(): boolean {
         return this.settled && this.#state === "fulfilled";
     }
 
@@ -36,11 +36,11 @@ export class Defer<T> implements PromiseLike<T> {
         return this.#pending.then(onfulfilled, onrejected);
     };
 
-    public resolve = (value: T | PromiseLike<T>) => {
+    public resolve = (value: T | PromiseLike<T>): void => {
         this.#event.emit("resolve", value);
     };
 
-    public reject = (error: unknown) => {
+    public reject = (error: unknown): void => {
         this.#event.emit("reject", error);
     };
 }

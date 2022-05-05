@@ -24,6 +24,7 @@ export class Perf implements ILogable<IPerfValue> {
 
     public finish(): this {
         this.#finish = performance.now();
+        
         return this;
     }
 

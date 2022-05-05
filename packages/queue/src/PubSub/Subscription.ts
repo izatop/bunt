@@ -16,7 +16,7 @@ export class Subscription<T> implements AsyncIterable<T>, Disposable {
         this.#parser = parser;
     }
 
-    public get size() {
+    public get size(): number {
         return this.#subscriptions.size;
     }
 
@@ -27,7 +27,7 @@ export class Subscription<T> implements AsyncIterable<T>, Disposable {
     /**
      * Unsubscribe all active subscriptions
      */
-    public async unsubscribe() {
+    public async unsubscribe(): Promise<void> {
         const pending: Promise<void>[] = [];
         for (const iterator of this.#subscriptions.values()) {
             pending.push(iterator.destroy());
@@ -53,7 +53,7 @@ export class Subscription<T> implements AsyncIterable<T>, Disposable {
         return iterator;
     }
 
-    public async dispose() {
+    public async dispose(): Promise<void> {
         await this.unsubscribe();
     }
 }

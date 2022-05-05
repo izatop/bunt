@@ -5,9 +5,12 @@ export type AssertionDetailsAllowType = string | Record<any, any> | null | numbe
 export type AssertionDetails = (() => AssertionDetailsAllowType) | AssertionDetailsAllowType;
 export type AssertionMessage = string | (() => string) | (() => Error);
 
-function createAssertionError(message?: AssertionMessage, details?: AssertionDetails) {
+function createAssertionError(message?: AssertionMessage, details?: AssertionDetails): Error | AssertionError {
     const description = isFunction(message) ? message() : message;
-    return isInstanceOf(description, Error) ? description : new AssertionError(description, details);
+
+    return isInstanceOf(description, Error)
+        ? description
+        : new AssertionError(description, details);
 }
 
 export function assert(expr: unknown, message?: AssertionMessage, details?: AssertionDetails): asserts expr {
@@ -17,7 +20,7 @@ export function assert(expr: unknown, message?: AssertionMessage, details?: Asse
 }
 
 export function fails(expr: unknown, message?: AssertionMessage, details?: AssertionDetails): void {
-    if (!!expr) {
+    if (expr) {
         throw createAssertionError(message, details);
     }
 }

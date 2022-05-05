@@ -1,5 +1,6 @@
 import {assert, isArray, isFunction, isObject} from "@bunt/util";
 import {GQLClientConnection} from "./GQLClientConnection";
+import {IGQLOperationStop} from "./interfaces";
 import {
     GQLClientOperation,
     GQLClientOperationType,
@@ -52,19 +53,23 @@ export class GQLProtoLayer {
                     .catch(console.error);
                 break;
             case GQLClientOperationType.STOP:
-                const subscription = this.#subscriptions.get(operation.id);
-                if (subscription) {
-                    this.#subscriptions.delete(operation.id);
-                    subscription.return?.();
-                }
+                this.stopOperation(operation);
         }
     }
 
-    private keepAliveUpdate() {
+    private stopOperation(operation: IGQLOperationStop): void {
+        const subscription = this.#subscriptions.get(operation.id);
+        if (subscription) {
+            this.#subscriptions.delete(operation.id);
+            subscription.return?.();
+        }
+    }
+
+    private keepAliveUpdate(): Promise<void> {
         return this.#client.send({type: GQLServerOperationType.CONNECTION_KEEP_ALIVE});
     }
 
-    private unsubscribeAll() {
+    private unsubscribeAll(): void {
         for (const subscription of this.#subscriptions.values()) {
             subscription.return?.();
         }
@@ -109,7 +114,7 @@ export class GQLProtoLayer {
         return {message: "Unknown error", code: 500};
     }
 
-    private terminate() {
+    private terminate(): void {
         for (const [id, subscription] of this.#subscriptions.entries()) {
             this.#subscriptions.delete(id);
             subscription.return?.();

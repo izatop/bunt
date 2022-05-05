@@ -9,11 +9,13 @@ import setters from "./mutators/setters";
 export class DateTimeMutation {
     public static begins(kind: Exclude<DateTimeKind, "ms">, time: number): number {
         assert(kind in begins);
+        
         return begins[kind](time);
     }
 
     public static ends(kind: Exclude<DateTimeKind, "ms">, time: number): number {
         assert(kind in begins);
+        
         return ends[kind](time);
     }
 

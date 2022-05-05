@@ -1,5 +1,5 @@
-import {dispose, isDisposable, isRunnable} from "@bunt/unit";
 import {ok} from "assert";
+import {dispose, isDisposable, isRunnable} from "@bunt/unit";
 import {command, Commander} from "../../src";
 import {RunnableTestCommand} from "./app/Action/RunnableTestCommand";
 import {BaseContext} from "./app/Context/BaseContext";

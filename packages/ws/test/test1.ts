@@ -1,10 +1,10 @@
+import * as crypto from "crypto";
 import {Resolver, RouteRule} from "@bunt/app";
 import {Fields, Text} from "@bunt/input";
 import {ApplyContext, Context} from "@bunt/unit";
 import {debugLogFormat, Logger, SeverityLevel, StdErrorTransport, StdOutTransport} from "@bunt/util";
 import {WebServer} from "@bunt/web";
 import {EchoProtoHandle, WebSocketServer} from "@bunt/ws";
-import * as crypto from "crypto";
 import * as websocket from "websocket";
 
 class TestContext extends Context {}
@@ -20,7 +20,7 @@ class TestHandle extends EchoProtoHandle<ITestContext, {authorization: string}> 
     }
 }
 
-function conn() {
+function conn(): Promise<websocket.connection> {
     return new Promise<websocket.connection>((resolve, reject) => {
         const client = new websocket.client();
         client.on("connectFailed", function (error) {
@@ -53,7 +53,7 @@ function conn() {
                 // console.log("[CLIENT] ping");
             });
 
-            function sendNumber() {
+            function sendNumber(): void {
                 if (connection.connected) {
                     const number = Math.round(Math.random() * 0xFFFFFF);
                     connection.sendUTF(number.toString());
@@ -73,7 +73,7 @@ function conn() {
     });
 }
 
-async function main() {
+async function main(): Promise<void> {
     try {
         Logger.setSeverity(SeverityLevel.INFO);
         Logger.set([new StdErrorTransport(debugLogFormat), new StdOutTransport(debugLogFormat)]);
@@ -93,7 +93,8 @@ async function main() {
 
         const clients = 1024;
         const backlog = 128;
-        await server.listen(3333, backlog);
+        server.listen(3333, backlog);
+
         const all = [];
         const ready = [];
         const errors = [];

@@ -73,7 +73,7 @@ export class AsyncCallback<T> implements AsyncIterable<T> {
     }
 
     @bind
-    private pipe(value?: T) {
+    private pipe(value?: T): void {
         this.#pipeline.splice(0, this.#pipeline.length)
             .forEach((resolve) => resolve(value));
     }

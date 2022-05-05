@@ -1,6 +1,6 @@
+import {URL} from "url";
 import {assert} from "@bunt/util";
 import {Client} from "minio";
-import {URL} from "url";
 import {FsDriverAbstract} from "./FsDriverAbstract";
 import {MinIOBucketPolicy} from "./MinIOBucketPolicy";
 

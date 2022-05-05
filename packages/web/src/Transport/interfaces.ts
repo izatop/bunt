@@ -1,6 +1,6 @@
-import {RequestValidatorAbstract} from "@bunt/app";
 import {IncomingMessage} from "http";
 import {Socket} from "net";
+import {RequestValidatorAbstract} from "@bunt/app";
 import {Responder} from "./Responder";
 import {Cookie} from "./Response/Cookie";
 

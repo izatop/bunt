@@ -3,7 +3,7 @@ import {ScalarType} from "./ScalarType";
 
 export const Numeric = new ScalarType<number>({
     name: "Numeric",
-    validate(payload) {
+    validate(payload): number {
         this.assert(isNumber(payload) || isString(payload), `Wrong payload: ${this.name} expected`, payload);
         const value = isNumber(payload) ? payload : parseInt(payload, 10);
 

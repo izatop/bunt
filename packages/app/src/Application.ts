@@ -86,7 +86,7 @@ export class Application<C extends Context> {
         return this.#unit.run(route.action, freezedState);
     }
 
-    public on(handlers: ActionTransactionHandlers) {
+    public on(handlers: ActionTransactionHandlers): void {
         this.#unit.on(handlers);
     }
 

@@ -3,7 +3,7 @@ import {ScalarType} from "./ScalarType";
 
 export const Float = new ScalarType<number>({
     name: "Float",
-    validate(payload) {
+    validate(payload): number {
         this.assert(isNumber(payload), `Wrong payload: ${this.name} expected`, payload);
         this.assert(
             payload <= Number.MAX_SAFE_INTEGER && payload >= Number.MIN_SAFE_INTEGER,

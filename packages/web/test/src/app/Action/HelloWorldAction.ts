@@ -12,6 +12,7 @@ interface IHelloWorldActionState {
 export class HelloWorldAction extends Action<BaseContext, IHelloWorldActionState> {
     public run(): string {
         const {payload} = this.state;
+        
         return `Hello, ${payload.name}!`;
     }
 }

@@ -26,6 +26,7 @@ export class EnvReader<T extends EnvRecord> {
     public ensure(key: string, parse?: (v: string) => unknown): unknown {
         const value = this.#map.get(key);
         assert(value, `The ${key} property should be defined`);
+        
         return isFunction(parse) ? parse(value) : value;
     }
 

@@ -31,7 +31,7 @@ export class SubscriptionIterator<T, TNext = unknown> extends AsyncPushPull<T | 
         this.#unsubscribe = fn;
     }
 
-    public async destroy() {
+    public async destroy(): Promise<void> {
         await this.#unsubscribe?.();
         super.destroy();
     }

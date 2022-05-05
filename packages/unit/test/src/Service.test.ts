@@ -1,5 +1,4 @@
-import {ServiceFactory} from "../../src";
-import {Context, SERVICE_KIND} from "../../src";
+import {ServiceFactory, Context, SERVICE_KIND} from "../../src";
 import {MemoryDb} from "./context/services/MemoryDb";
 import {MemoryDbServiceResolver} from "./context/services/MemoryDbServiceResolver";
 

@@ -1,7 +1,7 @@
 import {isObject, Logger} from "@bunt/util";
-import {RuntimeTask} from ".";
 import {IDisposable, IRunnable} from "./interfaces";
 import {Runtime} from "./Runtime";
+import {RuntimeTask} from ".";
 
 export const Signals: NodeJS.Signals[] = ["SIGINT", "SIGQUIT", "SIGTERM"];
 

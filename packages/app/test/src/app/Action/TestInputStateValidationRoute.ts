@@ -14,6 +14,7 @@ export interface ITestTypeValidationState {
 class TestInputStateValidationAction extends Action<BaseContext, ITestTypeValidationState> {
     public run(): Record<string, any> {
         const {session, payload} = this.state;
+        
         return {
             session,
             welcome: `Hello, ${payload.name} (age: ${payload.bd?.toDateString() ?? "N/A"})!`,

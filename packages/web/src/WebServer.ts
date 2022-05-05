@@ -1,3 +1,6 @@
+import * as http from "http";
+import {IncomingMessage, ServerResponse} from "http";
+import {Socket} from "net";
 import {Application, IRoute} from "@bunt/app";
 import {ActionAny, Context, ContextArg, Heartbeat, IDisposable, IRunnable, unit, Unit} from "@bunt/unit";
 import {
@@ -9,12 +12,8 @@ import {
     toError,
     NotFound,
     ValidationError,
-    isError,
     Defer,
 } from "@bunt/util";
-import * as http from "http";
-import {IncomingMessage, ServerResponse} from "http";
-import {Socket} from "net";
 import {IErrorResponseHeaders, IProtocolAcceptor, IResponderOptions, Responder} from "./Transport";
 
 export class WebServer<C extends Context> extends Application<C> implements IDisposable, IRunnable {
@@ -48,7 +47,7 @@ export class WebServer<C extends Context> extends Application<C> implements IDis
         return new this(await unit(context), await this.preload(routes), options);
     }
 
-    private static preload<C extends Context>(routes: IRoute<ActionAny<C>>[]) {
+    private static preload<C extends Context>(routes: IRoute<ActionAny<C>>[]): Promise<IRoute<any>[]> {
         return Promise.all(
             routes.map(async (route) => (
                 Object.assign(route, {action: await Unit.getAction(route.action)})
@@ -102,7 +101,7 @@ export class WebServer<C extends Context> extends Application<C> implements IDis
         return this.#state;
     }
 
-    protected async handle(req: IncomingMessage, res: ServerResponse) {
+    protected async handle(req: IncomingMessage, res: ServerResponse): Promise<void> {
         const finish = this.logger.perf("handle", req.url);
         const request = new Responder(req, res, this.#errorCodeMap, this.#options);
 
