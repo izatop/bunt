@@ -7,6 +7,7 @@ import {
     ActionFactory,
     ActionReturn,
     ActionState,
+    ActionTransactionHandlers,
     AsyncActionFactory,
     ContextArg,
 } from "./interfaces";
@@ -16,6 +17,7 @@ export class Unit<C extends Context> {
     protected readonly logger!: Logger;
 
     readonly #context: ApplyContext<C>;
+    readonly #handlers: ActionTransactionHandlers = {};
 
     protected constructor(context: ApplyContext<C>) {
         this.#context = context;
@@ -44,6 +46,10 @@ export class Unit<C extends Context> {
         return Context.apply(syncContext);
     }
 
+    public on(handlers: ActionTransactionHandlers) {
+        Object.assign(this.#handlers, handlers);
+    }
+
     public async run<A extends ActionAny<C>>(
         factory: ActionFactory<A>,
         state: ActionState<A>): Promise<ActionReturn<A>> {
@@ -53,7 +59,8 @@ export class Unit<C extends Context> {
         const finish = this.logger.perf("run", {action: ctor.name});
         const action = new ctor(this.#context, state);
 
-        return Promise.resolve(action.run()).finally(finish);
+        return this.watch(() => action.run())
+            .finally(finish);
     }
 
     public static async getAction(action: ActionFactory<any>): Promise<ActionCtor<any>> {
@@ -64,6 +71,23 @@ export class Unit<C extends Context> {
         }
 
         return action;
+    }
+
+    private watch<T>(run: () => Promise<T> | T): Promise<T> {
+        const {start, commit, rollback} = this.#handlers;
+        const pending = Promise.resolve()
+            .then(start)
+            .then(run);
+
+        if (commit) {
+            return pending.finally(() => pending.then(commit, rollback));
+        }
+
+        if (rollback) {
+            return pending.finally(() => pending.catch(rollback));
+        }
+
+        return pending;
     }
 
     private static isActionFactory(action: ActionFactory<any>): action is AsyncActionFactory<any> {

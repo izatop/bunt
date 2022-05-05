@@ -1,4 +1,14 @@
-import {ActionFactory, Context, ContextArg, Disposer, Heartbeat, IRunnable, unit, Unit} from "@bunt/unit";
+import {
+    ActionFactory,
+    ActionTransactionHandlers,
+    Context,
+    ContextArg,
+    Disposer,
+    Heartbeat,
+    IRunnable,
+    Unit,
+    unit,
+} from "@bunt/unit";
 import {Ctor, Defer, logger, Logger} from "@bunt/util";
 import {Handler} from "./Handler";
 import {ITransport} from "./interfaces";
@@ -40,9 +50,22 @@ export class Dispatcher<C extends Context> extends Disposer implements IRunnable
     }
 
     public subscribe<M extends Incoming, H extends Handler<C, M>>(type: MessageCtor<M>, action: Ctor<H>): this {
-        const subscription = this.#queue.on<any>(type, ({payload}) => this.#unit.run(action, {payload}));
+        const subscription = this.#queue.on<any>(type, async ({payload}) => {
+            try {
+                return await this.#unit.run(action, {payload});
+            } catch (reason) {
+                this.logger.error("Unexpected error", reason);
+
+                throw reason;
+            }
+        });
+
         this.onDispose(subscription);
 
         return this;
+    }
+
+    public on(handlers: ActionTransactionHandlers) {
+        this.#unit.on(handlers);
     }
 }

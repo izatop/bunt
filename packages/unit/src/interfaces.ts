@@ -31,3 +31,8 @@ export interface IShadowState<T> {
     getShadowState(): T;
 }
 
+export type ActionTransactionHandlers = {
+    start?: () => void;
+    commit?: <T>(value: T) => void;
+    rollback?: (reason: unknown) => void;
+};

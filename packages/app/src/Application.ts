@@ -1,4 +1,13 @@
-import {ActionAny, ApplyContext, Context, ContextArg, StateType, unit, Unit} from "@bunt/unit";
+import {
+    ActionAny,
+    ActionTransactionHandlers,
+    ApplyContext,
+    Context,
+    ContextArg,
+    StateType,
+    Unit,
+    unit,
+} from "@bunt/unit";
 import {assert, isDefined, logger, Logger} from "@bunt/util";
 import {ActionResponse, IRequest} from "./interfaces";
 import {IRoute, RouteNotFound} from "./Route";
@@ -60,22 +69,25 @@ export class Application<C extends Context> {
 
         const state: StateType = {};
         const matches = route.match(request.route);
-        const routeContext = {
-            request,
-            context: this.#unit.context,
-            args: new Map<string, string>(Object.entries(matches)),
-        };
 
         if (isDefined(route.payload)) {
             const {payload} = route;
-            Object.assign(state, await payload.validate(routeContext));
+
+            Object.assign(state, await payload.validate({
+                request,
+                context: this.#unit.context,
+                args: new Map<string, string>(Object.entries(matches)),
+            }));
         }
 
-        Object.freeze(state);
-        await request.linkState?.(state);
+        const freezedState = Object.freeze(state);
+        await request.linkState?.(freezedState);
 
-        // @todo
-        return this.#unit.run(route.action as any, state);
+        return this.#unit.run(route.action, freezedState);
+    }
+
+    public on(handlers: ActionTransactionHandlers) {
+        this.#unit.on(handlers);
     }
 
     public getRoutes(): IRoute<ActionAny<C>>[] {

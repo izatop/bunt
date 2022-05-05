@@ -11,7 +11,7 @@ describe("Queue", () => {
     test("Subscription", async () => {
         const success: FooMessage[] = [];
         const queue = new Queue(new TestTransport());
-        const sub1 = queue.subscribe(FooMessage, (message) => success.push(message));
+        const sub1 = queue.on(FooMessage, (message) => success.push(message));
 
         expect(sub1.subscribed).toBe(true);
         await expect(sub1.subscribe()).rejects.toThrow();
@@ -30,7 +30,7 @@ describe("Queue", () => {
         const queue = new Queue(new TestTransport());
 
         queue.send(new BarMessage(1));
-        const sub = queue.subscribe(BarMessage, () => {
+        const sub = queue.on(BarMessage, () => {
             throw new Error("Test Error");
         });
 
@@ -50,12 +50,12 @@ describe("Queue", () => {
         const queue = new Queue(new TestTransport());
         const calc = [10, 5, 3];
         queue.send(new MultiplyTask(calc));
-        queue.subscribe(MultiplyTask, ({payload}) => {
+        queue.on(MultiplyTask, ({payload}) => {
             return payload.reduce((l, r) => l + r, 0);
         });
 
         const reply = await wait<NumMessage>((resolve) => {
-            queue.subscribe(NumMessage, (message) => resolve(message));
+            queue.on(NumMessage, (message) => resolve(message));
         });
 
         expect(reply.payload).toBe(calc.reduce((l, r) => l + r, 0));

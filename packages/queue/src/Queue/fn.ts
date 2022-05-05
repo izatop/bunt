@@ -9,7 +9,7 @@ export function serialize<M extends Message>(message: M): string {
     const signature = crypto.createHash("sha1")
         .update(body)
         .digest("hex")
-        .substr(0, 8);
+        .substring(0, 8);
 
     return `${signature}:${body}`;
 }
@@ -17,12 +17,12 @@ export function serialize<M extends Message>(message: M): string {
 export function unserialize<T = unknown>(message: string): T {
     assert(serializeRe.test(message), "Wrong message format");
 
-    const body = message.substr(9);
-    const signature = message.substr(0, 8);
+    const body = message.substring(9);
+    const signature = message.substring(0, 8);
     const compareSignature = crypto.createHash("sha1")
         .update(body)
         .digest("hex")
-        .substr(0, 8);
+        .substring(0, 8);
 
     assert(signature === compareSignature, "Wrong checksum");
     return JSON.parse(body);
