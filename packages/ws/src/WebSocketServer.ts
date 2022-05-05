@@ -80,6 +80,7 @@ export class WebSocketServer<C extends Context> extends Disposer implements IRun
 
     public async dispose(): Promise<void> {
         this.logger.info("destroy");
+
         try {
             this.#disposeAcceptor();
 
@@ -221,8 +222,8 @@ export class WebSocketServer<C extends Context> extends Disposer implements IRun
                 this.handle(connection, () => this.#unit.run(route.action as any, state));
             });
         } catch (error) {
-            this.logger.error("Unexpected error", error);
-            socket.destroy(toError(error, "Unknown"));
+            this.logger.error(toError(error).message, error);
+            socket.destroy(toError(error));
         }
     };
 

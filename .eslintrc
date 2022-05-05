@@ -2,14 +2,27 @@
     "parser": "@typescript-eslint/parser",
     "plugins": [
         "@typescript-eslint",
-        "unused-imports"
+        "unused-imports",
+        "import"
     ],
     "extends": [
-        "plugin:@typescript-eslint/recommended"
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:import/recommended",
+        "plugin:import/typescript",
+        "plugin:react/recommended"
     ],
+    "ignorePatterns": [
+        "**/dist/**/*"
+    ],
+    "settings": {
+        "import/extensions": [
+            ".ts"
+        ]
+    },
     "rules": {
         "max-len": [
-            "warn",
+            "error",
             120
         ],
         "semi": "off",
@@ -26,11 +39,13 @@
             "all"
         ],
         "quotes": "off",
+        "arrow-parens": "error",
         "@typescript-eslint/quotes": "error",
         "indent": "off",
         "@typescript-eslint/indent": "error",
         "no-console": "error",
         "no-debugger": "error",
+        "newline-before-return": "error",
         "semi-spacing": [
             "error",
             {
@@ -48,16 +63,38 @@
                 "functions": "always-multiline"
             }
         ],
+        "object-curly-newline": [
+            "error",
+            {
+                "ImportDeclaration": {
+                    "multiline": true,
+                    "minProperties": 10
+                }
+            }
+        ],
+        "comma-spacing": "error",
         "unused-imports/no-unused-imports": "error",
         "unused-imports/no-unused-vars": [
             "warn",
             {
                 "vars": "all",
-                "varsIgnorePattern": "^_",
                 "args": "after-used",
-                "argsIgnorePattern": "^_"
+                "varsIgnorePattern": "^_",
+                "argsIgnorePattern": "^_",
+                "ignoreRestSiblings": true
             }
         ],
+        "import/no-unresolved": "off",
+        "import/order": [
+            "error",
+            {
+                "warnOnUnassignedImports": false,
+                "newlines-between": "never"
+            }
+        ],
+        "no-prototype-builtins": "off",
+        "export/named": "off",
+        "import/no-named-as-default": "off",
         "space-in-parens": [
             "error",
             "never"

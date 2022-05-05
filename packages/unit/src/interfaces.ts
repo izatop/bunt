@@ -32,7 +32,6 @@ export interface IShadowState<T> {
 }
 
 export type ActionTransactionHandlers = {
-    start?: () => void;
-    commit?: <T>(value: T) => void;
-    rollback?: (reason: unknown) => void;
+    start?: (action: string) => () => void;
+    error?: (reason: unknown) => void;
 };

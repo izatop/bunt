@@ -102,19 +102,14 @@ export class WebServer<C extends Context> extends Application<C> implements IDis
         return this.#state;
     }
 
-    protected async handle(req: IncomingMessage, res: ServerResponse): Promise<void> {
+    protected async handle(req: IncomingMessage, res: ServerResponse) {
         const finish = this.logger.perf("handle", req.url);
         const request = new Responder(req, res, this.#errorCodeMap, this.#options);
 
         try {
             assert(request.validate(this), "Invalid Request");
-            const response = await this.run(request);
-            await request.respond(response);
+            await request.respond(await this.run(request));
         } catch (error) {
-            if (isError(error)) {
-                this.logger.error(error.message, error);
-            }
-
             await request.respond(error);
         } finally {
             finish();
@@ -139,15 +134,12 @@ export class WebServer<C extends Context> extends Application<C> implements IDis
 
     private handleRequest = async (req: IncomingMessage, res: ServerResponse): Promise<void> => {
         const finish = this.logger.perf("request", {method: req.method, url: req.url});
+
         try {
             this.logger.debug(`${req.method} ${req.url}`);
             await this.handle(req, res);
-        } catch (error) {
-            const {url, method, headers} = req;
-            const request = {url, method, headers};
-            const response = {writable: res.writable, headersSent: res.headersSent, headers: res.getHeaders()};
-            this.logger.critical("Uncaught error", error);
-            this.logger.debug("Uncaught error", error, {request, response});
+        } catch (reason) {
+            this.logger.alert(toError(reason).message, reason);
 
             if (!res.headersSent) {
                 res.writeHead(500, "Internal Server Error");

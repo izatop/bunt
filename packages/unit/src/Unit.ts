@@ -1,4 +1,4 @@
-import {assert, isFunction, isInstanceOf, logger, Logger} from "@bunt/util";
+import {assert, isFunction, isInstanceOf, logger, Logger, noop, toError} from "@bunt/util";
 import {ApplyContext, Context} from "./Context";
 import {Action} from "./Action";
 import {
@@ -59,7 +59,7 @@ export class Unit<C extends Context> {
         const finish = this.logger.perf("run", {action: ctor.name});
         const action = new ctor(this.#context, state);
 
-        return this.watch(() => action.run())
+        return this.watch(ctor.name, () => action.run())
             .finally(finish);
     }
 
@@ -73,19 +73,20 @@ export class Unit<C extends Context> {
         return action;
     }
 
-    private watch<T>(run: () => Promise<T> | T): Promise<T> {
-        const {start, commit, rollback} = this.#handlers;
-        const pending = Promise.resolve()
-            .then(start)
-            .then(run);
+    private watch<T>(action: string, run: () => Promise<T> | T): Promise<T> {
+        const {start = noop, error} = this.#handlers;
+        const finish = start(action);
+        const pending = Promise.resolve(run());
 
-        if (commit) {
-            return pending.finally(() => pending.then(commit, rollback));
+        if (isFunction(finish)) {
+            pending.finally(finish);
         }
 
-        if (rollback) {
-            return pending.finally(() => pending.catch(rollback));
+        if (error) {
+            pending.catch(error);
         }
+
+        pending.catch((reason) => this.logger.error(toError(reason, "Unexpected error").message, reason));
 
         return pending;
     }
