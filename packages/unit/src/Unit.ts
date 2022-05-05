@@ -1,4 +1,4 @@
-import {assert, isFunction, isInstanceOf, logger, Logger, noop, toError} from "@bunt/util";
+import {assert, isFunction, isInstanceOf, logger, Logger, toError} from "@bunt/util";
 import {ApplyContext, Context} from "./Context";
 import {Action} from "./Action";
 import {
@@ -74,21 +74,17 @@ export class Unit<C extends Context> {
     }
 
     private watch<T>(action: string, run: () => Promise<T> | T): Promise<T> {
-        const {start = noop, error} = this.#handlers;
-        const finish = start(action);
-        const pending = Promise.resolve(run());
+        const {start, error} = this.#handlers;
+        const finish = start?.(action);
 
-        if (isFunction(finish)) {
-            pending.finally(finish);
-        }
+        return Promise.resolve(run())
+            .finally(finish)
+            .catch((reason) => {
+                this.logger.error(toError(reason, "Unexpected error").message, reason);
+                error?.(reason);
 
-        if (error) {
-            pending.catch(error);
-        }
-
-        pending.catch((reason) => this.logger.error(toError(reason, "Unexpected error").message, reason));
-
-        return pending;
+                throw reason;
+            });
     }
 
     private static isActionFactory(action: ActionFactory<any>): action is AsyncActionFactory<any> {
