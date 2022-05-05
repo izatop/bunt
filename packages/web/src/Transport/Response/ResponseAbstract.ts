@@ -1,5 +1,5 @@
 import {isFunction, isInstanceOf, isNumber, Promisify} from "@bunt/util";
-import HTTP from "http-status";
+import * as HTTP from "http-status";
 import {Headers} from "../Headers";
 import {Cookie, CookieOptions} from "./Cookie";
 

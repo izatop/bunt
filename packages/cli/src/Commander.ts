@@ -1,5 +1,5 @@
 import {Application, IRoute} from "@bunt/app";
-import {Action, ContextArg, IRunnable} from "@bunt/unit";
+import {Action, ActionTransactionHandlers, ContextArg, IRunnable} from "@bunt/unit";
 import {CommandContext} from "./Context/CommandContext";
 import {RequestCommand} from "./Request";
 
@@ -12,8 +12,10 @@ export class Commander<C extends CommandContext> {
 
     public static async execute<C extends CommandContext>(
         context: ContextArg<C>,
-        routes: IRoute<Action<C, any, IRunnable | void>>[] = []): Promise<IRunnable | void> {
+        routes: IRoute<Action<C, any, IRunnable | void>>[] = [],
+        handlers: ActionTransactionHandlers = {}): Promise<IRunnable | void> {
         const command = new this<C>(await Application.factory<C>(context, routes));
+        command.#application.on(handlers);
 
         return command.handle();
     }
