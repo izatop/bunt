@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.24.4](https://github.com/izatop/bunt/compare/v0.24.3...v0.24.4) (2022-05-05)
+
+
+### Bug Fixes
+
+* action transaction handlers ([375603d](https://github.com/izatop/bunt/commit/375603dde2348cedd108a38d1406c755c95dce94))
+
+
+
+
+
 ## [0.24.3](https://github.com/izatop/bunt/compare/v0.24.2...v0.24.3) (2022-05-05)
 
 **Note:** Version bump only for package @bunt/app
