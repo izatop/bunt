@@ -14,3 +14,4 @@ export * from "./UUID";
 export * from "./JSONString";
 export * from "./RecordType";
 export * from "./Enum";
+export * from "./EmailAddress";
