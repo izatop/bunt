@@ -20,7 +20,7 @@ export class XMap<K, V> extends Map<K, V> {
             return value;
         }
 
-        assert(!exists, `No value of key ${key}`);
+        assert(!exists, `The key doesn't exists: ${key}`);
 
         return value as V;
     }

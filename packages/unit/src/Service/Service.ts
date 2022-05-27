@@ -1,11 +1,8 @@
 import {Ctor, DecoratorTarget} from "@bunt/util";
 import {IServiceResolver} from "../interfaces";
-import {SERVICE_KIND} from "./fn";
 import {ServiceRef} from "./ServiceRef";
 
 export abstract class Service<T> implements IServiceResolver<T> {
-    public readonly [SERVICE_KIND]: true;
-
     public static getReferences(target: unknown, base: Ctor | null = null): PropertyKey[] {
         const references = [];
         for (const proto of this.getPrototypes(target, base)) {

@@ -12,3 +12,5 @@ export type MaybeArray<T> = T | T[];
 export type MayNullable<T> = T | null | undefined;
 
 export type Fn<A extends any[] = [], R = void> = (...args: A) => R;
+
+export type KeyOf<T extends Record<string, any>> = Exclude<keyof T, number | symbol>;
