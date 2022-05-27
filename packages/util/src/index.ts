@@ -14,4 +14,5 @@ export * from "./Node";
 export * from "./Perf";
 export * from "./Async";
 export * from "./Ref";
+export * from "./Map";
 export * from "./interfaces";
