@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.24.9](https://github.com/izatop/bunt/compare/v0.24.8...v0.24.9) (2022-05-27)
+
+
+### Bug Fixes
+
+* command, map ([97f25d1](https://github.com/izatop/bunt/commit/97f25d1a4cd8b5a7935adaaa4d654f4ee5ae93e9))
+* update deps ([dac5f79](https://github.com/izatop/bunt/commit/dac5f79423a246a3278505b362bb77325a3f6661))
+
+
+
+
+
 ## [0.24.8](https://github.com/izatop/bunt/compare/v0.24.7...v0.24.8) (2022-05-19)
 
 
