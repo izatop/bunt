@@ -21,4 +21,22 @@ describe("XMap", () => {
         expect(() => map.ensure(2, () => false)).not.toThrowError();
         expect(() => map.ensure(3, () => null)).not.toThrowError();
     });
+
+    test("pick", () => {
+        const map = new XMap<number, number>();
+        map.set(1, 2);
+        map.set(2, 3);
+        expect(map.pick(1)).toBe(2);
+        expect([...map.entries()]).toEqual([[2, 3]]);
+    });
+
+    test("fromArray", () => {
+        const map = XMap.fromArray([1, 2, 3], (_, index) => index);
+        expect([...map.entries()]).toEqual([[0, 1], [1, 2], [2, 3]]);
+    });
+
+    test("fromObject", () => {
+        const map = XMap.fromObject({foo: 1, bar: 2});
+        expect([...map.entries()]).toEqual([["foo", 1], ["bar", 2]]);
+    });
 });
