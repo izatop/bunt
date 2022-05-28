@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.24.11](https://github.com/izatop/bunt/compare/v0.24.10...v0.24.11) (2022-05-28)
+
+
+### Bug Fixes
+
+* xmap ([c9c177e](https://github.com/izatop/bunt/commit/c9c177ed8a5ae335e72049ce7977adc74f1c6498))
+
+
+
+
+
 ## [0.24.10](https://github.com/izatop/bunt/compare/v0.24.9...v0.24.10) (2022-05-27)
 
 
