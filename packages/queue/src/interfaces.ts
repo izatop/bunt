@@ -14,6 +14,8 @@ export type HandlerState<M extends Message> = {payload: MessagePayload<M>};
 export interface ITransport extends IDisposable {
     send<M extends Message>(message: M): Promisify<void>;
 
+    size<M extends Message>(message: M): Promisify<number>;
+
     getQueueList<M extends Message>(type: MessageCtor<M>, handler: MessageHandler<M>): IQueueList<M>;
 
     getQueueReader<M extends Message>(type: MessageCtor<M>): IQueueReader<M>;

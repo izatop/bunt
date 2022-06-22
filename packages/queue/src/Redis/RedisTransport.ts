@@ -48,6 +48,10 @@ export class RedisTransport extends Disposer implements ITransport, IPubSubTrans
         await this.#connection.publish(channel, message);
     }
 
+    public async size<M extends Message>(message: M): Promise<number> {
+        return this.#connection.llen(message.channel);
+    }
+
     public getQueueList<M extends Message>(type: MessageCtor<M>, handler: MessageHandler<M>): RedisQueueList<M> {
         return this.register(new RedisQueueList(this, type, handler));
     }
