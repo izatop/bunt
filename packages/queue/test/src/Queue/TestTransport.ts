@@ -1,5 +1,6 @@
 import {AsyncState} from "@bunt/util";
 import {
+    Incoming,
     IQueueList,
     IQueueReader,
     IReadOperation,
@@ -21,11 +22,11 @@ export class TestTransport implements ITransport {
 
     public getQueueReader<M extends Message>(type: MessageCtor<M>): IQueueReader<M> {
         const queue = this.ensure<M>(type.channel);
-        const cancel = () => this.resolve();
-        const listenNext = () => {
+        const cancel = (): void => this.resolve();
+        const listenNext = (): Promise<unknown> => {
             const state = AsyncState.acquire();
             this.pending.push(state);
-            
+
             return state;
         };
 
@@ -55,11 +56,15 @@ export class TestTransport implements ITransport {
         this.resolve();
     }
 
-    public async dispose(): Promise<void> {
-        await this.resolve();
+    public size<M extends Incoming>(type: MessageCtor<M>): number {
+        return this.ensure(type.channel).length;
     }
 
-    private ensure<M extends Message>(channel: string) {
+    public async dispose(): Promise<void> {
+        this.resolve();
+    }
+
+    private ensure<M extends Message>(channel: string): M[] {
         const queue = this.#messages.get(channel) ?? [];
         if (!this.#messages.has(channel)) {
             this.#messages.set(channel, queue);
@@ -68,7 +73,7 @@ export class TestTransport implements ITransport {
         return queue as M[];
     }
 
-    private resolve() {
+    private resolve(): void {
         while (this.pending.length > 0) {
             AsyncState.resolve(this.pending.shift());
         }

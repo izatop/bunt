@@ -18,6 +18,7 @@ describe("Queue", () => {
         await expect(sub1.unsubscribe()).resolves.toBeUndefined();
 
         queue.send(new FooMessage(true));
+        await expect(queue.size(FooMessage)).resolves.toBe(1);
         await sub1.subscribe();
 
         expect(success).toMatchSnapshot();

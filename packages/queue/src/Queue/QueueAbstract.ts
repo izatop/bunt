@@ -16,8 +16,8 @@ export abstract class QueueAbstract<Q extends ITransport> extends Disposer {
         await this.#transport.send(message);
     }
 
-    public async size<M extends Message>(message: M): Promise<void> {
-        await this.#transport.size(message);
+    public async size<M extends Incoming>(type: MessageCtor<M>): Promise<number> {
+        return this.#transport.size(type);
     }
 
     /**

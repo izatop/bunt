@@ -3,7 +3,7 @@ import {Defer} from "@bunt/util";
 import {Redis, RedisOptions} from "ioredis";
 import {ITransport} from "../interfaces";
 import {IPubSubTransport} from "../PubSub";
-import {isTransactionMessage, Message, MessageCtor, MessageHandler, serialize} from "../Queue";
+import {Incoming, isTransactionMessage, Message, MessageCtor, MessageHandler, serialize} from "../Queue";
 import {createConnection} from "./fn";
 import {RedisQ2Reader} from "./RedisQ2Reader";
 import {RedisQueueList} from "./RedisQueueList";
@@ -48,8 +48,8 @@ export class RedisTransport extends Disposer implements ITransport, IPubSubTrans
         await this.#connection.publish(channel, message);
     }
 
-    public async size<M extends Message>(message: M): Promise<number> {
-        return this.#connection.llen(message.channel);
+    public async size<M extends Incoming>(type: MessageCtor<M>): Promise<number> {
+        return this.#connection.llen(type.channel);
     }
 
     public getQueueList<M extends Message>(type: MessageCtor<M>, handler: MessageHandler<M>): RedisQueueList<M> {

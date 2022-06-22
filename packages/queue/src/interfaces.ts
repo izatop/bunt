@@ -1,7 +1,16 @@
 import {Context, IDisposable} from "@bunt/unit";
 import {Promisify} from "@bunt/util";
 import {Handler} from "./Handler";
-import {IQueueList, IQueueReader, Message, MessageCtor, MessageHandler, MessagePayload, TaskAbstract} from "./Queue";
+import {
+    Incoming,
+    IQueueList,
+    IQueueReader,
+    Message,
+    MessageCtor,
+    MessageHandler,
+    MessagePayload,
+    TaskAbstract,
+} from "./Queue";
 
 export type ActionHandler<C extends Context, M extends Message> = Handler<C, M>;
 
@@ -14,7 +23,7 @@ export type HandlerState<M extends Message> = {payload: MessagePayload<M>};
 export interface ITransport extends IDisposable {
     send<M extends Message>(message: M): Promisify<void>;
 
-    size<M extends Message>(message: M): Promisify<number>;
+    size<M extends Incoming>(type: MessageCtor<M>): Promisify<number>;
 
     getQueueList<M extends Message>(type: MessageCtor<M>, handler: MessageHandler<M>): IQueueList<M>;
 
