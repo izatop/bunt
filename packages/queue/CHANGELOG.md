@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.24.12](https://github.com/izatop/bunt/compare/v0.24.11...v0.24.12) (2022-06-22)
+
+
+### Bug Fixes
+
+* add queue.size(message) ([4872987](https://github.com/izatop/bunt/commit/4872987b4c1f3292bacd7b419f9f6fde9335753f))
+
+
+
+
+
 ## [0.24.11](https://github.com/izatop/bunt/compare/v0.24.10...v0.24.11) (2022-05-28)
 
 **Note:** Version bump only for package @bunt/queue
