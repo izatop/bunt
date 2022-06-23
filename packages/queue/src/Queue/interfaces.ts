@@ -78,6 +78,7 @@ export interface MessageCtor<M extends Incoming> {
     prototype: M;
 
     readonly channel: string;
+    readonly concurrency: number;
 
     new(message: MessagePayload<M>): M;
 }

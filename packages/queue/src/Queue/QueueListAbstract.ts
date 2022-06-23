@@ -1,5 +1,6 @@
 import {Disposer} from "@bunt/unit";
 import {assert, isDefined, isInstanceOf, toError} from "@bunt/util";
+import {ConcurrencyQueue} from "../Concurrency/ConcurrencyQueue";
 import {ITransport} from "../interfaces";
 import {
     IQueueList,
@@ -19,6 +20,7 @@ export abstract class QueueListAbstract<M extends Message> extends Disposer impl
     readonly #transport: ITransport;
     readonly #handler: MessageHandler<M>;
     readonly #watchers: IQueueListWatcher<M>[] = [];
+    readonly #queue: ConcurrencyQueue;
 
     #subscribed = true;
     #state?: Promise<void>;
@@ -31,6 +33,7 @@ export abstract class QueueListAbstract<M extends Message> extends Disposer impl
         this.#handler = handler;
         this.#transport = transport;
         this.#state = this.listen();
+        this.#queue = new ConcurrencyQueue(type.concurrency);
 
         this.onDispose(this.#reader);
         this.onDispose(() => this.unsubscribe());
@@ -65,9 +68,11 @@ export abstract class QueueListAbstract<M extends Message> extends Disposer impl
         while (this.#subscribed) {
             const readOperation = await this.#reader.read();
             if (readOperation) {
-                await this.handle(readOperation);
+                await this.#queue.enqueue(() => this.handle(readOperation));
             }
         }
+
+        await this.#queue.flush();
     }
 
     protected async handle(operation: IReadOperation<M>): Promise<void> {
