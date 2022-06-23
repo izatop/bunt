@@ -1,6 +1,6 @@
 export abstract class IncomingMessageAbstract<T> {
     public readonly payload: T;
-    public static readonly concurrency = 1;
+    public static readonly concurrency: number = 1;
 
     constructor(payload: T) {
         this.payload = payload;
