@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.24.14](https://github.com/izatop/bunt/compare/v0.24.13...v0.24.14) (2022-06-23)
+
+
+### Bug Fixes
+
+* queue: add concurrency ([c5590b5](https://github.com/izatop/bunt/commit/c5590b5612a3c19db87c7a04c147d80139445964))
+
+
+
+
+
 ## [0.24.13](https://github.com/izatop/bunt/compare/v0.24.12...v0.24.13) (2022-06-22)
 
 
