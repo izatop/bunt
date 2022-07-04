@@ -24,8 +24,8 @@ export abstract class ResponseAbstract<T> {
     public readonly encoding: string = "utf-8";
     public readonly cookies: Cookie[] = [];
 
-    readonly #data: Promisify<T>;
     readonly #headers: {[key: string]: string};
+    #data: Promisify<T>;
 
     constructor(data: Promisify<T> | (() => Promisify<T>), options: IResponseOptions = {}) {
         this.#data = isFunction(data) ? data() : data;
@@ -45,6 +45,10 @@ export abstract class ResponseAbstract<T> {
         } else {
             this.#headers = headers || {};
         }
+    }
+
+    public setContent(data: Promisify<T>): void {
+        this.#data = data;
     }
 
     public setCookie(name: string, value: string, options: CookieOptions): void {
