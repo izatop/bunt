@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.24.18](https://github.com/izatop/bunt/compare/v0.24.17...v0.24.18) (2022-07-07)
+
+
+### Bug Fixes
+
+* update deps, cookies ([929c41a](https://github.com/izatop/bunt/commit/929c41a9d89545a8e98d7ebe5bcdb0c33edf10da))
+
+
+
+
+
 ## [0.24.17](https://github.com/izatop/bunt/compare/v0.24.16...v0.24.17) (2022-07-04)
 
 
