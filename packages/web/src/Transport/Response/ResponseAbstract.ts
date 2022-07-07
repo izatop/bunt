@@ -22,8 +22,8 @@ export abstract class ResponseAbstract<T> {
     public readonly status?: string;
     public readonly type: string = "text/plain";
     public readonly encoding: string = "utf-8";
-    public readonly cookies: Cookie[] = [];
 
+    readonly #cookies = new Map<string, Cookie>();
     readonly #headers: {[key: string]: string};
     #data: Promisify<T>;
 
@@ -47,12 +47,20 @@ export abstract class ResponseAbstract<T> {
         }
     }
 
+    public get cookies(): Cookie[] {
+        return [...this.#cookies.values()];
+    }
+
     public setContent(data: Promisify<T>): void {
         this.#data = data;
     }
 
     public setCookie(name: string, value: string, options: CookieOptions): void {
-        this.cookies.push(new Cookie(name, value, options));
+        this.#cookies.set(name, new Cookie(name, value, options));
+    }
+
+    public hasCookie(name: string): boolean {
+        return this.#cookies.has(name);
     }
 
     public getHeaders(): Record<any, string> {

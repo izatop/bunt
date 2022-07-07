@@ -24,9 +24,9 @@
         "@commitlint/cli": "^17.0.3",
         "@commitlint/config-conventional": "^17.0.3",
         "@types/jest": "^28.1.4",
-        "@types/node": "^18.0.1",
-        "@typescript-eslint/eslint-plugin": "^5.30.4",
-        "@typescript-eslint/parser": "^5.30.4",
+        "@types/node": "^18.0.3",
+        "@typescript-eslint/eslint-plugin": "^5.30.5",
+        "@typescript-eslint/parser": "^5.30.5",
         "cross-env": "^7.0.3",
         "eslint": "^8.19.0",
         "eslint-plugin-import": "^2.26.0",
@@ -37,6 +37,6 @@
         "typescript": "^4.7.2"
     },
     "dependencies": {
-        "lerna": "^5.1.6"
+        "lerna": "^5.1.8"
     }
 }
