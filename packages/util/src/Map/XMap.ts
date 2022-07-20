@@ -39,7 +39,9 @@ export class XMap<K, V> extends Map<K, V> {
         return new XMap<K, T[K]>(Object.entries(values) as [K, T[K]][], initializer);
     }
 
-    public ensure(key: K, initializer: XMapInitializer<K, V> | undefined = this.#initializer): V {
+    public ensure(key: K): V;
+    public ensure<NV extends V = V>(key: K, initializer: XMapInitializer<K, NV>): NV;
+    public ensure(key: K, initializer: XMapInitializer<K, any> | undefined = this.#initializer): V {
         const exists = this.has(key);
         if (!exists && isFunction(initializer)) {
             const value = initializer(key);
