@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.24.23](https://github.com/izatop/bunt/compare/v0.24.22...v0.24.23) (2022-07-20)
+
+
+### Bug Fixes
+
+* action handlers ([836360e](https://github.com/izatop/bunt/commit/836360e534be42ccc49af10bdf63257656b05fe8))
+* action handlers ([0c59410](https://github.com/izatop/bunt/commit/0c59410805f6cdafe15affb781f75a66aeacd70d))
+
+
+
+
+
 ## [0.24.22](https://github.com/izatop/bunt/compare/v0.24.21...v0.24.22) (2022-07-20)
 
 
