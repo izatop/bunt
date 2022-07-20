@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.24.20](https://github.com/izatop/bunt/compare/v0.24.19...v0.24.20) (2022-07-20)
+
+
+### Bug Fixes
+
+* add dsn parser ([be82058](https://github.com/izatop/bunt/commit/be820582a1a2eca2fdbf630ae352f90a7e6a0ffc))
+
+
+
+
+
 ## [0.24.19](https://github.com/izatop/bunt/compare/v0.24.18...v0.24.19) (2022-07-15)
 
 
