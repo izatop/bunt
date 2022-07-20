@@ -57,7 +57,7 @@ export class Dispatcher<C extends Context> extends Disposer implements IRunnable
         return this;
     }
 
-    public on(handlers: ActionTransactionHandlers): void {
+    public on(handlers: ActionTransactionHandlers<C>): void {
         this.#unit.on(handlers);
     }
 }
