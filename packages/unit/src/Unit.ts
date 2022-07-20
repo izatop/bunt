@@ -37,7 +37,7 @@ export class Unit<C extends Context> {
 
     protected static async getContext<C extends Context>(context: ContextArg<C>): Promise<ApplyContext<C>> {
         if (isFunction(context)) {
-            return this.getContext(await context());
+            return this.getContext(context());
         }
 
         const syncContext = await context;
