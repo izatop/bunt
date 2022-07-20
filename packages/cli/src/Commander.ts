@@ -13,7 +13,7 @@ export class Commander<C extends CommandContext> {
     public static async execute<C extends CommandContext>(
         context: ContextArg<C>,
         routes: IRoute<Action<C, any, IRunnable | void>>[] = [],
-        handlers: ActionTransactionHandlers = {}): Promise<IRunnable | void> {
+        handlers: ActionTransactionHandlers<C> = {}): Promise<IRunnable | void> {
         const command = new this<C>(await Application.factory<C>(context, routes));
         command.#application.on(handlers);
 

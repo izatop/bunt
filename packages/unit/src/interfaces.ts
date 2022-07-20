@@ -31,7 +31,7 @@ export interface IShadowState<T> {
     getShadowState(): T;
 }
 
-export type ActionTransactionHandlers = {
-    start?: (action: string) => () => void;
-    error?: (reason: unknown) => void;
+export type ActionTransactionHandlers<C> = {
+    start?: (action: string, context: ApplyContext<C>) => () => void;
+    error?: (reason: unknown, context: ApplyContext<C>) => void;
 };

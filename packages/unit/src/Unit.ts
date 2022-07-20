@@ -17,7 +17,7 @@ export class Unit<C extends Context> {
     protected readonly logger!: Logger;
 
     readonly #context: ApplyContext<C>;
-    readonly #handlers: ActionTransactionHandlers = {};
+    readonly #handlers: ActionTransactionHandlers<C> = {};
 
     protected constructor(context: ApplyContext<C>) {
         this.#context = context;
@@ -46,7 +46,7 @@ export class Unit<C extends Context> {
         return Context.apply(syncContext);
     }
 
-    public on(handlers: ActionTransactionHandlers): void {
+    public on(handlers: ActionTransactionHandlers<C>): void {
         Object.assign(this.#handlers, handlers);
     }
 
@@ -75,13 +75,13 @@ export class Unit<C extends Context> {
 
     private watch<T>(action: string, run: () => Promise<T> | T): Promise<T> {
         const {start, error} = this.#handlers;
-        const finish = start?.(action);
+        const finish = start?.(action, this.context);
 
         return Promise.resolve(run())
             .finally(finish)
             .catch((reason) => {
                 this.logger.error(toError(reason, "Unexpected error").message, reason);
-                error?.(reason);
+                error?.(reason, this.context);
 
                 throw reason;
             });
