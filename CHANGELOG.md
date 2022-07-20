@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.24.21](https://github.com/izatop/bunt/compare/v0.24.20...v0.24.21) (2022-07-20)
+
+
+### Bug Fixes
+
+* apply context ([f07133b](https://github.com/izatop/bunt/commit/f07133bdf1257cc50d0870df174a9796b45ae17d))
+* context ([58e3871](https://github.com/izatop/bunt/commit/58e3871fa1a4002a44b8bb8691c3c89a0e315652))
+
+
+
+
+
 ## [0.24.20](https://github.com/izatop/bunt/compare/v0.24.19...v0.24.20) (2022-07-20)
 
 
