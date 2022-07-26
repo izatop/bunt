@@ -16,3 +16,4 @@ export * from "./RecordType";
 export * from "./Enum";
 export * from "./EmailAddress";
 export * from "./ScalarType";
+export * from "./Mutate";

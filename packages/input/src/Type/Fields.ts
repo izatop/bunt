@@ -1,13 +1,13 @@
 import {entriesReverse, isFunction, isInstanceOf, isObject, toError} from "@bunt/util";
 import {AssertionObjectError, AssertionTypeError, IReadableTypeError} from "../Assertion";
-import {ObjectFields, ObjectTypeMerge} from "../interfaces";
+import {FieldsSchema} from "../interfaces";
 import {TypeAbstract} from "../TypeAbstract";
 
 export class Fields<TValue extends Record<string, any>> extends TypeAbstract<TValue> {
-    readonly #fields: ObjectFields<TValue>;
+    readonly #fields: FieldsSchema<TValue>;
     readonly #name: string;
 
-    constructor(fields: ObjectFields<TValue>, name = "Object") {
+    constructor(fields: FieldsSchema<TValue>, name = "Object") {
         super();
         this.#fields = fields;
         this.#name = name;
@@ -17,11 +17,11 @@ export class Fields<TValue extends Record<string, any>> extends TypeAbstract<TVa
         return this.#name;
     }
 
-    public get fields(): ObjectFields<TValue> {
+    public get fields(): FieldsSchema<TValue> {
         return this.#fields;
     }
 
-    public merge<F extends Record<string, any>>(from: ObjectTypeMerge<F>): Fields<TValue & F> {
+    public merge<F extends Record<string, any>>(from: Fields<F> | FieldsSchema<F>): Fields<TValue & F> {
         if (isInstanceOf(from, Fields)) {
             return new Fields<TValue & F>(
                 Object.assign({}, this.fields, from.fields) as any,

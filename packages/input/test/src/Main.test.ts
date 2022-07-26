@@ -17,6 +17,7 @@ import {
     validate,
     Varchar,
     RecordType,
+    FieldSelectType,
 } from "../../src";
 import {ITestDescription, ITestHobby, ITestType} from "./interfaces";
 import {TestEnum, TestEnumType} from "./Type/TestEnum";
@@ -47,7 +48,7 @@ describe("Test Input", () => {
         [undefined, [1], new NonNull(new List(Int), [1])],
         ["text", "text", Text],
         ["text", "text", new Varchar({min: 0, max: 4})],
-        [{v: 1, b: true, n: []}, {v: 1, b: true}, new Fields({v: Int, b: Bool})],
+        [{v: 1, b: true}, {v: 1, b: true}, new Fields<{v: number; b: boolean}>({v: Int, b: Bool})],
         [[1, 2, 3], [1, 2, 3], new List(Int)],
         [false, false, union],
         ["2020-01-01", new Date("2020-01-01"), union],
@@ -57,6 +58,7 @@ describe("Test Input", () => {
         ["1", 1, JSONString],
         ["[1]", [1], JSONString],
         ["STR", TestEnum.STR, TestEnumType],
+        [[{n: 1}], [{n: 1}], new List<{n: number}>(new Fields<{n: number}>({n: Int}))],
     ];
 
     test.each(samples)(
@@ -146,5 +148,14 @@ describe("Test Input", () => {
         await expect(validate(RecordType, null))
             .rejects
             .toThrow();
+    });
+
+    test("List", async () => {
+        const t = [
+            {n: 1},
+        ];
+
+        const validator: FieldSelectType<{n: number}[]> = new List(new Fields({n: Int}));
+        await expect(validator.validate(t)).resolves.toEqual(t);
     });
 });

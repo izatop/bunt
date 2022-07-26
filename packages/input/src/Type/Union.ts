@@ -1,16 +1,25 @@
-import {Promisify} from "@bunt/util";
+import {isObject, Promisify} from "@bunt/util";
 import {TypeAbstract} from "../TypeAbstract";
+import {IScalarType} from "./ScalarType";
 
-export type UnionSelector = (input: unknown) => TypeAbstract<unknown> | undefined;
+export type UnionSelector<TValue> = (input: unknown) => TypeAbstract<TValue> | undefined;
 
 export class Union<TValue> extends TypeAbstract<TValue> {
-    readonly #selector: UnionSelector;
+    readonly #selector: UnionSelector<TValue>;
     readonly #name: string;
 
-    constructor(selector: UnionSelector, name = "Union") {
+    constructor(config: {name?: string; selector: IScalarType<TValue>});
+    constructor(selector: UnionSelector<TValue>);
+    constructor(...args: any[]) {
         super();
-        this.#selector = selector;
-        this.#name = name;
+        const [arg1, arg2] = args;
+        if (isObject(arg1)) {
+            this.#selector = arg1.selector;
+            this.#name = arg1.name ?? "Union";
+        } else {
+            this.#selector = arg1;
+            this.#name = arg2;
+        }
     }
 
     public get name(): string {
@@ -18,8 +27,8 @@ export class Union<TValue> extends TypeAbstract<TValue> {
     }
 
     public validate(input: unknown): Promisify<TValue> {
-        const type = this.#selector(input);
-        this.assert(!!type, `${this.name} detection was failed`, input);
+        const type = this.#selector.call(this, input);
+        this.assert(!!type, `${this.name} type detection failed`, input);
 
         return type.validate(input) as Promisify<TValue>;
     }
