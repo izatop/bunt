@@ -15,3 +15,4 @@ export * from "./JSONString";
 export * from "./RecordType";
 export * from "./Enum";
 export * from "./EmailAddress";
+export * from "./ScalarType";
