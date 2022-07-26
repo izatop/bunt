@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.24.24](https://github.com/izatop/bunt/compare/v0.24.23...v0.24.24) (2022-07-26)
+
+
+### Bug Fixes
+
+* update deps, imports ([c9dba60](https://github.com/izatop/bunt/commit/c9dba60aa76ebb7bbcffe346c9497b67cd235594))
+
+
+
+
+
 ## [0.24.20](https://github.com/izatop/bunt/compare/v0.24.19...v0.24.20) (2022-07-20)
 
 **Note:** Version bump only for package @bunt/input
