@@ -23,6 +23,10 @@ export class RequestProxy {
         return proxy;
     }
 
+    public get authorization(): string {
+        return this.#request.headers.get("authorization", "");
+    }
+
     public get cookies(): Cookies {
         return this.#request.cookies;
     }
