@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.24.27](https://github.com/izatop/bunt/compare/v0.24.26...v0.24.27) (2022-08-25)
+
+**Note:** Version bump only for package @bunt/ws
+
+
+
+
+
 ## [0.24.26](https://github.com/izatop/bunt/compare/v0.24.25...v0.24.26) (2022-08-19)
 
 **Note:** Version bump only for package @bunt/ws

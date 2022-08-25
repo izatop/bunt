@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.24.27](https://github.com/izatop/bunt/compare/v0.24.26...v0.24.27) (2022-08-25)
+
+
+### Bug Fixes
+
+* add authorization property to request proxy ([f4946f7](https://github.com/izatop/bunt/commit/f4946f7cb2db8b491faa7d4078a382d0d2fc483c))
+
+
+
+
+
 ## [0.24.26](https://github.com/izatop/bunt/compare/v0.24.25...v0.24.26) (2022-08-19)
 
 
