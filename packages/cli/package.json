@@ -1,6 +1,6 @@
 {
     "name": "@bunt/cli",
-    "version": "0.24.26",
+    "version": "0.24.28",
     "keywords": [
         "typescript"
     ],
@@ -26,8 +26,8 @@
         "access": "public"
     },
     "dependencies": {
-        "@bunt/app": "^0.24.26",
-        "@bunt/util": "^0.24.26",
+        "@bunt/app": "^0.24.28",
+        "@bunt/util": "^0.24.28",
         "path-to-regexp": "^6.2.1"
     },
     "license": "MIT"

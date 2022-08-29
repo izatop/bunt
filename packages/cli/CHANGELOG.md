@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.24.28](https://github.com/izatop/bunt/compare/v0.24.27...v0.24.28) (2022-08-29)
+
+
+### Bug Fixes
+
+* declare logger ([af844b5](https://github.com/izatop/bunt/commit/af844b58227a19d883125367d1b5f293b6c46569))
+* lint ([96e91d2](https://github.com/izatop/bunt/commit/96e91d2f61396ac46a146aa039361d105a383848))
+
+
+
+
+
 ## [0.24.26](https://github.com/izatop/bunt/compare/v0.24.25...v0.24.26) (2022-08-19)
 
 **Note:** Version bump only for package @bunt/cli

@@ -1,6 +1,6 @@
 {
     "name": "@bunt/queue",
-    "version": "0.24.26",
+    "version": "0.24.28",
     "keywords": [
         "typescript"
     ],
@@ -26,8 +26,8 @@
         "access": "public"
     },
     "dependencies": {
-        "@bunt/unit": "^0.24.26",
-        "@bunt/util": "^0.24.26",
+        "@bunt/unit": "^0.24.28",
+        "@bunt/util": "^0.24.28",
         "@types/ioredis": "^4.28.10",
         "ioredis": "^5.2.3"
     },

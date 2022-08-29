@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.24.28](https://github.com/izatop/bunt/compare/v0.24.27...v0.24.28) (2022-08-29)
+
+
+### Bug Fixes
+
+* update deps ([2a3df0d](https://github.com/izatop/bunt/commit/2a3df0d1e109f7ed833b2408680c551ea8a70fe7))
+
+
+
+
+
 ## [0.24.26](https://github.com/izatop/bunt/compare/v0.24.25...v0.24.26) (2022-08-19)
 
 **Note:** Version bump only for package @bunt/fs
