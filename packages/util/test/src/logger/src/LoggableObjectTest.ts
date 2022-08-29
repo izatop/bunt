@@ -1,8 +1,8 @@
-import {ILogable, ILogger, LogableType, Logger} from "../../../../src";
+import {ILogable, ILogger, LogableType, logger, Logger} from "../../../../src";
 
 export class LoggableObjectTest<T extends LogableType> implements ILogger, ILogable<T> {
     @logger
-    public logger!: Logger;
+    declare public readonly logger: Logger;
 
     protected value: T;
 

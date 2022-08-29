@@ -1,10 +1,10 @@
-import {Logger, safeMap} from "@bunt/util";
+import {logger, Logger, safeMap} from "@bunt/util";
 import {DisposableType, IDisposable} from "../Runtime";
 import {dispose} from "./functions";
 
 export abstract class Disposer implements IDisposable {
     @logger
-    protected readonly logger!: Logger;
+    declare protected readonly logger: Logger;
 
     readonly #disposables: DisposableType[] = [];
 

@@ -15,7 +15,7 @@ import {
     unit,
     Unit,
 } from "@bunt/unit";
-import {assert, Defer, isDefined, isString, Logger, noop, resolveOrReject, toError} from "@bunt/util";
+import {assert, Defer, isDefined, isString, logger, Logger, noop, resolveOrReject, toError} from "@bunt/util";
 import {RequestMessage, WebServer} from "@bunt/web";
 import * as ws from "ws";
 import {WebSocketCloseReason} from "./const";
@@ -23,7 +23,7 @@ import {HandleProtoType, ProtoHandleAbstract} from "./Protocol";
 
 export class WebSocketServer<C extends Context> extends Disposer implements IRunnable {
     @logger
-    public readonly logger!: Logger;
+    declare protected readonly logger: Logger;
 
     readonly #disposeAcceptor: () => void;
     readonly #servers = new Map<IRoute<ActionAny<C>>, ws.Server>();

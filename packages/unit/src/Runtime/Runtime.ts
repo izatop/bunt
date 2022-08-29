@@ -1,4 +1,4 @@
-import {Defer, isNull, isUndefined, LogFn, Logger, SingleRef, toError} from "@bunt/util";
+import {Defer, isNull, isUndefined, LogFn, logger, Logger, SingleRef, toError} from "@bunt/util";
 import {Disposer, dispose} from "../Dispose";
 import {Heartbeat} from "./Heartbeat";
 import {RuntimeTask} from "./interfaces";
@@ -11,7 +11,7 @@ const ENV = process.env.NODE_ENV || "production";
 
 export class Runtime extends Disposer {
     @logger
-    public readonly logger!: Logger;
+    declare protected readonly logger: Logger;
 
     readonly #running: Heartbeat[] = [];
     readonly #pending: Promise<unknown>[] = [];

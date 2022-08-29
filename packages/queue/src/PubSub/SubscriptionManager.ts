@@ -1,5 +1,5 @@
 import {IDisposable} from "@bunt/unit";
-import {assert, Defer, Logger} from "@bunt/util";
+import {assert, Defer, logger, Logger} from "@bunt/util";
 import {SubscriptionId, SubscriptionListenerId, SubscriptionManagerListener} from "./interfaces";
 import {SubscriptionList} from "./SubscriptionList";
 
@@ -7,7 +7,7 @@ export type SubscriptionManagerConfig = [list: SubscriptionList, state: Defer<vo
 
 export abstract class SubscriptionManager implements IDisposable {
     @logger
-    readonly logger!: Logger;
+    declare protected readonly logger: Logger;
 
     readonly #subscriptions = new Map<string, SubscriptionManagerConfig>();
 

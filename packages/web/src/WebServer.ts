@@ -12,12 +12,13 @@ import {
     NotFound,
     ValidationError,
     Defer,
+    logger,
 } from "@bunt/util";
 import {IErrorResponseHeaders, IProtocolAcceptor, IResponderOptions, Responder} from "./Transport";
 
 export class WebServer<C extends Context> extends Application<C> implements IDisposable, IRunnable {
     @logger
-    public readonly logger!: Logger;
+    declare protected readonly logger: Logger;
 
     readonly #server: http.Server;
     readonly #state = new Defer<void>();

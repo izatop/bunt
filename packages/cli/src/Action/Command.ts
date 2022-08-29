@@ -1,12 +1,12 @@
 import {Action, IRunnable, StateType} from "@bunt/unit";
-import {Argv, Logger, Program} from "@bunt/util";
+import {Argv, logger, Logger, Program} from "@bunt/util";
 import {CommandContext} from "../Context/CommandContext";
 
 export abstract class Command<C extends CommandContext,
     S extends StateType | null = null> extends Action<C, S, IRunnable | void> {
 
     @logger
-    protected logger!: Logger;
+    declare protected readonly logger: Logger;
 
     readonly #queue = new Set<Promise<unknown>>();
 

@@ -1,5 +1,5 @@
 import {Action, Context, IShadowState, ShadowState, StateType} from "@bunt/unit";
-import {assert, Logger} from "@bunt/util";
+import {assert, logger, Logger} from "@bunt/util";
 import ws from "ws";
 
 export abstract class ProtoHandleAbstract<C extends Context, S extends StateType = null>
@@ -14,7 +14,7 @@ export abstract class ProtoHandleAbstract<C extends Context, S extends StateType
     protected static protocol: string;
 
     @logger
-    protected logger!: Logger;
+    declare protected readonly logger: Logger;
 
     public static isSupported(protocol: string): boolean {
         return this.protocol.toLowerCase() === protocol.toLowerCase();
@@ -23,7 +23,7 @@ export abstract class ProtoHandleAbstract<C extends Context, S extends StateType
     public getShadowState(): ws {
         const shadowState = ShadowState.get<ws>(this.state);
         assert(shadowState, "Shadow state should be defined");
-        
+
         return shadowState;
     }
 }

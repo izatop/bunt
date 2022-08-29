@@ -8,13 +8,13 @@ import {
     Unit,
     unit,
 } from "@bunt/unit";
-import {assert, isDefined, Logger} from "@bunt/util";
+import {assert, isDefined, logger, Logger} from "@bunt/util";
 import {ActionResponse, IRequest} from "./interfaces";
 import {IRoute, RouteNotFound} from "./Route";
 
 export class Application<C extends Context> {
     @logger
-    protected logger!: Logger;
+    declare protected readonly logger: Logger;
 
     readonly #unit: Unit<C>;
     readonly #routes = new Set<IRoute<ActionAny<C>>>();

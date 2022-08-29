@@ -1,4 +1,4 @@
-import {Defer, Logger} from "@bunt/util";
+import {Defer, logger, Logger} from "@bunt/util";
 import {Disposer} from "../Dispose";
 import {IRunnable} from "./interfaces";
 import {isRunnable} from "./internal";
@@ -10,7 +10,7 @@ export class Heartbeat extends Disposer {
     public readonly name: string;
 
     @logger
-    protected readonly logger!: Logger;
+    declare protected readonly logger: Logger;
 
     readonly #running = new Set<HeartbeatRunningQueue>();
     readonly #life = new Defer<void>();
