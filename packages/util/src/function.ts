@@ -16,8 +16,8 @@ export function curry<A extends any[], T, S>(fn: (arg1: T, ...args: A) => S, val
     };
 }
 
-export function makeSafe<A extends any[], R extends Promise<any>>(fn: (...args: A) => R) {
-    return async (...args: A): Promise<R> => {
+export function makeSafe<A extends any[], R>(fn: (...args: A) => Promise<R>) {
+    return async (...args: A): Promise<R | undefined> => {
         try {
             return await fn(...args);
         } catch (error) {

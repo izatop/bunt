@@ -6,7 +6,6 @@ import {ActionAny, Context, ContextArg, Heartbeat, IDisposable, IRunnable, unit,
 import {
     assert,
     Ctor,
-    logger,
     Logger,
     PermissionError,
     toError,

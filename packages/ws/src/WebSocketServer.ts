@@ -15,7 +15,7 @@ import {
     unit,
     Unit,
 } from "@bunt/unit";
-import {assert, Defer, isDefined, isString, Logger, logger, noop, resolveOrReject, toError} from "@bunt/util";
+import {assert, Defer, isDefined, isString, Logger, noop, resolveOrReject, toError} from "@bunt/util";
 import {RequestMessage, WebServer} from "@bunt/web";
 import * as ws from "ws";
 import {WebSocketCloseReason} from "./const";

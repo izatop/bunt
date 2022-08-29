@@ -1,4 +1,4 @@
-import {assert, isFunction, isInstanceOf, logger, Logger, toError} from "@bunt/util";
+import {assert, isFunction, isInstanceOf, Logger, toError} from "@bunt/util";
 import {ApplyContext, Context} from "./Context";
 import {Action} from "./Action";
 import {

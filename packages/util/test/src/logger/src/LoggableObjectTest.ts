@@ -1,4 +1,4 @@
-import {ILogable, ILogger, LogableType, Logger, logger} from "../../../../src";
+import {ILogable, ILogger, LogableType, Logger} from "../../../../src";
 
 export class LoggableObjectTest<T extends LogableType> implements ILogger, ILogable<T> {
     @logger

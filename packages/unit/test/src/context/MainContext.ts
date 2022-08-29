@@ -1,5 +1,5 @@
 import * as crypto from "crypto";
-import {Context, resolve} from "../../../src";
+import {Context} from "../../../src";
 import {BaseContext} from "./BaseContext";
 import {MemoryDb} from "./services/MemoryDb";
 import {MemoryDbServiceResolver} from "./services/MemoryDbServiceResolver";

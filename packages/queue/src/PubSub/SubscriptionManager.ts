@@ -1,5 +1,5 @@
 import {IDisposable} from "@bunt/unit";
-import {assert, Defer, Logger, logger} from "@bunt/util";
+import {assert, Defer, Logger} from "@bunt/util";
 import {SubscriptionId, SubscriptionListenerId, SubscriptionManagerListener} from "./interfaces";
 import {SubscriptionList} from "./SubscriptionList";
 

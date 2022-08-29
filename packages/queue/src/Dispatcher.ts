@@ -9,7 +9,7 @@ import {
     Unit,
     unit,
 } from "@bunt/unit";
-import {Ctor, Defer, logger, Logger} from "@bunt/util";
+import {Ctor, Defer, Logger} from "@bunt/util";
 import {Handler} from "./Handler";
 import {ITransport} from "./interfaces";
 import {Incoming, MessageCtor, Queue, QueueAbstract} from "./Queue";

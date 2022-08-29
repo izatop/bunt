@@ -1,4 +1,4 @@
-import {Defer, Logger, logger} from "@bunt/util";
+import {Defer, Logger} from "@bunt/util";
 import {Disposer} from "../Dispose";
 import {IRunnable} from "./interfaces";
 import {isRunnable} from "./internal";

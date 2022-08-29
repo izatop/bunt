@@ -1,5 +1,5 @@
 import {Action, Context, IShadowState, ShadowState, StateType} from "@bunt/unit";
-import {assert, Logger, logger} from "@bunt/util";
+import {assert, Logger} from "@bunt/util";
 import ws from "ws";
 
 export abstract class ProtoHandleAbstract<C extends Context, S extends StateType = null>

@@ -1,4 +1,3 @@
-import {bind} from "../decorator";
 import {Promisify, Fn} from "../interfaces";
 import {isUndefined} from "../is";
 

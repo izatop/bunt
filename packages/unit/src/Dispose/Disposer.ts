@@ -1,4 +1,4 @@
-import {Logger, logger, safeMap} from "@bunt/util";
+import {Logger, safeMap} from "@bunt/util";
 import {DisposableType, IDisposable} from "../Runtime";
 import {dispose} from "./functions";
 

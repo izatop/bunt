@@ -1,4 +1,4 @@
-import {Defer, isNull, isUndefined, LogFn, Logger, logger, SingleRef, toError} from "@bunt/util";
+import {Defer, isNull, isUndefined, LogFn, Logger, SingleRef, toError} from "@bunt/util";
 import {Disposer, dispose} from "../Dispose";
 import {Heartbeat} from "./Heartbeat";
 import {RuntimeTask} from "./interfaces";

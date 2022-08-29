@@ -1,5 +1,5 @@
 import {Action, IRunnable, StateType} from "@bunt/unit";
-import {Argv, Logger, logger, Program} from "@bunt/util";
+import {Argv, Logger, Program} from "@bunt/util";
 import {CommandContext} from "../Context/CommandContext";
 
 export abstract class Command<C extends CommandContext,

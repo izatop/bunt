@@ -8,7 +8,7 @@ import {
     Unit,
     unit,
 } from "@bunt/unit";
-import {assert, isDefined, logger, Logger} from "@bunt/util";
+import {assert, isDefined, Logger} from "@bunt/util";
 import {ActionResponse, IRequest} from "./interfaces";
 import {IRoute, RouteNotFound} from "./Route";
 

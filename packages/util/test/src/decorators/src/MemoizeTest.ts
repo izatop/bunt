@@ -1,4 +1,3 @@
-import {memoize} from "../../../../src";
 
 export class MemoizeTest {
     @memoize
