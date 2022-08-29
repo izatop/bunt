@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Route Success 1`] = `
-Object {
+{
   "request": Request {
-    "body": "{\\"name\\":\\"World\\"}",
-    "headers": Object {
+    "body": "{"name":"World"}",
+    "headers": {
       "content-type": "application/json",
     },
     "route": "/u/123",

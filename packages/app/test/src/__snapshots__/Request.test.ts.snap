@@ -1,14 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Request FormTransform 1`] = `
-Object {
+{
   "foo": "bar",
   "key": "value",
 }
 `;
 
 exports[`Request JSONTransform 1`] = `
-Object {
+{
   "field1": "Value1",
   "num": 123,
 }

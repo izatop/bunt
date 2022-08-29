@@ -3,16 +3,16 @@
 exports[`Route Fails 1`] = `[Error: Assertion failed: payload]`;
 
 exports[`Route Success 1`] = `
-Object {
+{
   "request": Request {
-    "body": "{\\"bd\\":\\"2020-11-08T12:18:06.051Z\\",\\"name\\":\\"Peter\\"}",
-    "headers": Object {
+    "body": "{"bd":"2020-11-08T12:18:06.051Z","name":"Peter"}",
+    "headers": {
       "authorization": "s5sChdDmOPmFLtEEsq4L",
       "content-type": "application/json",
     },
     "route": "/test",
   },
-  "response": Object {
+  "response": {
     "bd": 2020-11-08T12:18:06.051Z,
     "session": "s5sChdDmOPmFLtEEsq4L",
     "welcome": "Hello, Peter (age: Sun Nov 08 2020)!",

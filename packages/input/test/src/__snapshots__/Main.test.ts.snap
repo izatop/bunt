@@ -1,18 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Test Input AssertionError 1`] = `
-Object {
-  "fields": Object {
-    "children": Object {
-      "fields": Array [
-        Object {
-          "fields": Object {
-            "children": Object {
+{
+  "fields": {
+    "children": {
+      "fields": [
+        {
+          "fields": {
+            "children": {
               "message": "Wrong payload: Human[] expected",
               "payload": 1,
               "type": "List",
             },
-            "links": Object {
+            "links": {
               "message": "Wrong payload: Text[] expected",
               "payload": undefined,
               "type": "List",
@@ -20,21 +20,21 @@ Object {
           },
           "index": 1,
           "message": "Assertion failed: children, links",
-          "payload": Object {
+          "payload": {
             "age": 12,
             "children": 1,
             "name": "Bob",
           },
           "type": "Human",
         },
-        Object {
-          "fields": Object {
-            "links": Object {
+        {
+          "fields": {
+            "links": {
               "message": "Wrong payload: Text[] expected",
               "payload": undefined,
               "type": "List",
             },
-            "name": Object {
+            "name": {
               "message": "Wrong payload: Text expected",
               "payload": undefined,
               "type": "Text",
@@ -42,48 +42,48 @@ Object {
           },
           "index": 2,
           "message": "Assertion failed: name, links",
-          "payload": Object {
+          "payload": {
             "age": 3,
           },
           "type": "Human",
         },
       ],
       "message": "Assertion failed",
-      "payload": Array [
-        Object {
+      "payload": [
+        {
           "age": 8,
-          "links": Array [
+          "links": [
             "b",
           ],
           "name": "Lisa",
         },
-        Object {
+        {
           "age": 12,
           "children": 1,
           "name": "Bob",
         },
-        Object {
+        {
           "age": 3,
         },
       ],
       "type": "List",
     },
-    "name": Object {
+    "name": {
       "message": "Wrong payload: Text expected",
       "payload": undefined,
       "type": "Text",
     },
-    "parent": Object {
-      "fields": Object {
-        "age": Object {
+    "parent": {
+      "fields": {
+        "age": {
           "message": "Wrong payload: Int expected",
           "payload": undefined,
           "type": "Int",
         },
       },
       "message": "Assertion failed: age",
-      "payload": Object {
-        "links": Array [
+      "payload": {
+        "links": [
           "a",
         ],
         "name": "Parent",
@@ -92,31 +92,31 @@ Object {
     },
   },
   "message": "Assertion failed: name, children, parent",
-  "payload": Object {
+  "payload": {
     "age": 32,
-    "children": Array [
-      Object {
+    "children": [
+      {
         "age": 8,
-        "links": Array [
+        "links": [
           "b",
         ],
         "name": "Lisa",
       },
-      Object {
+      {
         "age": 12,
         "children": 1,
         "name": "Bob",
       },
-      Object {
+      {
         "age": 3,
       },
     ],
-    "links": Array [
+    "links": [
       "a",
       "c",
     ],
-    "parent": Object {
-      "links": Array [
+    "parent": {
+      "links": [
         "a",
       ],
       "name": "Parent",

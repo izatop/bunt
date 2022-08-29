@@ -6,13 +6,13 @@ Log message
 [
   1,
   {
-    \\"foo\\": \\"123\\"
+    "foo": "123"
   }
 ]
 [
   1,
   {
-    \\"foo\\": \\"123\\"
+    "foo": "123"
   }
 ]
 
@@ -20,25 +20,25 @@ Log message
 `;
 
 exports[`Log format test default log formatter 1`] = `
-"{\\"pid\\":5761,\\"label\\":\\"Test\\",\\"message\\":\\"Log message\\",\\"args\\":[1,{\\"foo\\":\\"123\\"}],\\"groupId\\":\\"groupId\\",\\"host\\":\\"srv1\\",\\"timestamp\\":1585574245816,\\"severity\\":0}
+"{"pid":5761,"label":"Test","message":"Log message","args":[1,{"foo":"123"}],"groupId":"groupId","host":"srv1","timestamp":1585574245816,"severity":0}
 "
 `;
 
 exports[`Log format test readable JSON log formatter 1`] = `
 "{
-  \\"pid\\": 5761,
-  \\"label\\": \\"Test\\",
-  \\"message\\": \\"Log message\\",
-  \\"args\\": [
+  "pid": 5761,
+  "label": "Test",
+  "message": "Log message",
+  "args": [
     1,
     {
-      \\"foo\\": \\"123\\"
+      "foo": "123"
     }
   ],
-  \\"groupId\\": \\"groupId\\",
-  \\"host\\": \\"srv1\\",
-  \\"timestamp\\": 1585574245816,
-  \\"severity\\": 5
+  "groupId": "groupId",
+  "host": "srv1",
+  "timestamp": 1585574245816,
+  "severity": 5
 }
 "
 `;

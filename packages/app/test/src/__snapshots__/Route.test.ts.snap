@@ -5,7 +5,7 @@ Route {
   "action": [Function],
   "payload": RouteRule {
     "resolver": Resolver {
-      "resolvers": Object {
+      "resolvers": {
         "id": [Function],
         "option": [Function],
         "payload": [Function],

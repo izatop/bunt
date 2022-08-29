@@ -1,33 +1,33 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`DateTime begins/ends() 1`] = `
-Array [
-  Object {
+[
+  {
     "begins": 2020-02-12T12:35:13.000Z,
     "ends": 2020-02-12T12:35:13.999Z,
     "kind": "sec",
   },
-  Object {
+  {
     "begins": 2020-02-12T12:35:00.000Z,
     "ends": 2020-02-12T12:35:59.999Z,
     "kind": "min",
   },
-  Object {
+  {
     "begins": 2020-02-12T12:00:00.000Z,
     "ends": 2020-02-12T12:59:59.999Z,
     "kind": "hour",
   },
-  Object {
+  {
     "begins": 2020-02-11T21:00:00.000Z,
     "ends": 2020-02-12T20:59:59.999Z,
     "kind": "day",
   },
-  Object {
+  {
     "begins": 2020-01-30T21:00:00.000Z,
     "ends": 2020-02-29T20:59:59.999Z,
     "kind": "month",
   },
-  Object {
+  {
     "begins": 2019-12-30T21:00:00.000Z,
     "ends": 2020-12-31T20:59:59.999Z,
     "kind": "year",
@@ -36,48 +36,48 @@ Array [
 `;
 
 exports[`DateTime mutate() 1`] = `
-Array [
-  Array [
+[
+  [
     "ms",
     100,
     2020-02-12T12:35:13.223Z,
   ],
-  Array [
+  [
     "sec",
     10,
     2020-02-12T12:35:23.123Z,
   ],
-  Array [
+  [
     "min",
     -10,
     2020-02-12T12:25:13.123Z,
   ],
-  Array [
+  [
     "week",
     -1,
     2020-02-05T12:35:13.123Z,
   ],
-  Array [
+  [
     "week",
     2,
     2020-02-26T12:35:13.123Z,
   ],
-  Array [
+  [
     "month",
     3,
     2020-05-12T12:35:13.123Z,
   ],
-  Array [
+  [
     "hour",
     2,
     2020-02-12T14:35:13.123Z,
   ],
-  Array [
+  [
     "day",
     -1,
     2020-02-11T12:35:13.123Z,
   ],
-  Array [
+  [
     "year",
     -5,
     2015-02-12T12:35:13.123Z,
@@ -86,38 +86,38 @@ Array [
 `;
 
 exports[`DateTime set() 1`] = `
-Array [
-  Array [
+[
+  [
     "ms",
     333,
     2020-02-12T12:35:13.333Z,
   ],
-  Array [
+  [
     "sec",
     22,
     2020-02-12T12:35:22.123Z,
   ],
-  Array [
+  [
     "min",
     11,
     2020-02-12T12:11:13.123Z,
   ],
-  Array [
+  [
     "hour",
     0,
     2020-02-11T21:35:13.123Z,
   ],
-  Array [
+  [
     "month",
     2,
     2020-02-02T12:35:13.123Z,
   ],
-  Array [
+  [
     "day",
     11,
     2020-02-11T12:35:13.123Z,
   ],
-  Array [
+  [
     "year",
     2022,
     2022-02-12T12:35:13.123Z,

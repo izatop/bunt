@@ -3,17 +3,17 @@
 exports[`Response JSON 1`] = `"application/json; charset=utf-8"`;
 
 exports[`Response JSON 2`] = `
-Object {
+{
   "content-type": "application/json; charset=utf-8",
 }
 `;
 
 exports[`Response JSON 3`] = `
-Object {
-  "body": "{\\"foo\\":\\"bar\\"}",
+{
+  "body": "{"foo":"bar"}",
   "code": 200,
-  "cookies": Array [],
-  "headers": Object {
+  "cookies": [],
+  "headers": {
     "content-type": "application/json; charset=utf-8",
   },
   "status": "OK",
@@ -23,18 +23,18 @@ Object {
 exports[`Response Main 1`] = `"text/plain; charset=utf-8"`;
 
 exports[`Response Main 2`] = `
-Object {
+{
   "content-type": "text/plain; charset=utf-8",
   "foo": "123",
 }
 `;
 
 exports[`Response Main 3`] = `
-Object {
+{
   "body": "",
   "code": 204,
-  "cookies": Array [],
-  "headers": Object {
+  "cookies": [],
+  "headers": {
     "content-type": "text/plain; charset=utf-8",
     "foo": "123",
   },
@@ -43,11 +43,11 @@ Object {
 `;
 
 exports[`Response Redirect 1`] = `
-Object {
+{
   "body": "",
   "code": 301,
-  "cookies": Array [],
-  "headers": Object {
+  "cookies": [],
+  "headers": {
     "content-type": "text/plain; charset=utf-8",
     "location": "/redirect",
   },
@@ -56,7 +56,7 @@ Object {
 `;
 
 exports[`Response Redirect 2`] = `
-Object {
+{
   "content-type": "text/plain; charset=utf-8",
   "location": "/redirect",
 }
