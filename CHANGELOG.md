@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.24.29](https://github.com/izatop/bunt/compare/v0.24.28...v0.24.29) (2022-08-31)
+
+
+### Bug Fixes
+
+* jest snapshots ([5267212](https://github.com/izatop/bunt/commit/52672129a20ab3ac5e7a33ba0c3489a9ac22a99c))
+* temporary disable eslint no-unused-imports ([b992eb7](https://github.com/izatop/bunt/commit/b992eb7cef0da76cffe83141044acaa4749473b0))
+* update deps ([d0da410](https://github.com/izatop/bunt/commit/d0da4103d8cd15432e0baab970fa21fa0282045d))
+
+
+
+
+
 ## [0.24.28](https://github.com/izatop/bunt/compare/v0.24.27...v0.24.28) (2022-08-29)
 
 
