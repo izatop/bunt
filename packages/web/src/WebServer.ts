@@ -105,14 +105,11 @@ export class WebServer<C extends Context> extends Application<C> implements IDis
     protected async handle(req: IncomingMessage, res: ServerResponse): Promise<void> {
         const request = new Responder(req, res, this.#errorCodeMap, this.#options);
 
-        try {
-            assert(request.validate(this), "Validate request failed");
-            await request.respond(await this.run(request));
-        } catch (error) {
-            this.captureException(error);
-
-            await request.respond(error);
-        }
+        assert(request.validate(this), "Validate request failed");
+        await request.respond(
+            await this.run(request)
+                .catch((reason) => reason),
+        );
     }
 
     private handleUpgrade = (req: IncomingMessage, socket: Socket, head: Buffer): void => {
