@@ -14,7 +14,7 @@ import {
     Defer,
     logger,
 } from "@bunt/util";
-import {IErrorResponseHeaders, IProtocolAcceptor, IResponderOptions, Responder} from "./Transport";
+import {IErrorResponseHeaders, IProtocolAcceptor, IResponderOptions, Responder, ResponseAbstract} from "./Transport";
 
 export class WebServer<C extends Context> extends Application<C> implements IDisposable, IRunnable {
     @logger
@@ -105,29 +105,19 @@ export class WebServer<C extends Context> extends Application<C> implements IDis
     protected async handle(req: IncomingMessage, res: ServerResponse): Promise<void> {
         const request = new Responder(req, res, this.#errorCodeMap, this.#options);
 
-        assert(request.validate(this), "Validate request failed");
-        await request.respond(
-            await this.run(request)
-                .catch((reason) => reason),
-        );
-    }
-
-    private handleUpgrade = (req: IncomingMessage, socket: Socket, head: Buffer): void => {
-        const {upgrade} = req.headers;
         try {
-            assert(upgrade, "Upgrade headers mustn't be empty");
+            assert(request.validate(this), "Validate request failed");
+            await request.respond(await this.run(request));
+        } catch (reason) {
+            if (reason instanceof ResponseAbstract) {
+                await request.respond(reason);
 
-            const protocol = upgrade.toLowerCase();
-            const acceptor = this.#acceptors.get(protocol);
-            assert(acceptor, `Unsupported protocol ${protocol}`);
-            acceptor.handle(req, socket, head);
-        } catch (error) {
-            this.captureException(error);
+                return;
+            }
 
-            socket.write("HTTP/1.1 400 Bad request\r\nContent-Type: text/plain\r\nConnection: close\r\n\r\n");
-            socket.destroy(toError(error));
+            throw reason;
         }
-    };
+    }
 
     private handleRequest = async (req: IncomingMessage, res: ServerResponse): Promise<void> => {
         try {
@@ -143,6 +133,23 @@ export class WebServer<C extends Context> extends Application<C> implements IDis
             if (res.writable) {
                 res.end();
             }
+        }
+    };
+
+    private handleUpgrade = (req: IncomingMessage, socket: Socket, head: Buffer): void => {
+        const {upgrade} = req.headers;
+        try {
+            assert(upgrade, "Upgrade headers mustn't be empty");
+
+            const protocol = upgrade.toLowerCase();
+            const acceptor = this.#acceptors.get(protocol);
+            assert(acceptor, `Unsupported protocol ${protocol}`);
+            acceptor.handle(req, socket, head);
+        } catch (error) {
+            this.captureException(error);
+
+            socket.write("HTTP/1.1 400 Bad request\r\nContent-Type: text/plain\r\nConnection: close\r\n\r\n");
+            socket.destroy(toError(error));
         }
     };
 }

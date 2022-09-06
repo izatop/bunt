@@ -18,7 +18,6 @@ export class CorsValidation extends RequestValidatorAbstract<ICorsOptions> {
     }
 
     public validate(app: Application<any>, request: Responder): void {
-        const AccessControlAllowMethods = new Set<string>();
         if (request.isOptionsRequest()) {
             // Test route for the current OPTIONS request
             const routes = app.getRoutes();
@@ -26,16 +25,11 @@ export class CorsValidation extends RequestValidatorAbstract<ICorsOptions> {
                 return;
             }
 
-            let found = false;
-            for (const [method, matcher] of this.getRouteTuple(routes)) {
-                if (matcher.test(request.route)) {
-                    AccessControlAllowMethods.add(method);
-                    found = true;
-                }
-            }
+            const tuple = this.getRouteTuple(routes);
+            const matchedRoutes = tuple.filter(([, matcher]) => matcher.test(request.route));
+            assert(matchedRoutes.length > 0, () => new RouteNotFound("Not Found"));
 
-            assert(found, () => new RouteNotFound("Not Found"));
-            const methods = [...AccessControlAllowMethods.values()];
+            const methods = [...new Set(matchedRoutes.map(([m]) => m)).values()];
             const headers = this.getAccessControlHeaders(request, methods);
 
             throw new NoContentResponse({headers: new Headers(headers)});
