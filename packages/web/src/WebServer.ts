@@ -138,17 +138,17 @@ export class WebServer<C extends Context> extends Application<C> implements IDis
             this.logger.debug(`${req.method} ${req.url}`);
             await this.handle(req, res);
         } catch (reason) {
-            this.logger.alert(toError(reason).message, reason);
+            this.logger.error("Handle request error", reason);
 
             if (!res.headersSent) {
                 res.writeHead(500, "Internal Server Error");
             }
         } finally {
-            finish();
-
             if (res.writable) {
                 res.end();
             }
+
+            finish();
         }
     };
 }

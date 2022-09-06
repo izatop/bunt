@@ -1,4 +1,4 @@
-import {assert, isFunction, isInstanceOf, logger, Logger, toError} from "@bunt/util";
+import {assert, isFunction, isInstanceOf, logger, Logger} from "@bunt/util";
 import {ApplyContext, Context} from "./Context";
 import {Action} from "./Action";
 import {
@@ -35,6 +35,16 @@ export class Unit<C extends Context> {
         return new this<C>(await this.getContext(context));
     }
 
+    public static async getAction(action: ActionFactory<any>): Promise<ActionCtor<any>> {
+        if (this.isActionFactory(action)) {
+            const {default: ctor} = await action.factory();
+
+            return ctor;
+        }
+
+        return action;
+    }
+
     protected static async getContext<C extends Context>(context: ContextArg<C>): Promise<ApplyContext<C>> {
         if (isFunction(context)) {
             return this.getContext(context());
@@ -44,6 +54,10 @@ export class Unit<C extends Context> {
         assert(isInstanceOf(syncContext, Context), "Wrong context type");
 
         return Context.apply(syncContext);
+    }
+
+    private static isActionFactory(action: ActionFactory<any>): action is AsyncActionFactory<any> {
+        return !Action.isPrototypeOf(action);
     }
 
     public on(handlers: ActionTransactionHandlers<C>): void {
@@ -63,32 +77,19 @@ export class Unit<C extends Context> {
             .finally(finish);
     }
 
-    public static async getAction(action: ActionFactory<any>): Promise<ActionCtor<any>> {
-        if (this.isActionFactory(action)) {
-            const {default: ctor} = await action.factory();
-
-            return ctor;
-        }
-
-        return action;
-    }
-
-    private watch<T>(action: string, run: () => Promise<T> | T): Promise<T> {
+    private async watch<T>(action: string, run: () => Promise<T> | T): Promise<T> {
         const {start, error} = this.#handlers;
         const finish = start?.(action, this.context);
 
-        return Promise.resolve(run())
-            .finally(finish)
-            .catch((reason) => {
-                this.logger.error(toError(reason, "Unexpected error").message, reason);
-                error?.(reason, this.context);
+        try {
+            return await Promise.resolve(run());
+        } catch (reason) {
+            error?.(reason, this.context);
 
-                throw reason;
-            });
-    }
-
-    private static isActionFactory(action: ActionFactory<any>): action is AsyncActionFactory<any> {
-        return !Action.isPrototypeOf(action);
+            throw reason;
+        } finally {
+            finish?.();
+        }
     }
 }
 

@@ -21,22 +21,6 @@ export class Heartbeat extends Disposer {
         this.logger.debug("create", {label: this.name});
     }
 
-    public enqueue(...running: HeartbeatRunningQueue[]): this {
-        for (const job of running) {
-            this.#running.add(job);
-
-            Promise.resolve(job)
-                .catch((error) => this.reject(error))
-                .finally(() => this.finalize(job));
-        }
-
-        return this;
-    }
-
-    public get beats(): boolean {
-        return !this.#life.settled;
-    }
-
     public static create(target: IRunnable): Heartbeat {
         const heartbeat = registry.get(target) ?? new Heartbeat(target);
         if (!registry.has(target)) {
@@ -59,6 +43,22 @@ export class Heartbeat extends Disposer {
                 .getHeartbeat()
                 .watch();
         }
+    }
+
+    public enqueue(...running: HeartbeatRunningQueue[]): this {
+        for (const job of running) {
+            this.#running.add(job);
+
+            Promise.resolve(job)
+                .catch((error) => this.reject(error))
+                .finally(() => this.finalize(job));
+        }
+
+        return this;
+    }
+
+    public get beats(): boolean {
+        return !this.#life.settled;
     }
 
     public async dispose(): Promise<void> {

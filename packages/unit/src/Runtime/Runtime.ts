@@ -1,4 +1,4 @@
-import {Defer, isNull, isUndefined, LogFn, logger, Logger, SingleRef, toError} from "@bunt/util";
+import {isNull, isUndefined, logger, Logger, SingleRef, toError} from "@bunt/util";
 import {Disposer, dispose} from "../Dispose";
 import {Heartbeat} from "./Heartbeat";
 import {RuntimeTask} from "./interfaces";
@@ -15,7 +15,6 @@ export class Runtime extends Disposer {
 
     readonly #running: Heartbeat[] = [];
     readonly #pending: Promise<unknown>[] = [];
-    readonly #state = new Defer<void>();
 
     private readonly created: Date;
 
@@ -37,18 +36,6 @@ export class Runtime extends Disposer {
             .kill(code, reason);
     }
 
-    public async kill(code = 0, reason?: unknown): Promise<void> {
-        const fn: LogFn = code > 0 ? this.logger.error : this.logger.info;
-        fn("Kill { code: %d, reason: %s }", code, reason);
-
-        await Promise.allSettled(this.#pending);
-        await dispose(this);
-        await dispose(Logger);
-        if (!Runtime.isTest()) {
-            process.exit(code);
-        }
-    }
-
     public static onDispose(disposable: DisposableType): Runtime {
         return ref
             .ensure()
@@ -60,21 +47,38 @@ export class Runtime extends Disposer {
     }
 
     public static isProduction(): boolean {
-        return ENV === "production";
+        return this.env === "production";
     }
 
     public static isDevelopment(): boolean {
-        return ENV !== "production";
+        return this.env !== "production";
     }
 
     public static isTest(): boolean {
-        return ENV === "test";
+        return this.env === "test";
+    }
+
+    public static get env(): string {
+        return ENV;
     }
 
     public static run(tasks: RuntimeTask[]): Runtime {
         return ref
             .once(() => new Runtime())
             .run(tasks);
+    }
+
+    public async kill(code = 0, reason?: unknown): Promise<void> {
+        this.logger.info("kill { code: %d, reason: %s }", code, reason);
+
+        await Promise.allSettled(this.#pending);
+        await Promise.allSettled(this.#running.map((heartbeat) => heartbeat.dispose()));
+        await dispose(this);
+        await dispose(Logger);
+
+        if (!Runtime.isTest()) {
+            process.exit(code);
+        }
     }
 
     private run(tasks: RuntimeTask[]): this {
@@ -86,48 +90,32 @@ export class Runtime extends Disposer {
     }
 
     public async watch(): Promise<void> {
-        const finish = this.logger.perf("run");
         try {
-            await Promise.allSettled(this.#pending);
+            await Promise.all(this.#pending);
             await Promise.all(this.#running.map((heartbeat) => heartbeat.watch()));
+            await this.kill(0, "As expected");
         } catch (error) {
-            this.error(error);
-        } finally {
-            finish();
+            this.logger.alert(toError(error).message, error);
+            await this.kill(1, "Some tasks were rejected");
         }
-
-        const code = this.#state.rejected ? 1 : 0;
-        const reason = this.#state.rejected ? "Some tasks were rejected" : "As expected";
-        await this.kill(code, reason);
     }
 
     private async handle(task: RuntimeTask): Promise<void> {
-        try {
-            this.logger.debug("Run task");
+        this.logger.debug("Run task");
 
-            const object = await task();
-            if (isUndefined(object) || isNull(object)) {
-                return;
-            }
-
-            if (isRunnable(object)) {
-                const heartbeat = object.getHeartbeat();
-                this.onDispose(heartbeat);
-                this.#running.push(heartbeat);
-            }
-
-            if (isDisposable(object)) {
-                this.onDispose(object);
-            }
-        } catch (error) {
-            this.error(error);
-
-            throw error;
+        const object = await task();
+        if (isUndefined(object) || isNull(object)) {
+            return;
         }
-    }
 
-    private error(error: unknown): void {
-        this.logger.alert(toError(error).message, error);
-        this.#state.reject(error);
+        if (isRunnable(object)) {
+            const heartbeat = object.getHeartbeat();
+            this.onDispose(heartbeat);
+            this.#running.push(heartbeat);
+        }
+
+        if (isDisposable(object)) {
+            this.onDispose(object);
+        }
     }
 }
