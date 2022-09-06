@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.24.32](https://github.com/izatop/bunt/compare/v0.24.31...v0.24.32) (2022-09-06)
+
+
+### Bug Fixes
+
+* capture exception ([a2add4a](https://github.com/izatop/bunt/commit/a2add4a673704b8e341cdd8faa4557edccbb3f8b))
+
+
+
+
+
 ## [0.24.31](https://github.com/izatop/bunt/compare/v0.24.30...v0.24.31) (2022-09-06)
 
 
