@@ -95,6 +95,7 @@ export class WebServer<C extends Context> extends Application<C> implements IDis
 
     public async dispose(): Promise<void> {
         assert(this.#server.listening, "Server was destroyed");
+
         this.logger.info("close");
         this.#server.close();
 
@@ -102,16 +103,15 @@ export class WebServer<C extends Context> extends Application<C> implements IDis
     }
 
     protected async handle(req: IncomingMessage, res: ServerResponse): Promise<void> {
-        const finish = this.logger.perf("handle", req.url);
         const request = new Responder(req, res, this.#errorCodeMap, this.#options);
 
         try {
-            assert(request.validate(this), "Invalid Request");
+            assert(request.validate(this), "Validate request failed");
             await request.respond(await this.run(request));
         } catch (error) {
+            this.captureException(error);
+
             await request.respond(error);
-        } finally {
-            finish();
         }
     }
 
@@ -125,20 +125,19 @@ export class WebServer<C extends Context> extends Application<C> implements IDis
             assert(acceptor, `Unsupported protocol ${protocol}`);
             acceptor.handle(req, socket, head);
         } catch (error) {
-            this.logger.warning("Unexpected error", error);
+            this.captureException(error);
+
             socket.write("HTTP/1.1 400 Bad request\r\nContent-Type: text/plain\r\nConnection: close\r\n\r\n");
             socket.destroy(toError(error));
         }
     };
 
     private handleRequest = async (req: IncomingMessage, res: ServerResponse): Promise<void> => {
-        const finish = this.logger.perf("request", {method: req.method, url: req.url});
-
         try {
             this.logger.debug(`${req.method} ${req.url}`);
             await this.handle(req, res);
         } catch (reason) {
-            this.logger.error("Handle request error", reason);
+            this.captureException(reason);
 
             if (!res.headersSent) {
                 res.writeHead(500, "Internal Server Error");
@@ -147,8 +146,6 @@ export class WebServer<C extends Context> extends Application<C> implements IDis
             if (res.writable) {
                 res.end();
             }
-
-            finish();
         }
     };
 }

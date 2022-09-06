@@ -25,3 +25,13 @@ export function throttle<A extends any[], R>(fn: (...args: A) => R, t = 100): (.
 export async function all<P = unknown>(pending: Promise<P>[]): Promise<P[]> {
     return Promise.all(pending);
 }
+
+export function toAsync<A extends any[], R>(fn: (...args: A) => R): (...args: A) => Promise<R> {
+    return async (...args: A): Promise<R> => {
+        return fn(...args);
+    };
+}
+
+export async function asyncCall<A extends any[], R>(fn: (...args: A) => R, ...args: A): Promise<R> {
+    return fn(...args);
+}

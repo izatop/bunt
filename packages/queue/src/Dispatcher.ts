@@ -51,6 +51,12 @@ export class Dispatcher<C extends Context> extends Disposer implements IRunnable
 
     public subscribe<M extends Incoming, H extends Handler<C, M>>(type: MessageCtor<M>, action: Ctor<H>): this {
         const subscription = this.#queue.on<any>(type, ({payload}) => this.#unit.run(action, {payload}));
+        subscription.watch((op) => {
+            const {error} = this.#unit.getTransactionHandlers();
+            if (error && !op.status) {
+                error(op.error, this.#unit.context);
+            }
+        });
 
         this.onDispose(subscription);
 

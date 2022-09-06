@@ -1,4 +1,4 @@
-import {assert, isFunction, isInstanceOf, logger, Logger} from "@bunt/util";
+import {assert, asyncCall, isFunction, isInstanceOf, logger, Logger} from "@bunt/util";
 import {ApplyContext, Context} from "./Context";
 import {Action} from "./Action";
 import {
@@ -35,7 +35,8 @@ export class Unit<C extends Context> {
         return new this<C>(await this.getContext(context));
     }
 
-    public static async getAction(action: ActionFactory<any>): Promise<ActionCtor<any>> {
+    public static async getAction<C extends Context>(action: ActionFactory<any>)
+        : Promise<ActionCtor<Action<C, any, any>>> {
         if (this.isActionFactory(action)) {
             const {default: ctor} = await action.factory();
 
@@ -43,6 +44,10 @@ export class Unit<C extends Context> {
         }
 
         return action;
+    }
+
+    protected static isActionFactory(action: ActionFactory<any>): action is AsyncActionFactory<any> {
+        return !Action.isPrototypeOf(action);
     }
 
     protected static async getContext<C extends Context>(context: ContextArg<C>): Promise<ApplyContext<C>> {
@@ -56,43 +61,45 @@ export class Unit<C extends Context> {
         return Context.apply(syncContext);
     }
 
-    private static isActionFactory(action: ActionFactory<any>): action is AsyncActionFactory<any> {
-        return !Action.isPrototypeOf(action);
-    }
-
     public on(handlers: ActionTransactionHandlers<C>): void {
         Object.assign(this.#handlers, handlers);
+    }
+
+    public async exec<A extends ActionAny<C>>(
+        factory: ActionFactory<A>,
+        state: ActionState<A>): Promise<ActionReturn<A>> {
+        const ctor = await Unit.getAction<C>(factory);
+        assert(Action.isPrototypeOf(ctor), "The 'ctor' hasn't prototype of the Action class");
+
+        const perf = this.logger.perf("run", {action: ctor.name});
+        const action = new ctor(this.#context, state);
+        const {start} = this.#handlers;
+        const finish = start?.(action.name, this.context);
+
+        return asyncCall(() => action.run())
+            .finally(finish)
+            .finally(perf);
     }
 
     public async run<A extends ActionAny<C>>(
         factory: ActionFactory<A>,
         state: ActionState<A>): Promise<ActionReturn<A>> {
-        const ctor = await Unit.getAction(factory);
-        assert(Action.isPrototypeOf(ctor), "The 'ctor' hasn't prototype of the Action class");
-
-        const finish = this.logger.perf("run", {action: ctor.name});
-        const action = new ctor(this.#context, state);
-
-        return this.watch(ctor.name, () => action.run())
-            .finally(finish);
+        return this.watch(() => this.exec(factory, state));
     }
 
-    private async watch<T>(action: string, run: () => Promise<T> | T): Promise<T> {
-        const {start, error} = this.#handlers;
-        const finish = start?.(action, this.context);
+    public async watch<T>(run: () => Promise<T>): Promise<T> {
+        const {error} = this.#handlers;
 
         try {
-            return await Promise.resolve(run());
+            return await run();
         } catch (reason) {
             error?.(reason, this.context);
 
             throw reason;
-        } finally {
-            finish?.();
         }
     }
-}
 
-export function unit<C extends Context>(context: ContextArg<C>): Promise<Unit<C>> {
-    return Unit.factory<C>(context);
+    public getTransactionHandlers(): ActionTransactionHandlers<C> {
+        return this.#handlers;
+    }
 }

@@ -62,28 +62,30 @@ export class Application<C extends Context> {
     }
 
     public async run(request: IRequest): Promise<ActionResponse> {
-        const route = this.#index.find((route) => route.test(request.route));
-        assert(route, () => new RouteNotFound(request.route));
+        return this.#unit.watch(async () => {
+            const route = this.#index.find((route) => route.test(request.route));
+            assert(route, () => new RouteNotFound(request.route));
 
-        this.logger.debug("match", route);
+            this.logger.debug("match", route);
 
-        const state: StateType = {};
-        const matches = route.match(request.route);
+            const state: StateType = {};
+            const matches = route.match(request.route);
 
-        if (isDefined(route.payload)) {
-            const {payload} = route;
+            if (isDefined(route.payload)) {
+                const {payload} = route;
 
-            Object.assign(state, await payload.validate({
-                request,
-                context: this.#unit.context,
-                args: new Map<string, string>(Object.entries(matches)),
-            }));
-        }
+                Object.assign(state, await payload.validate({
+                    request,
+                    context: this.#unit.context,
+                    args: new Map<string, string>(Object.entries(matches)),
+                }));
+            }
 
-        const freezedState = Object.freeze(state);
-        await request.linkState?.(freezedState);
+            const freezedState = Object.freeze(state);
+            await request.linkState?.(freezedState);
 
-        return this.#unit.run(route.action, freezedState);
+            return this.#unit.exec(route.action, freezedState);
+        });
     }
 
     public on(handlers: ActionTransactionHandlers<C>): void {
@@ -92,5 +94,12 @@ export class Application<C extends Context> {
 
     public getRoutes(): IRoute<ActionAny<C>>[] {
         return this.#index;
+    }
+
+    protected captureException(reason: unknown): void {
+        this.logger.error("Unexpected error", reason);
+
+        const {error} = this.#unit.getTransactionHandlers();
+        error?.(reason, this.context);
     }
 }
