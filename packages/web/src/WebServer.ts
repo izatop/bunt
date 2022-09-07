@@ -109,13 +109,12 @@ export class WebServer<C extends Context> extends Application<C> implements IDis
             assert(request.validate(this), "Validate request failed");
             await request.respond(await this.run(request));
         } catch (reason) {
+            await request.respond(reason);
             if (reason instanceof ResponseAbstract) {
-                await request.respond(reason);
-
                 return;
             }
 
-            throw reason;
+            this.captureException(reason);
         }
     }
 

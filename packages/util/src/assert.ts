@@ -1,5 +1,5 @@
 import {AssertionError} from "./Exception";
-import {isFunction, isInstanceOf} from "./is";
+import {isFunction, isInstanceOf, isString} from "./is";
 
 export type AssertionDetailsAllowType = string | Record<any, any> | null | number;
 export type AssertionDetails = (() => AssertionDetailsAllowType) | AssertionDetailsAllowType;
@@ -16,6 +16,12 @@ function createAssertionError(message?: AssertionMessage, details?: AssertionDet
 export function assert(expr: unknown, message?: AssertionMessage, details?: AssertionDetails): asserts expr {
     if (!expr) {
         throw createAssertionError(message, details);
+    }
+}
+
+export function validateTrue(result: true | string, details?: AssertionDetails): void {
+    if (isString(result)) {
+        throw createAssertionError(result, details);
     }
 }
 
