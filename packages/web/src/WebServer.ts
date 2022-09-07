@@ -13,8 +13,9 @@ import {
     ValidationError,
     Defer,
     logger,
+    isError,
 } from "@bunt/util";
-import {IErrorResponseHeaders, IProtocolAcceptor, IResponderOptions, Responder, ResponseAbstract} from "./Transport";
+import {IErrorResponseHeaders, IProtocolAcceptor, IResponderOptions, Responder} from "./Transport";
 
 export class WebServer<C extends Context> extends Application<C> implements IDisposable, IRunnable {
     @logger
@@ -110,11 +111,10 @@ export class WebServer<C extends Context> extends Application<C> implements IDis
             await request.respond(await this.run(request));
         } catch (reason) {
             await request.respond(reason);
-            if (reason instanceof ResponseAbstract) {
-                return;
-            }
 
-            this.captureException(reason);
+            if (isError(reason)) {
+                this.captureException(reason);
+            }
         }
     }
 
