@@ -7,6 +7,7 @@
         ],
         "strict": true,
         "sourceMap": true,
+        "inlineSources": true,
         "strictNullChecks": true,
         "forceConsistentCasingInFileNames": true,
         "noImplicitThis": true,
