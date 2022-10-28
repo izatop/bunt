@@ -92,3 +92,11 @@ export interface ITransactionType {
 export type Task = TaskAbstract<any, any>;
 export type Message = MessageAbstract<any>;
 export type Incoming = Task | Message;
+
+export interface IMessageSerializer {
+    serialize(): string;
+}
+
+export interface IMessageParser<T> {
+    parse(value: T): string;
+}
