@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.24.38](https://github.com/izatop/bunt/compare/v0.24.37...v0.24.38) (2022-10-28)
+
+
+### Bug Fixes
+
+* update deps + queue custom parser/serializer ([234232d](https://github.com/izatop/bunt/commit/234232d99688f0e250cdda925e6bcc894e8d09a8))
+
+
+
+
+
 ## [0.24.35](https://github.com/izatop/bunt/compare/v0.24.34...v0.24.35) (2022-09-07)
 
 **Note:** Version bump only for package @bunt/util
