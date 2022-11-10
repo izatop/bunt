@@ -1,6 +1,5 @@
-import {Resolver, RouteRule} from "@bunt/app";
+import {Resolver, route, RouteRule} from "@bunt/app";
 import {Bool, Fields, Text, ToNumber} from "@bunt/input";
-import {route} from "../route";
 import {HelloWorldAction} from "./HelloWorldAction";
 
 export default route(

@@ -14,8 +14,9 @@ import {
     Defer,
     logger,
     AssertionError,
+    isError,
 } from "@bunt/util";
-import {IErrorResponseHeaders, IProtocolAcceptor, IResponderOptions, Responder} from "./Transport";
+import {IErrorResponseHeaders, IProtocolAcceptor, IResponderOptions, Responder, ResponseAbstract} from "./Transport";
 
 export class WebServer<C extends Context> extends Application<C> implements IDisposable, IRunnable {
     @logger
@@ -105,6 +106,17 @@ export class WebServer<C extends Context> extends Application<C> implements IDis
 
     protected async handle(req: IncomingMessage, res: ServerResponse): Promise<void> {
         const request = new Responder(req, res, this.#errorCodeMap, this.#options);
+        try {
+            request.validate(this);
+        } catch (reason) {
+            if (reason instanceof ResponseAbstract) {
+                return request.respond(reason);
+            }
+
+            if (isError(reason)) {
+                throw reason;
+            }
+        }
 
         if (request.validate(this)) {
             return request.respond(
