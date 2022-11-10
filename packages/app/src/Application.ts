@@ -62,7 +62,7 @@ export class Application<C extends Context> {
     }
 
     public async run(request: IRequest): Promise<ActionResponse> {
-        return this.#unit.watch(async () => {
+        const [action, state] = await this.#unit.watch(async () => {
             const route = this.#index.find((route) => route.test(request.route));
             assert(route, () => new RouteNotFound(request.route));
 
@@ -84,8 +84,10 @@ export class Application<C extends Context> {
             const freezedState = Object.freeze(state);
             await request.linkState?.(freezedState);
 
-            return this.#unit.exec(route.action, freezedState);
+            return [route.action, freezedState];
         });
+
+        return this.#unit.run(action, state);
     }
 
     public on(handlers: ActionTransactionHandlers<C>): void {

@@ -7,6 +7,7 @@ import {
     ActionFactory,
     ActionReturn,
     ActionState,
+    ActionTransactionFinish,
     ActionTransactionHandlers,
     AsyncActionFactory,
     ContextArg,
@@ -65,26 +66,24 @@ export class Unit<C extends Context> {
         Object.assign(this.#handlers, handlers);
     }
 
-    public async exec<A extends ActionAny<C>>(
-        factory: ActionFactory<A>,
-        state: ActionState<A>): Promise<ActionReturn<A>> {
-        const ctor = await Unit.getAction<C>(factory);
-        assert(Action.isPrototypeOf(ctor), "The 'ctor' hasn't prototype of the Action class");
-
-        const perf = this.logger.perf("run", {action: ctor.name});
-        const action = new ctor(this.#context, state);
-        const {start} = this.#handlers;
-        const finish = start?.(action.name, this.context);
-
-        return asyncCall(() => action.run())
-            .finally(finish)
-            .finally(perf);
-    }
-
     public async run<A extends ActionAny<C>>(
         factory: ActionFactory<A>,
         state: ActionState<A>): Promise<ActionReturn<A>> {
-        return this.watch(() => this.exec(factory, state));
+        const ctor = await this.watch(async () => {
+            const ctor = await Unit.getAction<C>(factory);
+            assert(Action.isPrototypeOf(ctor), "The 'ctor' hasn't prototype of the Action class");
+
+            return ctor;
+        });
+
+        const perf = this.logger.perf("run", {action: ctor.name});
+
+        const {start} = this.#handlers;
+        const wrapper = this.getTransactionWrapper<ActionReturn<A>>(start?.(ctor.name, this.context));
+
+        return asyncCall(() => new ctor(this.#context, state).run())
+            .then(...wrapper)
+            .finally(perf);
     }
 
     public async watch<T>(run: () => Promise<T>): Promise<T> {
@@ -101,5 +100,26 @@ export class Unit<C extends Context> {
 
     public getTransactionHandlers(): ActionTransactionHandlers<C> {
         return this.#handlers;
+    }
+
+    private getTransactionWrapper<T>(finish?: ActionTransactionFinish)
+        : [success?: (result: T) => T, fails?: (reason: unknown) => never] {
+        if (!finish) {
+            return [];
+        }
+
+        return [
+            (result): T => {
+                finish(null);
+
+                return result;
+            },
+            (reason: unknown): never => {
+                finish(reason);
+
+                throw reason;
+            },
+        ];
+
     }
 }

@@ -13,7 +13,7 @@ import {
     ValidationError,
     Defer,
     logger,
-    isError,
+    AssertionError,
 } from "@bunt/util";
 import {IErrorResponseHeaders, IProtocolAcceptor, IResponderOptions, Responder} from "./Transport";
 
@@ -106,16 +106,14 @@ export class WebServer<C extends Context> extends Application<C> implements IDis
     protected async handle(req: IncomingMessage, res: ServerResponse): Promise<void> {
         const request = new Responder(req, res, this.#errorCodeMap, this.#options);
 
-        try {
-            assert(request.validate(this), "Validate request failed");
-            await request.respond(await this.run(request));
-        } catch (reason) {
-            await request.respond(reason);
-
-            if (isError(reason)) {
-                this.captureException(reason);
-            }
+        if (request.validate(this)) {
+            return request.respond(
+                await this.run(request)
+                    .catch((reason) => reason),
+            );
         }
+
+        return request.respond(new AssertionError("Validate request failed"));
     }
 
     private handleRequest = async (req: IncomingMessage, res: ServerResponse): Promise<void> => {
