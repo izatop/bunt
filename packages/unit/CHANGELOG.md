@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.24.40](https://github.com/izatop/bunt/compare/v0.24.39...v0.24.40) (2022-11-10)
+
+
+### Bug Fixes
+
+* error flow ([c4af864](https://github.com/izatop/bunt/commit/c4af864538a82c2fe27a814720544689e4729181))
+
+
+
+
+
 ## [0.24.38](https://github.com/izatop/bunt/compare/v0.24.37...v0.24.38) (2022-10-28)
 
 **Note:** Version bump only for package @bunt/unit
