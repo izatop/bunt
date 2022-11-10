@@ -106,8 +106,11 @@ export class WebServer<C extends Context> extends Application<C> implements IDis
 
     protected async handle(req: IncomingMessage, res: ServerResponse): Promise<void> {
         const request = new Responder(req, res, this.#errorCodeMap, this.#options);
+
         try {
-            request.validate(this);
+            if (!request.validate(this)) {
+                return request.respond(new AssertionError("Validate request failed"));
+            }
         } catch (reason) {
             if (reason instanceof ResponseAbstract) {
                 return request.respond(reason);
@@ -118,14 +121,10 @@ export class WebServer<C extends Context> extends Application<C> implements IDis
             }
         }
 
-        if (request.validate(this)) {
-            return request.respond(
-                await this.run(request)
-                    .catch((reason) => reason),
-            );
-        }
-
-        return request.respond(new AssertionError("Validate request failed"));
+        return request.respond(
+            await this.run(request)
+                .catch((reason) => reason),
+        );
     }
 
     private handleRequest = async (req: IncomingMessage, res: ServerResponse): Promise<void> => {
