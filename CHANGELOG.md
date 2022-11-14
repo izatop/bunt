@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.24.44](https://github.com/izatop/bunt/compare/v0.24.43...v0.24.44) (2022-11-14)
+
+
+### Bug Fixes
+
+* add headers ([ca08f84](https://github.com/izatop/bunt/commit/ca08f846af0a480bd3197179f4709f132ba9501d))
+
+
+
+
+
 ## [0.24.43](https://github.com/izatop/bunt/compare/v0.24.42...v0.24.43) (2022-11-10)
 
 
