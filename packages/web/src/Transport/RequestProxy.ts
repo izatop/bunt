@@ -1,3 +1,4 @@
+import {IHeaders} from "@bunt/app";
 import {StateType} from "@bunt/unit";
 import {assert} from "@bunt/util";
 import {Cookies} from "./Cookies";
@@ -21,6 +22,10 @@ export class RequestProxy {
         assert(proxy, "Unexpected error");
 
         return proxy;
+    }
+
+    public get headers(): IHeaders {
+        return this.#request.headers;
     }
 
     public get authorization(): string {
