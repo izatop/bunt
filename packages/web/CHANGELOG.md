@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.24.45](https://github.com/izatop/bunt/compare/v0.24.44...v0.24.45) (2022-11-17)
+
+
+### Bug Fixes
+
+* add params ([f86c667](https://github.com/izatop/bunt/commit/f86c667709b49ecf31f65915238b31b3fb1469d2))
+* types ([b84b422](https://github.com/izatop/bunt/commit/b84b42237ff9705dc0f99f192462355a9bf4ded4))
+
+
+
+
+
 ## [0.24.44](https://github.com/izatop/bunt/compare/v0.24.43...v0.24.44) (2022-11-14)
 
 

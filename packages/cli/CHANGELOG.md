@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.24.45](https://github.com/izatop/bunt/compare/v0.24.44...v0.24.45) (2022-11-17)
+
+
+### Bug Fixes
+
+* add params ([f86c667](https://github.com/izatop/bunt/commit/f86c667709b49ecf31f65915238b31b3fb1469d2))
+
+
+
+
+
 ## [0.24.40](https://github.com/izatop/bunt/compare/v0.24.39...v0.24.40) (2022-11-10)
 
 **Note:** Version bump only for package @bunt/cli

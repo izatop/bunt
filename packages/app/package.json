@@ -1,6 +1,6 @@
 {
     "name": "@bunt/app",
-    "version": "0.24.40",
+    "version": "0.24.45",
     "keywords": [
         "typescript"
     ],
@@ -27,7 +27,7 @@
     },
     "dependencies": {
         "@bunt/input": "^0.24.38",
-        "@bunt/unit": "^0.24.40",
+        "@bunt/unit": "^0.24.45",
         "@bunt/util": "^0.24.38",
         "path-to-regexp": "^6.2.1"
     },
