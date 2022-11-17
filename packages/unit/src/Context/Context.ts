@@ -40,7 +40,7 @@ export class Context implements IDisposable {
             const descriptionMap: PropertyDescriptorMap = Object.getOwnPropertyDescriptors(context);
             for (const key of Service.getReferences(context, Context)) {
                 if (Reflect.has(context, key)) {
-                    const service: Service<any> = Reflect.get(context, key);
+                    const service = Reflect.get(context, key) as Service<any>;
                     const finishResolve = this.logger.perf(
                         "Resolve service",
                         {key, context: name, service: service.constructor.name},

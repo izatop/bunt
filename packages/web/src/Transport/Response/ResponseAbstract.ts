@@ -1,5 +1,5 @@
 import {isFunction, isInstanceOf, isNumber, Promisify} from "@bunt/util";
-import * as HTTP from "http-status";
+import HTTP from "http-status";
 import {Headers} from "../Headers";
 import {Cookie, CookieOptions} from "./Cookie";
 
@@ -37,7 +37,7 @@ export abstract class ResponseAbstract<T> {
 
         this.status = status;
         if (!this.status && this.code in HTTP) {
-            this.status = Reflect.get(HTTP, this.code);
+            this.status = (HTTP[this.code] ?? "Unknown").toString();
         }
 
         if (isInstanceOf(headers, Headers)) {
