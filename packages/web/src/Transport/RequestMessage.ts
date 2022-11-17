@@ -1,6 +1,6 @@
 import {IncomingMessage} from "http";
 import {URL} from "url";
-import {Application, IHeaders, RequestAbstract, RequestValidatorAbstract} from "@bunt/app";
+import {Application, IHeaders, IKeyValueMap, KeyValueMap, RequestAbstract, RequestValidatorAbstract} from "@bunt/app";
 import {StateType} from "@bunt/unit";
 import {isString, toArray} from "@bunt/util";
 import {Cookies} from "./Cookies";
@@ -12,7 +12,9 @@ export class RequestMessage extends RequestAbstract {
     public readonly cookies: Cookies;
     public readonly headers: IHeaders;
     public readonly route: string;
+    public readonly params: IKeyValueMap;
 
+    readonly #url: URL;
     readonly #method: string;
     readonly #message: IncomingMessage;
     readonly #validators: RequestValidatorAbstract<any>[] = [];
@@ -23,6 +25,7 @@ export class RequestMessage extends RequestAbstract {
         this.#options = options ?? {};
         this.#message = incomingMessage;
         this.#method = incomingMessage.method?.toUpperCase() ?? "GET";
+        this.#url = this.createURL(incomingMessage.url);
 
         const headers: [string, string][] = [];
         for (const [key, value] of Object.entries(this.#message.headers)) {
@@ -34,6 +37,7 @@ export class RequestMessage extends RequestAbstract {
         this.route = this.getRoute();
         this.headers = new Headers(headers);
         this.cookies = new Cookies(this.headers);
+        this.params = new KeyValueMap([...this.#url.searchParams.entries()]);
 
         if (this.#options.validators) {
             this.#validators = toArray(this.#options.validators);
@@ -79,9 +83,13 @@ export class RequestMessage extends RequestAbstract {
     }
 
     protected getRoute(): string {
-        const {pathname} = new URL(this.#message.url || "/", "http://localhost");
+        const {pathname} = this.createURL(this.#message.url);
         const {method = "GET"} = this.#message;
 
         return `${method.toUpperCase()} ${pathname}`;
+    }
+
+    protected createURL(url?: string): URL {
+        return new URL(url ?? "/", "http://localhost");
     }
 }

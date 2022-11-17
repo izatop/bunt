@@ -1,8 +1,9 @@
-import {RequestAbstract} from "@bunt/app";
+import {KeyValueMap, RequestAbstract} from "@bunt/app";
 import {Argv, assert} from "@bunt/util";
 import {Headers} from "./Headers";
 
 export class RequestCommand extends RequestAbstract {
+    public readonly params = new KeyValueMap([]);
     public readonly headers = new Headers([]);
     public readonly route: string;
 

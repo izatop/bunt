@@ -41,6 +41,7 @@ export interface IRequestTransform<T> {
 
 export interface IRequest {
     readonly route: string;
+    readonly params: IKeyValueMap;
     readonly headers: IHeaders;
 
     to<T>(transform: IRequestTransform<T>): Promise<T>;

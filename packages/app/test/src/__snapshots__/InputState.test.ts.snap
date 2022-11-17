@@ -10,6 +10,7 @@ exports[`Route Success 1`] = `
       "authorization": "s5sChdDmOPmFLtEEsq4L",
       "content-type": "application/json",
     },
+    "params": {},
     "route": "/test",
   },
   "response": {

@@ -1,11 +1,12 @@
 import {ILogable, isFunction, Promisify} from "@bunt/util";
 import {Application} from "../Application";
-import {IHeaders, IRequest, IRequestTransform, RequestTransformType} from "../interfaces";
+import {IHeaders, IKeyValueMap, IRequest, IRequestTransform, RequestTransformType} from "../interfaces";
 import {fromJsonRequest, fromTextRequest} from "../TransformRequest";
 
 export abstract class RequestAbstract implements IRequest, ILogable<{route: string}> {
     public abstract readonly route: string;
     public abstract readonly headers: IHeaders;
+    public abstract readonly params: IKeyValueMap;
 
     /**
      * Get a request body as the Buffer object
@@ -40,7 +41,7 @@ export abstract class RequestAbstract implements IRequest, ILogable<{route: stri
      */
     public async to<T>(transform: IRequestTransform<T>): Promise<T> {
         this.headers.assert("content-type", [transform.type].flat(1));
-        
+
         return transform(await this.getBuffer());
     }
 
