@@ -1,5 +1,5 @@
-import {isFunction, isInstanceOf, isNumber, Promisify} from "@bunt/util";
-import HTTP from "http-status";
+import {isFunction, isInstanceOf, isNumber, isString, Promisify} from "@bunt/util";
+import * as HTTP from "http-status";
 import {Headers} from "../Headers";
 import {Cookie, CookieOptions} from "./Cookie";
 
@@ -35,9 +35,11 @@ export abstract class ResponseAbstract<T> {
             this.code = code;
         }
 
+
         this.status = status;
-        if (!this.status && this.code in HTTP) {
-            this.status = (HTTP[this.code] ?? "Unknown").toString();
+        if (!this.status) {
+            const suggest = HTTP[this.code];
+            this.status = isString(suggest) ? suggest : "Unknown";
         }
 
         if (isInstanceOf(headers, Headers)) {
