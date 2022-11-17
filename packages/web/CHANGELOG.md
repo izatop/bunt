@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.24.46](https://github.com/izatop/bunt/compare/v0.24.45...v0.24.46) (2022-11-17)
+
+
+### Bug Fixes
+
+* test ([0d7955b](https://github.com/izatop/bunt/commit/0d7955b505a42731fba163d000a146989a2f6b98))
+
+
+
+
+
 ## [0.24.45](https://github.com/izatop/bunt/compare/v0.24.44...v0.24.45) (2022-11-17)
 
 
