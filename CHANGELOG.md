@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.24.47](https://github.com/izatop/bunt/compare/v0.24.46...v0.24.47) (2022-12-01)
+
+
+### Bug Fixes
+
+* multipart parser ([19f35d3](https://github.com/izatop/bunt/commit/19f35d362cb71bbe9d8d1d13f6cee7e9b87e601b))
+
+
+
+
+
 ## [0.24.46](https://github.com/izatop/bunt/compare/v0.24.45...v0.24.46) (2022-11-17)
 
 
