@@ -1,7 +1,12 @@
 import {ILogable, isFunction, Promisify} from "@bunt/util";
 import {Application} from "../Application";
 import {IHeaders, IKeyValueMap, IRequest, IRequestTransform, RequestTransformType} from "../interfaces";
-import {fromJsonRequest, fromTextRequest} from "../TransformRequest";
+import {
+    fromJsonRequest,
+    fromTextRequest,
+    MultipartFormDataTransform,
+    URLEncodedFormTransform,
+} from "../TransformRequest";
 
 export abstract class RequestAbstract implements IRequest, ILogable<{route: string}> {
     public abstract readonly route: string;
@@ -46,9 +51,17 @@ export abstract class RequestAbstract implements IRequest, ILogable<{route: stri
     }
 
     /**
-     * Serialize a request body to JSON.
+     * Serialize the request body to object.
      */
     public toObject<T = unknown>(): Promise<T> {
+        const [contentType] = this.headers.get("content-type").split(";");
+        switch(contentType) {
+            case "multipart/form-data":
+                return this.transform<T>(MultipartFormDataTransform);
+            case "application/x-www-form-urlencoded":
+                return this.transform<T>(URLEncodedFormTransform);
+        }
+
         return this.to(fromJsonRequest) as Promise<T>;
     }
 
