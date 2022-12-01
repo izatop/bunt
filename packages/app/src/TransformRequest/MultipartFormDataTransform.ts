@@ -10,7 +10,7 @@ export const MultipartFormDataTransform = async <T = unknown>(request: IRequest)
     request.headers.assert("Content-Type", (value) => value.startsWith("multipart/form-data"));
     const bb = busboy({headers: request.headers.toJSON()});
     const rs = await request.createReadableStream();
-    const defer = new Defer<unknown>();
+    const defer = new Defer<void>();
     const result: Record<string, any> = {};
     const pending: Defer<void>[] = [];
 
@@ -41,11 +41,12 @@ export const MultipartFormDataTransform = async <T = unknown>(request: IRequest)
                 .on("close", () => def.resolve());
         })
         .on("field", (name, value) => inject(parseFieldName(name), value, result))
-        .on("close", () => defer.resolve(result));
+        .on("close", () => defer.resolve());
 
     rs.pipe(bb);
 
+    await defer;
     await Promise.all(pending);
 
-    return defer.then((res) => res as T);
+    return result as any;
 };
