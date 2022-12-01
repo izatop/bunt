@@ -16,3 +16,4 @@ export * from "./Async";
 export * from "./Ref";
 export * from "./Map";
 export * from "./interfaces";
+export * from "./qs";
