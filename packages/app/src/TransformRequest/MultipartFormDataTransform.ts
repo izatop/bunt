@@ -40,7 +40,19 @@ export const MultipartFormDataTransform = async <T = unknown>(request: IRequest)
                 .pipe(createWriteStream(tmpname))
                 .on("close", () => def.resolve());
         })
-        .on("field", (name, value) => inject(parseFieldName(name), value, result))
+        .on("field", (name, value, info) => {
+            if (info.mimeType === "application/json") {
+                try {
+                    inject(parseFieldName(name), JSON.parse(value), result);
+                } catch {
+                    // skip
+                }
+
+                return;
+            }
+
+            inject(parseFieldName(name), value, result);
+        })
         .on("close", () => defer.resolve());
 
     rs.pipe(bb);
