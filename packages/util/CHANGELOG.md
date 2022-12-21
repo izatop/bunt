@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.24.52](https://github.com/izatop/bunt/compare/v0.24.51...v0.24.52) (2022-12-21)
+
+
+### Bug Fixes
+
+* update deps + async iterator factory ([10d4645](https://github.com/izatop/bunt/commit/10d46459a165b3fd5237bbd7bad84db07e415b76))
+
+
+
+
+
 ## [0.24.49](https://github.com/izatop/bunt/compare/v0.24.48...v0.24.49) (2022-12-01)
 
 
