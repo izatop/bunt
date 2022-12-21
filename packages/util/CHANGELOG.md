@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.24.53](https://github.com/izatop/bunt/compare/v0.24.52...v0.24.53) (2022-12-21)
+
+
+### Bug Fixes
+
+* @bunt/async ([0c2056e](https://github.com/izatop/bunt/commit/0c2056e235e02807b0e3e0d976e4c0681ff5c208))
+
+
+
+
+
 ## [0.24.52](https://github.com/izatop/bunt/compare/v0.24.51...v0.24.52) (2022-12-21)
 
 

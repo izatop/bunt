@@ -1,6 +1,6 @@
 {
     "name": "@bunt/async",
-    "version": "0.24.52",
+    "version": "0.24.53",
     "keywords": [
         "typescript",
         "async"
@@ -24,7 +24,7 @@
         "build:watch": "yarn build --watch"
     },
     "dependencies": {
-        "@bunt/util": "^0.24.52"
+        "@bunt/util": "^0.24.53"
     },
     "publishConfig": {
         "access": "public"

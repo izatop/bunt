@@ -1,6 +1,6 @@
 {
     "name": "@bunt/app",
-    "version": "0.24.52",
+    "version": "0.24.53",
     "keywords": [
         "typescript"
     ],
@@ -26,9 +26,9 @@
         "access": "public"
     },
     "dependencies": {
-        "@bunt/input": "^0.24.52",
-        "@bunt/unit": "^0.24.52",
-        "@bunt/util": "^0.24.52",
+        "@bunt/input": "^0.24.53",
+        "@bunt/unit": "^0.24.53",
+        "@bunt/util": "^0.24.53",
         "@types/busboy": "^1.5.0",
         "busboy": "^1.6.0",
         "path-to-regexp": "^6.2.1"

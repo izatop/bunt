@@ -1,6 +1,6 @@
 {
     "name": "@bunt/fs",
-    "version": "0.24.52",
+    "version": "0.24.53",
     "keywords": [
         "typescript"
     ],
@@ -26,8 +26,8 @@
         "access": "public"
     },
     "dependencies": {
-        "@bunt/unit": "^0.24.52",
-        "@bunt/util": "^0.24.52",
+        "@bunt/unit": "^0.24.53",
+        "@bunt/util": "^0.24.53",
         "@types/minio": "^7.0.15",
         "minio": "^7.0.32"
     },
