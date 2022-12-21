@@ -1,4 +1,4 @@
-import {Defer} from ".";
+import {Defer} from "./Defer";
 
 export interface IAsyncPushPullOptions {
     length?: number;
@@ -13,8 +13,19 @@ export class AsyncPushPull<T> {
     #pending: Defer<T | undefined> | null = null;
 
     constructor(options: IAsyncPushPullOptions = {}) {
-        this.#length = options.length ?? 1000;
+        this.#length = options.length ?? Infinity;
         this.#buffered = options.buffered ?? true;
+    }
+
+    public reject(reason: unknown): void {
+        if (this.#pending?.settled || !this.#pending) {
+            // eslint-disable-next-line
+            console.warn(`AsyncPushPull.reject failed call in destroyed state`);
+
+            return;
+        }
+
+        this.#pending?.reject(reason);
     }
 
     public push(value: T): void {
