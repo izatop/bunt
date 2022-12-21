@@ -2,6 +2,9 @@ import {bind} from "../decorator";
 import {Promisify, Fn} from "../interfaces";
 import {isUndefined} from "../is";
 
+/**
+ * @deprecated use @bunt/async AsyncIteratorFactory
+ */
 export class AsyncCallback<T> implements AsyncIterable<T> {
     readonly #disposables: Fn[] = [];
     readonly #pipeline: Fn<[T | undefined]>[] = [];

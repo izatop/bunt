@@ -1,6 +1,3 @@
-/**
- * @deprecated use @bunt/async
- */
 export class AsyncLoader {
     public static factory<T>(fn: () => Promise<{default: T}>): () => Promise<T> {
         return (): Promise<T> => this.require(fn);

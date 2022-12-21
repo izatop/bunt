@@ -4,4 +4,3 @@ export * from "./AsyncLoader";
 export * from "./AsyncPushPull";
 export * from "./AsyncState";
 export * from "./Defer";
-export * from "./AsyncIteratorFactory";

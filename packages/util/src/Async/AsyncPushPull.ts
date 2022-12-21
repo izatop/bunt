@@ -5,6 +5,9 @@ export interface IAsyncPushPullOptions {
     buffered?: boolean;
 }
 
+/**
+ * @deprecated use @bunt/async AsyncPool
+ */
 export class AsyncPushPull<T> {
     readonly #buffer: T[] = [];
     readonly #buffered: boolean;

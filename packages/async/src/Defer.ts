@@ -1,16 +1,14 @@
 import {EventEmitter} from "events";
 
-type DeferOnFulfilled<T, TResult1> = ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null;
-type DeferOnRejected<TResult2> = ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null;
+export type DeferOnFulfilled<T, TResult1> = ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null;
+export type DeferOnRejected<TResult2> = ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null;
+export type DeferState = "rejected" | "fulfilled" | "pending";
 
-/**
- * @deprecated use @bunt/async
- */
 export class Defer<T> implements PromiseLike<T> {
     readonly #event = new EventEmitter();
     readonly #pending: Promise<T>;
 
-    #state: "rejected" | "fulfilled" | "pending" = "pending";
+    #state: DeferState = "pending";
 
     constructor() {
         this.#event.once("resolve", () => this.#state = "fulfilled");
@@ -20,6 +18,10 @@ export class Defer<T> implements PromiseLike<T> {
             this.#event.once("resolve", resolve);
             this.#event.once("reject", reject);
         });
+    }
+
+    public get state(): DeferState {
+        return this.#state;
     }
 
     public get settled(): boolean {

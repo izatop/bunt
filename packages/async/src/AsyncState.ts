@@ -1,4 +1,4 @@
-import {isDefined} from "../is";
+import {isDefined} from "@bunt/util";
 
 export interface IAsyncStateMap<T> {
     resolve: (value: T | PromiseLike<T>) => void;
@@ -9,9 +9,6 @@ export interface IAsyncStateMap<T> {
 
 const registry = new WeakMap<Promise<any>, IAsyncStateMap<any>>();
 
-/**
- * @deprecated use @bunt/async
- */
 export class AsyncState {
     public static acquire<T>(listener?: (value: T) => void): Promise<T> {
         const state = {};

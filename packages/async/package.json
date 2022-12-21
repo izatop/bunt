@@ -1,0 +1,33 @@
+{
+    "name": "@bunt/async",
+    "version": "0.24.52",
+    "keywords": [
+        "typescript",
+        "async"
+    ],
+    "author": {
+        "name": "Artur Bier",
+        "email": "izatop@gmail.com"
+    },
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "files": [
+        "dist/"
+    ],
+    "description": "Async utils",
+    "repository": "git@github.com:izatop/bunt.git",
+    "scripts": {
+        "clean": "yarn build:clean",
+        "watch": "yarn build:watch",
+        "build": "yarn build:clean && tsc",
+        "build:clean": "rimraf dist tsconfig.tsbuildinfo",
+        "build:watch": "yarn build --watch"
+    },
+    "dependencies": {
+        "@bunt/util": "^0.24.52"
+    },
+    "publishConfig": {
+        "access": "public"
+    },
+    "license": "MIT"
+}
