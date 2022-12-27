@@ -1,8 +1,8 @@
-import {isNumber, isString, MayNullable, Promisify} from "@bunt/util";
+import {isNumber, isString, Promisify} from "@bunt/util";
 import {SuperType} from "../SuperType";
 
-export class StringAsNumber<TValue> extends SuperType<MayNullable<TValue>, Exclude<TValue, undefined | null>> {
-    public validate(payload: unknown): Promisify<TValue | undefined> {
+export class StringAsNumber extends SuperType<string | number, number> {
+    public validate(payload: unknown): Promisify<number> {
         this.assert(isString(payload) || isNumber(payload), "Wrong payload type", payload);
 
         return this.type.validate(+payload);
