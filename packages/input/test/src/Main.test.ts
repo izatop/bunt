@@ -18,6 +18,7 @@ import {
     Varchar,
     RecordType,
     FieldSelectType,
+    StringAsNumber,
 } from "../../src";
 import {ITestDescription, ITestHobby, ITestType} from "./interfaces";
 import {TestEnum, TestEnumType} from "./Type/TestEnum";
@@ -39,6 +40,8 @@ describe("Test Input", () => {
     const samples: [any, any, TypeAbstract<any>][] = [
         [1, 1, Int],
         ["1", 1, ToNumber],
+        ["2", 2, new StringAsNumber(Int)],
+        ["1.123", 1.123, new StringAsNumber(Float)],
         [false, false, Bool],
         [true, true, Bool],
         [rand, rand, Float],

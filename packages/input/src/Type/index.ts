@@ -17,3 +17,4 @@ export * from "./Enum";
 export * from "./EmailAddress";
 export * from "./ScalarType";
 export * from "./Mutate";
+export * from "./StirngAsNumber";
