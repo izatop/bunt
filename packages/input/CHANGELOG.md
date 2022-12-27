@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.24.54](https://github.com/izatop/bunt/compare/v0.24.53...v0.24.54) (2022-12-27)
+
+
+### Bug Fixes
+
+* string as number ([1f7a021](https://github.com/izatop/bunt/commit/1f7a02134fba8f9ef9378ba722a20455d5d6f51d))
+
+
+
+
+
 ## [0.24.53](https://github.com/izatop/bunt/compare/v0.24.52...v0.24.53) (2022-12-21)
 
 **Note:** Version bump only for package @bunt/input
