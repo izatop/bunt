@@ -4,3 +4,4 @@ export * from "./AsyncState";
 export * from "./Defer";
 export * from "./AsyncIteratorFactory";
 export * from "./AsyncLoader";
+export * from "./AsyncSingleCall";

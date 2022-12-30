@@ -26,6 +26,7 @@
         "access": "public"
     },
     "dependencies": {
+        "@bunt/async": "^0.24.53",
         "@bunt/unit": "^0.24.53",
         "@bunt/util": "^0.24.53",
         "ioredis": "^5.2.4"

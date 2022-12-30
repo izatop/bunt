@@ -1,5 +1,5 @@
 import {IDisposable} from "@bunt/unit";
-import {Defer} from "@bunt/util";
+import {Defer} from "@bunt/async";
 import {ConcurrencyQueue} from "./ConcurrencyQueue";
 
 export class RateLimitedQueue extends ConcurrencyQueue implements IDisposable {
