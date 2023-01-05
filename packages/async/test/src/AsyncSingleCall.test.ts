@@ -14,6 +14,7 @@ test("AsyncSingleCall", async () => {
     await caller.call();
     expect(counter).toBe(2);
 
-    await caller.call();
+    const pending = caller.call();
+    expect(pending).toBe(caller.wait());
     expect(counter).toBe(3);
 });

@@ -23,4 +23,8 @@ export class AsyncSingleCall {
 
         return this.#defer;
     }
+
+    public wait(): Defer<void> | null {
+        return this.#defer;
+    }
 }
