@@ -1,6 +1,6 @@
 {
     "name": "@bunt/ws",
-    "version": "0.24.55",
+    "version": "0.24.57",
     "keywords": [
         "typescript"
     ],
@@ -29,7 +29,7 @@
         "@bunt/app": "^0.24.55",
         "@bunt/unit": "^0.24.53",
         "@bunt/util": "^0.24.53",
-        "@bunt/web": "^0.24.55",
+        "@bunt/web": "^0.24.57",
         "@types/ws": "^8.5.4",
         "ws": "^8.11.0"
     },

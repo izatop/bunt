@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.24.57](https://github.com/izatop/bunt/compare/v0.24.56...v0.24.57) (2023-01-05)
+
+**Note:** Version bump only for package @bunt/queue
+
+
+
+
+
 ## [0.24.56](https://github.com/izatop/bunt/compare/v0.24.55...v0.24.56) (2022-12-30)
 
 
