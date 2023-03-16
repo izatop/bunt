@@ -1,3 +1,6 @@
+import http from "node:http";
+import https from "node:https";
+import {Readable} from "node:stream";
 import {FileStorage} from "../FileStorage";
 import {FsDriverAbstract} from "../Driver/FsDriverAbstract";
 import {FsWritableFile, IBucketOptions} from "../interfaces";
@@ -39,6 +42,17 @@ export class FsBucket {
 
     public async write(path: string, file: FsWritableFile, metadata: Record<any, any>): Promise<string> {
         return this.#driver.write(this.name, path, file, metadata);
+    }
+
+    public async writeRemoteURL(path: string, url: string, metadata: Record<any, any>): Promise<string> {
+        const get = url.startsWith("https") ? https.get : http.get;
+        const stream = await new Promise<Readable>((resolve, reject) => (
+            get(url, (res) => resolve(res))
+                .on("error", reject)
+                .end()
+        ));
+
+        return this.write(path, stream, metadata);
     }
 
     public async save(): Promise<void> {
