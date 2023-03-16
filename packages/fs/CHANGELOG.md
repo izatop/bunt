@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.25.1](https://github.com/izatop/bunt/compare/v0.25.0...v0.25.1) (2023-03-16)
+
+
+### Bug Fixes
+
+* writeRemoteURL ([9a1561e](https://github.com/izatop/bunt/commit/9a1561e0277c437a520136cd40be51543672596b))
+
+
+
+
+
 # [0.25.0](https://github.com/izatop/bunt/compare/v0.24.57...v0.25.0) (2023-03-16)
 
 
