@@ -1,6 +1,7 @@
 import {URL} from "url";
-import {assert} from "@bunt/util";
+import {assert, isString} from "@bunt/util";
 import {Client} from "minio";
+import {FsWritableFile} from "../interfaces";
 import {FsDriverAbstract} from "./FsDriverAbstract";
 import {MinIOBucketPolicy} from "./MinIOBucketPolicy";
 
@@ -57,8 +58,12 @@ export class MinIO extends FsDriverAbstract {
         await this.#client.makeBucket(name, region ?? DEFAULT_REGION);
     }
 
-    public write(bucket: string, name: string, file: string, metadata: Record<any, any>): Promise<string> {
-        return this.#client.fPutObject(bucket, name, file, metadata)
-            .then((res) => res.etag);
+    public async write(bucket: string, name: string, file: FsWritableFile, metadata: Record<any, any>)
+        : Promise<string> {
+        const result = isString(file)
+            ? this.#client.fPutObject(bucket, name, file, metadata)
+            : this.#client.putObject(bucket, name, file, metadata);
+
+        return (await result).etag;
     }
 }

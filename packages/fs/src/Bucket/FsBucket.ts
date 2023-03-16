@@ -1,9 +1,6 @@
-import {FsDriverAbstract} from "../Driver/FsDriverAbstract";
 import {FileStorage} from "../FileStorage";
-
-export interface IBucketOptions {
-    region?: string;
-}
+import {FsDriverAbstract} from "../Driver/FsDriverAbstract";
+import {FsWritableFile, IBucketOptions} from "../interfaces";
 
 export class FsBucket {
     public readonly name: string;
@@ -40,8 +37,8 @@ export class FsBucket {
         return this.#driver.deletePresignedUrl(this.name, file, expire);
     }
 
-    public async write(id: string, file: string, metadata: Record<any, any>): Promise<string> {
-        return this.#driver.write(this.name, id, file, metadata);
+    public async write(path: string, file: FsWritableFile, metadata: Record<any, any>): Promise<string> {
+        return this.#driver.write(this.name, path, file, metadata);
     }
 
     public async save(): Promise<void> {
