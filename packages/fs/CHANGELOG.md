@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.25.2](https://github.com/izatop/bunt/compare/v0.25.1...v0.25.2) (2023-03-16)
+
+
+### Bug Fixes
+
+* imports ([19c8cd0](https://github.com/izatop/bunt/commit/19c8cd0cda63e9340d6eb72573137aa07bc78c9f))
+
+
+
+
+
 ## [0.25.1](https://github.com/izatop/bunt/compare/v0.25.0...v0.25.1) (2023-03-16)
 
 
