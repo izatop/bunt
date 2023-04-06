@@ -108,13 +108,16 @@ export class MinIO extends FsDriverAbstract {
 
             if (protocols.includes(source.protocol)) {
                 const response = await fetch(source, {redirect: "follow", follow: 5});
-                const known = ["content-type"];
-                Object.assign(metadata, Object.fromEntries(
-                    [...response.headers.entries()]
-                        .filter(([key]) => known.includes(key)),
-                ));
+                const headers = [...response.headers.entries()];
+                const knownHeaders = ["content-type"];
+                const headersMetadata = Object.fromEntries(
+                    headers.filter(([key]) => knownHeaders.includes(key)),
+                );
 
-                assert(response.body, `Response body is null for URL ${source.href}`);
+                Object.assign(metadata, headersMetadata);
+
+                assert(response.ok, response.statusText, {status: response.status});
+                assert(response.body, "Response body is null", source.pathname);
                 metadata["content-type"] = this.#getMimeType(source.pathname, metadata);
 
                 return this.#client.putObject(
