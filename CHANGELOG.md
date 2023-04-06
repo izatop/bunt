@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.25.5](https://github.com/izatop/bunt/compare/v0.25.4...v0.25.5) (2023-04-06)
+
+
+### Bug Fixes
+
+* mime type detection ([02f0706](https://github.com/izatop/bunt/commit/02f07067c69a2d719fba1325063591b6e667d640))
+
+
+
+
+
 ## [0.25.4](https://github.com/izatop/bunt/compare/v0.25.3...v0.25.4) (2023-04-06)
 
 
