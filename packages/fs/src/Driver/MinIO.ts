@@ -106,7 +106,7 @@ export class MinIO extends FsDriverAbstract {
             }
 
             if (protocols.includes(source.protocol)) {
-                const response = await fetch(source);
+                const response = await fetch(source, {redirect: "follow", follow: 5});
                 const known = ["content-type"];
                 const headers = Object.fromEntries(
                     [...response.headers.entries()]
