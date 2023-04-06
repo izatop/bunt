@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.25.4](https://github.com/izatop/bunt/compare/v0.25.3...v0.25.4) (2023-04-06)
+
+
+### Bug Fixes
+
+* handle redirects ([adca206](https://github.com/izatop/bunt/commit/adca20691514b5b9716ce3fd454a9bdc6e71c946))
+
+
+
+
+
 ## [0.25.3](https://github.com/izatop/bunt/compare/v0.25.2...v0.25.3) (2023-04-06)
 
 
