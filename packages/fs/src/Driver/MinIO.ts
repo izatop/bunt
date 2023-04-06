@@ -1,11 +1,14 @@
 import {URL} from "url";
+import {Readable} from "stream";
 import {assert, isString} from "@bunt/util";
-import {Client} from "minio";
-import {FsWritableFile} from "../interfaces";
+import {Client, UploadedObjectInfo} from "minio";
+import fetch from "node-fetch";
+import {FsSource, FsStat, FsWritable} from "../interfaces";
 import {FsDriverAbstract} from "./FsDriverAbstract";
 import {MinIOBucketPolicy} from "./MinIOBucketPolicy";
 
 const DEFAULT_REGION = "default";
+const protocols = ["http:", "https:"];
 
 export class MinIO extends FsDriverAbstract {
     readonly #client: Client;
@@ -58,12 +61,71 @@ export class MinIO extends FsDriverAbstract {
         await this.#client.makeBucket(name, region ?? DEFAULT_REGION);
     }
 
-    public async write(bucket: string, name: string, file: FsWritableFile, metadata: Record<any, any>)
+    public async write(bucket: string, name: string, file: FsWritable, metadata: Record<string, any>)
         : Promise<string> {
-        const result = isString(file)
+        const op = isString(file)
             ? this.#client.fPutObject(bucket, name, file, metadata)
             : this.#client.putObject(bucket, name, file, metadata);
 
-        return (await result).etag;
+        return (await op).etag;
+    }
+
+    public get(bucket: string, file: string): Promise<Readable> {
+        return this.#client.getObject(bucket, file);
+    }
+
+    public async stat(bucket: string, file: string): Promise<FsStat> {
+        const {metaData: metadata, ...stat} = await this.#client.statObject(bucket, file);
+
+        return {
+            metadata,
+            ...stat,
+        };
+    }
+
+    public async put(
+        bucket: string,
+        name: string,
+        source: FsSource,
+        metadata?: Record<string, any>,
+    ): Promise<FsStat> {
+        await this.#put(bucket, name, source, metadata);
+
+        return this.stat(bucket, name);
+    }
+
+    async #put(
+        bucket: string,
+        name: string,
+        source: FsSource,
+        metadata: Record<string, any> = {},
+    ): Promise<UploadedObjectInfo> {
+        if (source instanceof URL) {
+            if (source.protocol.startsWith("file")) {
+                return this.#client.fPutObject(bucket, name, source.pathname, metadata);
+            }
+
+            if (protocols.includes(source.protocol)) {
+                const response = await fetch(source);
+                const known = ["content-type"];
+                const headers = Object.fromEntries(
+                    [...response.headers.entries()]
+                        .filter(([key]) => known.includes(key)),
+                );
+
+                assert(response.body, `Response body is null for URL ${source.href}`);
+
+                return this.#client.putObject(
+                    bucket,
+                    name,
+                    response.body as Readable,
+                    {...headers, ...metadata},
+                );
+            }
+
+            throw new Error(`Unsupported protocol: ${source.protocol}`);
+        }
+
+        return this.#client.putObject(bucket, name, source, metadata);
     }
 }

@@ -29,7 +29,9 @@
         "@bunt/unit": "^0.25.0",
         "@bunt/util": "^0.25.0",
         "@types/minio": "^7.0.15",
-        "minio": "^7.0.32"
+        "@types/node-fetch": "^2.6.3",
+        "minio": "^7.0.32",
+        "node-fetch": "2"
     },
     "license": "MIT"
 }

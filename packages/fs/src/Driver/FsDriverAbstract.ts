@@ -1,10 +1,8 @@
-import {FsWritableFile} from "../interfaces";
+import {Readable} from "node:stream";
+import {FsSource, FsStat, FsWritable} from "../interfaces";
 
 export abstract class FsDriverAbstract {
     public abstract createBucket(name: string, region?: string, checkExists?: boolean): Promise<void>;
-
-    public abstract write(bucket: string, name: string, file: FsWritableFile, metadata: Record<any, any>)
-    : Promise<string>;
 
     public abstract setBucketPolicy(bucket: string, policy: string): Promise<void>;
 
@@ -17,4 +15,22 @@ export abstract class FsDriverAbstract {
     public abstract removeObject(bucket: string, file: string): Promise<void>;
 
     public abstract deletePresignedUrl(bucket: string, file: string, expire: number): Promise<string>;
+
+    public abstract get(bucket: string, file: string): Promise<Readable>;
+
+    public abstract stat(bucket: string, file: string): Promise<FsStat>;
+
+    public abstract write(
+        bucket: string,
+        name: string,
+        file: FsWritable,
+        metadata: Record<any, any>
+    ): Promise<string>;
+
+    public abstract put(
+        bucket: string,
+        name: string,
+        file: FsSource,
+        metadata?: Record<string, any>
+    ): Promise<FsStat>;
 }

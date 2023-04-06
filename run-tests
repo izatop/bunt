@@ -3,6 +3,9 @@
 test "$(docker ps --filter name=redis-test -q)" = "" && \
     (docker run --rm --name redis-test -p 6379:6379 -d redis:alpine || exit 1)
 
+test "$(docker ps --filter name=minio-test -q)" = "" && \
+    (docker run --rm --name minio-test -p 9000:9000 -d minio/minio server /data || exit 1)
+
 yarn jest $@
 
-docker stop redis-test
+docker stop redis-test minio-test
