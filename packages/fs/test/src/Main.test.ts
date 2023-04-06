@@ -1,6 +1,7 @@
 import {dirname, resolve} from "node:path";
 import {createReadStream} from "node:fs";
 import {FileStorage, MinIO, MinIOBucketPolicy} from "../../src";
+import {getMimeType} from "../../src/mime-db";
 
 const fs = new FileStorage(new MinIO("http://minioadmin:minioadmin@localhost:9000"));
 
@@ -11,6 +12,15 @@ beforeAll(async () => {
 });
 
 describe("MinIO", () => {
+    test("type detect", async () => {
+        const bucket = fs.getBucket("test");
+        const type = getMimeType("https://hub.qubixinfinity.io/contracts/5.png");
+        expect(type).toBe("image/png");
+
+        const stat = await bucket.put("type-detect", new URL("https://hub.qubixinfinity.io/contracts/5.png"));
+        expect(stat.metadata["content-type"]).toBe(type);
+    });
+
     test("put URL", async () => {
         const bucket = fs.getBucket("test");
         const stat = await bucket.put("url", new URL("https://www.google.com/favicon.ico"));

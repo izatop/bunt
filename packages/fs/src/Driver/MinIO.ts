@@ -4,6 +4,7 @@ import {assert, isString} from "@bunt/util";
 import {Client, UploadedObjectInfo} from "minio";
 import fetch from "node-fetch";
 import {FsSource, FsStat, FsWritable} from "../interfaces";
+import {getMimeType} from "../mime-db";
 import {FsDriverAbstract} from "./FsDriverAbstract";
 import {MinIOBucketPolicy} from "./MinIOBucketPolicy";
 
@@ -108,18 +109,19 @@ export class MinIO extends FsDriverAbstract {
             if (protocols.includes(source.protocol)) {
                 const response = await fetch(source, {redirect: "follow", follow: 5});
                 const known = ["content-type"];
-                const headers = Object.fromEntries(
+                Object.assign(metadata, Object.fromEntries(
                     [...response.headers.entries()]
                         .filter(([key]) => known.includes(key)),
-                );
+                ));
 
                 assert(response.body, `Response body is null for URL ${source.href}`);
+                metadata["content-type"] = this.#getMimeType(source.pathname, metadata);
 
                 return this.#client.putObject(
                     bucket,
                     name,
                     response.body as Readable,
-                    {...headers, ...metadata},
+                    metadata,
                 );
             }
 
@@ -127,5 +129,9 @@ export class MinIO extends FsDriverAbstract {
         }
 
         return this.#client.putObject(bucket, name, source, metadata);
+    }
+
+    #getMimeType(source: string, metadata: Record<string, any>): string {
+        return metadata["content-type"] ?? getMimeType(source);
     }
 }

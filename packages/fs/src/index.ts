@@ -6,3 +6,4 @@ export * from "./Driver/FsDriverAbstract";
 export * from "./Driver/MinIOBucketPolicy";
 export * from "./Driver/MinIO";
 export * from "./interfaces";
+export * from "./mime-db";
