@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.25.3](https://github.com/izatop/bunt/compare/v0.25.2...v0.25.3) (2023-04-06)
+
+
+### Bug Fixes
+
+* fs minio ([f9e029d](https://github.com/izatop/bunt/commit/f9e029d3d33aa8d0227737e2d8e1ce74529b5046))
+
+
+
+
+
 ## [0.25.2](https://github.com/izatop/bunt/compare/v0.25.1...v0.25.2) (2023-03-16)
 
 
