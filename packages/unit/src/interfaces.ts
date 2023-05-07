@@ -1,6 +1,6 @@
 import {Fn, Promisify} from "@bunt/util";
-import {Action} from "./Action";
-import {ApplyContext, Context} from "./Context";
+import {Action} from "./Action.js";
+import {ApplyContext, Context} from "./Context/index.js";
 
 export type ActionAny<C extends Context = Context, S extends StateType | null = any, R = any> = Action<C, S, R>;
 

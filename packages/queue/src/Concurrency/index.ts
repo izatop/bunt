@@ -1,2 +1,2 @@
-export * from "./ConcurrencyQueue";
-export * from "./RateLimitedQueue";
+export * from "./ConcurrencyQueue.js";
+export * from "./RateLimitedQueue.js";

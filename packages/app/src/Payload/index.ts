@@ -1,3 +1,3 @@
-export * from "./Resolver";
-export * from "./Payload";
-export * from "./interfaces";
+export * from "./Resolver.js";
+export * from "./Payload.js";
+export * from "./interfaces.js";

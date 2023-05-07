@@ -1,4 +1,4 @@
-import {Defer} from "./Defer";
+import {Defer} from "./Defer.js";
 
 export interface IAsyncPushPullOptions {
     length?: number;

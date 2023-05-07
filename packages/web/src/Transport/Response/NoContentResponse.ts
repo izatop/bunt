@@ -1,4 +1,4 @@
-import {IResponseOptions, ResponseAbstract} from "./ResponseAbstract";
+import {IResponseOptions, ResponseAbstract} from "./ResponseAbstract.js";
 
 export class NoContentResponse extends ResponseAbstract<undefined> {
     constructor(options: IResponseOptions & {code?: never} = {}) {

@@ -1,5 +1,5 @@
 import {isObject} from "@bunt/util";
-import {ScalarType} from "./ScalarType";
+import {ScalarType} from "./ScalarType.js";
 
 export const RecordType = new ScalarType<Record<string, any>>({
     name: "RecordType",

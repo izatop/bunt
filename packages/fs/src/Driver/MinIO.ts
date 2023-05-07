@@ -3,10 +3,10 @@ import {Readable} from "stream";
 import {assert, isString} from "@bunt/util";
 import {Client, UploadedObjectInfo} from "minio";
 import fetch from "node-fetch";
-import {FsSource, FsStat, FsWritable} from "../interfaces";
+import {FsSource, FsStat, FsWritable} from "../interfaces.js";
 import {getMimeType} from "../mime-db";
-import {FsDriverAbstract} from "./FsDriverAbstract";
-import {MinIOBucketPolicy} from "./MinIOBucketPolicy";
+import {FsDriverAbstract} from "./FsDriverAbstract.js";
+import {MinIOBucketPolicy} from "./MinIOBucketPolicy.js";
 
 const DEFAULT_REGION = "default";
 const protocols = ["http:", "https:"];

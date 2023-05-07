@@ -1,6 +1,6 @@
-import {isArray} from "./is";
-import {all} from "./Async";
-import {Promisify} from "./interfaces";
+import {isArray} from "./is.js";
+import {Promisify} from "./interfaces.js";
+import {all} from "./Async/fn.js";
 
 export const noop = (..._args: any[]): void => void 0;
 

@@ -1,6 +1,6 @@
-import {isObject} from "../is";
-import {ILogable, ILogger, Logable, LoggerOwner} from "./interfaces";
-import {Logger} from "./Logger";
+import {isObject} from "../is.js";
+import {ILogable, ILogger, Logable, LoggerOwner} from "./interfaces.js";
+import {Logger} from "./Logger.js";
 
 export function isLoggerOwner(target: LoggerOwner): target is ILogger {
     return "getLogLabel" in target || "getLogGroupId" in target;

@@ -1,5 +1,5 @@
-import {Application} from "../Application";
-import {IRequest} from "../interfaces";
+import {Application} from "../Application.js";
+import {IRequest} from "../interfaces.js";
 
 export abstract class RequestValidatorAbstract<T extends Record<string, any>> {
     protected readonly options: T;

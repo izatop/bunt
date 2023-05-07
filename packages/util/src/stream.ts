@@ -1,5 +1,5 @@
 import {Duplex, Readable, Stream, Transform, Writable} from "stream";
-import {isObject} from "./is";
+import {isObject} from "./is.js";
 
 type IsStream = Readable | Writable | Duplex | Transform | Stream;
 

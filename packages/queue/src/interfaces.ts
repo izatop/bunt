@@ -1,6 +1,6 @@
 import {Context, IDisposable} from "@bunt/unit";
 import {Promisify} from "@bunt/util";
-import {Handler} from "./Handler";
+import {Handler} from "./Handler.js";
 import {
     Incoming,
     IQueueList,
@@ -10,7 +10,7 @@ import {
     MessageHandler,
     MessagePayload,
     TaskAbstract,
-} from "./Queue";
+} from "./Queue/index.js";
 
 export type ActionHandler<C extends Context, M extends Message> = Handler<C, M>;
 

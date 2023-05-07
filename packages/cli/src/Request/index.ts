@@ -1,2 +1,2 @@
-export * from "./Headers";
-export * from "./RequestCommand";
+export * from "./Headers.js";
+export * from "./RequestCommand.js";

@@ -3,10 +3,10 @@ import {URL} from "url";
 import {Application, IHeaders, IKeyValueMap, KeyValueMap, RequestAbstract, RequestValidatorAbstract} from "@bunt/app";
 import {StateType} from "@bunt/unit";
 import {isString, toArray} from "@bunt/util";
-import {Cookies} from "./Cookies";
-import {Headers} from "./Headers";
-import {IRequestMessageOptions} from "./interfaces";
-import {RequestProxy} from "./RequestProxy";
+import {Cookies} from "./Cookies.js";
+import {Headers} from "./Headers.js";
+import {IRequestMessageOptions} from "./interfaces.js";
+import {RequestProxy} from "./RequestProxy.js";
 
 export class RequestMessage extends RequestAbstract {
     public readonly cookies: Cookies;

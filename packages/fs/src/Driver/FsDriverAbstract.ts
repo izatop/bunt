@@ -1,5 +1,5 @@
 import {Readable} from "node:stream";
-import {FsSource, FsStat, FsWritable} from "../interfaces";
+import {FsSource, FsStat, FsWritable} from "../interfaces.js";
 
 export abstract class FsDriverAbstract {
     public abstract createBucket(name: string, region?: string, checkExists?: boolean): Promise<void>;

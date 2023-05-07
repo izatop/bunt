@@ -1,5 +1,5 @@
 import {Promisify} from "@bunt/util";
-import {assert} from "./Assertion";
+import {assert} from "./Assertion/index.js";
 
 export abstract class TypeAbstract<TValue> {
     public get name(): string {

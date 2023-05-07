@@ -1,5 +1,5 @@
 import {Ctor, isReadableError} from "@bunt/util";
-import {ServerError} from "./ServerError";
+import {ServerError} from "./ServerError.js";
 
 export interface IErrorResponse {
     code: number;
@@ -40,7 +40,7 @@ export class TransformError {
     private getStatus(): {code: number; status?: string} {
         if (this.#error instanceof ServerError) {
             const {code, status} = this.#error;
-            
+
             return {code, status};
         }
 

@@ -1,7 +1,7 @@
 import {Disposer} from "@bunt/unit";
 import {assert, isDefined, isInstanceOf, toError} from "@bunt/util";
-import {ConcurrencyQueue} from "../Concurrency/ConcurrencyQueue";
-import {ITransport} from "../interfaces";
+import {ConcurrencyQueue} from "../Concurrency/ConcurrencyQueue.js";
+import {ITransport} from "../interfaces.js";
 import {
     IQueueList,
     IQueueListWatcher,
@@ -11,8 +11,8 @@ import {
     MessageCtor,
     MessageHandler,
     OperationReleaseState,
-} from "./interfaces";
-import {TaskAbstract} from "./Message";
+} from "./interfaces.js";
+import {TaskAbstract} from "./Message/index.js";
 
 export abstract class QueueListAbstract<M extends Message> extends Disposer implements IQueueList<M> {
     readonly #type: MessageCtor<M>;

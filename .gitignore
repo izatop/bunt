@@ -2,11 +2,12 @@
 node_modules/
 coverage/
 dist/
+esm/
 db/
 yarn-*.log
 lerna-*.log
 npm-*.log
 .DS_Store
-tsconfig.tsbuildinfo
+*.tsbuildinfo
 test.js
 /.js/

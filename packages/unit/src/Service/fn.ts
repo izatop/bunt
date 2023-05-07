@@ -1,6 +1,6 @@
 import {isInstanceOf, isObject} from "@bunt/util";
-import {IServiceResolver} from "../interfaces";
-import {Service} from "./Service";
+import {IServiceResolver} from "../interfaces.js";
+import {Service} from "./Service.js";
 
 export function isService<T>(maybe: unknown): maybe is IServiceResolver<T> {
     if (!isObject(maybe)) {

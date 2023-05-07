@@ -1,2 +1,2 @@
-export * from "./interface";
-export * from "./ClientConnectionAbstract";
+export * from "./interface.js";
+export * from "./ClientConnectionAbstract.js";

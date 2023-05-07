@@ -1,6 +1,6 @@
-import {assert} from "../assert";
-import {isDefined, isNumber} from "../is";
-import {entriesReverse} from "../object";
+import {assert} from "../assert.js";
+import {isDefined, isNumber} from "../is.js";
+import {entriesReverse} from "../object.js";
 
 const OPTION_REGEX = /^--([a-z0-9_-]+)=(.+)$/i;
 const FLAG_ON_REGEX = /^-([a-z0-9]+)$/i;

@@ -1,5 +1,5 @@
 import {toError} from "@bunt/util";
-import {IReadOperationFail, Message, OperationReleaseState, ReadOperation} from "../Queue";
+import {IReadOperationFail, Message, OperationReleaseState, ReadOperation} from "../Queue/index.js";
 
 export class RedisQ2ReadOperation<M extends Message> extends ReadOperation<M> {
     readonly #commit: () => Promise<void>;

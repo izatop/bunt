@@ -1,5 +1,5 @@
 import {Promisify} from "@bunt/util";
-import {Application} from "./Application";
+import {Application} from "./Application.js";
 
 export type ActionResponse = Error
 | {stringify(): string}

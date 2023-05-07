@@ -1,7 +1,7 @@
 import {entriesReverse, isFunction, isInstanceOf, isObject, toError} from "@bunt/util";
-import {AssertionObjectError, AssertionTypeError, IReadableTypeError} from "../Assertion";
-import {FieldsSchema} from "../interfaces";
-import {TypeAbstract} from "../TypeAbstract";
+import {AssertionObjectError, AssertionTypeError, IReadableTypeError} from "../Assertion/index.js";
+import {FieldsSchema} from "../interfaces.js";
+import {TypeAbstract} from "../TypeAbstract.js";
 
 export class Fields<TValue extends Record<string, any>> extends TypeAbstract<TValue> {
     readonly #fields: FieldsSchema<TValue>;

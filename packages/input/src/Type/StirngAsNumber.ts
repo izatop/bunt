@@ -1,5 +1,5 @@
 import {isNumber, isString, Promisify} from "@bunt/util";
-import {SuperType} from "../SuperType";
+import {SuperType} from "../SuperType.js";
 
 export class StringAsNumber extends SuperType<string | number, number> {
     public validate(payload: unknown): Promisify<number> {

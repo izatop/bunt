@@ -1,8 +1,8 @@
 import {IHeaders} from "@bunt/app";
 import {StateType} from "@bunt/unit";
 import {assert} from "@bunt/util";
-import {Cookies} from "./Cookies";
-import {RequestMessage} from "./RequestMessage";
+import {Cookies} from "./Cookies.js";
+import {RequestMessage} from "./RequestMessage.js";
 
 const map = new WeakMap<any, RequestProxy>();
 

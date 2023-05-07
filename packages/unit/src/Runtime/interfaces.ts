@@ -1,5 +1,5 @@
 import {Promisify} from "@bunt/util";
-import {Heartbeat} from "./Heartbeat";
+import {Heartbeat} from "./Heartbeat.js";
 
 export interface IRunnable {
     getHeartbeat(): Heartbeat;

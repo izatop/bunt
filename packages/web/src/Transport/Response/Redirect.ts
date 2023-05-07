@@ -1,4 +1,4 @@
-import {RedirectResponse} from "./RedirectResponse";
+import {RedirectResponse} from "./RedirectResponse.js";
 
 /**
  * @deprecated see RedirectResponse

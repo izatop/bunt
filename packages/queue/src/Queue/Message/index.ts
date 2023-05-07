@@ -1,3 +1,3 @@
-export * from "./MessageAbstract";
-export * from "./TransactionAbstract";
-export * from "./TaskAbstract";
+export * from "./MessageAbstract.js";
+export * from "./TransactionAbstract.js";
+export * from "./TaskAbstract.js";

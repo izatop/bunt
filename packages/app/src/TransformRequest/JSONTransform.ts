@@ -1,4 +1,4 @@
-import {IRequest, IRequestTransform} from "../interfaces";
+import {IRequest, IRequestTransform} from "../interfaces.js";
 
 export const JSONTransform = async <T>(request: IRequest): Promise<T> => {
     request.headers.assert("content-type", ["application/json"]);

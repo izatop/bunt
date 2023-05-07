@@ -16,7 +16,13 @@ import {
     AssertionError,
     isError,
 } from "@bunt/util";
-import {IErrorResponseHeaders, IProtocolAcceptor, IResponderOptions, Responder, ResponseAbstract} from "./Transport";
+import {
+    IErrorResponseHeaders,
+    IProtocolAcceptor,
+    IResponderOptions,
+    Responder,
+    ResponseAbstract,
+} from "./Transport/index.js";
 
 export class WebServer<C extends Context> extends Application<C> implements IDisposable, IRunnable {
     @logger

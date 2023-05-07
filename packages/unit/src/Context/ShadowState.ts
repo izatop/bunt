@@ -1,4 +1,4 @@
-import {StateType} from "../interfaces";
+import {StateType} from "../interfaces.js";
 
 const weakState = new WeakMap<any, unknown>();
 

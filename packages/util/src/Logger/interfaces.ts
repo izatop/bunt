@@ -1,5 +1,5 @@
-import {Func, Promisify} from "../interfaces";
-import {Logger} from "./Logger";
+import {Func, Promisify} from "../interfaces.js";
+import {Logger} from "./Logger.js";
 
 export enum SeverityLevel {
     EMERGENCY,

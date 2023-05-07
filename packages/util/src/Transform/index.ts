@@ -1,2 +1,2 @@
-export * from "./interfaces";
-export * from "./TransformInput";
+export * from "./interfaces.js";
+export * from "./TransformInput.js";

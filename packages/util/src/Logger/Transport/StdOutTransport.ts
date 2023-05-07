@@ -1,6 +1,6 @@
-import {LogFormat, LogMessage, SeverityLevel} from "../interfaces";
-import {defaultLogFormat} from "./formatters";
-import {InOutTransportAbstract} from "./InOutTransportAbstract";
+import {LogFormat, LogMessage, SeverityLevel} from "../interfaces.js";
+import {defaultLogFormat} from "./formatters.js";
+import {InOutTransportAbstract} from "./InOutTransportAbstract.js";
 
 export class StdOutTransport extends InOutTransportAbstract<string> {
     constructor(format?: LogFormat<string>) {

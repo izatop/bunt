@@ -12,10 +12,10 @@ import {
     isString,
     isUndefined,
 } from "@bunt/util";
-import {IRequestSendOptions, IResponderOptions} from "./interfaces";
-import {RequestMessage} from "./RequestMessage";
-import {ResponseAbstract} from "./Response";
-import {IErrorResponseHeaders, TransformError} from "./TransformError";
+import {IRequestSendOptions, IResponderOptions} from "./interfaces.js";
+import {RequestMessage} from "./RequestMessage.js";
+import {ResponseAbstract} from "./Response/index.js";
+import {IErrorResponseHeaders, TransformError} from "./TransformError.js";
 
 export class Responder extends RequestMessage {
     readonly #options: IResponderOptions;
@@ -70,7 +70,7 @@ export class Responder extends RequestMessage {
 
             if (isReadableStream(response)) {
                 response.pipe(this.#response);
-                
+
                 return;
             }
 

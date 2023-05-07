@@ -1,4 +1,4 @@
-import {RequestAbstract} from "./RequestAbstract";
+import {RequestAbstract} from "./RequestAbstract.js";
 
 /**
  * @deprecated use RequestAbstract

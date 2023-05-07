@@ -1,7 +1,7 @@
 import {Action, Context} from "@bunt/unit";
 import {Promisify} from "@bunt/util";
-import {HandlerReturn, HandlerState} from "./interfaces";
-import {Message, MessagePayload} from "./Queue";
+import {HandlerReturn, HandlerState} from "./interfaces.js";
+import {Message, MessagePayload} from "./Queue/index.js";
 
 export abstract class Handler<C extends Context, M extends Message>
     extends Action<C, HandlerState<M>, HandlerReturn<M>> {

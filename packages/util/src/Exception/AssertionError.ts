@@ -1,6 +1,6 @@
-import {isFunction} from "../is";
-import {ILogable} from "../Logger";
-import {ValidationError} from "./ValidationError";
+import {isFunction} from "../is.js";
+import {ILogable} from "../Logger/index.js";
+import {ValidationError} from "./ValidationError.js";
 
 export class AssertionError extends ValidationError implements ILogable<Record<any, any>> {
     public readonly details?: any;

@@ -1,7 +1,7 @@
 import {Disposer} from "@bunt/unit";
 import {isArray} from "@bunt/util";
-import {IPubSubTransport, PubSubChannel} from "./interfaces";
-import {Subscription} from "./Subscription";
+import {IPubSubTransport, PubSubChannel} from "./interfaces.js";
+import {Subscription} from "./Subscription.js";
 
 export abstract class PubSubAbstract<S extends Record<string, any>> extends Disposer {
     readonly #transport: IPubSubTransport;

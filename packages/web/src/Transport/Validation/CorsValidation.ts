@@ -1,10 +1,10 @@
 import {Application, IRoute, IRouteMatcher, RegexpMatcher, RequestValidatorAbstract, RouteNotFound} from "@bunt/app";
 import {ActionAny} from "@bunt/unit";
 import {assert, isFunction, isString} from "@bunt/util";
-import {Headers} from "../Headers";
-import {ICorsOptions} from "../interfaces";
-import {Responder} from "../Responder";
-import {NoContentResponse} from "../Response";
+import {Headers} from "../Headers.js";
+import {ICorsOptions} from "../interfaces.js";
+import {Responder} from "../Responder.js";
+import {NoContentResponse} from "../Response/index.js";
 
 type RouteTuple = [method: string, matcher: IRouteMatcher];
 

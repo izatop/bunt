@@ -1,6 +1,6 @@
 import {isNumber, isString, Promisify} from "@bunt/util";
-import {Int} from "./Int";
-import {ScalarType} from "./ScalarType";
+import {Int} from "./Int.js";
+import {ScalarType} from "./ScalarType.js";
 
 export const ToNumber = new ScalarType<number>({
     name: "Int",

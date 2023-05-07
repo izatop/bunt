@@ -1,5 +1,5 @@
 import {isString} from "@bunt/util";
-import {ScalarType} from "./ScalarType";
+import {ScalarType} from "./ScalarType.js";
 
 export const JSONString = new ScalarType<any>({
     name: "JSON",

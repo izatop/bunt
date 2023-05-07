@@ -1,1 +1,1 @@
-export * from "./XMap";
+export * from "./XMap.js";

@@ -1,21 +1,21 @@
-import {assert} from "../assert";
-import {isFunction} from "../is";
-import {DateTimeKind, TimeMutateFn} from "./interface";
-import begins from "./mutators/begins";
-import ends from "./mutators/ends";
-import mutators from "./mutators/mutators";
-import setters from "./mutators/setters";
+import {assert} from "../assert.js";
+import {isFunction} from "../is.js";
+import {DateTimeKind, TimeMutateFn} from "./interface.js";
+import begins from "./mutators/begins.js";
+import ends from "./mutators/ends.js";
+import mutators from "./mutators/mutators.js";
+import setters from "./mutators/setters.js";
 
 export class DateTimeMutation {
     public static begins(kind: Exclude<DateTimeKind, "ms">, time: number): number {
         assert(kind in begins);
-        
+
         return begins[kind](time);
     }
 
     public static ends(kind: Exclude<DateTimeKind, "ms">, time: number): number {
         assert(kind in begins);
-        
+
         return ends[kind](time);
     }
 

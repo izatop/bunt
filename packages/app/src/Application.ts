@@ -9,8 +9,8 @@ import {
     unit,
 } from "@bunt/unit";
 import {assert, isDefined, logger, Logger} from "@bunt/util";
-import {ActionResponse, IRequest} from "./interfaces";
-import {IRoute, RouteNotFound} from "./Route";
+import {ActionResponse, IRequest} from "./interfaces.js";
+import {IRoute, RouteNotFound} from "./Route/index.js";
 
 export class Application<C extends Context> {
     @logger

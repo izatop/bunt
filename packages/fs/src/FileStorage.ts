@@ -1,7 +1,7 @@
-import {FsBucket} from "./Bucket/FsBucket";
-import {FsBucketList} from "./Bucket/FsBucketList";
-import {FsDriverAbstract} from "./Driver/FsDriverAbstract";
-import {IBucketOptions} from "./interfaces";
+import {FsBucket} from "./Bucket/FsBucket.js";
+import {FsBucketList} from "./Bucket/FsBucketList.js";
+import {FsDriverAbstract} from "./Driver/FsDriverAbstract.js";
+import {IBucketOptions} from "./interfaces.js";
 
 export class FileStorage {
     readonly #driver: FsDriverAbstract;

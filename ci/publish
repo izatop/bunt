@@ -2,6 +2,6 @@
 
 yarn clean \
     && yarn lint \
-    && yarn build \
+    && ./build \
     && yarn test \
     && yarn lerna publish --conventional-commits --yes

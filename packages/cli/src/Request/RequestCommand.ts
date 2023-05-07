@@ -1,6 +1,6 @@
 import {KeyValueMap, RequestAbstract} from "@bunt/app";
 import {Argv, assert} from "@bunt/util";
-import {Headers} from "./Headers";
+import {Headers} from "./Headers.js";
 
 export class RequestCommand extends RequestAbstract {
     public readonly params = new KeyValueMap([]);

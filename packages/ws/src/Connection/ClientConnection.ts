@@ -1,4 +1,4 @@
-import {ClientConnectionAbstract} from "./ClientConnectionAbstract";
+import {ClientConnectionAbstract} from "./ClientConnectionAbstract.js";
 
 export class ClientConnection extends ClientConnectionAbstract<string> {
     protected parse(payload: Buffer): string {

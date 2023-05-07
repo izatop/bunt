@@ -1,5 +1,5 @@
 import {isString, isUndefined, Promisify} from "@bunt/util";
-import {TypeAbstract} from "../TypeAbstract";
+import {TypeAbstract} from "../TypeAbstract.js";
 
 interface IVarchar {
     readonly min?: number;

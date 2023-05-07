@@ -1,1 +1,1 @@
-export * from "./Perf";
+export * from "./Perf.js";

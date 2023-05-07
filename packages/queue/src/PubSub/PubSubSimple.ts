@@ -1,4 +1,4 @@
-import {PubSubAbstract} from "./PubSubAbstract";
+import {PubSubAbstract} from "./PubSubAbstract.js";
 
 export class PubSubSimple<S extends Record<string, any>> extends PubSubAbstract<S> {
     protected serialize<K extends keyof S>(message: S[K]): string {

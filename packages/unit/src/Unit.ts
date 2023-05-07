@@ -1,6 +1,6 @@
 import {assert, asyncCall, isFunction, isInstanceOf, logger, Logger} from "@bunt/util";
-import {ApplyContext, Context} from "./Context";
-import {Action} from "./Action";
+import {ApplyContext, Context} from "./Context/index.js";
+import {Action} from "./Action.js";
 import {
     ActionAny,
     ActionCtor,
@@ -11,7 +11,7 @@ import {
     ActionTransactionHandlers,
     AsyncActionFactory,
     ContextArg,
-} from "./interfaces";
+} from "./interfaces.js";
 
 export class Unit<C extends Context> {
     @logger

@@ -1,4 +1,4 @@
-import {Ctor, Newable} from "./interfaces";
+import {Ctor, Newable} from "./interfaces.js";
 
 export const isNull = (value: unknown): value is null => value === null;
 export const isUndefined = (value: unknown): value is undefined => typeof value === "undefined";

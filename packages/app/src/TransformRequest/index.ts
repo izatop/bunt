@@ -1,3 +1,3 @@
-export * from "./URLEncodedFormTransform";
-export * from "./JSONTransform";
-export * from "./MultipartFormDataTransform";
+export * from "./URLEncodedFormTransform.js";
+export * from "./JSONTransform.js";
+export * from "./MultipartFormDataTransform.js";

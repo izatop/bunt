@@ -1,7 +1,7 @@
 import {IDisposable} from "@bunt/unit";
 import {assert, Defer, logger, Logger} from "@bunt/util";
-import {SubscriptionId, SubscriptionListenerId, SubscriptionManagerListener} from "./interfaces";
-import {SubscriptionList} from "./SubscriptionList";
+import {SubscriptionId, SubscriptionListenerId, SubscriptionManagerListener} from "./interfaces.js";
+import {SubscriptionList} from "./SubscriptionList.js";
 
 export type SubscriptionManagerConfig = [list: SubscriptionList, state: Defer<void>];
 

@@ -1,9 +1,9 @@
 import {Context, StateType} from "@bunt/unit";
 import {noop, Promisify} from "@bunt/util";
-import {ProtoHandleAbstract} from "../ProtoHandleAbstract";
-import {GQLClientConnection} from "./GQLClientConnection";
-import {GQLProtoLayer} from "./GQLProtoLayer";
-import {GQLClientPayload} from "./interfaces";
+import {ProtoHandleAbstract} from "../ProtoHandleAbstract.js";
+import {GQLClientConnection} from "./GQLClientConnection.js";
+import {GQLProtoLayer} from "./GQLProtoLayer.js";
+import {GQLClientPayload} from "./interfaces.js";
 
 export abstract class GQLProtoHandle<C extends Context,
     S extends StateType | null = null> extends ProtoHandleAbstract<C, S> {

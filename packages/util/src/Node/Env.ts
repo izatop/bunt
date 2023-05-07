@@ -1,6 +1,6 @@
-import {assert} from "../assert";
-import {KeyOf} from "../interfaces";
-import {Dict} from "./interfaces";
+import {assert} from "../assert.js";
+import {KeyOf} from "../interfaces.js";
+import {Dict} from "./interfaces.js";
 
 export type EnvValue = string | undefined;
 

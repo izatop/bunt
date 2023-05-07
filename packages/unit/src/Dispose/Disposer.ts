@@ -1,6 +1,6 @@
 import {logger, Logger, safeMap} from "@bunt/util";
-import {DisposableType, IDisposable} from "../Runtime";
-import {dispose} from "./functions";
+import {DisposableType, IDisposable} from "../Runtime/index.js";
+import {dispose} from "./functions.js";
 
 export abstract class Disposer implements IDisposable {
     @logger

@@ -1,5 +1,5 @@
-import {ClientConnectionAbstract} from "../../Connection";
-import {GQLOperationMessage} from "./index";
+import {ClientConnectionAbstract} from "../../Connection/index.js";
+import {GQLOperationMessage} from "./index.js";
 
 export class GQLClientConnection extends ClientConnectionAbstract<GQLOperationMessage> {
     protected parse(payload: Buffer): GQLOperationMessage {

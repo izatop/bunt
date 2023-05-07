@@ -1,7 +1,7 @@
 import {Defer, logger, Logger} from "@bunt/util";
-import {Disposer} from "../Dispose";
-import {IRunnable} from "./interfaces";
-import {isRunnable} from "./internal";
+import {Disposer} from "../Dispose/index.js";
+import {IRunnable} from "./interfaces.js";
+import {isRunnable} from "./internal.js";
 import {HeartbeatRunningQueue} from ".";
 
 const registry = new WeakMap<IRunnable, Heartbeat>();

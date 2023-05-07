@@ -1,4 +1,4 @@
-import {DateTimeKind, TimeMutateFn} from "../interface";
+import {DateTimeKind, TimeMutateFn} from "../interface.js";
 
 const hour: TimeMutateFn = (time, value) => new Date(time).setHours(value);
 const day: TimeMutateFn = (time, value) => new Date(time).setDate(value);

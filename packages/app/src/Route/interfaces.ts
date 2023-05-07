@@ -1,8 +1,8 @@
 import {ActionAny, ActionContext, ActionFactory, ActionState, ApplyContext} from "@bunt/unit";
-import {IRequest} from "../interfaces";
-import {Payload} from "../Payload";
-import {Route} from "./Route";
-import {RouteRule} from "./RouteRule";
+import {IRequest} from "../interfaces.js";
+import {Payload} from "../Payload/index.js";
+import {Route} from "./Route.js";
+import {RouteRule} from "./RouteRule.js";
 
 export interface IRoute<A extends ActionAny> {
     readonly route: string;

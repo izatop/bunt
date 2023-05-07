@@ -1,6 +1,6 @@
-import {ITransactionType, Message, MessageCtor} from "../Queue";
-import {RedisQ2ReadOperation} from "./RedisQ2ReadOperation";
-import {RedisQueueReader} from "./RedisQueueReader";
+import {ITransactionType, Message, MessageCtor} from "../Queue/index.js";
+import {RedisQ2ReadOperation} from "./RedisQ2ReadOperation.js";
+import {RedisQueueReader} from "./RedisQueueReader.js";
 
 export class RedisQ2Reader<M extends Message,
     MC extends MessageCtor<M> & ITransactionType> extends RedisQueueReader<M, MC> {

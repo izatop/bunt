@@ -1,8 +1,8 @@
 import {Logger} from "@bunt/util";
-import {IServiceResolver} from "../interfaces";
-import {IDisposable, isDisposable} from "../Runtime";
-import {isService, Service} from "../Service";
-import {ApplyContext, ResolveService} from "./interfaces";
+import {IServiceResolver} from "../interfaces.js";
+import {IDisposable, isDisposable} from "../Runtime/index.js";
+import {isService, Service} from "../Service/index.js";
+import {ApplyContext, ResolveService} from "./interfaces.js";
 
 const cache = new WeakMap();
 const services = new WeakMap();

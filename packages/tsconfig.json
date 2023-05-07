@@ -3,6 +3,9 @@
     "include": [],
     "references": [
         {
+            "path": "./util"
+        },
+        {
             "path": "./unit"
         },
         {
@@ -21,16 +24,10 @@
             "path": "./cli"
         },
         {
-            "path": "./util"
-        },
-        {
             "path": "./input"
         },
         {
             "path": "./queue"
-        },
-        {
-            "path": "./project"
         },
         {
             "path": "./async"

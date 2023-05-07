@@ -1,6 +1,6 @@
 import {assert, isArray, isFunction, isObject} from "@bunt/util";
-import {GQLClientConnection} from "./GQLClientConnection";
-import {IGQLOperationStop} from "./interfaces";
+import {GQLClientConnection} from "./GQLClientConnection.js";
+import {IGQLOperationStop} from "./interfaces.js";
 import {
     GQLClientOperation,
     GQLClientOperationType,
@@ -10,7 +10,7 @@ import {
     GQLOperationMessage,
     GQLServerOperationType,
     GQLSubscribeFunction,
-} from "./index";
+} from "./index.js";
 
 // @TODO Upgrade type validation to input schema validation
 const AllowTypes: string[] = Object.values(GQLClientOperationType);

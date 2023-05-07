@@ -1,4 +1,4 @@
-import {KeyValueMap} from "./KeyValueMap";
+import {KeyValueMap} from "./KeyValueMap.js";
 
 const toStrictKey = (key: string): string => key.toLowerCase();
 

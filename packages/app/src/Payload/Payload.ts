@@ -1,7 +1,7 @@
 import {FieldSelectType, validate} from "@bunt/input";
 import {ActionAny, ActionState} from "@bunt/unit";
-import {IRouteContext} from "../Route";
-import {Resolver} from "./Resolver";
+import {IRouteContext} from "../Route/index.js";
+import {Resolver} from "./Resolver.js";
 
 export class Payload<A extends ActionAny> {
     public readonly resolver: Resolver<A>;

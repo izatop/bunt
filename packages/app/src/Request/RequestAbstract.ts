@@ -1,12 +1,12 @@
 import {ILogable, isFunction, Promisify} from "@bunt/util";
-import {Application} from "../Application";
-import {IHeaders, IKeyValueMap, IRequest, IRequestTransform, RequestTransformType} from "../interfaces";
+import {Application} from "../Application.js";
+import {IHeaders, IKeyValueMap, IRequest, IRequestTransform, RequestTransformType} from "../interfaces.js";
 import {
     fromJsonRequest,
     fromTextRequest,
     MultipartFormDataTransform,
     URLEncodedFormTransform,
-} from "../TransformRequest";
+} from "../TransformRequest/index.js";
 
 export abstract class RequestAbstract implements IRequest, ILogable<{route: string}> {
     public abstract readonly route: string;

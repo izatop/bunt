@@ -1,7 +1,7 @@
 import {isFunction, isInstanceOf, isNumber, isString, Promisify} from "@bunt/util";
 import * as HTTP from "http-status";
-import {Headers} from "../Headers";
-import {Cookie, CookieOptions} from "./Cookie";
+import {Headers} from "../Headers.js";
+import {Cookie, CookieOptions} from "./Cookie.js";
 
 export interface IResponseOptions {
     code?: number;

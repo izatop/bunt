@@ -1,5 +1,5 @@
 import {hostname} from "os";
-import {MessageAbstract} from "./MessageAbstract";
+import {MessageAbstract} from "./MessageAbstract.js";
 
 export abstract class TransactionAbstract<T> extends MessageAbstract<T> {
     public static getBackupKey(): string {

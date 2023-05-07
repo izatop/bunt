@@ -1,15 +1,17 @@
 {
     "extends": "../../tsconfig.lib.json",
     "compilerOptions": {
+        "module": "esnext",
+        "moduleResolution": "nodenext",
         "rootDir": "src",
-        "outDir": "dist"
+        "outDir": "dist/esm"
     },
     "references": [
         {
-            "path": "../cli"
+            "path": "../app/tsconfig.esm.json"
         },
         {
-            "path": "../util"
+            "path": "../util/tsconfig.esm.json"
         }
     ],
     "include": [

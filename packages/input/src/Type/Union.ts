@@ -1,6 +1,6 @@
 import {isObject, Promisify} from "@bunt/util";
-import {TypeAbstract} from "../TypeAbstract";
-import {IScalarType} from "./ScalarType";
+import {TypeAbstract} from "../TypeAbstract.js";
+import {IScalarType} from "./ScalarType.js";
 
 export type UnionSelector<TValue> = (input: unknown) => TypeAbstract<TValue> | undefined;
 

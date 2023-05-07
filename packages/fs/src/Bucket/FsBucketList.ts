@@ -1,6 +1,6 @@
-import {FileStorage} from "../FileStorage";
-import {IBucketOptions} from "../interfaces";
-import {FsBucket} from "./FsBucket";
+import {FileStorage} from "../FileStorage.js";
+import {IBucketOptions} from "../interfaces.js";
+import {FsBucket} from "./FsBucket.js";
 
 export class FsBucketList {
     readonly #fs: FileStorage;

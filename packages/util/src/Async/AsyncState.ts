@@ -1,4 +1,4 @@
-import {isDefined} from "../is";
+import {isDefined} from "../is.js";
 
 export interface IAsyncStateMap<T> {
     resolve: (value: T | PromiseLike<T>) => void;

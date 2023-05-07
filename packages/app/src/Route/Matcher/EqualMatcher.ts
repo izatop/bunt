@@ -1,4 +1,4 @@
-import {IRouteMatcher} from "../interfaces";
+import {IRouteMatcher} from "../interfaces.js";
 
 export class EqualMatcher implements IRouteMatcher {
     protected readonly route: string;

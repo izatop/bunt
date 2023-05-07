@@ -1,5 +1,5 @@
-import {SuperType} from "../SuperType";
-import {TypeAbstract} from "../TypeAbstract";
+import {SuperType} from "../SuperType.js";
+import {TypeAbstract} from "../TypeAbstract.js";
 
 export type MutateFunction<TIn, TOut> = (value: TIn) => TOut;
 

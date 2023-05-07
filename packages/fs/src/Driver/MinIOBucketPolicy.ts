@@ -1,4 +1,4 @@
-import {BucketPolicyAbstract} from "./BucketPolicyAbstract";
+import {BucketPolicyAbstract} from "./BucketPolicyAbstract.js";
 
 export class MinIOBucketPolicy extends BucketPolicyAbstract {
     public static PUBLIC_READONLY = "public-readonly";

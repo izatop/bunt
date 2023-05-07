@@ -1,5 +1,5 @@
 import {ActionAny, ActionState} from "@bunt/unit";
-import {IRouteContext} from "../Route";
+import {IRouteContext} from "../Route/index.js";
 
 export type ResolverFn<A extends ActionAny> = (context: IRouteContext<A>) => ActionState<A> | unknown;
 export type ResolverType<A extends ActionAny> = ActionState<A> | ResolverFn<A>;

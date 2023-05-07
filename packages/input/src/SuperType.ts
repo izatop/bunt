@@ -1,4 +1,4 @@
-import {TypeAbstract} from "./TypeAbstract";
+import {TypeAbstract} from "./TypeAbstract.js";
 
 export abstract class SuperType<TValue, SValue> extends TypeAbstract<TValue> {
     protected readonly type: TypeAbstract<SValue>;

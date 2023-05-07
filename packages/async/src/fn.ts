@@ -1,4 +1,4 @@
-import {Defer} from "./Defer";
+import {Defer} from "./Defer.js";
 
 export function timeout(timeout: number): Defer<void> {
     const defer = new Defer<void>();

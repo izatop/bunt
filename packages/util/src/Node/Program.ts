@@ -1,4 +1,4 @@
-import {Argv} from "./Argv";
+import {Argv} from "./Argv.js";
 
 export class Program {
     public readonly args: Argv;

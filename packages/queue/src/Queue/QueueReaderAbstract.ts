@@ -1,5 +1,5 @@
-import {tryUnserialize} from "./fn";
-import {IQueueReader, IReadOperation, Message, MessageCtor} from "./interfaces";
+import {tryUnserialize} from "./fn.js";
+import {IQueueReader, IReadOperation, Message, MessageCtor} from "./interfaces.js";
 
 export abstract class QueueReaderAbstract<M extends Message,
     MC extends MessageCtor<M>,

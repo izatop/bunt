@@ -1,6 +1,6 @@
 import {IDisposable} from "@bunt/unit";
 import {Defer} from "@bunt/async";
-import {ConcurrencyQueue} from "./ConcurrencyQueue";
+import {ConcurrencyQueue} from "./ConcurrencyQueue.js";
 
 export class RateLimitedQueue extends ConcurrencyQueue implements IDisposable {
     readonly #slots: PromiseLike<void>[] = [];

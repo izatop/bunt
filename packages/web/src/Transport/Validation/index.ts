@@ -1,1 +1,1 @@
-export * from "./CorsValidation";
+export * from "./CorsValidation.js";

@@ -1,8 +1,8 @@
 import {IncomingMessage} from "http";
 import {Socket} from "net";
 import {RequestValidatorAbstract} from "@bunt/app";
-import {Responder} from "./Responder";
-import {Cookie} from "./Response/Cookie";
+import {Responder} from "./Responder.js";
+import {Cookie} from "./Response/Cookie.js";
 
 export type ServerHeadersResolver = (request: Responder) => {[key: string]: string};
 

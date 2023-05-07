@@ -1,6 +1,6 @@
 import {FieldSelectType} from "@bunt/input";
 import {ActionAny, ActionState} from "@bunt/unit";
-import {Payload, Resolver} from "../Payload";
+import {Payload, Resolver} from "../Payload/index.js";
 
 export class RouteRule<A extends ActionAny> extends Payload<A> {
     public readonly route: string;

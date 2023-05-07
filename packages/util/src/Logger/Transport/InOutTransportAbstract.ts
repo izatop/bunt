@@ -1,5 +1,5 @@
-import {Promisify} from "../../interfaces";
-import {ILoggerTransport, LogFormat, LogMessage} from "../interfaces";
+import {Promisify} from "../../interfaces.js";
+import {ILoggerTransport, LogFormat, LogMessage} from "../interfaces.js";
 
 export interface ILoggerStreamCallback<T> {
     writable: boolean;

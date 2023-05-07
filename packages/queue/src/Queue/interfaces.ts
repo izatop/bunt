@@ -1,6 +1,6 @@
 import {IDisposable} from "@bunt/unit";
 import {Promisify} from "@bunt/util";
-import {MessageAbstract, TaskAbstract} from "./Message";
+import {MessageAbstract, TaskAbstract} from "./Message/index.js";
 
 export interface IReadOperationState<M extends Message> {
     error?: Error;

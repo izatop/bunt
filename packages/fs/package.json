@@ -8,20 +8,27 @@
         "name": "Artur Bier",
         "email": "izatop@gmail.com"
     },
-    "main": "dist/index.js",
-    "types": "dist/index.d.ts",
+    "main": "dist/cjs/index.js",
+    "module": "dist/esm/index.js",
+    "types": "dist/cjs/index.d.ts",
+    "exports": {
+        ".": {
+            "import": {
+                "types": "./dist/esm/index.d.ts",
+                "default": "./dist/esm/index.js"
+            },
+            "require": {
+                "types": "./dist/cjs/index.d.ts",
+                "default": "./dist/cjs/index.js"
+            }
+        }
+    },
     "files": [
-        "dist/"
+        "dist/",
+        "LICENSE"
     ],
     "description": "FileSystem library",
     "repository": "git@github.com:izatop/bunt.git",
-    "scripts": {
-        "clean": "yarn build:clean",
-        "watch": "yarn build:watch",
-        "build": "yarn build:clean && tsc",
-        "build:clean": "rimraf dist tsconfig.tsbuildinfo",
-        "build:watch": "yarn build --watch"
-    },
     "publishConfig": {
         "access": "public"
     },
@@ -30,7 +37,7 @@
         "@bunt/util": "^0.25.0",
         "@types/minio": "^7.0.15",
         "@types/node-fetch": "^2.6.3",
-        "minio": "^7.0.32",
+        "minio": "^7.1.0",
         "node-fetch": "2"
     },
     "license": "MIT"

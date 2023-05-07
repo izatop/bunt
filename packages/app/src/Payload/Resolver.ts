@@ -1,7 +1,7 @@
 import {ActionAny, ActionState} from "@bunt/unit";
 import {isFunction, isObject} from "@bunt/util";
-import {IRouteContext} from "../Route";
-import {ResolverResolvers} from "./interfaces";
+import {IRouteContext} from "../Route/index.js";
+import {ResolverResolvers} from "./interfaces.js";
 
 export class Resolver<A extends ActionAny> {
     readonly resolvers: ResolverResolvers<A>;

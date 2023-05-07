@@ -1,5 +1,5 @@
 import {ILogable, IReadableError, ValidationError} from "@bunt/util";
-import {TypeAbstract} from "../TypeAbstract";
+import {TypeAbstract} from "../TypeAbstract.js";
 
 export interface IReadableTypeError {
     type: string;

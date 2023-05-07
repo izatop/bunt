@@ -8,8 +8,8 @@ import {
     Message,
     MessageCtor,
     MessagePayload,
-} from "./interfaces";
-import {MessageAbstract} from "./Message";
+} from "./interfaces.js";
+import {MessageAbstract} from "./Message/index.js";
 
 const serializeRe = /^[0-9a-f]{8}:.+$/;
 

@@ -1,6 +1,6 @@
 import {Service} from "@bunt/unit";
-import {FsDriverAbstract} from "./Driver/FsDriverAbstract";
-import {FileStorage} from "./FileStorage";
+import {FsDriverAbstract} from "./Driver/FsDriverAbstract.js";
+import {FileStorage} from "./FileStorage.js";
 
 export class FileStorageService extends Service<FileStorage> {
     readonly #driver: FsDriverAbstract;

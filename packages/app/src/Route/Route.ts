@@ -7,8 +7,8 @@ import {
     RouteMatcherFactory,
     RouteRuleArg,
     RouteRuleVariants,
-} from "./interfaces";
-import {RouteRule} from "./RouteRule";
+} from "./interfaces.js";
+import {RouteRule} from "./RouteRule.js";
 
 export class Route<A extends ActionAny> implements IRoute<A>, ILogable<{route: string}> {
     public readonly route: string;

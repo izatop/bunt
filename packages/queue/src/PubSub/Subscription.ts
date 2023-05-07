@@ -1,7 +1,7 @@
 import {Disposable} from "@bunt/unit";
 import {all} from "@bunt/util";
-import {SubscriptionManager} from "./SubscriptionManager";
-import {SubscriptionIterator} from "./SubscriptionIterator";
+import {SubscriptionManager} from "./SubscriptionManager.js";
+import {SubscriptionIterator} from "./SubscriptionIterator.js";
 
 export class Subscription<T> implements AsyncIterable<T>, Disposable {
     public readonly channel: string;

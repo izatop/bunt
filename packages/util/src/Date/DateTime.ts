@@ -1,6 +1,6 @@
-import {assert} from "../assert";
-import {DateTimeMutation} from "./DateTimeMutation";
-import {DateTimeKind} from "./interface";
+import {assert} from "../assert.js";
+import {DateTimeMutation} from "./DateTimeMutation.js";
+import {DateTimeKind} from "./interface.js";
 
 export class DateTime {
     readonly #date: Date;

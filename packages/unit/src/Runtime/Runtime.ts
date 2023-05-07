@@ -1,8 +1,8 @@
 import {isNull, isUndefined, logger, Logger, SingleRef, toError} from "@bunt/util";
-import {Disposer, dispose} from "../Dispose";
-import {Heartbeat} from "./Heartbeat";
-import {RuntimeTask} from "./interfaces";
-import {isDisposable, isRunnable, Signals} from "./internal";
+import {Disposer, dispose} from "../Dispose/index.js";
+import {Heartbeat} from "./Heartbeat.js";
+import {RuntimeTask} from "./interfaces.js";
+import {isDisposable, isRunnable, Signals} from "./internal.js";
 import {DisposableType} from ".";
 
 const ref = new SingleRef<Runtime>();

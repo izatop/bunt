@@ -1,6 +1,6 @@
-import {Context} from "./Context";
-import {ActionAny, AsyncActionFactory, ActionImport, ContextArg} from "./interfaces";
-import {Unit} from "./Unit";
+import {Context} from "./Context/index.js";
+import {ActionAny, AsyncActionFactory, ActionImport, ContextArg} from "./interfaces.js";
+import {Unit} from "./Unit.js";
 
 export function asyncify<A extends ActionAny>(factory: ActionImport<A>): AsyncActionFactory<A> {
     return {factory};

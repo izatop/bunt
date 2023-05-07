@@ -1,5 +1,5 @@
 import {isUndefined} from "@bunt/util";
-import {AsyncPool} from "./AsyncPool";
+import {AsyncPool} from "./AsyncPool.js";
 
 export type AsyncIteratorFactoryControl<T> = {
     push(value: T): void;

@@ -1,14 +1,14 @@
 import {Disposer, IDisposable} from "@bunt/unit";
 import {Defer} from "@bunt/util";
 import {Redis, RedisOptions} from "ioredis";
-import {ITransport} from "../interfaces";
-import {IPubSubTransport} from "../PubSub";
-import {Incoming, isTransactionMessage, Message, MessageCtor, MessageHandler, serialize} from "../Queue";
-import {createConnection} from "./fn";
-import {RedisQ2Reader} from "./RedisQ2Reader";
-import {RedisQueueList} from "./RedisQueueList";
-import {RedisQueueReader} from "./RedisQueueReader";
-import {RedisSubscriptionManager} from "./RedisSubscriptionManager";
+import {ITransport} from "../interfaces.js";
+import {IPubSubTransport} from "../PubSub/index.js";
+import {Incoming, isTransactionMessage, Message, MessageCtor, MessageHandler, serialize} from "../Queue/index.js";
+import {createConnection} from "./fn.js";
+import {RedisQ2Reader} from "./RedisQ2Reader.js";
+import {RedisQueueList} from "./RedisQueueList.js";
+import {RedisQueueReader} from "./RedisQueueReader.js";
+import {RedisSubscriptionManager} from "./RedisSubscriptionManager.js";
 
 export class RedisTransport extends Disposer implements ITransport, IPubSubTransport {
     readonly #connection: Redis;

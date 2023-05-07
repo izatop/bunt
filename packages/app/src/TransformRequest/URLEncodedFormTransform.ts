@@ -1,5 +1,5 @@
 import {parse} from "querystring";
-import {IRequest} from "../interfaces";
+import {IRequest} from "../interfaces.js";
 
 export const URLEncodedFormTransform = async <T = unknown>(request: IRequest): Promise<T> => {
     request.headers.assert("Content-Type", "application/x-www-form-urlencoded");

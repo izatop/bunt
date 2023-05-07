@@ -1,5 +1,5 @@
 import {match, MatchFunction, pathToRegexp} from "path-to-regexp";
-import {IRouteMatcher} from "../interfaces";
+import {IRouteMatcher} from "../interfaces.js";
 
 export class RegexpMatcher implements IRouteMatcher {
     protected readonly route: string;

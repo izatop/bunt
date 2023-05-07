@@ -1,5 +1,5 @@
-import {DecoratorTarget} from "./interfaces";
-import {isObject} from "./is";
+import {DecoratorTarget} from "./interfaces.js";
+import {isObject} from "./is.js";
 
 export const freeze = <S extends {[key: string]: any}>(source: S): S => {
     const target = Object.freeze(Object.assign(Object.create(null), source));

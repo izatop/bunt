@@ -1,4 +1,4 @@
-import {IServiceResolver} from "../interfaces";
+import {IServiceResolver} from "../interfaces.js";
 
 export type ResolveService<T> = T extends IServiceResolver<infer S> ? Promise<S> : T;
 

@@ -1,6 +1,6 @@
 import {isArray, isInstanceOf, toError} from "@bunt/util";
-import {AssertionListError, AssertionTypeError, IReadableListField} from "../Assertion";
-import {SuperType} from "../SuperType";
+import {AssertionListError, AssertionTypeError, IReadableListField} from "../Assertion/index.js";
+import {SuperType} from "../SuperType.js";
 
 export class List<TValue> extends SuperType<TValue[], TValue> {
     public async validate(payload: unknown): Promise<TValue[]> {

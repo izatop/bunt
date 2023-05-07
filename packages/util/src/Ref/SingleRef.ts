@@ -1,4 +1,4 @@
-import {assert} from "../assert";
+import {assert} from "../assert.js";
 
 const store = new WeakMap();
 
@@ -20,7 +20,7 @@ export class SingleRef<T> {
     public ensure(): T {
         const ref = this.get();
         assert(ref, "Unknown reference");
-        
+
         return ref;
     }
 

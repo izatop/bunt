@@ -1,5 +1,5 @@
 import {isNumber, isString} from "@bunt/util";
-import {ScalarType} from "./ScalarType";
+import {ScalarType} from "./ScalarType.js";
 
 export const DateTime = new ScalarType<Date>({
     name: "DateTime",

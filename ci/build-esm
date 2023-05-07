@@ -1,0 +1,3 @@
+#!/bin/sh
+
+find packages -type d -name esm -execdir sh -c 'echo "{\"type\":\"module\"}" > $(pwd)/esm/package.json' \;

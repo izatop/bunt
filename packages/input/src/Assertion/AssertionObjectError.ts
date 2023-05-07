@@ -1,5 +1,5 @@
-import {TypeAbstract} from "../TypeAbstract";
-import {AssertionTypeError, IReadableTypeError} from "./AssertionTypeError";
+import {TypeAbstract} from "../TypeAbstract.js";
+import {AssertionTypeError, IReadableTypeError} from "./AssertionTypeError.js";
 
 export interface IReadableObjectError extends IReadableTypeError {
     fields: Record<string, IReadableTypeError>;

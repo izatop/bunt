@@ -1,9 +1,9 @@
 import * as http from "node:http";
 import * as https from "node:https";
 import {Readable} from "node:stream";
-import {FileStorage} from "../FileStorage";
-import {FsDriverAbstract} from "../Driver/FsDriverAbstract";
-import {FsSource, FsStat, FsWritable, IBucketOptions} from "../interfaces";
+import {FileStorage} from "../FileStorage.js";
+import {FsDriverAbstract} from "../Driver/FsDriverAbstract.js";
+import {FsSource, FsStat, FsWritable, IBucketOptions} from "../interfaces.js";
 
 export class FsBucket {
     public readonly name: string;

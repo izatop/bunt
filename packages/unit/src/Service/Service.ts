@@ -1,6 +1,6 @@
 import {Ctor, DecoratorTarget} from "@bunt/util";
-import {IServiceResolver} from "../interfaces";
-import {ServiceRef} from "./ServiceRef";
+import {IServiceResolver} from "../interfaces.js";
+import {ServiceRef} from "./ServiceRef.js";
 
 export abstract class Service<T> implements IServiceResolver<T> {
     public static getReferences(target: unknown, base: Ctor | null = null): PropertyKey[] {

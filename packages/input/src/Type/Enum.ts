@@ -1,5 +1,5 @@
 import {isString, Promisify} from "@bunt/util";
-import {TypeAbstract} from "../TypeAbstract";
+import {TypeAbstract} from "../TypeAbstract.js";
 
 export class Enum<T extends string | number> extends TypeAbstract<T> {
     readonly #value: any;

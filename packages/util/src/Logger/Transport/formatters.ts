@@ -1,5 +1,5 @@
-import {isDefined, isString} from "../../is";
-import {LogFormat, LogMessage, SeverityLevel} from "../interfaces";
+import {isDefined, isString} from "../../is.js";
+import {LogFormat, LogMessage, SeverityLevel} from "../interfaces.js";
 
 export const defaultLogFormat: LogFormat<string> = (log) => {
     return JSON.stringify(log) + "\n";

@@ -1,5 +1,5 @@
-import {assert} from "../assert";
-import {DateConfig} from "./interface";
+import {assert} from "../assert.js";
+import {DateConfig} from "./interface.js";
 
 function normalizeLocale(locale: string): string {
     if (/^[a-z]{2}_.+$/.test(locale)) {

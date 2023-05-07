@@ -1,6 +1,6 @@
 import {Action, IRunnable, StateType} from "@bunt/unit";
 import {Argv, logger, Logger, Program} from "@bunt/util";
-import {CommandContext} from "../Context/CommandContext";
+import {CommandContext} from "../Context/CommandContext.js";
 
 export abstract class Command<C extends CommandContext,
     S extends StateType | null = null> extends Action<C, S, IRunnable | void> {

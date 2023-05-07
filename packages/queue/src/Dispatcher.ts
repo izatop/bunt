@@ -10,9 +10,9 @@ import {
     unit,
 } from "@bunt/unit";
 import {Ctor, Defer, logger, Logger} from "@bunt/util";
-import {Handler} from "./Handler";
-import {ITransport} from "./interfaces";
-import {Incoming, MessageCtor, Queue, QueueAbstract} from "./Queue";
+import {Handler} from "./Handler.js";
+import {ITransport} from "./interfaces.js";
+import {Incoming, MessageCtor, Queue, QueueAbstract} from "./Queue/index.js";
 
 export class Dispatcher<C extends Context> extends Disposer implements IRunnable {
     @logger

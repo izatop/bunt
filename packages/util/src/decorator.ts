@@ -1,6 +1,6 @@
-import {assert} from "./assert";
-import {DecoratorTarget} from "./interfaces";
-import {isFunction, isUndefined} from "./is";
+import {assert} from "./assert.js";
+import {DecoratorTarget} from "./interfaces.js";
+import {isFunction, isUndefined} from "./is.js";
 
 export function memoize(target: DecoratorTarget, key: string): PropertyDescriptor {
     const descriptor = Reflect.getOwnPropertyDescriptor(target, key);

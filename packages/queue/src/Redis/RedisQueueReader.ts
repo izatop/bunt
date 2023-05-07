@@ -1,6 +1,6 @@
 import {Redis} from "ioredis";
-import {Message, MessageCtor, QueueReaderAbstract, ReadOperation} from "../Queue";
-import {RedisTransport} from "./RedisTransport";
+import {Message, MessageCtor, QueueReaderAbstract, ReadOperation} from "../Queue/index.js";
+import {RedisTransport} from "./RedisTransport.js";
 
 export class RedisQueueReader<M extends Message, MC extends MessageCtor<M>>
     extends QueueReaderAbstract<M, MC, ReadOperation<M>> {

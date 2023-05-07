@@ -1,6 +1,6 @@
 import {isFunction} from "@bunt/util";
-import {FieldSelectType} from "./interfaces";
-import {TypeAbstract} from "./TypeAbstract";
+import {FieldSelectType} from "./interfaces.js";
+import {TypeAbstract} from "./TypeAbstract.js";
 
 export async function validate<T>(type: FieldSelectType<T>, value: unknown): Promise<T> {
     if (isFunction(type)) {

@@ -1,4 +1,4 @@
-import {IKeyValueMap} from "../interfaces";
+import {IKeyValueMap} from "../interfaces.js";
 
 export class KeyValueMap implements IKeyValueMap {
     readonly #map: Map<string, string>;

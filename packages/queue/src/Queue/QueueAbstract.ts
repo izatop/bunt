@@ -1,6 +1,6 @@
 import {Disposer} from "@bunt/unit";
-import {ITransport} from "../interfaces";
-import {Incoming, IQueueList, Message, MessageCtor, MessageHandler} from "./interfaces";
+import {ITransport} from "../interfaces.js";
+import {Incoming, IQueueList, Message, MessageCtor, MessageHandler} from "./interfaces.js";
 
 export abstract class QueueAbstract<Q extends ITransport> extends Disposer {
     readonly #transport: Q;

@@ -1,6 +1,6 @@
 import {isFunction, isNull, isUndefined, Promisify} from "@bunt/util";
-import {SuperType} from "../SuperType";
-import {TypeAbstract} from "../TypeAbstract";
+import {SuperType} from "../SuperType.js";
+import {TypeAbstract} from "../TypeAbstract.js";
 
 export class NonNull<TValue> extends SuperType<TValue, TValue> {
     readonly #defaultValue: TValue | (() => TValue);

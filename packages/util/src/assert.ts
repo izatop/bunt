@@ -1,5 +1,5 @@
-import {AssertionError} from "./Exception";
-import {isFunction, isInstanceOf, isString} from "./is";
+import {AssertionError} from "./Exception/index.js";
+import {isFunction, isInstanceOf, isString} from "./is.js";
 
 export type AssertionDetailsAllowType = string | Record<any, any> | null | number;
 export type AssertionDetails = (() => AssertionDetailsAllowType) | AssertionDetailsAllowType;

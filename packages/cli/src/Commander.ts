@@ -1,7 +1,7 @@
 import {Application, IRoute} from "@bunt/app";
 import {Action, ActionTransactionHandlers, ContextArg, IRunnable} from "@bunt/unit";
-import {CommandContext} from "./Context/CommandContext";
-import {RequestCommand} from "./Request";
+import {CommandContext} from "./Context/CommandContext.js";
+import {RequestCommand} from "./Request/index.js";
 
 export class Commander<C extends CommandContext> {
     readonly #application: Application<C>;

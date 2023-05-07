@@ -1,6 +1,6 @@
 import {isFunction} from "@bunt/util";
-import {ResolvableValue} from "../interfaces";
-import {Service} from "./Service";
+import {ResolvableValue} from "../interfaces.js";
+import {Service} from "./Service.js";
 
 export class ServiceFactory<T> extends Service<T> {
     protected readonly resolver: ResolvableValue<T>;

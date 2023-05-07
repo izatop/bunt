@@ -1,3 +1,3 @@
-export * from "./Protocol";
-export * from "./Connection";
-export * from "./WebSocketServer";
+export * from "./Protocol/index.js";
+export * from "./Connection/index.js";
+export * from "./WebSocketServer.js";

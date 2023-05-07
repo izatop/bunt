@@ -1,6 +1,6 @@
 import {Redis} from "ioredis";
-import {SubscriptionManager} from "../PubSub";
-import {RedisTransport} from "./RedisTransport";
+import {SubscriptionManager} from "../PubSub/index.js";
+import {RedisTransport} from "./RedisTransport.js";
 
 export class RedisSubscriptionManager extends SubscriptionManager {
     readonly #transport: RedisTransport;

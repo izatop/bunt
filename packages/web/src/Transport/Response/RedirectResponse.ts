@@ -1,6 +1,6 @@
 import {assert} from "@bunt/util";
 import * as HTTP from "http-status";
-import {IResponseOptions, ResponseAbstract} from "./ResponseAbstract";
+import {IResponseOptions, ResponseAbstract} from "./ResponseAbstract.js";
 
 export class RedirectResponse extends ResponseAbstract<undefined> {
     constructor(location: string, code: number = HTTP.MOVED_PERMANENTLY, options: IResponseOptions = {}) {

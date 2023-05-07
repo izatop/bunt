@@ -1,6 +1,6 @@
 import {Promisify} from "@bunt/util";
-import {ApplyContext, Context} from "./Context";
-import {StateType} from "./interfaces";
+import {ApplyContext, Context} from "./Context/index.js";
+import {StateType} from "./interfaces.js";
 
 export abstract class Action<C extends Context, S extends StateType = null, R = unknown> {
     public readonly state: S;

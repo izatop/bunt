@@ -1,4 +1,4 @@
-import {ITransport} from "../interfaces";
+import {ITransport} from "../interfaces.js";
 import {SubscriptionManager} from ".";
 
 export const SubscriptionListenerId = Symbol.for("SubscriptionListenerId");

@@ -1,10 +1,11 @@
 import * as os from "os";
 import {format} from "util";
-import {makeSafe, Promisify} from "..";
-import {assert} from "../assert";
-import {isDefined, isFunction, isInstanceOf, isNumber, isUndefined} from "../is";
-import {Perf} from "../Perf";
-import {isLogable, isLoggerOwner} from "./functions";
+import {assert} from "../assert.js";
+import {isDefined, isFunction, isInstanceOf, isNumber, isUndefined} from "../is.js";
+import {Perf} from "../Perf/index.js";
+import {makeSafe} from "../function.js";
+import {Promisify} from "../interfaces.js";
+import {isLogable, isLoggerOwner} from "./functions.js";
 import {
     ILogger,
     ILoggerTransport,
@@ -15,7 +16,7 @@ import {
     LogMessage,
     LogWrapFn,
     SeverityLevel,
-} from "./interfaces";
+} from "./interfaces.js";
 
 type SafeLog = (log: LogMessage) => void;
 

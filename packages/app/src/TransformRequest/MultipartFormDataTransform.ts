@@ -4,7 +4,7 @@ import {join} from "path";
 import {createWriteStream} from "fs";
 import {Defer, QueryString} from "@bunt/util";
 import * as busboy from "busboy";
-import {IRequest} from "../interfaces";
+import {IRequest} from "../interfaces.js";
 
 export const MultipartFormDataTransform = async <T = unknown>(request: IRequest): Promise<T> => {
     request.headers.assert("Content-Type", (value) => value.startsWith("multipart/form-data"));

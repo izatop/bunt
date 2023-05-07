@@ -1,7 +1,7 @@
 import {performance} from "perf_hooks";
-import {isString} from "../is";
-import {ILogable} from "../Logger";
-import {IPerfValue, PerfLabel} from "./interfaces";
+import {isString} from "../is.js";
+import {ILogable} from "../Logger/index.js";
+import {IPerfValue, PerfLabel} from "./interfaces.js";
 
 export class Perf implements ILogable<IPerfValue> {
     public readonly label: string;
@@ -24,7 +24,7 @@ export class Perf implements ILogable<IPerfValue> {
 
     public finish(): this {
         this.#finish = performance.now();
-        
+
         return this;
     }
 

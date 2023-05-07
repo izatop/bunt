@@ -1,6 +1,6 @@
 import {assert, ILogable, isBoolean, isFunction} from "@bunt/util";
-import {HeaderAssertValue, IHeaders} from "../interfaces";
-import {StrictKeyValueMap} from "./StrictKeyValueMap";
+import {HeaderAssertValue, IHeaders} from "../interfaces.js";
+import {StrictKeyValueMap} from "./StrictKeyValueMap.js";
 
 export abstract class HeadersAbstract extends StrictKeyValueMap
     implements IHeaders, ILogable<{[key: string]: string}> {

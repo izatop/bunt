@@ -1,4 +1,4 @@
-import {Promisify} from "../interfaces";
+import {Promisify} from "../interfaces.js";
 
 export type TypeToJSON<T> = T extends Date ? string | number : any;
 export type TransformFunction<T> = (value: TypeToJSON<T>) => Promisify<T>;

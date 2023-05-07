@@ -1,0 +1,36 @@
+{
+    "files": [],
+    "include": [],
+    "references": [
+        {
+            "path": "./util/tsconfig.esm.json"
+        },
+        {
+            "path": "./unit/tsconfig.esm.json"
+        },
+        {
+            "path": "./app/tsconfig.esm.json"
+        },
+        {
+            "path": "./web/tsconfig.esm.json"
+        },
+        {
+            "path": "./ws/tsconfig.esm.json"
+        },
+        {
+            "path": "./fs/tsconfig.esm.json"
+        },
+        {
+            "path": "./cli/tsconfig.esm.json"
+        },
+        {
+            "path": "./input/tsconfig.esm.json"
+        },
+        {
+            "path": "./queue/tsconfig.esm.json"
+        },
+        {
+            "path": "./async/tsconfig.esm.json"
+        },
+    ]
+}

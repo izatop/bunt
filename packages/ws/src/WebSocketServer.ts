@@ -18,8 +18,8 @@ import {
 import {assert, Defer, isDefined, isString, logger, Logger, noop, resolveOrReject, toError} from "@bunt/util";
 import {RequestMessage, WebServer} from "@bunt/web";
 import * as ws from "ws";
-import {WebSocketCloseReason} from "./const";
-import {HandleProtoType, ProtoHandleAbstract} from "./Protocol";
+import {WebSocketCloseReason} from "./const.js";
+import {HandleProtoType, ProtoHandleAbstract} from "./Protocol/index.js";
 
 export class WebSocketServer<C extends Context> extends Disposer implements IRunnable {
     @logger

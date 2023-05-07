@@ -1,6 +1,6 @@
 import {Context, StateType} from "@bunt/unit";
-import {ClientConnection} from "../Connection/ClientConnection";
-import {ProtoHandleAbstract} from "./ProtoHandleAbstract";
+import {ClientConnection} from "../Connection/ClientConnection.js";
+import {ProtoHandleAbstract} from "./ProtoHandleAbstract.js";
 
 export abstract class EchoProtoHandle<C extends Context,
     S extends StateType | null = null> extends ProtoHandleAbstract<C, S> {
