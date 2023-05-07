@@ -1,6 +1,12 @@
 import {toError} from "@bunt/util";
 import {createReleaseState} from "./fn.js";
-import {IHandleReleaseFactory, IReadOperation, IReadOperationFail, Message, OperationReleaseState} from "./interfaces.js";
+import {
+    IHandleReleaseFactory,
+    IReadOperation,
+    IReadOperationFail,
+    Message,
+    OperationReleaseState,
+} from "./interfaces.js";
 
 export class ReadOperation<M extends Message> implements IReadOperation<M> {
     readonly #message: M;
