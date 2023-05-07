@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.26.0](https://github.com/izatop/bunt/compare/v0.25.6...v0.26.0) (2023-05-07)
+
+
+### Bug Fixes
+
+* ci ([ee88539](https://github.com/izatop/bunt/commit/ee885391d6e54712b82d7ded834e3f2383004fce))
+* lint ([638558b](https://github.com/izatop/bunt/commit/638558bfcbdadba29afd162e669622571537488f))
+
+
+### Features
+
+* **esm:** added esm support, update deps ([672c9e5](https://github.com/izatop/bunt/commit/672c9e5e8903c87796c5214eee3287c62843ebb8))
+
+
+
+
+
 ## [0.25.6](https://github.com/izatop/bunt/compare/v0.25.5...v0.25.6) (2023-04-06)
 
 

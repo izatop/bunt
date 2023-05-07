@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.26.0](https://github.com/izatop/bunt/compare/v0.25.6...v0.26.0) (2023-05-07)
+
+
+### Features
+
+* **esm:** added esm support, update deps ([672c9e5](https://github.com/izatop/bunt/commit/672c9e5e8903c87796c5214eee3287c62843ebb8))
+
+
+
+
+
 # [0.25.0](https://github.com/izatop/bunt/compare/v0.24.57...v0.25.0) (2023-03-16)
 
 **Note:** Version bump only for package @bunt/async
