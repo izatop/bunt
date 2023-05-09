@@ -7,3 +7,4 @@ export * from "./RequestMessage.js";
 export * from "./Responder.js";
 export * from "./ServerError.js";
 export * from "./TransformError.js";
+export * from "./RequestProxy.js";
