@@ -9,5 +9,8 @@ test "$(docker ps --filter name=minio-test -q)" = "" && \
     (docker run --rm --name minio-test -p 9000:9000 -d minio/minio server /data || exit 1)
 
 yarn jest "$@"
+CODE=$?
 
 docker stop redis-test minio-test
+
+exit ${CODE}
