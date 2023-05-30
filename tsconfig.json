@@ -6,6 +6,7 @@
             "ES2022"
         ],
         "strict": true,
+        "alwaysStrict": true,
         "sourceMap": true,
         "inlineSources": true,
         "strictNullChecks": true,
@@ -15,7 +16,9 @@
         "strictPropertyInitialization": true,
         "strictFunctionTypes": true,
         "experimentalDecorators": true,
-        "allowSyntheticDefaultImports": true
+        "allowSyntheticDefaultImports": true,
+        "skipDefaultLibCheck": true,
+        "skipLibCheck": true
     },
     "exclude": [
         "node_modules"

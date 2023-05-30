@@ -1,4 +1,4 @@
-.idea/
+.yarn/
 node_modules/
 coverage/
 dist/

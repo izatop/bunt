@@ -117,6 +117,7 @@ export class MinIO extends FsDriverAbstract {
                 Object.assign(metadata, headersMetadata);
 
                 assert(response.ok, response.statusText, {status: response.status});
+                assert(response.status === 200, "Invalid status code", {status: response.status});
                 assert(response.body, "Response body is null", source.pathname);
                 metadata["content-type"] = this.#getMimeType(source.pathname, metadata);
 

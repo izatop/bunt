@@ -1,7 +1,9 @@
 #!/bin/sh
 
+export TIMEZONE=UTC LOCALE=en
+
 yarn clean \
     && yarn lint \
-    && ci/build \
-    && yarn test \
+    && bin/build \
+    && bin/run-tests test --ci --bail \
     && yarn lerna publish --conventional-commits --yes

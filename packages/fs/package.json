@@ -35,10 +35,10 @@
     "dependencies": {
         "@bunt/unit": "^0.26.0",
         "@bunt/util": "^0.26.0",
-        "@types/minio": "^7.0.15",
-        "@types/node-fetch": "^2.6.3",
-        "minio": "^7.1.0",
-        "node-fetch": "2"
+        "@types/minio": "^7.1.0",
+        "@types/node-fetch": "^2.6.4",
+        "minio": "^7.1.1",
+        "node-fetch": "2.6.11"
     },
     "license": "MIT"
 }
