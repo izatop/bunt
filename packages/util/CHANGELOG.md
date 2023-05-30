@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.26.2](https://github.com/izatop/bunt/compare/v0.26.1...v0.26.2) (2023-05-30)
+
+
+### Bug Fixes
+
+* env ([f7d5d78](https://github.com/izatop/bunt/commit/f7d5d783350720d083c27c2db016b67f9533c1c2))
+
+
+
+
+
 # [0.26.0](https://github.com/izatop/bunt/compare/v0.25.6...v0.26.0) (2023-05-07)
 
 

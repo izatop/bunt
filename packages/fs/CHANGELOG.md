@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.26.2](https://github.com/izatop/bunt/compare/v0.26.1...v0.26.2) (2023-05-30)
+
+
+### Bug Fixes
+
+* update deps, ci -> bin ([b3f87a6](https://github.com/izatop/bunt/commit/b3f87a628f38a161972d09bb6d949c52764b4591))
+
+
+
+
+
 # [0.26.0](https://github.com/izatop/bunt/compare/v0.25.6...v0.26.0) (2023-05-07)
 
 
