@@ -410,24 +410,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@bunt/app@^0.26.2, @bunt/app@workspace:packages/app":
+"@bunt/app@^0.26.3, @bunt/app@workspace:packages/app":
   version: 0.0.0-use.local
   resolution: "@bunt/app@workspace:packages/app"
   dependencies:
-    "@bunt/input": ^0.26.2
-    "@bunt/unit": ^0.26.2
-    "@bunt/util": ^0.26.2
+    "@bunt/input": ^0.26.3
+    "@bunt/unit": ^0.26.3
+    "@bunt/util": ^0.26.3
     "@types/busboy": ^1.5.0
     busboy: ^1.6.0
     path-to-regexp: ^6.2.1
   languageName: unknown
   linkType: soft
 
-"@bunt/async@^0.26.2, @bunt/async@workspace:packages/async":
+"@bunt/async@^0.26.3, @bunt/async@workspace:packages/async":
   version: 0.0.0-use.local
   resolution: "@bunt/async@workspace:packages/async"
   dependencies:
-    "@bunt/util": ^0.26.2
+    "@bunt/util": ^0.26.3
   languageName: unknown
   linkType: soft
 
@@ -435,8 +435,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@bunt/cli@workspace:packages/cli"
   dependencies:
-    "@bunt/app": ^0.26.2
-    "@bunt/util": ^0.26.2
+    "@bunt/app": ^0.26.3
+    "@bunt/util": ^0.26.3
     path-to-regexp: ^6.2.1
   languageName: unknown
   linkType: soft
@@ -445,8 +445,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@bunt/fs@workspace:packages/fs"
   dependencies:
-    "@bunt/unit": ^0.26.2
-    "@bunt/util": ^0.26.2
+    "@bunt/unit": ^0.26.3
+    "@bunt/util": ^0.26.3
     "@types/minio": ^7.1.0
     "@types/node-fetch": ^2.6.4
     minio: ^7.1.1
@@ -454,11 +454,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@bunt/input@^0.26.2, @bunt/input@workspace:packages/input":
+"@bunt/input@^0.26.3, @bunt/input@workspace:packages/input":
   version: 0.0.0-use.local
   resolution: "@bunt/input@workspace:packages/input"
   dependencies:
-    "@bunt/util": ^0.26.2
+    "@bunt/util": ^0.26.3
   languageName: unknown
   linkType: soft
 
@@ -466,33 +466,33 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@bunt/queue@workspace:packages/queue"
   dependencies:
-    "@bunt/async": ^0.26.2
-    "@bunt/unit": ^0.26.2
-    "@bunt/util": ^0.26.2
+    "@bunt/async": ^0.26.3
+    "@bunt/unit": ^0.26.3
+    "@bunt/util": ^0.26.3
     ioredis: ^5.2.4
   languageName: unknown
   linkType: soft
 
-"@bunt/unit@^0.26.2, @bunt/unit@workspace:packages/unit":
+"@bunt/unit@^0.26.3, @bunt/unit@workspace:packages/unit":
   version: 0.0.0-use.local
   resolution: "@bunt/unit@workspace:packages/unit"
   dependencies:
-    "@bunt/util": ^0.26.2
+    "@bunt/util": ^0.26.3
   languageName: unknown
   linkType: soft
 
-"@bunt/util@^0.26.2, @bunt/util@workspace:packages/util":
+"@bunt/util@^0.26.3, @bunt/util@workspace:packages/util":
   version: 0.0.0-use.local
   resolution: "@bunt/util@workspace:packages/util"
   languageName: unknown
   linkType: soft
 
-"@bunt/web@^0.26.2, @bunt/web@workspace:packages/web":
+"@bunt/web@^0.26.3, @bunt/web@workspace:packages/web":
   version: 0.0.0-use.local
   resolution: "@bunt/web@workspace:packages/web"
   dependencies:
-    "@bunt/app": ^0.26.2
-    "@bunt/util": ^0.26.2
+    "@bunt/app": ^0.26.3
+    "@bunt/util": ^0.26.3
     http-status: ^1.6.1
     path-to-regexp: ^6.2.1
   languageName: unknown
@@ -502,10 +502,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@bunt/ws@workspace:packages/ws"
   dependencies:
-    "@bunt/app": ^0.26.2
-    "@bunt/unit": ^0.26.2
-    "@bunt/util": ^0.26.2
-    "@bunt/web": ^0.26.2
+    "@bunt/app": ^0.26.3
+    "@bunt/unit": ^0.26.3
+    "@bunt/util": ^0.26.3
+    "@bunt/web": ^0.26.3
     "@types/websocket": ^1.0.4
     "@types/ws": ^8.5.4
     websocket: ^1.0.34
