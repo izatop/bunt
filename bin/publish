@@ -5,5 +5,5 @@ export TIMEZONE=UTC LANG=en-US
 yarn clean \
     && yarn lint \
     && bin/build \
-    && bin/run-tests test --ci --bail \
-    && yarn lerna publish --conventional-commits --yes
+    && bin/run-tests --bail=1 --ci \
+    && yarn lerna publish --conventional-commits -y --no-progress
