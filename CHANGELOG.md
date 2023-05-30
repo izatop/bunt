@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.26.2](https://github.com/izatop/bunt/compare/v0.26.1...v0.26.2) (2023-05-30)
+
+
+### Bug Fixes
+
+* bin paths ([058fb77](https://github.com/izatop/bunt/commit/058fb775988bf9ab7b63076d0435e984982794b8))
+* env ([f7d5d78](https://github.com/izatop/bunt/commit/f7d5d783350720d083c27c2db016b67f9533c1c2))
+* env ([b4fc49b](https://github.com/izatop/bunt/commit/b4fc49bd9e70416f0f89e26cfc5576ed0b4013b5))
+* github workflow ([f454742](https://github.com/izatop/bunt/commit/f454742a7e8c2629b0d43bf2d153f2ab704d60f2))
+* publish action ([a44abda](https://github.com/izatop/bunt/commit/a44abda398de8ff6fcf90d75d238dee58b7edf30))
+* rename action ([0f6fa9d](https://github.com/izatop/bunt/commit/0f6fa9d232c74f1a9948ed3319be8550fc77599c))
+* update deps, ci -> bin ([b3f87a6](https://github.com/izatop/bunt/commit/b3f87a628f38a161972d09bb6d949c52764b4591))
+* workflow ([9d503eb](https://github.com/izatop/bunt/commit/9d503eb125c123944c640e62b3741f1f8bb2bf17))
+* yarn Zero-Installs ([5f18b26](https://github.com/izatop/bunt/commit/5f18b26bf495f667f50f18e70b10aee2f6a5916a))
+
+
+### Features
+
+* create actions ([59f11c7](https://github.com/izatop/bunt/commit/59f11c712b66d7af1a5f6bca2838dfdfb23092dd))
+
+
+
+
+
 ## [0.26.1](https://github.com/izatop/bunt/compare/v0.26.0...v0.26.1) (2023-05-09)
 
 
