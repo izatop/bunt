@@ -1,0 +1,16 @@
+name: Publish
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    name: Build & publish
+    steps:
+    - uses: actions/checkout@v3
+    - run: yarn
+    - run: ci/publish
