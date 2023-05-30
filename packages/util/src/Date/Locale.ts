@@ -1,4 +1,3 @@
-import {assert} from "../assert.js";
 import {DateConfig} from "./interface.js";
 
 function normalizeLocale(locale: string): string {
@@ -26,7 +25,6 @@ const config: DateConfig = getDefaultConfig();
 
 export function setLocale(locale: string | string[]): void {
     const [supported] = Intl.DateTimeFormat.supportedLocalesOf(locale);
-    assert(supported, `Incorrect locale information provided: ${locale}`);
     config.locale = supported;
 }
 

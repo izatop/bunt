@@ -1,7 +1,6 @@
 #!/bin/sh
 
-set -a
-export TIMEZONE=UTC LOCALE=en
+export TIMEZONE=UTC LANG=en-US
 
 yarn clean \
     && yarn lint \
