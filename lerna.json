@@ -3,7 +3,9 @@
   "useWorkspaces": true,
   "command": {
     "version": {
+      "allowBranch": "master",
       "ignoreChanges": [
+        "**/*.md",
         "packages/*/test"
       ]
     }
