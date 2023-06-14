@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.27.0](https://github.com/izatop/bunt/compare/v0.26.3...v0.27.0) (2023-06-14)
+
+
+### Bug Fixes
+
+* exit code ([e8cbc0a](https://github.com/izatop/bunt/commit/e8cbc0a59fca6cce6988d8d60838476f7d19ca14))
+* lerna.json ([b535cfe](https://github.com/izatop/bunt/commit/b535cfe48fb304b09ed9bda9aa72b32afff70f17))
+* update workspace configuration ([e5944c8](https://github.com/izatop/bunt/commit/e5944c8d992ce93b55cf8eb71c5d4904a62a4d39))
+
+
+### Features
+
+* task runner ([b108fc0](https://github.com/izatop/bunt/commit/b108fc08afb75dce76dfd76fabe00f8af4d8ebe7))
+
+
+
+
+
 ## [0.26.3](https://github.com/izatop/bunt/compare/v0.26.2...v0.26.3) (2023-05-30)
 
 
