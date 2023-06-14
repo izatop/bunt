@@ -1,4 +1,4 @@
-import {NotFound} from "@bunt/util";
+import {NotFound} from "@bunt/assert";
 
 export class RouteNotFound extends NotFound {
     constructor(route: string) {

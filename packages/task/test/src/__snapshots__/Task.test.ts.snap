@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Task Runner.getTaskUpgradeState 1`] = `
+{
+  "reason": "ok",
+  "result": "done",
+  "runAt": 2000-01-01T00:00:00.000Z,
+  "state": 0,
+}
+`;
+
+exports[`Task Runner.getTaskUpgradeState 2`] = `
+{
+  "reason": "Unexpected error",
+  "state": 2,
+}
+`;
+
+exports[`Task Runner.getTaskUpgradeState 3`] = `
+{
+  "result": "done",
+  "state": 3,
+}
+`;
+
+exports[`Task Runner.getTaskUpgradeState 4`] = `
+{
+  "reason": "success",
+  "result": "done",
+  "state": 3,
+}
+`;
+
+exports[`Task Runner.getTaskUpgradeState 5`] = `
+{
+  "state": 3,
+}
+`;

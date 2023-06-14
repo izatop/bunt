@@ -7,6 +7,9 @@
     "references": [
         {
             "path": "../util"
+        },
+        {
+            "path": "../async"
         }
     ],
     "include": [

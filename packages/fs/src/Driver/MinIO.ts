@@ -1,8 +1,9 @@
 import {URL} from "url";
 import {Readable} from "stream";
-import {assert, isString} from "@bunt/util";
 import {Client, UploadedObjectInfo} from "minio";
 import fetch from "node-fetch";
+import {assert} from "@bunt/assert";
+import {isString} from "@bunt/is";
 import {FsSource, FsStat, FsWritable} from "../interfaces.js";
 import {getMimeType} from "../mime-db";
 import {FsDriverAbstract} from "./FsDriverAbstract.js";

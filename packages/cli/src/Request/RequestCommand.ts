@@ -1,5 +1,6 @@
 import {KeyValueMap, RequestAbstract} from "@bunt/app";
-import {Argv, assert} from "@bunt/util";
+import {Argv} from "@bunt/util";
+import {assert} from "@bunt/assert";
 import {Headers} from "./Headers.js";
 
 export class RequestCommand extends RequestAbstract {

@@ -1,4 +1,5 @@
-import {Defer, logger, Logger} from "@bunt/util";
+import {logger, Logger} from "@bunt/util";
+import {Defer} from "@bunt/async";
 import {Disposer} from "../Dispose/index.js";
 import {IRunnable} from "./interfaces.js";
 import {isRunnable} from "./internal.js";

@@ -1,4 +1,5 @@
-import {isArray, isInstanceOf, toError} from "@bunt/util";
+import {isArray, isInstanceOf} from "@bunt/is";
+import {toError} from "@bunt/assert";
 import {AssertionListError, AssertionTypeError, IReadableListField} from "../Assertion/index.js";
 import {SuperType} from "../SuperType.js";
 

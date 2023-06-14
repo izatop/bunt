@@ -1,4 +1,4 @@
-import {assert} from "@bunt/util";
+import {assert} from "@bunt/assert";
 import {Defer} from "./Defer.js";
 
 export interface IAsyncPushPullOptions {

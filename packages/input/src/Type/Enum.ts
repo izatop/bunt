@@ -1,4 +1,5 @@
-import {isString, Promisify} from "@bunt/util";
+import {isString} from "@bunt/is";
+import {Promisify} from "@bunt/type";
 import {TypeAbstract} from "../TypeAbstract.js";
 
 export class Enum<T extends string | number> extends TypeAbstract<T> {

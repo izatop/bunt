@@ -1,4 +1,6 @@
-import {assert, ILogable, isBoolean, isFunction} from "@bunt/util";
+import {isBoolean, isFunction} from "@bunt/is";
+import {ILogable} from "@bunt/type";
+import {assert} from "@bunt/assert";
 import {HeaderAssertValue, IHeaders} from "../interfaces.js";
 import {StrictKeyValueMap} from "./StrictKeyValueMap.js";
 

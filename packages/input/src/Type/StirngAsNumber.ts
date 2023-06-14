@@ -1,4 +1,5 @@
-import {isNumber, isString, Promisify} from "@bunt/util";
+import {isNumber, isString} from "@bunt/is";
+import {Promisify} from "@bunt/type";
 import {SuperType} from "../SuperType.js";
 
 export class StringAsNumber extends SuperType<string | number, number> {

@@ -3,7 +3,19 @@
     "include": [],
     "references": [
         {
+            "path": "./type"
+        },
+        {
             "path": "./util"
+        },
+        {
+            "path": "./is"
+        },
+        {
+            "path": "./assert"
+        },
+        {
+            "path": "./date"
         },
         {
             "path": "./unit"
@@ -28,6 +40,9 @@
         },
         {
             "path": "./queue"
+        },
+        {
+            "path": "./task"
         },
         {
             "path": "./async"

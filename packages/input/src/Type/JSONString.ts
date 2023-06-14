@@ -1,4 +1,4 @@
-import {isString} from "@bunt/util";
+import {isString} from "@bunt/is";
 import {ScalarType} from "./ScalarType.js";
 
 export const JSONString = new ScalarType<any>({

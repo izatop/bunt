@@ -1,4 +1,5 @@
-import {isObject, Promisify} from "@bunt/util";
+import {isObject} from "@bunt/is";
+import {Promisify} from "@bunt/type";
 import {TypeAbstract} from "../TypeAbstract.js";
 import {IScalarType} from "./ScalarType.js";
 

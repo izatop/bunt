@@ -1,4 +1,5 @@
-import {assert, isDefined, isFunction} from "@bunt/util";
+import {assert} from "@bunt/assert";
+import {isDefined, isFunction} from "@bunt/is";
 
 export type EnvRecord = Record<string, string>;
 
@@ -26,7 +27,7 @@ export class EnvReader<T extends EnvRecord> {
     public ensure(key: string, parse?: (v: string) => unknown): unknown {
         const value = this.#map.get(key);
         assert(value, `The ${key} property should be defined`);
-        
+
         return isFunction(parse) ? parse(value) : value;
     }
 

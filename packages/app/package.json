@@ -33,7 +33,10 @@
         "access": "public"
     },
     "dependencies": {
+        "@bunt/assert": "^0.1.0",
+        "@bunt/async": "^0.26.3",
         "@bunt/input": "^0.26.3",
+        "@bunt/is": "^0.1.0",
         "@bunt/unit": "^0.26.3",
         "@bunt/util": "^0.26.3",
         "@types/busboy": "^1.5.0",

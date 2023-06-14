@@ -1,4 +1,7 @@
-import {assert, isArray, isDefined, KeyOf, XMap} from "@bunt/util";
+import {assert} from "@bunt/assert";
+import {isArray, isDefined} from "@bunt/is";
+import {KeyOf} from "@bunt/type";
+import {XMap} from "@bunt/util";
 
 export type DSNOptions<O extends Record<string, any> = Record<string, any>> = O;
 

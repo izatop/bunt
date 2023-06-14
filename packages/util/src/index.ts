@@ -6,7 +6,6 @@ export * from "./string.js";
 export * from "./decorator.js";
 export * from "./function.js";
 export * from "./callback.js";
-export * from "./Date/index.js";
 export * from "./Transform/index.js";
 export * from "./Logger/index.js";
 export * from "./Exception/index.js";

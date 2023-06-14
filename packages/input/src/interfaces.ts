@@ -1,4 +1,4 @@
-import {KeyOf} from "@bunt/util";
+import {KeyOf} from "@bunt/type";
 import {Fields, Int, Nullable} from "./Type/index.js";
 import {TypeAbstract} from "./TypeAbstract.js";
 

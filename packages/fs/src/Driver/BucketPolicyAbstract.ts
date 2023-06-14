@@ -1,4 +1,4 @@
-import {assert} from "@bunt/util";
+import {assert} from "@bunt/assert";
 
 export type PolicyFn = (bucket: string) => string;
 

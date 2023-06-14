@@ -1,4 +1,4 @@
-import {Promisify} from "@bunt/util";
+import {Promisify} from "@bunt/type";
 import {Heartbeat} from "./Heartbeat.js";
 
 export interface IRunnable {
