@@ -1,4 +1,5 @@
-import {isObject, Logger} from "@bunt/util";
+import {isObject} from "@bunt/is";
+import {Logger} from "@bunt/util";
 import {IDisposable, IRunnable} from "./interfaces.js";
 import {Runtime} from "./Runtime.js";
 import {RuntimeTask} from ".";

@@ -1,4 +1,4 @@
-import {Promisify} from "@bunt/util";
+import {Promisify} from "@bunt/type";
 import {assert} from "./Assertion/index.js";
 
 export abstract class TypeAbstract<TValue> {

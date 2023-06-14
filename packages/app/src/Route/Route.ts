@@ -1,5 +1,6 @@
 import {ActionAny, ActionFactory} from "@bunt/unit";
-import {ILogable, isFunction, isString} from "@bunt/util";
+import {isFunction, isString} from "@bunt/is";
+import {ILogable} from "@bunt/type";
 import {
     IRoute,
     IRouteMatcher,

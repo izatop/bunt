@@ -1,4 +1,4 @@
-import {Promisify} from "@bunt/util";
+import {Promisify} from "@bunt/type";
 import {ApplyContext, Context} from "./Context/index.js";
 import {StateType} from "./interfaces.js";
 

@@ -1,4 +1,4 @@
-import {isInstanceOf, isObject} from "@bunt/util";
+import {isInstanceOf, isObject} from "@bunt/is";
 import {IServiceResolver} from "../interfaces.js";
 import {Service} from "./Service.js";
 

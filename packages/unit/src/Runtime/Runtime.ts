@@ -1,4 +1,6 @@
-import {isNull, isUndefined, logger, Logger, SingleRef, toError} from "@bunt/util";
+import {logger, Logger, SingleRef} from "@bunt/util";
+import {toError} from "@bunt/assert";
+import {isNull, isUndefined} from "@bunt/is";
 import {Disposer, dispose} from "../Dispose/index.js";
 import {Heartbeat} from "./Heartbeat.js";
 import {RuntimeTask} from "./interfaces.js";

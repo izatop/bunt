@@ -1,4 +1,5 @@
-import {ILogable, isFunction, Promisify} from "@bunt/util";
+import {ILogable, Promisify} from "@bunt/type";
+import {isFunction} from "@bunt/is";
 import {Application} from "../Application.js";
 import {IHeaders, IKeyValueMap, IRequest, IRequestTransform, RequestTransformType} from "../interfaces.js";
 import {

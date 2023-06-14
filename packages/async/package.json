@@ -31,6 +31,8 @@
     "description": "Async utils",
     "repository": "git@github.com:izatop/bunt.git",
     "dependencies": {
+        "@bunt/assert": "^0.1.0",
+        "@bunt/is": "^0.1.0",
         "@bunt/util": "^0.26.3"
     },
     "publishConfig": {

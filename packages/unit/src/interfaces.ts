@@ -1,4 +1,4 @@
-import {Fn, Promisify} from "@bunt/util";
+import {Fn, Promisify} from "@bunt/type";
 import {Action} from "./Action.js";
 import {ApplyContext, Context} from "./Context/index.js";
 

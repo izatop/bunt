@@ -1,4 +1,4 @@
-import {Promisify} from "@bunt/util";
+import {Promisify} from "@bunt/type";
 import {TypeAbstract} from "../TypeAbstract.js";
 
 export interface IScalarType<TValue> {

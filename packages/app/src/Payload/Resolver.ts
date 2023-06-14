@@ -1,5 +1,5 @@
 import {ActionAny, ActionState} from "@bunt/unit";
-import {isFunction, isObject} from "@bunt/util";
+import {isFunction, isObject} from "@bunt/is";
 import {IRouteContext} from "../Route/index.js";
 import {ResolverResolvers} from "./interfaces.js";
 

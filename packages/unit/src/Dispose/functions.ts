@@ -1,4 +1,6 @@
-import {isFunction, safeMap, toError} from "@bunt/util";
+import {safeMap} from "@bunt/util";
+import {isFunction} from "@bunt/is";
+import {toError} from "@bunt/assert";
 import {DisposableType, isRunnable, SystemLogger} from "../Runtime/index.js";
 
 const disposed = new WeakSet<DisposableType>();

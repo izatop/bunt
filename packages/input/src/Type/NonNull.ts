@@ -1,4 +1,5 @@
-import {isFunction, isNull, isUndefined, Promisify} from "@bunt/util";
+import {isFunction, isNull, isUndefined} from "@bunt/is";
+import {Promisify} from "@bunt/type";
 import {SuperType} from "../SuperType.js";
 import {TypeAbstract} from "../TypeAbstract.js";
 

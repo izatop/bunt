@@ -1,4 +1,5 @@
-import {isNull, isUndefined, MayNullable, Promisify} from "@bunt/util";
+import {MayNullable, Promisify} from "@bunt/type";
+import {isNull, isUndefined} from "@bunt/is";
 import {SuperType} from "../SuperType.js";
 
 export class Nullable<TValue> extends SuperType<MayNullable<TValue>, Exclude<TValue, undefined | null>> {

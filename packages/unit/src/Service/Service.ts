@@ -1,4 +1,4 @@
-import {Ctor, DecoratorTarget} from "@bunt/util";
+import {Ctor, DecoratorTarget} from "@bunt/type";
 import {IServiceResolver} from "../interfaces.js";
 import {ServiceRef} from "./ServiceRef.js";
 

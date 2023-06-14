@@ -2,8 +2,9 @@ import {randomBytes} from "crypto";
 import {tmpdir} from "os";
 import {join} from "path";
 import {createWriteStream} from "fs";
-import {Defer, QueryString} from "@bunt/util";
+import {QueryString} from "@bunt/util";
 import * as busboy from "busboy";
+import {Defer} from "@bunt/async";
 import {IRequest} from "../interfaces.js";
 
 export const MultipartFormDataTransform = async <T = unknown>(request: IRequest): Promise<T> => {

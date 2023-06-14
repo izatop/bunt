@@ -32,8 +32,10 @@
     "publishConfig": {
         "access": "public"
     },
+    "license": "MIT",
     "dependencies": {
-        "@bunt/util": "^0.26.3"
-    },
-    "license": "MIT"
+        "@bunt/assert": "^0.1.0",
+        "@bunt/is": "^0.1.0",
+        "@bunt/type": "^0.1.0"
+    }
 }

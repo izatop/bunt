@@ -1,4 +1,5 @@
-import {isNumber, isString, Promisify} from "@bunt/util";
+import {isNumber, isString} from "@bunt/is";
+import {Promisify} from "@bunt/type";
 import {Int} from "./Int.js";
 import {ScalarType} from "./ScalarType.js";
 

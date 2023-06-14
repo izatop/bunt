@@ -33,6 +33,10 @@
         "access": "public"
     },
     "dependencies": {
+        "@bunt/assert": "^0.1.0",
+        "@bunt/async": "^0.26.3",
+        "@bunt/is": "^0.1.0",
+        "@bunt/type": "^0.1.0",
         "@bunt/util": "^0.26.3"
     },
     "license": "MIT"

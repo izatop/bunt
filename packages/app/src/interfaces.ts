@@ -1,4 +1,4 @@
-import {Promisify} from "@bunt/util";
+import {Promisify} from "@bunt/type";
 import {Application} from "./Application.js";
 
 export type ActionResponse = Error

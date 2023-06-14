@@ -1,4 +1,4 @@
-import {isFunction} from "@bunt/util";
+import {isFunction} from "@bunt/is";
 import {FieldSelectType} from "./interfaces.js";
 import {TypeAbstract} from "./TypeAbstract.js";
 
@@ -9,3 +9,7 @@ export async function validate<T>(type: FieldSelectType<T>, value: unknown): Pro
 
     return (type as TypeAbstract<T>).validate(value);
 }
+
+export const entriesReverse = <V>(entries: [string | number | symbol, V][] = []): Record<any, any> => {
+    return Object.assign({}, ...entries.map(([key, value]) => ({[key]: value})));
+};

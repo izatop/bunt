@@ -1,4 +1,4 @@
-import {isFunction} from "@bunt/util";
+import {isFunction} from "@bunt/is";
 import {ResolvableValue} from "../interfaces.js";
 import {Service} from "./Service.js";
 

@@ -1,4 +1,4 @@
-import {isNumber} from "@bunt/util";
+import {isNumber} from "@bunt/is";
 import {ScalarType} from "./ScalarType.js";
 
 export const Int = new ScalarType<number>({

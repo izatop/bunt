@@ -1,4 +1,5 @@
-import {isString, isUndefined, Promisify} from "@bunt/util";
+import {isString, isUndefined} from "@bunt/is";
+import {Promisify} from "@bunt/type";
 import {TypeAbstract} from "../TypeAbstract.js";
 
 interface IVarchar {

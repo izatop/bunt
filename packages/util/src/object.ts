@@ -16,12 +16,7 @@ export const freeze = <S extends {[key: string]: any}>(source: S): S => {
 // @TODO
 // eslint-disable-next-line
 export const entriesReverse = <V>(entries: [string | number | symbol, V][] = []) => {
-    return Object.assign(
-        {},
-        ...entries.map(([key, value]) => ({
-            [key]: value,
-        })),
-    );
+    return Object.assign({}, ...entries.map(([key, value]) => ({[key]: value})));
 };
 
 export const getClassName = (target: DecoratorTarget, prefix?: string): string => {
