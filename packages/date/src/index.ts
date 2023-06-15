@@ -1,4 +1,4 @@
-export * from "./DateTime.js";
-export * from "./DateTimeMutation.js";
+export * from "./XDate.js";
+export * from "./XDateMutation.js";
 export * from "./Locale.js";
 export * from "./interface.js";

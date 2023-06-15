@@ -1,4 +1,4 @@
-export type DateTimeKind =
+export type XDateIntervalKind =
     "ms"
     | "sec"
     | "min"
@@ -8,16 +8,16 @@ export type DateTimeKind =
     | "week"
     | "year";
 
-export type TimeMutateFn = (date: number, value: number) => number;
+export type XTimeMutateFn = (date: number, value: number) => number;
 
-export enum TimeMultiply {
+export enum XTimeMultiply {
     SEC = 1000,
     MIN = SEC * 60,
     HOUR = MIN * 60,
     DAY = HOUR * 24,
 }
 
-export type DateConfig = {
+export type XDateConfig = {
     locale: string;
     timeZone: string;
     weekBegins: number;

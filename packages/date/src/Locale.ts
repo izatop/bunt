@@ -1,4 +1,4 @@
-import {DateConfig} from "./interface.js";
+import {XDateConfig} from "./interface.js";
 
 function normalizeLocale(locale: string): string {
     if (/^[a-z]{2}_.+$/.test(locale)) {
@@ -8,7 +8,7 @@ function normalizeLocale(locale: string): string {
     return locale;
 }
 
-export function getDefaultConfig(): DateConfig {
+export function getDefaultConfig(): XDateConfig {
     const system = Intl.DateTimeFormat().resolvedOptions();
     const timeZone = process.env.TZ ?? process.env.TIMEZONE ?? system.timeZone;
     const locale = normalizeLocale(process.env.LANG ?? process.env.LANGUAGE ?? system.locale);
@@ -21,7 +21,7 @@ export function getDefaultConfig(): DateConfig {
     return {locale, timeZone, weekBegins};
 }
 
-const config: DateConfig = getDefaultConfig();
+const config: XDateConfig = getDefaultConfig();
 
 export function setLocale(locale: string | string[]): void {
     const [supported] = Intl.DateTimeFormat.supportedLocalesOf(locale);
