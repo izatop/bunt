@@ -63,10 +63,12 @@ export class TransformError {
     }
 
     private getResponseJSON(): Record<any, any> {
+        const {code, status: message = this.#error.message} = this.getStatus();
+
         if (isReadableError(this.#error)) {
-            return this.#error.toSafeJSON();
+            return {code, message, data: this.#error.toSafeJSON()};
         }
 
-        return {error: this.#error.message};
+        return {code, message};
     }
 }
