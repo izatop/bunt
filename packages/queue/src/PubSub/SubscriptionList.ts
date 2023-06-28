@@ -1,5 +1,5 @@
 import {safeMap} from "@bunt/util";
-import {SubscriptionManagerListener} from ".";
+import {SubscriptionManagerListener} from "./interfaces.js";
 
 export class SubscriptionList {
     readonly #listeners = new Set<SubscriptionManagerListener>();

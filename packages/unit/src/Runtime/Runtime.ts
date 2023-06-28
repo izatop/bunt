@@ -3,9 +3,8 @@ import {toError} from "@bunt/assert";
 import {isNull, isUndefined} from "@bunt/is";
 import {Disposer, dispose} from "../Dispose/index.js";
 import {Heartbeat} from "./Heartbeat.js";
-import {RuntimeTask} from "./interfaces.js";
+import {DisposableType, RuntimeTask} from "./interfaces.js";
 import {isDisposable, isRunnable, Signals} from "./internal.js";
-import {DisposableType} from ".";
 
 const ref = new SingleRef<Runtime>();
 const DEBUG = !!process.env.DEBUG;
