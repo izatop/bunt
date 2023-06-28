@@ -1,6 +1,6 @@
 {
     "name": "@bunt/app",
-    "version": "0.28.1",
+    "version": "0.28.2",
     "keywords": [
         "typescript"
     ],
@@ -37,7 +37,7 @@
         "@bunt/async": "^0.28.1",
         "@bunt/input": "^0.28.1",
         "@bunt/is": "^0.28.1",
-        "@bunt/unit": "^0.28.1",
+        "@bunt/unit": "^0.28.2",
         "@bunt/util": "^0.28.1",
         "@types/busboy": "^1.5.0",
         "busboy": "^1.6.0",
