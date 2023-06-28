@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.28.1](https://github.com/izatop/bunt/compare/v0.28.0...v0.28.1) (2023-06-28)
+
+
+### Bug Fixes
+
+* update deps, fix imports (.js) ([00a1d1c](https://github.com/izatop/bunt/commit/00a1d1c2ab0ed2ed6c98ea9387a4702682f7cbab))
+* update lerna.json ([9185d30](https://github.com/izatop/bunt/commit/9185d3058f7b06a2f1c782a65dceda7ef46351e2))
+* yarn.lock ([cef3a6e](https://github.com/izatop/bunt/commit/cef3a6eb900a67f57b67d7873a7ca90712de64db))
+
+
+
+
+
 # [0.28.0](https://github.com/izatop/bunt/compare/v0.27.1...v0.28.0) (2023-06-22)
 
 

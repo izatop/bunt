@@ -1,6 +1,6 @@
 {
     "name": "@bunt/unit",
-    "version": "0.28.0",
+    "version": "0.28.1",
     "keywords": [
         "typescript"
     ],
@@ -33,11 +33,11 @@
         "access": "public"
     },
     "dependencies": {
-        "@bunt/assert": "^0.28.0",
-        "@bunt/async": "^0.28.0",
-        "@bunt/is": "^0.28.0",
-        "@bunt/type": "^0.28.0",
-        "@bunt/util": "^0.28.0"
+        "@bunt/assert": "^0.28.1",
+        "@bunt/async": "^0.28.1",
+        "@bunt/is": "^0.28.1",
+        "@bunt/type": "^0.28.1",
+        "@bunt/util": "^0.28.1"
     },
     "license": "MIT"
 }
