@@ -1,7 +1,7 @@
 import {Context} from "@bunt/unit";
 import {Ctor} from "@bunt/type";
-import {TaskAbstract} from "./TaskAbstract";
-import {TaskConfig} from "./interfaces";
+import {TaskAbstract} from "./TaskAbstract.js";
+import {TaskConfig} from "./interfaces.js";
 
 export function define<C extends Context, S extends Record<any, any>>(
     action: Ctor<TaskAbstract<C, S>>,

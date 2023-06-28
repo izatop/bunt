@@ -1,5 +1,5 @@
 import {Promisify} from "@bunt/type";
-import {LimiterAbstract} from "./LimiterAbstract";
+import {LimiterAbstract} from "./LimiterAbstract.js";
 
 export class ConcurrencyLimiter extends LimiterAbstract {
     readonly #limit: number;

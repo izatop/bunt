@@ -5,7 +5,7 @@ import fetch from "node-fetch";
 import {assert} from "@bunt/assert";
 import {isString} from "@bunt/is";
 import {FsSource, FsStat, FsWritable} from "../interfaces.js";
-import {getMimeType} from "../mime-db";
+import {getMimeType} from "../mime-db.js";
 import {FsDriverAbstract} from "./FsDriverAbstract.js";
 import {MinIOBucketPolicy} from "./MinIOBucketPolicy.js";
 

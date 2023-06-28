@@ -1,2 +1,2 @@
 export * from "./Exception/index.js";
-export * from "./assert";
+export * from "./assert.js";

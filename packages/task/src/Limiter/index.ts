@@ -1,3 +1,3 @@
-export * from "./ConcurrencyLimiter";
-export * from "./FixedWindowLimiter";
-export * from "./LimiterAbstract";
+export * from "./ConcurrencyLimiter.js";
+export * from "./FixedWindowLimiter.js";
+export * from "./LimiterAbstract.js";

@@ -1,8 +1,8 @@
 import {ApplyContext, Context} from "@bunt/unit";
 import {Ctor} from "@bunt/type";
-import {TaskIterator} from "./TaskIterator";
-import {ConcurrencyLimiter, FixedWindowLimiter} from "./Limiter";
-import {TaskAbstract} from "./TaskAbstract";
+import {TaskIterator} from "./TaskIterator.js";
+import {ConcurrencyLimiter, FixedWindowLimiter} from "./Limiter/index.js";
+import {TaskAbstract} from "./TaskAbstract.js";
 
 export enum TaskState {
     READY,

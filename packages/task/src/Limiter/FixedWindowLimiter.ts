@@ -1,7 +1,7 @@
 import {Promisify} from "@bunt/type";
 import {assert} from "@bunt/assert";
 import {timeout} from "@bunt/async";
-import {LimiterAbstract} from "./LimiterAbstract";
+import {LimiterAbstract} from "./LimiterAbstract.js";
 
 export class FixedWindowLimiter extends LimiterAbstract {
     readonly #limit: number;
