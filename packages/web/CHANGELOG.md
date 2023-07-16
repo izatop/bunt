@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.29.0](https://github.com/izatop/bunt/compare/v0.28.3...v0.29.0) (2023-07-16)
+
+
+### Features
+
+* download response ([445821b](https://github.com/izatop/bunt/commit/445821b5d806eafb996d90885ae6cde9831c059f))
+
+
+
+
+
 ## [0.28.3](https://github.com/izatop/bunt/compare/v0.28.2...v0.28.3) (2023-07-13)
 
 **Note:** Version bump only for package @bunt/web
