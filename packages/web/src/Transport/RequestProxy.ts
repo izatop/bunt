@@ -32,6 +32,10 @@ export class RequestProxy {
         return this.#request.headers.get("authorization", "");
     }
 
+    public get url(): URL {
+        return this.#request.url;
+    }
+
     public get cookies(): Cookies {
         return this.#request.cookies;
     }

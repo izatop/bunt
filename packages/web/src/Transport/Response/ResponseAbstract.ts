@@ -1,3 +1,4 @@
+import {Readable} from "stream";
 import {isFunction, isInstanceOf, isNumber, isString, Promisify} from "@bunt/util";
 import * as HTTP from "http-status";
 import {Headers} from "../Headers.js";
@@ -12,7 +13,7 @@ export interface IResponseOptions {
 export interface IResponseAnswer {
     code: number;
     status?: string;
-    body: string | Buffer;
+    body: string | Buffer | Readable;
     headers: {[key: string]: string};
     cookies: Cookie[];
 }
@@ -89,5 +90,5 @@ export abstract class ResponseAbstract<T> {
         return `${this.type}; charset=${this.encoding}`;
     }
 
-    protected abstract stringify(data: T): string | Buffer;
+    protected abstract stringify(data: T): string | Buffer | Readable;
 }

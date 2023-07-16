@@ -6,3 +6,4 @@ export * from "./TextPlainResponse.js";
 export * from "./NoContentResponse.js";
 export * from "./Redirect.js";
 export * from "./RedirectResponse.js";
+export * from "./DownloadResponse.js";

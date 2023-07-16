@@ -3,7 +3,6 @@ import {Application} from "./Application.js";
 
 export type ActionResponse = Error
 | {stringify(): string}
-| NodeJS.ReadableStream
 | Buffer
 | string
 | number

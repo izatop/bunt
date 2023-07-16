@@ -1,4 +1,5 @@
 import {IncomingMessage, ServerResponse} from "http";
+import {Readable} from "stream";
 import {ActionResponse, StrictKeyValueMap} from "@bunt/app";
 import {
     assert,
@@ -68,12 +69,6 @@ export class Responder extends RequestMessage {
                 return this.send(response);
             }
 
-            if (isReadableStream(response)) {
-                response.pipe(this.#response);
-
-                return;
-            }
-
             if (isError(response)) {
                 const transform = new TransformError(response, this.#errorCodeMap);
                 const accept = this.headers.get("accept");
@@ -110,7 +105,8 @@ export class Responder extends RequestMessage {
      * @param body
      * @param options
      */
-    protected send(body: string | undefined | Buffer, options: IRequestSendOptions = {code: 200}): void {
+    protected async send(body: string | undefined | Buffer | Readable,
+        options: IRequestSendOptions = {code: 200}): Promise<void> {
         try {
             const {code, status, headers = {}, cookies = []} = options;
             const headersMap = StrictKeyValueMap.fromObject(headers);
@@ -129,10 +125,19 @@ export class Responder extends RequestMessage {
             this.applyServerOptions();
 
             this.#response.writeHead(code, status);
-            this.#response.write(body);
+            if (isReadableStream(body)) {
+                body.pipe(this.#response);
+                await new Promise((resolve, reject) => {
+                    this.#response.on("finish", resolve);
+                    this.#response.on("error", reject);
+                });
+
+                return;
+            }
+
+            this.#response.end(body);
         } finally {
             this.#complete = true;
-            this.#response.end();
         }
     }
 

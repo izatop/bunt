@@ -44,6 +44,10 @@ export class RequestMessage extends RequestAbstract {
         }
     }
 
+    public get url(): URL {
+        return this.#url;
+    }
+
     public get host(): string {
         return this.headers.get("host", "");
     }
