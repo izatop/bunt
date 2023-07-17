@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.29.1](https://github.com/izatop/bunt/compare/v0.29.0...v0.29.1) (2023-07-17)
+
+
+### Bug Fixes
+
+* update deps, busboy charset ([bbe3209](https://github.com/izatop/bunt/commit/bbe3209f82bb59f11cf14235b119bde4186fd0a2))
+
+
+
+
+
 # [0.29.0](https://github.com/izatop/bunt/compare/v0.28.3...v0.29.0) (2023-07-16)
 
 
