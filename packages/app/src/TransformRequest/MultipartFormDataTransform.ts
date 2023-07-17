@@ -9,7 +9,12 @@ import {IRequest} from "../interfaces.js";
 
 export const MultipartFormDataTransform = async <T = unknown>(request: IRequest): Promise<T> => {
     request.headers.assert("Content-Type", (value) => value.startsWith("multipart/form-data"));
-    const bb = busboy({headers: request.headers.toJSON(), defCharset: "utf-8"});
+    const bb = busboy({
+        headers: request.headers.toJSON(),
+        defCharset: "utf-8",
+        defParamCharset: "utf-8",
+    });
+
     const rs = await request.createReadableStream();
     const defer = new Defer<void>();
     const result: Record<string, any> = {};
