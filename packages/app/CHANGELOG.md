@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.29.2](https://github.com/izatop/bunt/compare/v0.29.1...v0.29.2) (2023-07-17)
+
+
+### Bug Fixes
+
+* filename encoding ([edd135c](https://github.com/izatop/bunt/commit/edd135caf4c8de460029cacf8a2b0f2b1a1a7177))
+
+
+
+
+
 ## [0.29.1](https://github.com/izatop/bunt/compare/v0.29.0...v0.29.1) (2023-07-17)
 
 
