@@ -448,6 +448,7 @@ __metadata:
   dependencies:
     "@bunt/assert": ^0.29.0
     "@bunt/is": ^0.29.0
+    "@bunt/type": ^0.29.0
     "@bunt/util": ^0.29.0
   languageName: unknown
   linkType: soft
@@ -567,6 +568,7 @@ __metadata:
   resolution: "@bunt/ws@workspace:packages/ws"
   dependencies:
     "@bunt/app": ^0.29.2
+    "@bunt/async": ^0.29.0
     "@bunt/unit": ^0.29.0
     "@bunt/util": ^0.29.0
     "@bunt/web": ^0.29.3

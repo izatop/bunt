@@ -33,6 +33,7 @@
     "dependencies": {
         "@bunt/assert": "^0.29.0",
         "@bunt/is": "^0.29.0",
+        "@bunt/type": "^0.29.0",
         "@bunt/util": "^0.29.0"
     },
     "publishConfig": {

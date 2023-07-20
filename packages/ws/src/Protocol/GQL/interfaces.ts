@@ -1,19 +1,42 @@
 import {Promisify} from "@bunt/util";
 
+export enum GQLOperationType {
+    Ping = "ping",
+    Pong = "pong",
+    Complete = "complete",
+}
+
 export enum GQLClientOperationType {
-    CONNECTION_INIT = "connection_init",
-    CONNECTION_TERMINATE = "connection_terminate",
-    START = "start",
-    STOP = "stop",
+    ConnectionInit = "connection_init",
+    Subscribe = "subscribe",
+
+    //CONNECTION_INIT = "connection_init_",
+    //CONNECTION_TERMINATE = "connection_terminate",
+    //START = "start",
+    //STOP = "stop",
 }
 
 export enum GQLServerOperationType {
-    CONNECTION_ACK = "connection_ack",
-    CONNECTION_ERROR = "connection_error",
-    CONNECTION_KEEP_ALIVE = "ka",
-    DATA = "data",
-    ERROR = "error",
-    COMPLETE = "complete",
+    ConnectionAck = "connection_ack",
+    Next = "next",
+    Error = "error",
+
+    //CONNECTION_ACK = "connection_ack",
+    //CONNECTION_ERROR = "connection_error",
+    //CONNECTION_KEEP_ALIVE = "ka",
+    //NEXT = "next",
+    //DATA = "data",
+    //ERROR = "error",
+    //COMPLETE = "complete",
+}
+
+export interface ExecutionResult<
+    TData = Record<string, unknown>,
+    TExtensions = Record<string, unknown>,
+> {
+    errors?: ReadonlyArray<GQLError>;
+    data?: TData | null;
+    extensions?: TExtensions;
 }
 
 export type GQLError = {
@@ -25,75 +48,72 @@ export type GQLConnectionParams = Record<string, any>;
 
 export type GQLClientPayload = {
     query: string;
-    variables?: Record<string, any>;
-    operationName?: string;
+    operationName?: string | null;
+    variables?: Record<string, unknown> | null;
+    extensions?: Record<string, unknown> | null;
 };
 
 export type GQLServerResponse = {
     data: any;
-    errors?: GQLError[]; // @todo describe GQL error interface
+    errors?: GQLError[];
 };
 
+export interface IGQLOperationConnectionInit {
+    type: GQLClientOperationType.ConnectionInit;
+    payload: GQLConnectionParams;
+}
+
 export interface IGQLOperationConnectionAsk {
-    type: GQLServerOperationType.CONNECTION_ACK;
+    type: GQLServerOperationType.ConnectionAck;
 }
 
-export interface IGQLOperationConnectionError {
-    type: GQLServerOperationType.CONNECTION_ERROR;
+export interface IGQLOperationPing {
+    type: GQLOperationType.Ping;
 }
 
-export interface IGQLOperationData {
+export interface IGQLOperationPong {
+    type: GQLOperationType.Pong;
+}
+
+export interface IGQLOperationSubscribe {
     id: string;
-    type: GQLServerOperationType.DATA;
-    payload: GQLServerResponse;
+    type: GQLClientOperationType.Subscribe;
+    payload: GQLClientPayload;
+}
+
+export interface IGQLOperationNext {
+    id: string;
+    type: GQLServerOperationType.Next;
+    payload: Record<any, any>;
 }
 
 export interface IGQLOperationError {
     id: string;
-    type: GQLServerOperationType.ERROR;
-    payload: GQLError;
+    type: GQLServerOperationType.Error;
+    payload: GQLError[];
 }
 
 export interface IGQLOperationComplete {
     id: string;
-    type: GQLServerOperationType.COMPLETE;
-}
-
-export interface IGQLOperationConnectionKeepAlive {
-    type: GQLServerOperationType.CONNECTION_KEEP_ALIVE;
-}
-
-export interface IGQLOperationConnectionInit {
-    type: GQLClientOperationType.CONNECTION_INIT;
-    payload: GQLConnectionParams;
-}
-
-export interface IGQLOperationConnectionTerminate {
-    type: GQLClientOperationType.CONNECTION_TERMINATE;
-}
-
-export interface IGQLOperationStart {
-    id: string;
-    type: GQLClientOperationType.START;
-    payload: GQLClientPayload;
-}
-
-export interface IGQLOperationStop {
-    type: GQLClientOperationType.STOP;
-    id: string;
+    type: GQLOperationType.Complete;
 }
 
 export type GQLClientOperation = IGQLOperationConnectionInit
-| IGQLOperationConnectionTerminate
-| IGQLOperationStart
-| IGQLOperationStop;
+| IGQLOperationConnectionInit
+| IGQLOperationPing
+| IGQLOperationPong
+| IGQLOperationSubscribe
+| IGQLOperationError
+| IGQLOperationComplete
+;
 
 export type GQLServerOperation = IGQLOperationConnectionAsk
-| IGQLOperationConnectionError
-| IGQLOperationConnectionKeepAlive
-| IGQLOperationData
+| IGQLOperationPing
+| IGQLOperationPong
+| IGQLOperationNext
 | IGQLOperationError
-| IGQLOperationComplete;
+| IGQLOperationComplete
+;
 
 export type GQLOperationMessage = GQLClientOperation | GQLServerOperation;
 

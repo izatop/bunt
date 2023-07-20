@@ -15,9 +15,12 @@ import {
     unit,
     Unit,
 } from "@bunt/unit";
-import {assert, Defer, isDefined, isString, logger, Logger, noop, resolveOrReject} from "@bunt/util";
+import {Defer} from "@bunt/async";
 import {RequestMessage, WebServer} from "@bunt/web";
 import * as ws from "ws";
+import {Logger, logger, noop, resolveOrReject} from "@bunt/util";
+import {assert} from "@bunt/assert";
+import {isDefined, isString} from "@bunt/is";
 import {WebSocketCloseReason} from "./const.js";
 import {HandleProtoType, ProtoHandleAbstract} from "./Protocol/index.js";
 

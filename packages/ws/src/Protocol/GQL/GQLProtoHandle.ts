@@ -8,7 +8,7 @@ import {GQLClientPayload} from "./interfaces.js";
 export abstract class GQLProtoHandle<C extends Context,
     S extends StateType | null = null> extends ProtoHandleAbstract<C, S> {
 
-    public static protocol = "graphql-ws";
+    public static protocol = "graphql-transport-ws";
 
     readonly #connection = new GQLClientConnection(this.getShadowState());
 

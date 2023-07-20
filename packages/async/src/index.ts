@@ -5,3 +5,4 @@ export * from "./Defer.js";
 export * from "./AsyncIteratorFactory.js";
 export * from "./AsyncLoader.js";
 export * from "./AsyncSingleCall.js";
+export * from "./AsyncCallback.js";

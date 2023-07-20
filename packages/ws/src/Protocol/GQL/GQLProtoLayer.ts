@@ -1,6 +1,6 @@
 import {assert, isArray, isFunction, isObject} from "@bunt/util";
 import {GQLClientConnection} from "./GQLClientConnection.js";
-import {IGQLOperationStop} from "./interfaces.js";
+import {GQLOperationType, IGQLOperationComplete} from "./interfaces.js";
 import {
     GQLClientOperation,
     GQLClientOperationType,
@@ -13,7 +13,10 @@ import {
 } from "./index.js";
 
 // @TODO Upgrade type validation to input schema validation
-const AllowTypes: string[] = Object.values(GQLClientOperationType);
+const AllowTypes: string[] = [
+    ...Object.values(GQLClientOperationType),
+    ...Object.values(GQLOperationType),
+];
 
 /**
  * @final
@@ -30,7 +33,7 @@ export class GQLProtoLayer {
         this.#initialize = init;
         this.#subscribe = factory;
 
-        const interval = setInterval(() => this.keepAliveUpdate(), 30000);
+        const interval = setInterval(() => this.ping(), 30000);
         this.#client.on("close", () => this.unsubscribeAll());
         this.#client.on("close", () => clearInterval(interval));
     }
@@ -38,26 +41,32 @@ export class GQLProtoLayer {
     public async handle(operation: GQLOperationMessage): Promise<void> {
         assert(this.isClientOperation(operation), "Wrong the Operation Message");
         switch (operation.type) {
-            case GQLClientOperationType.CONNECTION_INIT:
+            case GQLClientOperationType.ConnectionInit:
                 Object.assign(this.#params, operation.payload);
-                await this.#client.send({type: GQLServerOperationType.CONNECTION_ACK});
-                await this.keepAliveUpdate();
                 await Promise.resolve(this.#initialize(this.#params));
+                await this.#client.send({type: GQLServerOperationType.ConnectionAck});
                 break;
-            case GQLClientOperationType.CONNECTION_TERMINATE:
-                this.terminate();
+
+            case GQLOperationType.Pong:
                 break;
-            case GQLClientOperationType.START:
+
+            case GQLOperationType.Ping:
+                await this.#client.send({type: GQLOperationType.Pong});
+                break;
+
+            case GQLOperationType.Complete:
+                this.unsubscribe(operation);
+                break;
+
+            case GQLClientOperationType.Subscribe:
                 this.createSubscription(operation.id, operation.payload)
                     // eslint-disable-next-line
                     .catch(console.error);
                 break;
-            case GQLClientOperationType.STOP:
-                this.stopOperation(operation);
         }
     }
 
-    private stopOperation(operation: IGQLOperationStop): void {
+    private unsubscribe(operation: IGQLOperationComplete): void {
         const subscription = this.#subscriptions.get(operation.id);
         if (subscription) {
             this.#subscriptions.delete(operation.id);
@@ -65,12 +74,17 @@ export class GQLProtoLayer {
         }
     }
 
-    private keepAliveUpdate(): Promise<void> {
-        return this.#client.send({type: GQLServerOperationType.CONNECTION_KEEP_ALIVE});
+    private ping(): Promise<void> {
+        return this.#client.send({type: GQLOperationType.Ping});
+    }
+
+    private pong(): Promise<void> {
+        return this.#client.send({type: GQLOperationType.Pong});
     }
 
     private unsubscribeAll(): void {
-        for (const subscription of this.#subscriptions.values()) {
+        for (const [id, subscription] of this.#subscriptions.entries()) {
+            this.#subscriptions.delete(id);
             subscription.return?.();
         }
     }
@@ -82,14 +96,19 @@ export class GQLProtoLayer {
 
             this.#subscriptions.set(id, subscription);
             for await (const next of subscription) {
-                await this.#client.send({id, type: GQLServerOperationType.DATA, payload: next});
+                await this.#client.send({id, type: GQLServerOperationType.Next, payload: next});
             }
 
-            await this.#client.send({id, type: GQLServerOperationType.COMPLETE});
+            await this.#client.send({id, type: GQLOperationType.Complete});
         } catch (error) {
             if (this.#client.ready) {
-                await this.#client.send({id, type: GQLServerOperationType.ERROR, payload: this.serializeError(error)});
-                await this.#client.send({id, type: GQLServerOperationType.COMPLETE});
+                await this.#client.send({
+                    id,
+                    type: GQLServerOperationType.Error,
+                    payload: [this.serializeError(error)],
+                });
+
+                await this.#client.send({id, type: GQLOperationType.Complete});
             }
         }
     }
@@ -112,12 +131,5 @@ export class GQLProtoLayer {
         }
 
         return {message: "Unknown error", code: 500};
-    }
-
-    private terminate(): void {
-        for (const [id, subscription] of this.#subscriptions.entries()) {
-            this.#subscriptions.delete(id);
-            subscription.return?.();
-        }
     }
 }

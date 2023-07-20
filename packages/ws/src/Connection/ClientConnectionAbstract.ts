@@ -1,5 +1,7 @@
 import ws from "ws";
-import {assert, AsyncCallback, filterValueCallback, resolveOrReject} from "@bunt/util";
+import {filterValueCallback, resolveOrReject} from "@bunt/util";
+import {assert} from "@bunt/assert";
+import {AsyncCallback} from "@bunt/async";
 import {IClientConnection} from "./interface.js";
 
 export abstract class ClientConnectionAbstract<T> implements IClientConnection<T> {
