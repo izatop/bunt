@@ -119,8 +119,8 @@ export class WebSocketServer<C extends Context> extends Disposer implements IRun
         return webSocketServer;
     }
 
-    protected factoryWebSocketServer(): ws.Server {
-        const webSocketServer = new ws.Server({noServer: true});
+    protected factoryWebSocketServer(): ws.WebSocketServer {
+        const webSocketServer = new ws.WebSocketServer({noServer: true});
         const live = new WeakSet<ws>();
         const queue: {connection: ws; expire: number}[] = [];
         const getExpireTime = (): number => Date.now() + this.#limits.pingTimeout;

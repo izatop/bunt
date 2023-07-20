@@ -8,7 +8,6 @@ import {
     Ctor,
     Logger,
     PermissionError,
-    toError,
     NotFound,
     ValidationError,
     Defer,
@@ -162,8 +161,15 @@ export class WebServer<C extends Context> extends Application<C> implements IDis
         } catch (error) {
             this.captureException(error);
 
-            socket.write("HTTP/1.1 400 Bad request\r\nContent-Type: text/plain\r\nConnection: close\r\n\r\n");
-            socket.destroy(toError(error));
+            const response = [
+                "HTTP/1.1 400 Bad request",
+                "Content-Type: text/plain",
+                "Content-Length: 0",
+                "Connection: close",
+                "",
+            ];
+
+            socket.end(response.join("\r\n"));
         }
     };
 }
