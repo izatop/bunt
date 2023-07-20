@@ -1,6 +1,6 @@
 {
     "name": "@bunt/ws",
-    "version": "0.29.3",
+    "version": "0.29.4",
     "keywords": [
         "typescript"
     ],
@@ -33,10 +33,10 @@
         "access": "public"
     },
     "dependencies": {
-        "@bunt/app": "^0.29.2",
+        "@bunt/app": "^0.29.4",
         "@bunt/unit": "^0.29.0",
         "@bunt/util": "^0.29.0",
-        "@bunt/web": "^0.29.3",
+        "@bunt/web": "^0.29.4",
         "@types/ws": "^8.5.5",
         "ws": "^8.13.0"
     },

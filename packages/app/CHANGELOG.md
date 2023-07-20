@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.29.4](https://github.com/izatop/bunt/compare/v0.29.3...v0.29.4) (2023-07-20)
+
+
+### Bug Fixes
+
+* handle route not found ([9da3a3c](https://github.com/izatop/bunt/commit/9da3a3cf5095b6ff79989c4fbb127f5508d96097))
+
+
+
+
+
 ## [0.29.2](https://github.com/izatop/bunt/compare/v0.29.1...v0.29.2) (2023-07-17)
 
 
