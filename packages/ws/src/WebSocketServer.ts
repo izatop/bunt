@@ -15,7 +15,7 @@ import {
     unit,
     Unit,
 } from "@bunt/unit";
-import {assert, Defer, isDefined, isString, logger, Logger, noop, resolveOrReject, toError} from "@bunt/util";
+import {assert, Defer, isDefined, isString, logger, Logger, noop, resolveOrReject} from "@bunt/util";
 import {RequestMessage, WebServer} from "@bunt/web";
 import * as ws from "ws";
 import {WebSocketCloseReason} from "./const.js";
@@ -91,7 +91,7 @@ export class WebSocketServer<C extends Context> extends Disposer implements IRun
                         webSocket.close(resolveOrReject(resolve, reject));
                     }));
                 } catch (error) {
-                    this.logger.error("Unexpected error", error);
+                    this.#web.captureException(error);
                 }
             }
 
@@ -226,8 +226,17 @@ export class WebSocketServer<C extends Context> extends Disposer implements IRun
                 this.handle(connection, () => this.#unit.run(route.action as any, state));
             });
         } catch (error) {
-            this.logger.error(toError(error).message, error);
-            socket.destroy(toError(error));
+            this.#web.captureException(error);
+
+            const response = [
+                "HTTP/1.1 404 Not found",
+                "Content-Type: text/plain",
+                "Content-Length: 0",
+                "Connection: close",
+                "",
+            ];
+
+            socket.end(response.join("\r\n"));
         }
     };
 
@@ -236,7 +245,7 @@ export class WebSocketServer<C extends Context> extends Disposer implements IRun
             await action();
             connection.close(WebSocketCloseReason.NORMAL_CLOSURE);
         } catch (error) {
-            this.logger.error("Unexpected error", error);
+            this.#web.captureException(error);
             connection.close(WebSocketCloseReason.INTERNAL_ERROR);
         }
     }

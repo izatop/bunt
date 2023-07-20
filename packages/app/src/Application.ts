@@ -100,7 +100,7 @@ export class Application<C extends Context> {
         return this.#index;
     }
 
-    protected captureException(reason: unknown): void {
+    public captureException(reason: unknown): void {
         this.logger.error("Unexpected error", reason);
 
         const {error} = this.#unit.getTransactionHandlers();
