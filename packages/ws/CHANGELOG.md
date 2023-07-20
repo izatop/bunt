@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.29.3](https://github.com/izatop/bunt/compare/v0.29.2...v0.29.3) (2023-07-20)
+
+
+### Bug Fixes
+
+* upgrade request ([cf96fc1](https://github.com/izatop/bunt/commit/cf96fc15699102c6c048ddd4be308ba20ee1b206))
+
+
+
+
+
 ## [0.29.2](https://github.com/izatop/bunt/compare/v0.29.1...v0.29.2) (2023-07-17)
 
 **Note:** Version bump only for package @bunt/ws
