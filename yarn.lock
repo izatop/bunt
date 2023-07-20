@@ -417,7 +417,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@bunt/app@^0.29.2, @bunt/app@workspace:packages/app":
+"@bunt/app@^0.29.4, @bunt/app@workspace:packages/app":
   version: 0.0.0-use.local
   resolution: "@bunt/app@workspace:packages/app"
   dependencies:
@@ -457,7 +457,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@bunt/cli@workspace:packages/cli"
   dependencies:
-    "@bunt/app": ^0.29.2
+    "@bunt/app": ^0.29.4
     "@bunt/assert": ^0.29.0
     "@bunt/util": ^0.29.0
     path-to-regexp: ^6.2.1
@@ -552,11 +552,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@bunt/web@^0.29.3, @bunt/web@workspace:packages/web":
+"@bunt/web@^0.29.4, @bunt/web@workspace:packages/web":
   version: 0.0.0-use.local
   resolution: "@bunt/web@workspace:packages/web"
   dependencies:
-    "@bunt/app": ^0.29.2
+    "@bunt/app": ^0.29.4
     "@bunt/util": ^0.29.0
     http-status: ^1.6.2
     path-to-regexp: ^6.2.1
@@ -567,11 +567,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@bunt/ws@workspace:packages/ws"
   dependencies:
-    "@bunt/app": ^0.29.2
+    "@bunt/app": ^0.29.4
     "@bunt/async": ^0.29.0
     "@bunt/unit": ^0.29.0
     "@bunt/util": ^0.29.0
-    "@bunt/web": ^0.29.3
+    "@bunt/web": ^0.29.4
     "@types/websocket": ^1.0.5
     "@types/ws": ^8.5.5
     websocket: ^1.0.34
