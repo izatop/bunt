@@ -147,10 +147,9 @@ export class WebSocketServer<C extends Context> extends Disposer implements IRun
     }
 
     #keepAlive(alive: WeakSet<ws>, queue: WebSocketPingQueue[]): void {
-        let index = 0;
         const current = Date.now();
         while (queue.length > 0) {
-            const {connection, time} = queue[index++];
+            const {connection, time} = queue[0];
             if (time + this.#limits.pingTimeout > current) {
                 return;
             }
