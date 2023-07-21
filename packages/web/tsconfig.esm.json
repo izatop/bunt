@@ -8,6 +8,21 @@
     },
     "references": [
         {
+            "path": "../unit/tsconfig.esm.json"
+        },
+        {
+            "path": "../type/tsconfig.esm.json"
+        },
+        {
+            "path": "../is/tsconfig.esm.json"
+        },
+        {
+            "path": "../assert/tsconfig.esm.json"
+        },
+        {
+            "path": "../async/tsconfig.esm.json"
+        },
+        {
             "path": "../app/tsconfig.esm.json"
         },
         {

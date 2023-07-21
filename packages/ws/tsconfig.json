@@ -9,10 +9,25 @@
             "path": "../unit"
         },
         {
+            "path": "../type"
+        },
+        {
+            "path": "../is"
+        },
+        {
+            "path": "../assert"
+        },
+        {
+            "path": "../async"
+        },
+        {
             "path": "../app"
         },
         {
             "path": "../util"
+        },
+        {
+            "path": "../web"
         }
     ],
     "include": [

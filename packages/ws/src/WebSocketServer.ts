@@ -126,44 +126,43 @@ export class WebSocketServer<C extends Context> extends Disposer implements IRun
     protected factoryWebSocketServer(): ws.WebSocketServer {
         const alive = new WeakSet<ws>();
         const wss = new ws.WebSocketServer({noServer: true});
-        const intervalMs = this.#limits.pingTimeout / (this.#limits.maxConnections / this.#limits.pingsPerSecond);
+        const minIntervalMs = this.#limits.pingTimeout / (this.#limits.maxConnections / this.#limits.pingsPerSecond);
+        const intervalMs = minIntervalMs > 5000 ? minIntervalMs : 5000;
         const queue: WebSocketPingQueue[] = [];
 
         wss.on("connection", (connection) => {
             alive.add(connection);
             queue.push({connection, time: Date.now()});
             connection.once("close", () => alive.delete(connection));
-            connection.on("pong", () => {
-                alive.add(connection);
-                queue.push({connection, time: Date.now()});
-            });
+            connection.on("error", (reason) => this.logger.error("WebSocketClient", reason));
+            connection.on("pong", () => alive.add(connection));
         });
 
         const {call: keepAlive} = new AsyncSingleCall(() => this.#keepAlive(alive, queue));
         const timerInterval = setInterval(keepAlive, intervalMs);
         wss.on("close", () => clearInterval(timerInterval));
+        wss.on("error", (reason) => this.logger.error("WebSocket", reason));
 
         return wss;
     }
 
     #keepAlive(alive: WeakSet<ws>, queue: WebSocketPingQueue[]): void {
-        const size = queue.length;
-        for (let i = 0; i < size; i++) {
-            const {connection, time} = queue[i];
-            if (time + this.#limits.pingTimeout > Date.now()) {
+        let index = 0;
+        const current = Date.now();
+        while (queue.length > 0) {
+            const {connection, time} = queue[index++];
+            if (time + this.#limits.pingTimeout > current) {
                 return;
             }
 
-            queue.unshift();
-            if (alive.has(connection)) {
-                if (connection.readyState !== connection.CLOSED) {
-                    connection.terminate();
-                }
-
-                return;
+            queue.shift();
+            if (!alive.has(connection)) {
+                return connection.terminate();
             }
 
             alive.delete(connection);
+            queue.push({connection, time: Date.now()});
+
             connection.ping();
         }
     }
