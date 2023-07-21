@@ -10,19 +10,20 @@ import {
     Disposer,
     Heartbeat,
     IRunnable,
-    Runtime,
     ShadowState,
     unit,
     Unit,
 } from "@bunt/unit";
-import {Defer} from "@bunt/async";
+import {AsyncSingleCall, Defer} from "@bunt/async";
 import {RequestMessage, WebServer} from "@bunt/web";
 import * as ws from "ws";
-import {Logger, logger, noop, resolveOrReject} from "@bunt/util";
+import {Logger, logger, resolveOrReject} from "@bunt/util";
 import {assert} from "@bunt/assert";
 import {isDefined, isString} from "@bunt/is";
 import {WebSocketCloseReason} from "./const.js";
 import {HandleProtoType, ProtoHandleAbstract} from "./Protocol/index.js";
+
+type WebSocketPingQueue = {connection: ws.WebSocket; time: number};
 
 export class WebSocketServer<C extends Context> extends Disposer implements IRunnable {
     @logger
@@ -123,57 +124,48 @@ export class WebSocketServer<C extends Context> extends Disposer implements IRun
     }
 
     protected factoryWebSocketServer(): ws.WebSocketServer {
-        const webSocketServer = new ws.WebSocketServer({noServer: true});
-        const live = new WeakSet<ws>();
-        const queue: {connection: ws; expire: number}[] = [];
-        const getExpireTime = (): number => Date.now() + this.#limits.pingTimeout;
+        const alive = new WeakSet<ws>();
+        const wss = new ws.WebSocketServer({noServer: true});
+        const intervalMs = this.#limits.pingTimeout / (this.#limits.maxConnections / this.#limits.pingsPerSecond);
+        const queue: WebSocketPingQueue[] = [];
 
-        webSocketServer.on("connection", (connection) => {
-            live.add(connection);
-            queue.unshift({connection, expire: getExpireTime()});
-            connection.once("close", () => live.delete(connection));
-            connection.on("pong", () => live.add(connection));
+        wss.on("connection", (connection) => {
+            alive.add(connection);
+            queue.push({connection, time: Date.now()});
+            connection.once("close", () => alive.delete(connection));
+            connection.on("pong", () => {
+                alive.add(connection);
+                queue.push({connection, time: Date.now()});
+            });
         });
 
-        const test = (): void => {
-            const now = Date.now();
-            const restore = [];
-            const nextExpireTime = getExpireTime();
-            const range = queue.splice(-this.#limits.pingsPerSecond);
-            for (const item of range) {
-                if (item.expire > now) {
-                    restore.push(item);
-                    continue;
-                }
+        const {call: keepAlive} = new AsyncSingleCall(() => this.#keepAlive(alive, queue));
+        const timerInterval = setInterval(keepAlive, intervalMs);
+        wss.on("close", () => clearInterval(timerInterval));
 
-                const {connection} = item;
-                if (!live.has(connection)) {
+        return wss;
+    }
+
+    #keepAlive(alive: WeakSet<ws>, queue: WebSocketPingQueue[]): void {
+        const size = queue.length;
+        for (let i = 0; i < size; i++) {
+            const {connection, time} = queue[i];
+            if (time + this.#limits.pingTimeout > Date.now()) {
+                return;
+            }
+
+            queue.unshift();
+            if (alive.has(connection)) {
+                if (connection.readyState !== connection.CLOSED) {
                     connection.terminate();
-                    continue;
                 }
 
-                item.expire = nextExpireTime;
-                queue.unshift(item);
-                live.delete(connection);
-                connection.ping(noop);
+                return;
             }
 
-            restore.sort(({expire: a}, {expire: b}) => b - a);
-            queue.push(...restore);
-
-            if (Runtime.isDevelopment()) {
-                const all = queue.length;
-                const fast = restore.length;
-                const slow = queue.filter(({expire}) => expire < now).length;
-                this.logger.debug(`ping/pong { queue: ${all}, fast: ${fast}, slow: ${slow} }`);
-            }
-        };
-
-        const intervalMs = this.#limits.pingTimeout / (this.#limits.maxConnections / this.#limits.pingsPerSecond);
-        const timerInterval = setInterval(test, intervalMs);
-        webSocketServer.on("close", () => clearInterval(timerInterval));
-
-        return webSocketServer;
+            alive.delete(connection);
+            connection.ping();
+        }
     }
 
     protected handleUpgrade = async (req: IncomingMessage, socket: Socket, head: Buffer): Promise<void> => {

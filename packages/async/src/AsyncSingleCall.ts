@@ -1,6 +1,6 @@
 import {Defer} from "./Defer.js";
 
-export type AsyncSingleCallFn = () => Promise<void>;
+export type AsyncSingleCallFn = () => Promise<void> | void;
 
 export class AsyncSingleCall {
     readonly #fn: AsyncSingleCallFn;
@@ -10,21 +10,21 @@ export class AsyncSingleCall {
         this.#fn = fn;
     }
 
-    public call(): Defer<void> {
+    public call = (): Defer<void> => {
         if (!this.#defer) {
-            const defer = new Defer<void>();
-            this.#fn()
-                .then(() => defer.resolve())
-                .catch((reason) => defer.reject(reason))
-                .finally(() => this.#defer = null);
+            this.#defer = new Defer<void>();
+            const {resolve, reject} = this.#defer;
 
-            this.#defer = defer;
+            Promise.resolve(this.#fn())
+                .then(resolve)
+                .catch(reject)
+                .finally(() => this.#defer = null);
         }
 
         return this.#defer;
-    }
+    };
 
-    public wait(): Defer<void> | null {
+    public wait = (): Defer<void> | null => {
         return this.#defer;
-    }
+    };
 }
