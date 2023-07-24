@@ -9,7 +9,7 @@ export class RedirectResponse extends ResponseAbstract<undefined> {
         super(undefined, {...options, headers, code: code});
     }
 
-    public stringify(): string {
+    public serialize(): string {
         return "";
     }
 }

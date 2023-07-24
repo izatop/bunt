@@ -1,20 +1,26 @@
 import {Readable} from "stream";
 import {isFunction, isInstanceOf, isNumber, isString, Promisify} from "@bunt/util";
 import * as HTTP from "http-status";
+import {StrictKeyValueMap} from "@bunt/app";
 import {Headers} from "../Headers.js";
 import {Cookie, CookieOptions} from "./Cookie.js";
 
 export interface IResponseOptions {
     code?: number;
     status?: string;
-    headers?: {[key: string]: string} | Headers;
+    headers?: Promisify<Record<string, string> | Headers>;
 }
+
+export type ResponseArgs<T> = [
+    reponse: Promisify<T> | (() => Promisify<T>),
+    options?: IResponseOptions
+];
 
 export interface IResponseAnswer {
     code: number;
     status?: string;
     body: string | Buffer | Readable;
-    headers: {[key: string]: string};
+    headers: Record<string, string>;
     cookies: Cookie[];
 }
 
@@ -25,17 +31,16 @@ export abstract class ResponseAbstract<T> {
     public readonly encoding: string = "utf-8";
 
     readonly #cookies = new Map<string, Cookie>();
-    readonly #headers: {[key: string]: string};
-    #data: Promisify<T>;
+    readonly #headers: Promisify<{[key: string]: string}>;
+    #response: Promisify<T>;
 
-    constructor(data: Promisify<T> | (() => Promisify<T>), options: IResponseOptions = {}) {
-        this.#data = isFunction(data) ? data() : data;
+    constructor(...[response, options = {}]: ResponseArgs<T>) {
+        this.#response = isFunction(response) ? response() : response;
 
         const {code, status, headers} = options;
         if (isNumber(code) && code > 0) {
             this.code = code;
         }
-
 
         this.status = status;
         if (!this.status) {
@@ -46,7 +51,7 @@ export abstract class ResponseAbstract<T> {
         if (isInstanceOf(headers, Headers)) {
             this.#headers = headers.toJSON();
         } else {
-            this.#headers = headers || {};
+            this.#headers = headers || Promise.resolve({});
         }
     }
 
@@ -55,7 +60,7 @@ export abstract class ResponseAbstract<T> {
     }
 
     public setContent(data: Promisify<T>): void {
-        this.#data = data;
+        this.#response = data;
     }
 
     public setCookie(name: string, value: string, options: CookieOptions): void {
@@ -66,23 +71,17 @@ export abstract class ResponseAbstract<T> {
         return this.#cookies.has(name);
     }
 
-    public getHeaders(): Record<any, string> {
-        return {
-            ...this.#headers,
-            "content-type": this.getContentType(),
-        };
-    }
-
     public async getResponse(): Promise<IResponseAnswer> {
         const {status, code, cookies} = this;
-        const headers = this.getHeaders();
+        const headersMap = new StrictKeyValueMap([["content-type", this.getContentType()]]);
+        headersMap.append(await this.#headers);
 
         return {
             code,
             status,
-            headers,
             cookies,
-            body: this.stringify(await this.#data),
+            headers: headersMap.toJSON(),
+            body: this.serialize(await this.#response),
         };
     }
 
@@ -90,5 +89,5 @@ export abstract class ResponseAbstract<T> {
         return `${this.type}; charset=${this.encoding}`;
     }
 
-    protected abstract stringify(data: T): string | Buffer | Readable;
+    protected abstract serialize(data: T): string | Buffer | Readable;
 }

@@ -5,7 +5,7 @@ export class NoContentResponse extends ResponseAbstract<undefined> {
         super(undefined, {status: "No Content", ...options, code: 204});
     }
 
-    public stringify(): string {
+    public serialize(): string {
         return "";
     }
 }
