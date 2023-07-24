@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.29.9](https://github.com/izatop/bunt/compare/v0.29.8...v0.29.9) (2023-07-24)
+
+
+### Bug Fixes
+
+* download reponse ([008e95c](https://github.com/izatop/bunt/commit/008e95c511e53be569a77a564c6f70a5e4605d8b))
+
+
+
+
+
 ## [0.29.6](https://github.com/izatop/bunt/compare/v0.29.5...v0.29.6) (2023-07-21)
 
 **Note:** Version bump only for package @bunt/app

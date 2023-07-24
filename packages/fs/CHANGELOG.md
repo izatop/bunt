@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.29.9](https://github.com/izatop/bunt/compare/v0.29.8...v0.29.9) (2023-07-24)
+
+
+### Bug Fixes
+
+* download response ([8ad8711](https://github.com/izatop/bunt/commit/8ad8711561c30e3381904b91a0e2549021ce28b6))
+
+
+
+
+
 ## [0.29.6](https://github.com/izatop/bunt/compare/v0.29.5...v0.29.6) (2023-07-21)
 
 **Note:** Version bump only for package @bunt/fs
