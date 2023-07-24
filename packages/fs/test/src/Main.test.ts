@@ -14,10 +14,11 @@ beforeAll(async () => {
 describe("MinIO", () => {
     test("type detect", async () => {
         const bucket = fs.getBucket("test");
-        const type = getMimeType("https://hub.qubixinfinity.io/contracts/5.png");
+        const url = "https://www.google.com/images/branding/googlelogo/2x/googlelogo_light_color_272x92dp.png";
+        const type = getMimeType(url);
         expect(type).toBe("image/png");
 
-        const stat = await bucket.put("type-detect", new URL("https://hub.qubixinfinity.io/contracts/5.png"));
+        const stat = await bucket.put("type-detect", new URL(url));
         expect(stat.metadata["content-type"]).toBe(type);
     });
 

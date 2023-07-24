@@ -1,14 +1,34 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Response JSON 1`] = `"application/json; charset=utf-8"`;
-
-exports[`Response JSON 2`] = `
+exports[`Response Download (auto) 1`] = `
 {
-  "content-type": "application/json; charset=utf-8",
+  "code": 200,
+  "cookies": [],
+  "headers": {
+    "content-disposition": "attachment; filename=download.txt",
+    "content-length": "14",
+    "content-type": "text/plain",
+  },
+  "status": "OK",
 }
 `;
 
-exports[`Response JSON 3`] = `
+exports[`Response Download 1`] = `
+{
+  "code": 200,
+  "cookies": [],
+  "headers": {
+    "content-disposition": "attachment; filename=download.txt",
+    "content-length": "14",
+    "content-type": "text/plain",
+  },
+  "status": "OK",
+}
+`;
+
+exports[`Response JSON 1`] = `"application/json; charset=utf-8"`;
+
+exports[`Response JSON 2`] = `
 {
   "body": "{"foo":"bar"}",
   "code": 200,
@@ -23,13 +43,6 @@ exports[`Response JSON 3`] = `
 exports[`Response Main 1`] = `"text/plain; charset=utf-8"`;
 
 exports[`Response Main 2`] = `
-{
-  "content-type": "text/plain; charset=utf-8",
-  "foo": "123",
-}
-`;
-
-exports[`Response Main 3`] = `
 {
   "body": "",
   "code": 204,
@@ -52,12 +65,5 @@ exports[`Response Redirect 1`] = `
     "location": "/redirect",
   },
   "status": "Moved Permanently",
-}
-`;
-
-exports[`Response Redirect 2`] = `
-{
-  "content-type": "text/plain; charset=utf-8",
-  "location": "/redirect",
 }
 `;
