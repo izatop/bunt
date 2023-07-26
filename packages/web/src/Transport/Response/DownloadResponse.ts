@@ -35,7 +35,7 @@ export class DownloadResponse extends ResponseAbstract<Readable> {
 function createHeaders(options: DownloadOptions): Record<string, string> {
     const size = options.size;
     const headers: Record<string, string> = {
-        "Content-Disposition": `attachment; filename=${options.filename}`,
+        "Content-Disposition": `attachment; filename=${encodeURI(options.filename)}`,
         "Content-Length": size.toString(),
         "Content-Type": options.mimeType,
     };
@@ -66,10 +66,9 @@ function createTemporarySource(options: DownloadOptionsAuth): ResponseArgs<Reada
     const inputReadable = factoryReadableStream(options.source);
     const tmpname = `${tmpdir()}/${Date.now()}-${randomBytes(16).toString("hex")}`;
     const writable = createWriteStream(tmpname);
-    inputReadable.pipe(writable);
-
     const defer = new Defer<number>();
     writable.once("close", () => stat(tmpname).then((s) => defer.resolve(s.size)));
+    inputReadable.pipe(writable);
 
     const ready = (): Readable => createReadStream(tmpname).once("close", () => unlink(tmpname));
     const headers = (size: number): Record<string, string> => createHeaders({...options, size});
