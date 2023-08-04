@@ -552,7 +552,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@bunt/web@^0.29.9, @bunt/web@workspace:packages/web":
+"@bunt/web@^0.29.10, @bunt/web@workspace:packages/web":
   version: 0.0.0-use.local
   resolution: "@bunt/web@workspace:packages/web"
   dependencies:
@@ -578,7 +578,7 @@ __metadata:
     "@bunt/type": ^0.29.0
     "@bunt/unit": ^0.29.6
     "@bunt/util": ^0.29.0
-    "@bunt/web": ^0.29.9
+    "@bunt/web": ^0.29.10
     "@types/websocket": ^1.0.5
     "@types/ws": ^8.5.5
     websocket: ^1.0.34
