@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.29.10](https://github.com/izatop/bunt/compare/v0.29.9...v0.29.10) (2023-07-26)
+
+
+### Bug Fixes
+
+* download response ([7494999](https://github.com/izatop/bunt/commit/7494999bce7afa895d2ca16ff020ae1ceb73e973))
+
+
+
+
+
 ## [0.29.9](https://github.com/izatop/bunt/compare/v0.29.8...v0.29.9) (2023-07-24)
 
 
