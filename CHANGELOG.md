@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.29.11](https://github.com/izatop/bunt/compare/v0.29.10...v0.29.11) (2023-08-04)
+
+
+### Bug Fixes
+
+* update deps ([908d361](https://github.com/izatop/bunt/commit/908d361da31bba9bfabdad6d3eecaee0b9c501bc))
+* yarn.lock ([d9e7641](https://github.com/izatop/bunt/commit/d9e76410acae5f2a8e26162c7f2a2cbc2bc1714a))
+
+
+
+
+
 ## [0.29.10](https://github.com/izatop/bunt/compare/v0.29.9...v0.29.10) (2023-07-26)
 
 
