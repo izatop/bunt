@@ -6,7 +6,7 @@ export class RateLimitedQueue extends ConcurrencyQueue implements IDisposable {
     readonly #slots: PromiseLike<void>[] = [];
     readonly #pending: Defer<void>[] = [];
     readonly #limit: number;
-    readonly #timer: NodeJS.Timer;
+    readonly #timer: NodeJS.Timeout;
 
     constructor(concurrency: number, limit: number, windowMs: number) {
         super(concurrency);
