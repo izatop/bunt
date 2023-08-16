@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.29.12](https://github.com/izatop/bunt/compare/v0.29.11...v0.29.12) (2023-08-16)
+
+
+### Bug Fixes
+
+* type ([781a898](https://github.com/izatop/bunt/commit/781a8983b7017975edc4988b5980964e2319c469))
+
+
+
+
+
 ## [0.29.6](https://github.com/izatop/bunt/compare/v0.29.5...v0.29.6) (2023-07-21)
 
 **Note:** Version bump only for package @bunt/unit
