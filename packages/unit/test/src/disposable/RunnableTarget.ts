@@ -2,7 +2,7 @@ import {Heartbeat, IRunnable} from "../../../src";
 
 export class RunnableTarget implements IRunnable {
     public getHeartbeat(): Heartbeat {
-        let timer: NodeJS.Timer | undefined;
+        let timer: NodeJS.Timeout | undefined;
         const job = new Promise((resolve) => {
             timer = setTimeout(resolve, 5000);
         });
