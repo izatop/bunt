@@ -6,6 +6,7 @@ describe("Cli", () => {
     test("Parser should work", () => {
         const args = new Argv(argv);
         expect({...args}).toEqual({
+            argv,
             flags: new Map(Object.entries({f: true, not: false})),
             options: new Map(Object.entries({kv: "value", port: "123"})),
             args: new Set(["argument1", "argument2"]),
