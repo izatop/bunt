@@ -1,9 +1,10 @@
 import {isFunction, isInstanceOf, isString} from "@bunt/is";
+import {Fn} from "@bunt/type";
 import {AssertionError} from "./Exception/index.js";
 
 export type AssertionDetailsAllowType = string | Record<any, any> | null | number;
 export type AssertionDetails = (() => AssertionDetailsAllowType) | AssertionDetailsAllowType;
-export type AssertionMessage = string | (() => string) | (() => Error);
+export type AssertionMessage = string | Fn<[], string | Error>;
 
 function createAssertionError(message?: AssertionMessage, details?: AssertionDetails): Error | AssertionError {
     const description = isFunction(message) ? message() : message;

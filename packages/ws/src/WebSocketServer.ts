@@ -124,7 +124,7 @@ export class WebSocketServer<C extends Context> extends Disposer implements IRun
     }
 
     protected factoryWebSocketServer(): ws.WebSocketServer {
-        const alive = new WeakSet<ws>();
+        const alive = new WeakSet<ws.WebSocket>();
         const wss = new ws.WebSocketServer({noServer: true});
         const minIntervalMs = this.#limits.pingTimeout / (this.#limits.maxConnections / this.#limits.pingsPerSecond);
         const intervalMs = minIntervalMs > 5000 ? minIntervalMs : 5000;
@@ -146,7 +146,7 @@ export class WebSocketServer<C extends Context> extends Disposer implements IRun
         return wss;
     }
 
-    #keepAlive(alive: WeakSet<ws>, queue: WebSocketPingQueue[]): void {
+    #keepAlive(alive: WeakSet<ws.WebSocket>, queue: WebSocketPingQueue[]): void {
         const current = Date.now();
         while (queue.length > 0) {
             const {connection, time} = queue[0];
@@ -233,7 +233,7 @@ export class WebSocketServer<C extends Context> extends Disposer implements IRun
         }
     };
 
-    protected async handle(connection: ws, action: () => Promise<unknown>): Promise<void> {
+    protected async handle(connection: ws.WebSocket, action: () => Promise<unknown>): Promise<void> {
         try {
             await action();
             connection.close(WebSocketCloseReason.NORMAL_CLOSURE);
