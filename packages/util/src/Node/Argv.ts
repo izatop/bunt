@@ -13,6 +13,7 @@ export type ArgvParse = {
 };
 
 export class Argv {
+    public readonly argv: string[];
     public readonly args: Set<string>;
     public readonly options: Map<string, string>;
     public readonly flags: Map<string, boolean>;
@@ -22,6 +23,7 @@ export class Argv {
         this.flags = flags;
         this.args = args;
         this.options = options;
+        this.argv = input;
     }
 
     public toObject(): Record<string, string | boolean> {
