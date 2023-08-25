@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.29.13](https://github.com/izatop/bunt/compare/v0.29.12...v0.29.13) (2023-08-25)
+
+
+### Bug Fixes
+
+* after typescript upgraded ([39dbbc9](https://github.com/izatop/bunt/commit/39dbbc98883c2b5a97bc4bc05382fe46dca5a207))
+* tests ([e7093d2](https://github.com/izatop/bunt/commit/e7093d28b9e861da2d80f36ce43076a6616db7ef))
+* update deps ([a45ca4e](https://github.com/izatop/bunt/commit/a45ca4eb6f0b0bfe2816dd54ed6c346d0d693140))
+
+
+
+
+
 ## [0.29.12](https://github.com/izatop/bunt/compare/v0.29.11...v0.29.12) (2023-08-16)
 
 

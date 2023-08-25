@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.29.13](https://github.com/izatop/bunt/compare/v0.29.12...v0.29.13) (2023-08-25)
+
+
+### Bug Fixes
+
+* after typescript upgraded ([39dbbc9](https://github.com/izatop/bunt/commit/39dbbc98883c2b5a97bc4bc05382fe46dca5a207))
+
+
+
+
+
 # [0.29.0](https://github.com/izatop/bunt/compare/v0.28.3...v0.29.0) (2023-07-16)
 
 **Note:** Version bump only for package @bunt/type
