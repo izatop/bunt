@@ -8,10 +8,10 @@
   },
   "references": [
     {
-      "path": "../assert"
+      "path": "../assert/tsconfig.esm.json"
     },
     {
-      "path": "../is"
+      "path": "../is/tsconfig.esm.json"
     }
   ],
   "include": [
