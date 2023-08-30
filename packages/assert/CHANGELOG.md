@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.29.15](https://github.com/izatop/bunt/compare/v0.29.14...v0.29.15) (2023-08-30)
+
+
+### Bug Fixes
+
+* tsconfig ([aa5854b](https://github.com/izatop/bunt/commit/aa5854baa39288707e84fb1cee400112f0d1b662))
+
+
+
+
+
 ## [0.29.14](https://github.com/izatop/bunt/compare/v0.29.13...v0.29.14) (2023-08-30)
 
 

@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.29.15](https://github.com/izatop/bunt/compare/v0.29.14...v0.29.15) (2023-08-30)
+
+**Note:** Version bump only for package @bunt/input
+
+
+
+
+
 ## [0.29.14](https://github.com/izatop/bunt/compare/v0.29.13...v0.29.14) (2023-08-30)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "@bunt/app",
-  "version": "0.29.14",
+  "version": "0.29.15",
   "keywords": [
     "typescript"
   ],
@@ -33,12 +33,12 @@
     "access": "public"
   },
   "dependencies": {
-    "@bunt/assert": "^0.29.14",
-    "@bunt/async": "^0.29.14",
-    "@bunt/input": "^0.29.14",
+    "@bunt/assert": "^0.29.15",
+    "@bunt/async": "^0.29.15",
+    "@bunt/input": "^0.29.15",
     "@bunt/is": "^0.29.14",
-    "@bunt/unit": "^0.29.14",
-    "@bunt/util": "^0.29.14",
+    "@bunt/unit": "^0.29.15",
+    "@bunt/util": "^0.29.15",
     "@types/busboy": "^1.5.0",
     "busboy": "^1.6.0",
     "path-to-regexp": "^6.2.1"
