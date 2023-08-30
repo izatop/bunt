@@ -1,5 +1,5 @@
-import {assert} from "../assert.js";
-import {KeyOf} from "../interfaces.js";
+import {assert} from "@bunt/assert";
+import {KeyOf} from "@bunt/type";
 import {Dict} from "./interfaces.js";
 
 export type EnvValue = string | undefined;

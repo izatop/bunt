@@ -8,7 +8,7 @@ import {Cookie, CookieOptions} from "./Cookie.js";
 export interface IResponseOptions {
     code?: number;
     status?: string;
-    headers?: Promisify<Record<string, string> | Headers>;
+    headers?: Promisify<Record<string, string>> | Headers;
 }
 
 export type ResponseArgs<T> = [
@@ -51,7 +51,7 @@ export abstract class ResponseAbstract<T> {
         if (isInstanceOf(headers, Headers)) {
             this.#headers = headers.toJSON();
         } else {
-            this.#headers = headers || Promise.resolve({});
+            this.#headers = headers || {};
         }
     }
 

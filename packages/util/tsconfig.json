@@ -1,10 +1,24 @@
 {
-    "extends": "../../tsconfig.lib.json",
-    "compilerOptions": {
-        "rootDir": "src",
-        "outDir": "dist/cjs"
+  "extends": "../../tsconfig.lib.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist/cjs"
+  },
+  "references": [
+    {
+      "path": "../assert"
     },
-    "include": [
-        "src"
-    ]
+    {
+      "path": "../type"
+    },
+    {
+      "path": "../async"
+    },
+    {
+      "path": "../is"
+    }
+  ],
+  "include": [
+    "src"
+  ]
 }

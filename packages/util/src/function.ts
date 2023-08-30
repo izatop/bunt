@@ -1,6 +1,6 @@
+import {all} from "@bunt/async";
 import {isArray} from "@bunt/is";
-import {Promisify} from "./interfaces.js";
-import {all} from "./Async/fn.js";
+import {Promisify} from "@bunt/type";
 
 export const noop = (..._args: any[]): void => void 0;
 

@@ -1,4 +1,4 @@
-import {Func, Promisify} from "../interfaces.js";
+import {Func, Logable, LogableType, Promisify} from "@bunt/type";
 import {Logger} from "./Logger.js";
 
 export enum SeverityLevel {
@@ -29,22 +29,6 @@ export interface ILogger {
 }
 
 export type LoggerOwner = Record<any, any> | ILogger | Func;
-export type LogableType = string
-| Record<any, any>
-| number
-| bigint
-| null
-| undefined
-| boolean
-| Date
-| unknown;
-
-export interface ILogable<T extends LogableType> {
-    getLogValue(): T;
-}
-
-export type Logable = ILogable<LogableType> | LogableType | Logable[];
-
 export type LogFn = (message: string, ...args: Logable[]) => void;
 export type LogWrapFn = (logger: Logger, message: string, ...args: LogableType[]) => void;
 export type LogFormat<T> = (log: LogMessage) => T;

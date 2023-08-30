@@ -1,20 +1,20 @@
 {
-    "extends": "../../tsconfig.lib.json",
-    "compilerOptions": {
-        "module": "NodeNext",
-        "moduleResolution": "NodeNext",
-        "rootDir": "src",
-        "outDir": "dist/esm"
+  "extends": "../../tsconfig.lib.json",
+  "compilerOptions": {
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "rootDir": "src",
+    "outDir": "dist/esm"
+  },
+  "references": [
+    {
+      "path": "../assert"
     },
-    "references": [
-        {
-            "path": "../assert"
-        },
-        {
-            "path": "../is"
-        }
-    ],
-    "include": [
-        "src"
-    ]
+    {
+      "path": "../is"
+    }
+  ],
+  "include": [
+    "src"
+  ]
 }

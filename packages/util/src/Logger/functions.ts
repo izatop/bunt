@@ -1,5 +1,6 @@
 import {isObject} from "@bunt/is";
-import {ILogable, ILogger, Logable, LoggerOwner} from "./interfaces.js";
+import {ILogable, Logable} from "@bunt/type";
+import {ILogger, LoggerOwner} from "./interfaces.js";
 import {Logger} from "./Logger.js";
 
 export function isLoggerOwner(target: LoggerOwner): target is ILogger {

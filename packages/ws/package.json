@@ -1,52 +1,52 @@
 {
-    "name": "@bunt/ws",
-    "version": "0.29.13",
-    "keywords": [
-        "typescript"
-    ],
-    "author": {
-        "name": "Artur Bier",
-        "email": "izatop@gmail.com"
-    },
-    "main": "dist/cjs/index.js",
-    "module": "dist/esm/index.js",
-    "types": "dist/cjs/index.d.ts",
-    "exports": {
-        ".": {
-            "import": {
-                "types": "./dist/esm/index.d.ts",
-                "default": "./dist/esm/index.js"
-            },
-            "require": {
-                "types": "./dist/cjs/index.d.ts",
-                "default": "./dist/cjs/index.js"
-            }
-        }
-    },
-    "files": [
-        "dist/",
-        "LICENSE"
-    ],
-    "description": "WebSocket Server",
-    "repository": "git@github.com:izatop/bunt.git",
-    "publishConfig": {
-        "access": "public"
-    },
-    "dependencies": {
-        "@bunt/app": "^0.29.13",
-        "@bunt/assert": "^0.29.13",
-        "@bunt/async": "^0.29.13",
-        "@bunt/is": "^0.29.13",
-        "@bunt/type": "^0.29.13",
-        "@bunt/unit": "^0.29.13",
-        "@bunt/util": "^0.29.13",
-        "@bunt/web": "^0.29.13",
-        "@types/ws": "^8.5.5",
-        "ws": "^8.13.0"
-    },
-    "devDependencies": {
-        "@types/websocket": "^1.0.6",
-        "websocket": "^1.0.34"
-    },
-    "license": "MIT"
+  "name": "@bunt/ws",
+  "version": "0.29.13",
+  "keywords": [
+    "typescript"
+  ],
+  "author": {
+    "name": "Artur Bier",
+    "email": "izatop@gmail.com"
+  },
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/cjs/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/esm/index.d.ts",
+        "default": "./dist/esm/index.js"
+      },
+      "require": {
+        "types": "./dist/cjs/index.d.ts",
+        "default": "./dist/cjs/index.js"
+      }
+    }
+  },
+  "files": [
+    "dist/",
+    "LICENSE"
+  ],
+  "description": "WebSocket Server",
+  "repository": "git@github.com:izatop/bunt.git",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@bunt/app": "^0.29.13",
+    "@bunt/assert": "^0.29.13",
+    "@bunt/async": "^0.29.13",
+    "@bunt/is": "^0.29.13",
+    "@bunt/type": "^0.29.13",
+    "@bunt/unit": "^0.29.13",
+    "@bunt/util": "^0.29.13",
+    "@bunt/web": "^0.29.13",
+    "@types/ws": "^8.5.5",
+    "ws": "^8.13.0"
+  },
+  "devDependencies": {
+    "@types/websocket": "^1.0.6",
+    "websocket": "^1.0.34"
+  },
+  "license": "MIT"
 }

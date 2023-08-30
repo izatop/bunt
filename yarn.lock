@@ -449,7 +449,6 @@ __metadata:
     "@bunt/assert": ^0.29.13
     "@bunt/is": ^0.29.13
     "@bunt/type": ^0.29.13
-    "@bunt/util": ^0.29.13
   languageName: unknown
   linkType: soft
 
@@ -549,6 +548,11 @@ __metadata:
 "@bunt/util@^0.29.13, @bunt/util@workspace:packages/util":
   version: 0.0.0-use.local
   resolution: "@bunt/util@workspace:packages/util"
+  dependencies:
+    "@bunt/assert": ^0.29.13
+    "@bunt/async": ^0.29.13
+    "@bunt/is": ^0.29.13
+    "@bunt/type": ^0.29.13
   languageName: unknown
   linkType: soft
 

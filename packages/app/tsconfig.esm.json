@@ -1,23 +1,35 @@
 {
-    "extends": "../../tsconfig.lib.json",
-    "compilerOptions": {
-        "module": "NodeNext",
-        "moduleResolution": "NodeNext",
-        "rootDir": "src",
-        "outDir": "dist/esm"
+  "extends": "../../tsconfig.lib.json",
+  "compilerOptions": {
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "rootDir": "src",
+    "outDir": "dist/esm"
+  },
+  "references": [
+    {
+      "path": "../type/tsconfig.esm.json"
     },
-    "references": [
-        {
-            "path": "../util/tsconfig.esm.json"
-        },
-        {
-            "path": "../unit/tsconfig.esm.json"
-        },
-        {
-            "path": "../input/tsconfig.esm.json"
-        }
-    ],
-    "include": [
-        "src"
-    ]
+    {
+      "path": "../assert/tsconfig.esm.json"
+    },
+    {
+      "path": "../async/tsconfig.esm.json"
+    },
+    {
+      "path": "../input/tsconfig.esm.json"
+    },
+    {
+      "path": "../is/tsconfig.esm.json"
+    },
+    {
+      "path": "../unit/tsconfig.esm.json"
+    },
+    {
+      "path": "../util/tsconfig.esm.json"
+    }
+  ],
+  "include": [
+    "src"
+  ]
 }

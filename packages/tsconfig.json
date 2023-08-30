@@ -1,51 +1,51 @@
 {
-    "files": [],
-    "include": [],
-    "references": [
-        {
-            "path": "./type"
-        },
-        {
-            "path": "./util"
-        },
-        {
-            "path": "./is"
-        },
-        {
-            "path": "./assert"
-        },
-        {
-            "path": "./date"
-        },
-        {
-            "path": "./unit"
-        },
-        {
-            "path": "./app"
-        },
-        {
-            "path": "./web"
-        },
-        {
-            "path": "./ws"
-        },
-        {
-            "path": "./fs"
-        },
-        {
-            "path": "./cli"
-        },
-        {
-            "path": "./input"
-        },
-        {
-            "path": "./queue"
-        },
-        {
-            "path": "./task"
-        },
-        {
-            "path": "./async"
-        },
-    ]
+  "files": [],
+  "include": [],
+  "references": [
+    {
+      "path": "./type"
+    },
+    {
+      "path": "./util"
+    },
+    {
+      "path": "./is"
+    },
+    {
+      "path": "./assert"
+    },
+    {
+      "path": "./date"
+    },
+    {
+      "path": "./unit"
+    },
+    {
+      "path": "./app"
+    },
+    {
+      "path": "./web"
+    },
+    {
+      "path": "./ws"
+    },
+    {
+      "path": "./fs"
+    },
+    {
+      "path": "./cli"
+    },
+    {
+      "path": "./input"
+    },
+    {
+      "path": "./queue"
+    },
+    {
+      "path": "./task"
+    },
+    {
+      "path": "./async"
+    },
+  ]
 }

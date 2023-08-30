@@ -1,6 +1,6 @@
-import {AsyncPushPull, isUndefined, Promisify} from "@bunt/util";
+import {AsyncPool, isUndefined, Promisify} from "@bunt/util";
 
-export class SubscriptionIterator<T, TNext = unknown> extends AsyncPushPull<T | undefined>
+export class SubscriptionIterator<T, TNext = unknown> extends AsyncPool<T | undefined>
     implements AsyncIterator<T, undefined, TNext> {
     #unsubscribe?: () => Promisify<void>;
 
@@ -33,6 +33,5 @@ export class SubscriptionIterator<T, TNext = unknown> extends AsyncPushPull<T | 
 
     public async destroy(): Promise<void> {
         await this.#unsubscribe?.();
-        super.destroy();
     }
 }

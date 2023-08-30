@@ -1,6 +1,6 @@
 import {performance} from "perf_hooks";
 import {isString} from "@bunt/is";
-import {ILogable} from "../Logger/index.js";
+import {ILogable} from "@bunt/type";
 import {IPerfValue, PerfLabel} from "./interfaces.js";
 
 export class Perf implements ILogable<IPerfValue> {

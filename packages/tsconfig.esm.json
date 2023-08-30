@@ -1,51 +1,51 @@
 {
-    "files": [],
-    "include": [],
-    "references": [
-        {
-            "path": "./type/tsconfig.esm.json"
-        },
-        {
-            "path": "./util/tsconfig.esm.json"
-        },
-        {
-            "path": "./is/tsconfig.esm.json"
-        },
-        {
-            "path": "./assert/tsconfig.esm.json"
-        },
-        {
-            "path": "./date/tsconfig.esm.json"
-        },
-        {
-            "path": "./unit/tsconfig.esm.json"
-        },
-        {
-            "path": "./app/tsconfig.esm.json"
-        },
-        {
-            "path": "./web/tsconfig.esm.json"
-        },
-        {
-            "path": "./ws/tsconfig.esm.json"
-        },
-        {
-            "path": "./fs/tsconfig.esm.json"
-        },
-        {
-            "path": "./cli/tsconfig.esm.json"
-        },
-        {
-            "path": "./input/tsconfig.esm.json"
-        },
-        {
-            "path": "./queue/tsconfig.esm.json"
-        },
-        {
-            "path": "./task/tsconfig.esm.json"
-        },
-        {
-            "path": "./async/tsconfig.esm.json"
-        },
-    ]
+  "files": [],
+  "include": [],
+  "references": [
+    {
+      "path": "./type/tsconfig.esm.json"
+    },
+    {
+      "path": "./util/tsconfig.esm.json"
+    },
+    {
+      "path": "./is/tsconfig.esm.json"
+    },
+    {
+      "path": "./assert/tsconfig.esm.json"
+    },
+    {
+      "path": "./date/tsconfig.esm.json"
+    },
+    {
+      "path": "./unit/tsconfig.esm.json"
+    },
+    {
+      "path": "./app/tsconfig.esm.json"
+    },
+    {
+      "path": "./web/tsconfig.esm.json"
+    },
+    {
+      "path": "./ws/tsconfig.esm.json"
+    },
+    {
+      "path": "./fs/tsconfig.esm.json"
+    },
+    {
+      "path": "./cli/tsconfig.esm.json"
+    },
+    {
+      "path": "./input/tsconfig.esm.json"
+    },
+    {
+      "path": "./queue/tsconfig.esm.json"
+    },
+    {
+      "path": "./task/tsconfig.esm.json"
+    },
+    {
+      "path": "./async/tsconfig.esm.json"
+    },
+  ]
 }

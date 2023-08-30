@@ -1,4 +1,4 @@
-import {assert} from "../assert.js";
+import {assert} from "@bunt/assert";
 import {isArray, isFunction} from "@bunt/is";
 
 export type XMapArrayFactory<K, V> = (value: V, index: number, array: V[]) => K;

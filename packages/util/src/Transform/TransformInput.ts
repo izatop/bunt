@@ -1,5 +1,5 @@
-import {Promisify} from "../interfaces.js";
 import {isArray, isFunction, isObject} from "@bunt/is";
+import {Promisify} from "@bunt/type";
 import {JSONInput, Transformable, TransformOut, TransformSchema} from "./interfaces.js";
 
 export class TransformInput {

@@ -1,18 +1,18 @@
 {
-    "extends": "../../tsconfig.lib.json",
-    "compilerOptions": {
-        "rootDir": "src",
-        "outDir": "dist/cjs"
+  "extends": "../../tsconfig.lib.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist/cjs"
+  },
+  "references": [
+    {
+      "path": "../app"
     },
-    "references": [
-        {
-            "path": "../app"
-        },
-        {
-            "path": "../util"
-        }
-    ],
-    "include": [
-        "src"
-    ]
+    {
+      "path": "../util"
+    }
+  ],
+  "include": [
+    "src"
+  ]
 }

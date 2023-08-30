@@ -1,16 +1,14 @@
 import * as os from "os";
 import {format} from "util";
-import {assert} from "../assert.js";
 import {isDefined, isFunction, isInstanceOf, isNumber, isUndefined} from "@bunt/is";
+import {assert} from "@bunt/assert";
+import {Logable, LogableType, Promisify} from "@bunt/type";
 import {Perf} from "../Perf/index.js";
 import {makeSafe} from "../function.js";
-import {Promisify} from "../interfaces.js";
 import {isLogable, isLoggerOwner} from "./functions.js";
 import {
     ILogger,
     ILoggerTransport,
-    Logable,
-    LogableType,
     LogFn,
     LoggerOwner,
     LogMessage,

@@ -1,5 +1,5 @@
-import {DecoratorTarget} from "./interfaces.js";
 import {isObject} from "@bunt/is";
+import {DecoratorTarget} from "@bunt/type";
 
 export const freeze = <S extends {[key: string]: any}>(source: S): S => {
     const target = Object.freeze(Object.assign(Object.create(null), source));

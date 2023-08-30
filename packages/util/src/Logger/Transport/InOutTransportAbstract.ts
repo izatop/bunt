@@ -1,4 +1,4 @@
-import {Promisify} from "../../interfaces.js";
+import {Promisify} from "@bunt/type";
 import {ILoggerTransport, LogFormat, LogMessage} from "../interfaces.js";
 
 export interface ILoggerStreamCallback<T> {

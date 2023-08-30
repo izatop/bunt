@@ -1,39 +1,39 @@
 {
-    "name": "@bunt/is",
-    "version": "0.29.13",
-    "keywords": [
-        "typescript"
-    ],
-    "author": {
-        "name": "Artur Bier",
-        "email": "izatop@gmail.com"
-    },
-    "main": "dist/cjs/index.js",
-    "module": "dist/esm/index.js",
-    "types": "dist/cjs/index.d.ts",
-    "exports": {
-        ".": {
-            "import": {
-                "types": "./dist/esm/index.d.ts",
-                "default": "./dist/esm/index.js"
-            },
-            "require": {
-                "types": "./dist/cjs/index.d.ts",
-                "default": "./dist/cjs/index.js"
-            }
-        }
-    },
-    "files": [
-        "dist/",
-        "LICENSE"
-    ],
-    "description": "Utils",
-    "repository": "git@github.com:izatop/bunt.git",
-    "publishConfig": {
-        "access": "public"
-    },
-    "license": "MIT",
-    "dependencies": {
-        "@bunt/type": "^0.29.13"
+  "name": "@bunt/is",
+  "version": "0.29.13",
+  "keywords": [
+    "typescript"
+  ],
+  "author": {
+    "name": "Artur Bier",
+    "email": "izatop@gmail.com"
+  },
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/cjs/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/esm/index.d.ts",
+        "default": "./dist/esm/index.js"
+      },
+      "require": {
+        "types": "./dist/cjs/index.d.ts",
+        "default": "./dist/cjs/index.js"
+      }
     }
+  },
+  "files": [
+    "dist/",
+    "LICENSE"
+  ],
+  "description": "Utils",
+  "repository": "git@github.com:izatop/bunt.git",
+  "publishConfig": {
+    "access": "public"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@bunt/type": "^0.29.13"
+  }
 }

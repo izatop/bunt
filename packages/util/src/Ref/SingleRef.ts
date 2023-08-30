@@ -1,4 +1,4 @@
-import {assert} from "../assert.js";
+import {assert} from "@bunt/assert";
 
 const store = new WeakMap();
 
