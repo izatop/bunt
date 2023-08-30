@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.29.14](https://github.com/izatop/bunt/compare/v0.29.13...v0.29.14) (2023-08-30)
+
+
+### Bug Fixes
+
+* refactor ([bed370d](https://github.com/izatop/bunt/commit/bed370d6e3d240b16ee0f0e88335ba09bc308059))
+* test + update deps ([c2f46e5](https://github.com/izatop/bunt/commit/c2f46e59c06b5a2aee0b2c0264f6d65693199abe))
+
+
+
+
+
 ## [0.29.13](https://github.com/izatop/bunt/compare/v0.29.12...v0.29.13) (2023-08-25)
 
 
