@@ -1,5 +1,5 @@
 import {assert} from "../assert.js";
-import {isDefined, isNumber} from "../is.js";
+import {isDefined, isNumber} from "@bunt/is";
 import {entriesReverse} from "../object.js";
 
 const OPTION_REGEX = /^--([a-z0-9_-]+)=(.+)$/i;

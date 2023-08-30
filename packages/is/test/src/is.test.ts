@@ -2,6 +2,8 @@ import {
     isArray,
     isArrowFunction,
     isBoolean,
+    isNotNullish,
+    isNullish,
     isClass,
     isDefined,
     isFunction,
@@ -23,7 +25,7 @@ describe("is", () => {
     const objectValue = {};
     const NaNValue = NaN;
     const undefinedValue = undefined;
-    const functionValue = function test() {return null;};
+    const functionValue = function test(): null {return null;};
     const arrowFunctionValue = () => void 0;
     const stringValue = "hello";
     const booleanValue1 = true;
@@ -83,6 +85,18 @@ describe("is", () => {
     test.each(make((v) => typeof v === "undefined"))(
         "isUndefined(%s): %s", (a, b) => {
             expect(isUndefined(a)).toBe(b);
+        },
+    );
+
+    test.each(make((v) => isNull(v) || isUndefined(v)))(
+        "isNullish(%s): %s", (a, b) => {
+            expect(isNullish(a)).toBe(b);
+        },
+    );
+
+    test.each(make((v) => !isNullish(v)))(
+        "isNotNullish(%s): %s", (a, b) => {
+            expect(isNotNullish(a)).toBe(b);
         },
     );
 

@@ -1,4 +1,4 @@
-import {isObject} from "../is.js";
+import {isObject} from "@bunt/is";
 import {ILogable, ILogger, Logable, LoggerOwner} from "./interfaces.js";
 import {Logger} from "./Logger.js";
 

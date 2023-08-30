@@ -1,4 +1,4 @@
-import {isDefined, isString} from "../../is.js";
+import {isDefined, isString} from "@bunt/is";
 import {LogFormat, LogMessage, SeverityLevel} from "../interfaces.js";
 
 export const defaultLogFormat: LogFormat<string> = (log) => {

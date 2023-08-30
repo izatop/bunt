@@ -12,9 +12,7 @@ export const isNumber = (value: unknown): value is number => {
 };
 
 export const isNullish = (value: unknown): value is null | undefined => isNull(value) || isUndefined(value);
-export const isNotNullish = <T>(value: T | null | undefined): value is null | undefined => (
-    !(isNull(value) || isUndefined(value))
-);
+export const isNotNullish = <T>(value: T | null | undefined): value is T => !isNullish(value);
 
 export const isFunction = <T extends (...args: any) => any>(value: unknown): value is T => {
     return typeof value === "function" && !isClass(value);

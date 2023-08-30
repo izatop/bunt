@@ -1,5 +1,5 @@
 import {performance} from "perf_hooks";
-import {isString} from "../is.js";
+import {isString} from "@bunt/is";
 import {ILogable} from "../Logger/index.js";
 import {IPerfValue, PerfLabel} from "./interfaces.js";
 

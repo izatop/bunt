@@ -1,5 +1,5 @@
 import {Duplex, Readable, Stream, Transform, Writable} from "stream";
-import {isObject} from "./is.js";
+import {isObject} from "@bunt/is";
 
 type IsStream = Readable | Writable | Duplex | Transform | Stream;
 

@@ -1,4 +1,4 @@
-import {isFunction} from "../is.js";
+import {isFunction} from "@bunt/is";
 import {ILogable} from "../Logger/index.js";
 import {ValidationError} from "./ValidationError.js";
 

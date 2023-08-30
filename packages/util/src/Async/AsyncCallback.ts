@@ -1,6 +1,6 @@
 import {bind} from "../decorator.js";
 import {Promisify, Fn} from "../interfaces.js";
-import {isUndefined} from "../is.js";
+import {isUndefined} from "@bunt/is";
 
 /**
  * @deprecated use @bunt/async AsyncIteratorFactory

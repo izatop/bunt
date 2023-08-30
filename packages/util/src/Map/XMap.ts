@@ -1,5 +1,5 @@
 import {assert} from "../assert.js";
-import {isArray, isFunction} from "../is.js";
+import {isArray, isFunction} from "@bunt/is";
 
 export type XMapArrayFactory<K, V> = (value: V, index: number, array: V[]) => K;
 export type XMapInitializer<K, V> = (key: K) => V;

@@ -1,4 +1,4 @@
-import {isArray} from "./is.js";
+import {isArray} from "@bunt/is";
 import {Promisify} from "./interfaces.js";
 import {all} from "./Async/fn.js";
 

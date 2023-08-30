@@ -1,4 +1,4 @@
-import {isDefined} from "../is.js";
+import {isDefined} from "@bunt/is";
 
 export interface IAsyncStateMap<T> {
     resolve: (value: T | PromiseLike<T>) => void;

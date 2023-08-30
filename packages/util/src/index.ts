@@ -1,4 +1,4 @@
-export * from "./is.js";
+export * from "@bunt/is";
 export * from "./stream.js";
 export * from "./assert.js";
 export * from "./object.js";

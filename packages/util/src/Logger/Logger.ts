@@ -1,7 +1,7 @@
 import * as os from "os";
 import {format} from "util";
 import {assert} from "../assert.js";
-import {isDefined, isFunction, isInstanceOf, isNumber, isUndefined} from "../is.js";
+import {isDefined, isFunction, isInstanceOf, isNumber, isUndefined} from "@bunt/is";
 import {Perf} from "../Perf/index.js";
 import {makeSafe} from "../function.js";
 import {Promisify} from "../interfaces.js";
