@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.29.16](https://github.com/izatop/bunt/compare/v0.29.15...v0.29.16) (2023-08-30)
+
+
+### Bug Fixes
+
+* es modules ([12b7746](https://github.com/izatop/bunt/commit/12b774640671e2d7af6b119d7364285fe9a4ff19))
+
+
+
+
+
 ## [0.29.15](https://github.com/izatop/bunt/compare/v0.29.14...v0.29.15) (2023-08-30)
 
 

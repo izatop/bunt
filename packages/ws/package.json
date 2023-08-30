@@ -1,6 +1,6 @@
 {
   "name": "@bunt/ws",
-  "version": "0.29.15",
+  "version": "0.29.16",
   "keywords": [
     "typescript"
   ],
@@ -33,14 +33,14 @@
     "access": "public"
   },
   "dependencies": {
-    "@bunt/app": "^0.29.15",
-    "@bunt/assert": "^0.29.15",
-    "@bunt/async": "^0.29.15",
-    "@bunt/is": "^0.29.14",
-    "@bunt/type": "^0.29.14",
-    "@bunt/unit": "^0.29.15",
-    "@bunt/util": "^0.29.15",
-    "@bunt/web": "^0.29.15",
+    "@bunt/app": "^0.29.16",
+    "@bunt/assert": "^0.29.16",
+    "@bunt/async": "^0.29.16",
+    "@bunt/is": "^0.29.16",
+    "@bunt/type": "^0.29.16",
+    "@bunt/unit": "^0.29.16",
+    "@bunt/util": "^0.29.16",
+    "@bunt/web": "^0.29.16",
     "@types/ws": "^8.5.5",
     "ws": "^8.13.0"
   },
