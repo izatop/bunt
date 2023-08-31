@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.29.17](https://github.com/izatop/bunt/compare/v0.29.16...v0.29.17) (2023-08-31)
+
+
+### Bug Fixes
+
+* transaction wrapper ([40990f9](https://github.com/izatop/bunt/commit/40990f963df17209a05eef5e46ac11340515d24d))
+
+
+
+
+
 ## [0.29.16](https://github.com/izatop/bunt/compare/v0.29.15...v0.29.16) (2023-08-30)
 
 
