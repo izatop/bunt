@@ -417,38 +417,38 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@bunt/app@^0.29.15, @bunt/app@workspace:packages/app":
+"@bunt/app@^0.29.16, @bunt/app@workspace:packages/app":
   version: 0.0.0-use.local
   resolution: "@bunt/app@workspace:packages/app"
   dependencies:
-    "@bunt/assert": ^0.29.15
-    "@bunt/async": ^0.29.15
-    "@bunt/input": ^0.29.15
-    "@bunt/is": ^0.29.14
-    "@bunt/unit": ^0.29.15
-    "@bunt/util": ^0.29.15
+    "@bunt/assert": ^0.29.16
+    "@bunt/async": ^0.29.16
+    "@bunt/input": ^0.29.16
+    "@bunt/is": ^0.29.16
+    "@bunt/unit": ^0.29.16
+    "@bunt/util": ^0.29.16
     "@types/busboy": ^1.5.0
     busboy: ^1.6.0
     path-to-regexp: ^6.2.1
   languageName: unknown
   linkType: soft
 
-"@bunt/assert@^0.29.15, @bunt/assert@workspace:packages/assert":
+"@bunt/assert@^0.29.16, @bunt/assert@workspace:packages/assert":
   version: 0.0.0-use.local
   resolution: "@bunt/assert@workspace:packages/assert"
   dependencies:
-    "@bunt/is": ^0.29.14
-    "@bunt/type": ^0.29.14
+    "@bunt/is": ^0.29.16
+    "@bunt/type": ^0.29.16
   languageName: unknown
   linkType: soft
 
-"@bunt/async@^0.29.15, @bunt/async@workspace:packages/async":
+"@bunt/async@^0.29.16, @bunt/async@workspace:packages/async":
   version: 0.0.0-use.local
   resolution: "@bunt/async@workspace:packages/async"
   dependencies:
-    "@bunt/assert": ^0.29.15
-    "@bunt/is": ^0.29.14
-    "@bunt/type": ^0.29.14
+    "@bunt/assert": ^0.29.16
+    "@bunt/is": ^0.29.16
+    "@bunt/type": ^0.29.16
   languageName: unknown
   linkType: soft
 
@@ -456,9 +456,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@bunt/cli@workspace:packages/cli"
   dependencies:
-    "@bunt/app": ^0.29.15
-    "@bunt/assert": ^0.29.15
-    "@bunt/util": ^0.29.15
+    "@bunt/app": ^0.29.16
+    "@bunt/assert": ^0.29.16
+    "@bunt/util": ^0.29.16
     path-to-regexp: ^6.2.1
   languageName: unknown
   linkType: soft
@@ -467,8 +467,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@bunt/date@workspace:packages/date"
   dependencies:
-    "@bunt/assert": ^0.29.15
-    "@bunt/is": ^0.29.14
+    "@bunt/assert": ^0.29.16
+    "@bunt/is": ^0.29.16
   languageName: unknown
   linkType: soft
 
@@ -476,9 +476,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@bunt/fs@workspace:packages/fs"
   dependencies:
-    "@bunt/assert": ^0.29.15
-    "@bunt/is": ^0.29.14
-    "@bunt/unit": ^0.29.15
+    "@bunt/assert": ^0.29.16
+    "@bunt/is": ^0.29.16
+    "@bunt/unit": ^0.29.16
     "@types/minio": ^7.1.1
     "@types/node-fetch": ^2.6.4
     minio: ^7.1.2
@@ -486,21 +486,21 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@bunt/input@^0.29.15, @bunt/input@workspace:packages/input":
+"@bunt/input@^0.29.16, @bunt/input@workspace:packages/input":
   version: 0.0.0-use.local
   resolution: "@bunt/input@workspace:packages/input"
   dependencies:
-    "@bunt/assert": ^0.29.15
-    "@bunt/is": ^0.29.14
-    "@bunt/type": ^0.29.14
+    "@bunt/assert": ^0.29.16
+    "@bunt/is": ^0.29.16
+    "@bunt/type": ^0.29.16
   languageName: unknown
   linkType: soft
 
-"@bunt/is@^0.29.14, @bunt/is@workspace:packages/is":
+"@bunt/is@^0.29.16, @bunt/is@workspace:packages/is":
   version: 0.0.0-use.local
   resolution: "@bunt/is@workspace:packages/is"
   dependencies:
-    "@bunt/type": ^0.29.14
+    "@bunt/type": ^0.29.16
   languageName: unknown
   linkType: soft
 
@@ -508,9 +508,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@bunt/queue@workspace:packages/queue"
   dependencies:
-    "@bunt/async": ^0.29.15
-    "@bunt/unit": ^0.29.15
-    "@bunt/util": ^0.29.15
+    "@bunt/async": ^0.29.16
+    "@bunt/unit": ^0.29.16
+    "@bunt/util": ^0.29.16
     ioredis: ^5.3.2
   languageName: unknown
   linkType: soft
@@ -519,53 +519,53 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@bunt/task@workspace:packages/task"
   dependencies:
-    "@bunt/assert": ^0.29.15
-    "@bunt/async": ^0.29.15
-    "@bunt/is": ^0.29.14
-    "@bunt/type": ^0.29.14
-    "@bunt/unit": ^0.29.15
+    "@bunt/assert": ^0.29.16
+    "@bunt/async": ^0.29.16
+    "@bunt/is": ^0.29.16
+    "@bunt/type": ^0.29.16
+    "@bunt/unit": ^0.29.16
   languageName: unknown
   linkType: soft
 
-"@bunt/type@^0.29.14, @bunt/type@workspace:packages/type":
+"@bunt/type@^0.29.16, @bunt/type@workspace:packages/type":
   version: 0.0.0-use.local
   resolution: "@bunt/type@workspace:packages/type"
   languageName: unknown
   linkType: soft
 
-"@bunt/unit@^0.29.15, @bunt/unit@workspace:packages/unit":
+"@bunt/unit@^0.29.16, @bunt/unit@workspace:packages/unit":
   version: 0.0.0-use.local
   resolution: "@bunt/unit@workspace:packages/unit"
   dependencies:
-    "@bunt/assert": ^0.29.15
-    "@bunt/async": ^0.29.15
-    "@bunt/is": ^0.29.14
-    "@bunt/type": ^0.29.14
-    "@bunt/util": ^0.29.15
+    "@bunt/assert": ^0.29.16
+    "@bunt/async": ^0.29.16
+    "@bunt/is": ^0.29.16
+    "@bunt/type": ^0.29.16
+    "@bunt/util": ^0.29.16
   languageName: unknown
   linkType: soft
 
-"@bunt/util@^0.29.15, @bunt/util@workspace:packages/util":
+"@bunt/util@^0.29.16, @bunt/util@workspace:packages/util":
   version: 0.0.0-use.local
   resolution: "@bunt/util@workspace:packages/util"
   dependencies:
-    "@bunt/assert": ^0.29.15
-    "@bunt/async": ^0.29.15
-    "@bunt/is": ^0.29.14
-    "@bunt/type": ^0.29.14
+    "@bunt/assert": ^0.29.16
+    "@bunt/async": ^0.29.16
+    "@bunt/is": ^0.29.16
+    "@bunt/type": ^0.29.16
   languageName: unknown
   linkType: soft
 
-"@bunt/web@^0.29.15, @bunt/web@workspace:packages/web":
+"@bunt/web@^0.29.16, @bunt/web@workspace:packages/web":
   version: 0.0.0-use.local
   resolution: "@bunt/web@workspace:packages/web"
   dependencies:
-    "@bunt/app": ^0.29.15
-    "@bunt/assert": ^0.29.15
-    "@bunt/async": ^0.29.15
-    "@bunt/is": ^0.29.14
-    "@bunt/type": ^0.29.14
-    "@bunt/util": ^0.29.15
+    "@bunt/app": ^0.29.16
+    "@bunt/assert": ^0.29.16
+    "@bunt/async": ^0.29.16
+    "@bunt/is": ^0.29.16
+    "@bunt/type": ^0.29.16
+    "@bunt/util": ^0.29.16
     http-status: ^1.6.2
     path-to-regexp: ^6.2.1
   languageName: unknown
@@ -575,14 +575,14 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@bunt/ws@workspace:packages/ws"
   dependencies:
-    "@bunt/app": ^0.29.15
-    "@bunt/assert": ^0.29.15
-    "@bunt/async": ^0.29.15
-    "@bunt/is": ^0.29.14
-    "@bunt/type": ^0.29.14
-    "@bunt/unit": ^0.29.15
-    "@bunt/util": ^0.29.15
-    "@bunt/web": ^0.29.15
+    "@bunt/app": ^0.29.16
+    "@bunt/assert": ^0.29.16
+    "@bunt/async": ^0.29.16
+    "@bunt/is": ^0.29.16
+    "@bunt/type": ^0.29.16
+    "@bunt/unit": ^0.29.16
+    "@bunt/util": ^0.29.16
+    "@bunt/web": ^0.29.16
     "@types/websocket": ^1.0.6
     "@types/ws": ^8.5.5
     websocket: ^1.0.34

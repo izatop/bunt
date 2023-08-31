@@ -108,7 +108,12 @@ export class Unit<C extends Context> {
     private getTransactionWrapper<T>(finish?: ActionTransactionFinish)
         : [success?: (result: T) => T, fails?: (reason: unknown) => never] {
         if (!finish) {
-            return [];
+            return [
+                (value): T => value,
+                (reason): never => {
+                    throw reason;
+                },
+            ];
         }
 
         return [
