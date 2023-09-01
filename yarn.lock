@@ -417,7 +417,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@bunt/app@^0.29.16, @bunt/app@workspace:packages/app":
+"@bunt/app@^0.29.17, @bunt/app@workspace:packages/app":
   version: 0.0.0-use.local
   resolution: "@bunt/app@workspace:packages/app"
   dependencies:
@@ -425,7 +425,7 @@ __metadata:
     "@bunt/async": ^0.29.16
     "@bunt/input": ^0.29.16
     "@bunt/is": ^0.29.16
-    "@bunt/unit": ^0.29.16
+    "@bunt/unit": ^0.29.17
     "@bunt/util": ^0.29.16
     "@types/busboy": ^1.5.0
     busboy: ^1.6.0
@@ -456,7 +456,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@bunt/cli@workspace:packages/cli"
   dependencies:
-    "@bunt/app": ^0.29.16
+    "@bunt/app": ^0.29.17
     "@bunt/assert": ^0.29.16
     "@bunt/util": ^0.29.16
     path-to-regexp: ^6.2.1
@@ -478,7 +478,7 @@ __metadata:
   dependencies:
     "@bunt/assert": ^0.29.16
     "@bunt/is": ^0.29.16
-    "@bunt/unit": ^0.29.16
+    "@bunt/unit": ^0.29.17
     "@types/minio": ^7.1.1
     "@types/node-fetch": ^2.6.4
     minio: ^7.1.2
@@ -509,7 +509,7 @@ __metadata:
   resolution: "@bunt/queue@workspace:packages/queue"
   dependencies:
     "@bunt/async": ^0.29.16
-    "@bunt/unit": ^0.29.16
+    "@bunt/unit": ^0.29.17
     "@bunt/util": ^0.29.16
     ioredis: ^5.3.2
   languageName: unknown
@@ -523,7 +523,7 @@ __metadata:
     "@bunt/async": ^0.29.16
     "@bunt/is": ^0.29.16
     "@bunt/type": ^0.29.16
-    "@bunt/unit": ^0.29.16
+    "@bunt/unit": ^0.29.17
   languageName: unknown
   linkType: soft
 
@@ -533,7 +533,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@bunt/unit@^0.29.16, @bunt/unit@workspace:packages/unit":
+"@bunt/unit@^0.29.17, @bunt/unit@workspace:packages/unit":
   version: 0.0.0-use.local
   resolution: "@bunt/unit@workspace:packages/unit"
   dependencies:
@@ -556,11 +556,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@bunt/web@^0.29.16, @bunt/web@workspace:packages/web":
+"@bunt/web@^0.29.17, @bunt/web@workspace:packages/web":
   version: 0.0.0-use.local
   resolution: "@bunt/web@workspace:packages/web"
   dependencies:
-    "@bunt/app": ^0.29.16
+    "@bunt/app": ^0.29.17
     "@bunt/assert": ^0.29.16
     "@bunt/async": ^0.29.16
     "@bunt/is": ^0.29.16
@@ -575,14 +575,14 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@bunt/ws@workspace:packages/ws"
   dependencies:
-    "@bunt/app": ^0.29.16
+    "@bunt/app": ^0.29.17
     "@bunt/assert": ^0.29.16
     "@bunt/async": ^0.29.16
     "@bunt/is": ^0.29.16
     "@bunt/type": ^0.29.16
-    "@bunt/unit": ^0.29.16
+    "@bunt/unit": ^0.29.17
     "@bunt/util": ^0.29.16
-    "@bunt/web": ^0.29.16
+    "@bunt/web": ^0.29.17
     "@types/websocket": ^1.0.6
     "@types/ws": ^8.5.5
     websocket: ^1.0.34

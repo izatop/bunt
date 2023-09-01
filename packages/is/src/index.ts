@@ -11,6 +11,14 @@ export const isNumber = (value: unknown): value is number => {
     return typeof value === "number" && value === +value;
 };
 
+export const isNumberGreaterThan = (value: unknown, than: number): value is number => (
+    isNumber(value) && value > than
+);
+
+export const isNumberLessThan = (value: unknown, than: number): value is number => (
+    isNumber(value) && value < than
+);
+
 export const isNullish = (value: unknown): value is null | undefined => isNull(value) || isUndefined(value);
 export const isNotNullish = <T>(value: T | null | undefined): value is T => !isNullish(value);
 
