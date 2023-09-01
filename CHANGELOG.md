@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.29.18](https://github.com/izatop/bunt/compare/v0.29.17...v0.29.18) (2023-09-01)
+
+
+### Bug Fixes
+
+* is number greater/less than functions ([f2d8294](https://github.com/izatop/bunt/commit/f2d82947064f701336bfed02ab97c733674ef67c))
+
+
+
+
+
 ## [0.29.17](https://github.com/izatop/bunt/compare/v0.29.16...v0.29.17) (2023-08-31)
 
 

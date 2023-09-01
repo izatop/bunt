@@ -1,6 +1,6 @@
 {
   "name": "@bunt/task",
-  "version": "0.29.17",
+  "version": "0.29.18",
   "keywords": [
     "typescript"
   ],
@@ -34,10 +34,10 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@bunt/assert": "^0.29.16",
-    "@bunt/async": "^0.29.16",
-    "@bunt/is": "^0.29.16",
+    "@bunt/assert": "^0.29.18",
+    "@bunt/async": "^0.29.18",
+    "@bunt/is": "^0.29.18",
     "@bunt/type": "^0.29.16",
-    "@bunt/unit": "^0.29.17"
+    "@bunt/unit": "^0.29.18"
   }
 }
