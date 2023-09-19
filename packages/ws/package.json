@@ -42,7 +42,7 @@
     "@bunt/util": "^0.29.18",
     "@bunt/web": "^0.29.18",
     "@types/ws": "^8.5.5",
-    "ws": "^8.13.0"
+    "ws": "^8.14.1"
   },
   "devDependencies": {
     "@types/websocket": "^1.0.6",

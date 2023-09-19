@@ -39,7 +39,7 @@
     "@bunt/is": "^0.29.18",
     "@bunt/unit": "^0.29.18",
     "@bunt/util": "^0.29.18",
-    "@types/busboy": "^1.5.0",
+    "@types/busboy": "^1.5.1",
     "busboy": "^1.6.0",
     "path-to-regexp": "^6.2.1"
   },

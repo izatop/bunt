@@ -11,7 +11,27 @@ export type DecoratorTarget = Object;
 export type MaybeArray<T> = T | T[];
 export type MayNullable<T> = T | null | undefined;
 export type Nullable<T> = T | null | undefined;
+export type NonNullable<T> = Exclude<T,  null | undefined>;
 
 export type Fn<A extends any[] = [], R = void> = (...args: A) => R;
 
 export type KeyOf<T extends Record<string, any>> = Exclude<keyof T, number | symbol>;
+
+export type Rec<K extends keyof any = any, T = any> = Record<K, T>;
+export type Prop<T extends Rec, K extends keyof T> = T[K];
+
+export type DeepPartial<T extends Rec> = {
+    [K in keyof T]?: T[K] extends Rec ? DeepPartial<T[K]> : T[K];
+};
+
+export type DeepRequire<T extends Rec> = {
+    [K in keyof T]-?: T[K] extends Rec ? DeepRequire<T[K]> : T[K];
+};
+
+export type DeepReadonly<T extends Rec> = {
+    readonly [K in keyof T]: T[K] extends Rec ? DeepReadonly<T[K]> : T[K];
+};
+
+export type DeepWritable<T extends Rec> = {
+    -readonly [K in keyof T]: T[K] extends Rec ? DeepWritable<T[K]> : T[K];
+};
