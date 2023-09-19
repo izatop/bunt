@@ -1,6 +1,6 @@
 {
   "name": "@bunt/assert",
-  "version": "0.29.18",
+  "version": "0.29.19",
   "keywords": [
     "typescript"
   ],
@@ -33,8 +33,8 @@
     "access": "public"
   },
   "dependencies": {
-    "@bunt/is": "^0.29.18",
-    "@bunt/type": "^0.29.16"
+    "@bunt/is": "^0.29.19",
+    "@bunt/type": "^0.29.19"
   },
   "license": "MIT"
 }

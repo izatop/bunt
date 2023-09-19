@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.29.19](https://github.com/izatop/bunt/compare/v0.29.18...v0.29.19) (2023-09-19)
+
+
+### Bug Fixes
+
+* update deps + improve types ([369a4eb](https://github.com/izatop/bunt/commit/369a4eb509e395a8030264b16eb5b9f65092beba))
+
+
+
+
+
 ## [0.29.16](https://github.com/izatop/bunt/compare/v0.29.15...v0.29.16) (2023-08-30)
 
 
