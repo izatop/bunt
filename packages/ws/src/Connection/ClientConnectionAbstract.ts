@@ -1,6 +1,5 @@
 import ws from "ws";
 import {filterValueCallback, resolveOrReject} from "@bunt/util";
-import {assert} from "@bunt/assert";
 import {AsyncCallback} from "@bunt/async";
 import {IClientConnection} from "./interface.js";
 
@@ -23,7 +22,10 @@ export abstract class ClientConnectionAbstract<T> implements IClientConnection<T
 
     public send(payload: T): Promise<void> {
         return new Promise<void>((resolve, reject) => {
-            assert(this.#connection.readyState === this.#connection.OPEN, "Cannot send message in close state");
+            if (this.#connection.readyState !== this.#connection.OPEN) {
+                return reject(new Error("Cannot send the message, the connection is in a wrong state"));
+            }
+
             this.#connection.send(this.serialize(payload), resolveOrReject(resolve, reject));
         });
     }

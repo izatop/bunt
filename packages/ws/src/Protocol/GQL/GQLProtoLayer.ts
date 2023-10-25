@@ -1,4 +1,4 @@
-import {assert, isArray, isFunction, isObject} from "@bunt/util";
+import {Logger, assert, isArray, isFunction, isObject, logger} from "@bunt/util";
 import {GQLClientConnection} from "./GQLClientConnection.js";
 import {GQLOperationType, IGQLOperationComplete} from "./interfaces.js";
 import {
@@ -22,6 +22,9 @@ const AllowTypes: string[] = [
  * @final
  */
 export class GQLProtoLayer {
+    @logger
+    declare protected readonly logger: Logger;
+
     readonly #initialize: GQLInitFunction;
     readonly #subscribe: GQLSubscribeFunction;
     readonly #client: GQLClientConnection;
@@ -51,7 +54,7 @@ export class GQLProtoLayer {
                 break;
 
             case GQLOperationType.Ping:
-                await this.#client.send({type: GQLOperationType.Pong});
+                await this.pong();
                 break;
 
             case GQLOperationType.Complete:
@@ -63,6 +66,8 @@ export class GQLProtoLayer {
                     // eslint-disable-next-line
                     .catch(console.error);
                 break;
+            default:
+                this.logger.warning("Unknown operation", operation);
         }
     }
 
@@ -74,8 +79,12 @@ export class GQLProtoLayer {
         }
     }
 
-    private ping(): Promise<void> {
-        return this.#client.send({type: GQLOperationType.Ping});
+    private async ping(): Promise<void> {
+        try {
+            await this.#client.send({type: GQLOperationType.Ping});
+        } catch (reason) {
+            this.logger.error("Unexpected error", reason);
+        }
     }
 
     private pong(): Promise<void> {
