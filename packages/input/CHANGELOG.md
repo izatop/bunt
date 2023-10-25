@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.29.21](https://github.com/izatop/bunt/compare/v0.29.20...v0.29.21) (2023-10-25)
+
+
+### Bug Fixes
+
+* unhandled exception + email validation ([285a321](https://github.com/izatop/bunt/commit/285a321d781aafd60a553f03402a576a433282d6))
+
+
+
+
+
 ## [0.29.19](https://github.com/izatop/bunt/compare/v0.29.18...v0.29.19) (2023-09-19)
 
 **Note:** Version bump only for package @bunt/input
