@@ -415,13 +415,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@bunt/app@^0.29.20, @bunt/app@workspace:packages/app":
+"@bunt/app@^0.29.21, @bunt/app@workspace:packages/app":
   version: 0.0.0-use.local
   resolution: "@bunt/app@workspace:packages/app"
   dependencies:
     "@bunt/assert": ^0.29.19
     "@bunt/async": ^0.29.19
-    "@bunt/input": ^0.29.19
+    "@bunt/input": ^0.29.21
     "@bunt/is": ^0.29.19
     "@bunt/unit": ^0.29.19
     "@bunt/util": ^0.29.19
@@ -454,7 +454,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@bunt/cli@workspace:packages/cli"
   dependencies:
-    "@bunt/app": ^0.29.20
+    "@bunt/app": ^0.29.21
     "@bunt/assert": ^0.29.19
     "@bunt/util": ^0.29.19
     path-to-regexp: ^6.2.1
@@ -484,7 +484,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@bunt/input@^0.29.19, @bunt/input@workspace:packages/input":
+"@bunt/input@^0.29.21, @bunt/input@workspace:packages/input":
   version: 0.0.0-use.local
   resolution: "@bunt/input@workspace:packages/input"
   dependencies:
@@ -554,11 +554,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@bunt/web@^0.29.20, @bunt/web@workspace:packages/web":
+"@bunt/web@^0.29.21, @bunt/web@workspace:packages/web":
   version: 0.0.0-use.local
   resolution: "@bunt/web@workspace:packages/web"
   dependencies:
-    "@bunt/app": ^0.29.20
+    "@bunt/app": ^0.29.21
     "@bunt/assert": ^0.29.19
     "@bunt/async": ^0.29.19
     "@bunt/is": ^0.29.19
@@ -573,14 +573,14 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@bunt/ws@workspace:packages/ws"
   dependencies:
-    "@bunt/app": ^0.29.20
+    "@bunt/app": ^0.29.21
     "@bunt/assert": ^0.29.19
     "@bunt/async": ^0.29.19
     "@bunt/is": ^0.29.19
     "@bunt/type": ^0.29.19
     "@bunt/unit": ^0.29.19
     "@bunt/util": ^0.29.19
-    "@bunt/web": ^0.29.20
+    "@bunt/web": ^0.29.21
     "@types/websocket": ^1.0.8
     "@types/ws": ^8.5.8
     websocket: ^1.0.34
@@ -2476,13 +2476,13 @@ __metadata:
   linkType: hard
 
 "axios@npm:^1.0.0":
-  version: 1.5.1
-  resolution: "axios@npm:1.5.1"
+  version: 1.6.1
+  resolution: "axios@npm:1.6.1"
   dependencies:
     follow-redirects: ^1.15.0
     form-data: ^4.0.0
     proxy-from-env: ^1.1.0
-  checksum: 4444f06601f4ede154183767863d2b8e472b4a6bfc5253597ed6d21899887e1fd0ee2b3de792ac4f8459fe2e359d2aa07c216e45fd8b9e4e0688a6ebf48a5a8d
+  checksum: 573f03f59b7487d54551b16f5e155d1d130ad4864ed32d1da93d522b78a57123b34e3bde37f822a65ee297e79f1db840f9ad6514addff50d3cbf5caeed39e8dc
   languageName: node
   linkType: hard
 
