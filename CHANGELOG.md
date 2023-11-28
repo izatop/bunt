@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.29.22](https://github.com/izatop/bunt/compare/v0.29.21...v0.29.22) (2023-11-28)
+
+
+### Bug Fixes
+
+* ci ([aac5b13](https://github.com/izatop/bunt/commit/aac5b13ee535596be809abb9ce23dda02c3ebca6))
+* ci ([16b5204](https://github.com/izatop/bunt/commit/16b52044dee19a591d7a3e1b9a0e7fc5d8f4bc68))
+* supportedArchitectures ([1e2a005](https://github.com/izatop/bunt/commit/1e2a005baba5ffc09aa427ae72445792847836e2))
+* update deps + yarn version ([427afab](https://github.com/izatop/bunt/commit/427afab7b1b22acb8bba03b55efedf838b38bdc9))
+* update yarn.lock ([844e58e](https://github.com/izatop/bunt/commit/844e58eea005196a078177e7cbb4ce0e69f2b7ee))
+* win32 ([af9adb6](https://github.com/izatop/bunt/commit/af9adb66500170a6982df7749f5611cf7ab9e824))
+
+
+
+
+
 ## [0.29.21](https://github.com/izatop/bunt/compare/v0.29.20...v0.29.21) (2023-10-25)
 
 
