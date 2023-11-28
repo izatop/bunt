@@ -41,11 +41,11 @@
     "@bunt/unit": "^0.29.19",
     "@bunt/util": "^0.29.19",
     "@bunt/web": "^0.29.21",
-    "@types/ws": "^8.5.8",
+    "@types/ws": "^8.5.10",
     "ws": "^8.14.2"
   },
   "devDependencies": {
-    "@types/websocket": "^1.0.8",
+    "@types/websocket": "^1.0.10",
     "websocket": "^1.0.34"
   },
   "license": "MIT"
