@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.29.23](https://github.com/izatop/bunt/compare/v0.29.22...v0.29.23) (2024-02-07)
+
+
+### Bug Fixes
+
+* github workflow ([48b307c](https://github.com/izatop/bunt/commit/48b307c7acde099fe6c5a0ca3e52e96dc91a63ef))
+* github workflows ([25e9582](https://github.com/izatop/bunt/commit/25e9582f52b9e8dd88b2a449de35a3aefa7b594c))
+* upgrade deps ([24268a1](https://github.com/izatop/bunt/commit/24268a1ae6d823cc17b3c189e2092ead4e5530e7))
+* upgrade yarn ([72067a1](https://github.com/izatop/bunt/commit/72067a1ea3beedb4b3397b86d59418b3f087b2fe))
+* version ([1056eb1](https://github.com/izatop/bunt/commit/1056eb15efec9eed43696ebe337d0348bed45f54))
+
+
+
+
+
 ## [0.29.22](https://github.com/izatop/bunt/compare/v0.29.21...v0.29.22) (2023-11-28)
 
 
