@@ -1,6 +1,6 @@
 import {Readable} from "stream";
 import {isFunction, isInstanceOf, isNumber, isString, Promisify} from "@bunt/util";
-import HTTP from "http-status";
+import * as HTTP from "http-status";
 import {StrictKeyValueMap} from "@bunt/app";
 import {Headers} from "../Headers.js";
 import {Cookie, CookieOptions} from "./Cookie.js";
