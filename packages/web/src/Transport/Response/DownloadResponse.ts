@@ -35,7 +35,7 @@ export class DownloadResponse extends ResponseAbstract<Readable> {
 function createHeaders(options: DownloadOptions): Record<string, string> {
     const size = options.size;
     const headers: Record<string, string> = {
-        "Content-Disposition": `attachment; filename=${encodeURI(options.filename)}`,
+        "Content-Disposition": `attachment; filename="${encodeURI(options.filename)}"`,
         "Content-Length": size.toString(),
         "Content-Type": options.mimeType,
     };
