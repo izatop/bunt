@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.29.24](https://github.com/izatop/bunt/compare/v0.29.23...v0.29.24) (2024-02-28)
+
+
+### Bug Fixes
+
+* escape filename ([1ac8df2](https://github.com/izatop/bunt/commit/1ac8df2dee5ab4dab7bd079a1df05c17f1264566))
+* http status ([999b0e4](https://github.com/izatop/bunt/commit/999b0e489672409033cceb5e88ef4afb42e3cc89))
+* import ([21c277c](https://github.com/izatop/bunt/commit/21c277c349b723deaf94f3337f0f94024dbc97f8))
+* tests ([e767c93](https://github.com/izatop/bunt/commit/e767c933abd0f12e1d194ba7a516ce6c5cbd83aa))
+* update deps ([8203e3d](https://github.com/izatop/bunt/commit/8203e3d90125dbfa13e229a1243b1280f5f08e22))
+
+
+
+
+
 ## [0.29.22](https://github.com/izatop/bunt/compare/v0.29.21...v0.29.22) (2023-11-28)
 
 **Note:** Version bump only for package @bunt/web
