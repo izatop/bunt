@@ -1,6 +1,6 @@
 import {Readable} from "stream";
 import {isFunction, isInstanceOf, isNumber, isString, Promisify} from "@bunt/util";
-import * as HTTP from "http-status";
+import HTTP from "http-status";
 import {StrictKeyValueMap} from "@bunt/app";
 import {Headers} from "../Headers.js";
 import {Cookie, CookieOptions} from "./Cookie.js";
@@ -44,7 +44,7 @@ export abstract class ResponseAbstract<T> {
 
         this.status = status;
         if (!this.status) {
-            const suggest = HTTP[this.code];
+            const suggest = Reflect.get(HTTP, this.code.toString());
             this.status = isString(suggest) ? suggest : "Unknown";
         }
 
