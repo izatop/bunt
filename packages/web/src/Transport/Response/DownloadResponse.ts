@@ -34,8 +34,15 @@ export class DownloadResponse extends ResponseAbstract<Readable> {
 
 function createHeaders(options: DownloadOptions): Record<string, string> {
     const size = options.size;
+    const attributes = [
+        "attachment",
+        `filename="${encodeURI(options.filename)}"`,
+        // Safari https://datatracker.ietf.org/doc/html/rfc5987#section-3.2.2
+        `filename*=utf-8''${encodeURI(options.filename)}`,
+    ];
+
     const headers: Record<string, string> = {
-        "Content-Disposition": `attachment; filename="${encodeURI(options.filename)}"`,
+        "Content-Disposition": attributes.join("; "),
         "Content-Length": size.toString(),
         "Content-Type": options.mimeType,
     };

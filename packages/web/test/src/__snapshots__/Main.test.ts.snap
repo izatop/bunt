@@ -5,7 +5,7 @@ exports[`Response Download (auto) 1`] = `
   "code": 200,
   "cookies": [],
   "headers": {
-    "content-disposition": "attachment; filename="download.txt"",
+    "content-disposition": "attachment; filename="download.txt"; filename*=utf-8''download.txt",
     "content-length": "14",
     "content-type": "text/plain",
   },
@@ -18,7 +18,7 @@ exports[`Response Download 1`] = `
   "code": 200,
   "cookies": [],
   "headers": {
-    "content-disposition": "attachment; filename="download.txt"",
+    "content-disposition": "attachment; filename="download.txt"; filename*=utf-8''download.txt",
     "content-length": "14",
     "content-type": "text/plain",
   },
