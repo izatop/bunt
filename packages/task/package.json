@@ -1,6 +1,6 @@
 {
   "name": "@bunt/task",
-  "version": "0.29.19",
+  "version": "0.29.26",
   "keywords": [
     "typescript"
   ],
@@ -38,6 +38,6 @@
     "@bunt/async": "^0.29.19",
     "@bunt/is": "^0.29.19",
     "@bunt/type": "^0.29.19",
-    "@bunt/unit": "^0.29.19"
+    "@bunt/unit": "^0.29.26"
   }
 }
