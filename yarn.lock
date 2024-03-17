@@ -415,7 +415,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@bunt/app@npm:^0.29.22, @bunt/app@workspace:packages/app":
+"@bunt/app@npm:^0.29.26, @bunt/app@workspace:packages/app":
   version: 0.0.0-use.local
   resolution: "@bunt/app@workspace:packages/app"
   dependencies:
@@ -423,8 +423,8 @@ __metadata:
     "@bunt/async": "npm:^0.29.19"
     "@bunt/input": "npm:^0.29.21"
     "@bunt/is": "npm:^0.29.19"
-    "@bunt/unit": "npm:^0.29.19"
-    "@bunt/util": "npm:^0.29.19"
+    "@bunt/unit": "npm:^0.29.26"
+    "@bunt/util": "npm:^0.29.26"
     "@types/busboy": "npm:^1.5.3"
     busboy: "npm:^1.6.0"
     path-to-regexp: "npm:^6.2.1"
@@ -454,9 +454,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@bunt/cli@workspace:packages/cli"
   dependencies:
-    "@bunt/app": "npm:^0.29.22"
+    "@bunt/app": "npm:^0.29.26"
     "@bunt/assert": "npm:^0.29.19"
-    "@bunt/util": "npm:^0.29.19"
+    "@bunt/util": "npm:^0.29.26"
     path-to-regexp: "npm:^6.2.1"
   languageName: unknown
   linkType: soft
@@ -476,7 +476,7 @@ __metadata:
   dependencies:
     "@bunt/assert": "npm:^0.29.19"
     "@bunt/is": "npm:^0.29.19"
-    "@bunt/unit": "npm:^0.29.19"
+    "@bunt/unit": "npm:^0.29.26"
     "@types/minio": "npm:^7.1.1"
     "@types/node-fetch": "npm:^2.6.11"
     minio: "npm:^7.1.3"
@@ -507,8 +507,8 @@ __metadata:
   resolution: "@bunt/queue@workspace:packages/queue"
   dependencies:
     "@bunt/async": "npm:^0.29.19"
-    "@bunt/unit": "npm:^0.29.19"
-    "@bunt/util": "npm:^0.29.19"
+    "@bunt/unit": "npm:^0.29.26"
+    "@bunt/util": "npm:^0.29.26"
     ioredis: "npm:^5.3.2"
   languageName: unknown
   linkType: soft
@@ -521,7 +521,7 @@ __metadata:
     "@bunt/async": "npm:^0.29.19"
     "@bunt/is": "npm:^0.29.19"
     "@bunt/type": "npm:^0.29.19"
-    "@bunt/unit": "npm:^0.29.19"
+    "@bunt/unit": "npm:^0.29.26"
   languageName: unknown
   linkType: soft
 
@@ -531,7 +531,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@bunt/unit@npm:^0.29.19, @bunt/unit@workspace:packages/unit":
+"@bunt/unit@npm:^0.29.26, @bunt/unit@workspace:packages/unit":
   version: 0.0.0-use.local
   resolution: "@bunt/unit@workspace:packages/unit"
   dependencies:
@@ -539,11 +539,11 @@ __metadata:
     "@bunt/async": "npm:^0.29.19"
     "@bunt/is": "npm:^0.29.19"
     "@bunt/type": "npm:^0.29.19"
-    "@bunt/util": "npm:^0.29.19"
+    "@bunt/util": "npm:^0.29.26"
   languageName: unknown
   linkType: soft
 
-"@bunt/util@npm:^0.29.19, @bunt/util@workspace:packages/util":
+"@bunt/util@npm:^0.29.26, @bunt/util@workspace:packages/util":
   version: 0.0.0-use.local
   resolution: "@bunt/util@workspace:packages/util"
   dependencies:
@@ -554,16 +554,16 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@bunt/web@npm:^0.29.25, @bunt/web@workspace:packages/web":
+"@bunt/web@npm:^0.29.26, @bunt/web@workspace:packages/web":
   version: 0.0.0-use.local
   resolution: "@bunt/web@workspace:packages/web"
   dependencies:
-    "@bunt/app": "npm:^0.29.22"
+    "@bunt/app": "npm:^0.29.26"
     "@bunt/assert": "npm:^0.29.19"
     "@bunt/async": "npm:^0.29.19"
     "@bunt/is": "npm:^0.29.19"
     "@bunt/type": "npm:^0.29.19"
-    "@bunt/util": "npm:^0.29.19"
+    "@bunt/util": "npm:^0.29.26"
     http-status: "npm:^1.7.4"
     path-to-regexp: "npm:^6.2.1"
   languageName: unknown
@@ -573,14 +573,14 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@bunt/ws@workspace:packages/ws"
   dependencies:
-    "@bunt/app": "npm:^0.29.22"
+    "@bunt/app": "npm:^0.29.26"
     "@bunt/assert": "npm:^0.29.19"
     "@bunt/async": "npm:^0.29.19"
     "@bunt/is": "npm:^0.29.19"
     "@bunt/type": "npm:^0.29.19"
-    "@bunt/unit": "npm:^0.29.19"
-    "@bunt/util": "npm:^0.29.19"
-    "@bunt/web": "npm:^0.29.25"
+    "@bunt/unit": "npm:^0.29.26"
+    "@bunt/util": "npm:^0.29.26"
+    "@bunt/web": "npm:^0.29.26"
     "@types/websocket": "npm:^1.0.10"
     "@types/ws": "npm:^8.5.10"
     websocket: "npm:^1.0.34"
