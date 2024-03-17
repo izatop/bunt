@@ -17,10 +17,9 @@ export const MultipartFormDataTransform = async <T = unknown>(request: IRequest)
 
     const rs = await request.createReadableStream();
     const defer = new Defer<void>();
-    const result: Record<string, any> = {};
     const pending: Defer<void>[] = [];
 
-    const {parseFieldName, inject} = QueryString;
+    const qs = new QueryString();
 
     bb
         .on("file", (name, file, info) => {
@@ -37,7 +36,7 @@ export const MultipartFormDataTransform = async <T = unknown>(request: IRequest)
                 tmpname,
             };
 
-            inject(parseFieldName(name), value, result);
+            qs.push(name, value);
 
             const def = new Defer<void>();
             pending.push(def);
@@ -48,7 +47,7 @@ export const MultipartFormDataTransform = async <T = unknown>(request: IRequest)
         })
         .on("field", (name, value) => {
             try {
-                inject(parseFieldName(name), JSON.parse(value), result);
+                qs.push(name, JSON.parse(value));
             } catch {
                 // skip
             }
@@ -60,5 +59,5 @@ export const MultipartFormDataTransform = async <T = unknown>(request: IRequest)
     await defer;
     await Promise.all(pending);
 
-    return result as any;
+    return qs.toObject();
 };
