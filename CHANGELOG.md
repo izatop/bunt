@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.29.27](https://github.com/izatop/bunt/compare/v0.29.26...v0.29.27) (2024-04-10)
+
+
+### Bug Fixes
+
+* deps ([419c281](https://github.com/izatop/bunt/commit/419c2815b1586362dab8703fe3db782ddddd6a95))
+* node-fetch version ([553c2ea](https://github.com/izatop/bunt/commit/553c2ea20bbb65c9e29de8b759175eded20090cb))
+* update deps ([d709cd0](https://github.com/izatop/bunt/commit/d709cd0e132782bcd0cbfdfb3b36d5e907d87e32))
+* upgrade deps ([a497919](https://github.com/izatop/bunt/commit/a4979191dae28e10bc7c4b971621eeb06e3e386d))
+
+
+
+
+
 ## [0.29.26](https://github.com/izatop/bunt/compare/v0.29.25...v0.29.26) (2024-03-17)
 
 
