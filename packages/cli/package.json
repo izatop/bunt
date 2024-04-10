@@ -36,7 +36,7 @@
     "@bunt/app": "^0.29.26",
     "@bunt/assert": "^0.29.19",
     "@bunt/util": "^0.29.26",
-    "path-to-regexp": "^6.2.1"
+    "path-to-regexp": "^6.2.2"
   },
   "license": "MIT"
 }

@@ -41,7 +41,7 @@
     "@bunt/util": "^0.29.26",
     "@types/busboy": "^1.5.3",
     "busboy": "^1.6.0",
-    "path-to-regexp": "^6.2.1"
+    "path-to-regexp": "^6.2.2"
   },
   "license": "MIT"
 }
