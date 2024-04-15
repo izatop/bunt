@@ -415,7 +415,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@bunt/app@npm:^0.29.26, @bunt/app@workspace:packages/app":
+"@bunt/app@npm:^0.29.27, @bunt/app@workspace:packages/app":
   version: 0.0.0-use.local
   resolution: "@bunt/app@workspace:packages/app"
   dependencies:
@@ -454,7 +454,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@bunt/cli@workspace:packages/cli"
   dependencies:
-    "@bunt/app": "npm:^0.29.26"
+    "@bunt/app": "npm:^0.29.27"
     "@bunt/assert": "npm:^0.29.19"
     "@bunt/util": "npm:^0.29.26"
     path-to-regexp: "npm:^6.2.2"
@@ -554,11 +554,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@bunt/web@npm:^0.29.26, @bunt/web@workspace:packages/web":
+"@bunt/web@npm:^0.29.27, @bunt/web@workspace:packages/web":
   version: 0.0.0-use.local
   resolution: "@bunt/web@workspace:packages/web"
   dependencies:
-    "@bunt/app": "npm:^0.29.26"
+    "@bunt/app": "npm:^0.29.27"
     "@bunt/assert": "npm:^0.29.19"
     "@bunt/async": "npm:^0.29.19"
     "@bunt/is": "npm:^0.29.19"
@@ -573,14 +573,14 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@bunt/ws@workspace:packages/ws"
   dependencies:
-    "@bunt/app": "npm:^0.29.26"
+    "@bunt/app": "npm:^0.29.27"
     "@bunt/assert": "npm:^0.29.19"
     "@bunt/async": "npm:^0.29.19"
     "@bunt/is": "npm:^0.29.19"
     "@bunt/type": "npm:^0.29.19"
     "@bunt/unit": "npm:^0.29.26"
     "@bunt/util": "npm:^0.29.26"
-    "@bunt/web": "npm:^0.29.26"
+    "@bunt/web": "npm:^0.29.27"
     "@types/websocket": "npm:^1.0.10"
     "@types/ws": "npm:^8.5.10"
     websocket: "npm:^1.0.34"

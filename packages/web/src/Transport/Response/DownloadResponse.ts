@@ -1,8 +1,9 @@
 import {createReadStream, createWriteStream} from "fs";
 import {Readable} from "stream";
-import {randomBytes} from "crypto";
+import {randomUUID} from "crypto";
 import {tmpdir} from "os";
 import {stat, unlink} from "fs/promises";
+import {join} from "path";
 import {isString, isUndefined} from "@bunt/is";
 import {Defer} from "@bunt/async";
 import {ResponseAbstract, ResponseArgs} from "./ResponseAbstract.js";
@@ -71,7 +72,7 @@ function createOptions(options: DownloadOptionsAuth): ResponseArgs<Readable> {
 
 function createTemporarySource(options: DownloadOptionsAuth): ResponseArgs<Readable> {
     const inputReadable = factoryReadableStream(options.source);
-    const tmpname = `${tmpdir()}/${Date.now()}-${randomBytes(16).toString("hex")}`;
+    const tmpname = join(tmpdir(), randomUUID());
     const writable = createWriteStream(tmpname);
     const defer = new Defer<number>();
     writable.once("close", () => stat(tmpname).then((s) => defer.resolve(s.size)));

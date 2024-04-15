@@ -1,4 +1,4 @@
-import {randomBytes} from "crypto";
+import {randomUUID} from "crypto";
 import {tmpdir} from "os";
 import {join} from "path";
 import {createWriteStream} from "fs";
@@ -24,10 +24,7 @@ export const MultipartFormDataTransform = async <T = unknown>(request: IRequest)
     bb
         .on("file", (name, file, info) => {
             const {encoding, filename, mimeType} = info;
-            const tmpname = join(
-                tmpdir(),
-                `${randomBytes(4).toString("hex")}-${Buffer.from(filename, "utf-8").toString("hex")}`,
-            );
+            const tmpname = join(tmpdir(), randomUUID());
 
             const value = {
                 filename,
