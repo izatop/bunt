@@ -415,7 +415,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@bunt/app@npm:^0.29.27, @bunt/app@workspace:packages/app":
+"@bunt/app@npm:^0.29.28, @bunt/app@workspace:packages/app":
   version: 0.0.0-use.local
   resolution: "@bunt/app@workspace:packages/app"
   dependencies:
@@ -454,7 +454,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@bunt/cli@workspace:packages/cli"
   dependencies:
-    "@bunt/app": "npm:^0.29.27"
+    "@bunt/app": "npm:^0.29.28"
     "@bunt/assert": "npm:^0.29.19"
     "@bunt/util": "npm:^0.29.26"
     path-to-regexp: "npm:^6.2.2"
@@ -554,11 +554,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@bunt/web@npm:^0.29.27, @bunt/web@workspace:packages/web":
+"@bunt/web@npm:^0.29.28, @bunt/web@workspace:packages/web":
   version: 0.0.0-use.local
   resolution: "@bunt/web@workspace:packages/web"
   dependencies:
-    "@bunt/app": "npm:^0.29.27"
+    "@bunt/app": "npm:^0.29.28"
     "@bunt/assert": "npm:^0.29.19"
     "@bunt/async": "npm:^0.29.19"
     "@bunt/is": "npm:^0.29.19"
@@ -573,14 +573,14 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@bunt/ws@workspace:packages/ws"
   dependencies:
-    "@bunt/app": "npm:^0.29.27"
+    "@bunt/app": "npm:^0.29.28"
     "@bunt/assert": "npm:^0.29.19"
     "@bunt/async": "npm:^0.29.19"
     "@bunt/is": "npm:^0.29.19"
     "@bunt/type": "npm:^0.29.19"
     "@bunt/unit": "npm:^0.29.26"
     "@bunt/util": "npm:^0.29.26"
-    "@bunt/web": "npm:^0.29.27"
+    "@bunt/web": "npm:^0.29.28"
     "@types/websocket": "npm:^1.0.10"
     "@types/ws": "npm:^8.5.10"
     websocket: "npm:^1.0.34"
@@ -9959,8 +9959,8 @@ __metadata:
   linkType: hard
 
 "ws@npm:^8.16.0":
-  version: 8.16.0
-  resolution: "ws@npm:8.16.0"
+  version: 8.17.1
+  resolution: "ws@npm:8.17.1"
   peerDependencies:
     bufferutil: ^4.0.1
     utf-8-validate: ">=5.0.2"
@@ -9969,7 +9969,7 @@ __metadata:
       optional: true
     utf-8-validate:
       optional: true
-  checksum: 10/7c511c59e979bd37b63c3aea4a8e4d4163204f00bd5633c053b05ed67835481995f61a523b0ad2b603566f9a89b34cb4965cb9fab9649fbfebd8f740cea57f17
+  checksum: 10/4264ae92c0b3e59c7e309001e93079b26937aab181835fb7af79f906b22cd33b6196d96556dafb4e985742dd401e99139572242e9847661fdbc96556b9e6902d
   languageName: node
   linkType: hard
 
