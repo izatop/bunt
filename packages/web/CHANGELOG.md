@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.30.1](https://github.com/izatop/bunt/compare/v0.30.0...v0.30.1) (2024-08-13)
+
+
+### Bug Fixes
+
+* upgrade deps ([27544be](https://github.com/izatop/bunt/commit/27544be3a3b9edfa06dfb9984d84a116b550b04b))
+
+
+
+
+
 # [0.30.0](https://github.com/izatop/bunt/compare/v0.29.28...v0.30.0) (2024-07-30)
 
 **Note:** Version bump only for package @bunt/web
