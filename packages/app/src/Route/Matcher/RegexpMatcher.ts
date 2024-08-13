@@ -3,7 +3,7 @@ import {IRouteMatcher} from "../interfaces.js";
 
 export class RegexpMatcher implements IRouteMatcher {
     protected readonly route: string;
-    protected readonly matcher: MatchFunction;
+    protected readonly matcher: MatchFunction<any>;
     protected readonly tester: RegExp;
 
     constructor(route: string) {

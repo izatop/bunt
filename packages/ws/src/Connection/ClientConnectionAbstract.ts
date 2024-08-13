@@ -35,7 +35,9 @@ export abstract class ClientConnectionAbstract<T> implements IClientConnection<T
             const listener = filterValueCallback<Buffer>(Buffer.isBuffer, (message) => emit(this.parse(message)));
             this.#connection.on("message", listener);
 
-            return () => this.#connection.removeListener("message", listener);
+            return (): void => {
+                this.#connection.removeListener("message", listener);
+            };
         });
 
         return asyncCallback[Symbol.asyncIterator]();
