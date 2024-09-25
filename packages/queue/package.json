@@ -1,6 +1,6 @@
 {
   "name": "@bunt/queue",
-  "version": "0.30.0",
+  "version": "0.31.0",
   "keywords": [
     "typescript"
   ],
@@ -33,9 +33,9 @@
     "access": "public"
   },
   "dependencies": {
-    "@bunt/async": "^0.30.0",
-    "@bunt/unit": "^0.30.0",
-    "@bunt/util": "^0.30.0",
+    "@bunt/async": "^0.31.0",
+    "@bunt/unit": "^0.31.0",
+    "@bunt/util": "^0.31.0",
     "ioredis": "^5.4.1"
   },
   "license": "MIT"

@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.31.0](https://github.com/izatop/bunt/compare/v0.30.1...v0.31.0) (2024-09-25)
+
+
+### Bug Fixes
+
+* update deps ([8cb2487](https://github.com/izatop/bunt/commit/8cb2487648dfa960869802ef3b214f9f1ad44c0a))
+
+
+### Features
+
+* update deps ([0fa2fdf](https://github.com/izatop/bunt/commit/0fa2fdf2722795f8d15d6d536fb86fe52793fc2f))
+
+
+
+
+
 ## [0.30.1](https://github.com/izatop/bunt/compare/v0.30.0...v0.30.1) (2024-08-13)
 
 
