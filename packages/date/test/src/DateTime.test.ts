@@ -1,7 +1,7 @@
-import {DateTime, XDate, XDateIntervalKind} from "../../src";
+import {XDate, XDateIntervalKind} from "../../src";
 
 describe("DateTime", () => {
-    const date = new DateTime("2020-02-12T12:35:13.123Z");
+    const date = new XDate("2020-02-12T12:35:13.123Z");
     test("mutate()", () => {
         const mutations: [XDateIntervalKind, number][] = [
             ["ms", +100],
@@ -57,12 +57,13 @@ describe("DateTime", () => {
     });
 
     const tests: [number, XDate][] = new Array(7)
-        .fill(new Date(2020, 4, 11))
-        .map((d: Date, index) => new DateTime(d).mutate(["day", index]).date)
-        .map((d: Date) => [d.getDate(), new DateTime(d)]);
+        .fill(new Date(2024, 8, 1))
+        .map((d: Date, index) => new XDate(d).mutate(["day", index]).date)
+        .map((d: Date) => [d.getDate(), new XDate(d)]);
+
     test.each(tests)("begins/ends ( %d )", (...args) => {
         const dt = args.pop() as XDate;
-        expect(dt.begins("week").date.getDate()).toBe(11);
-        expect(dt.ends("week").date.getDate()).toBe(17);
+        expect(dt.begins("week").date.getDate()).toBe(1);
+        expect(dt.ends("week").date.getDate()).toBe(7);
     });
 });

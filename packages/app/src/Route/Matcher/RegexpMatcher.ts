@@ -8,7 +8,7 @@ export class RegexpMatcher implements IRouteMatcher {
 
     constructor(route: string) {
         this.route = route;
-        this.tester = pathToRegexp(route);
+        this.tester = pathToRegexp(route).regexp;
         this.matcher = match(route);
     }
 

@@ -1,35 +1,32 @@
+import {isObject} from "@bunt/is";
 import {XDateConfig} from "./interface.js";
 
-function normalizeLocale(locale: string): string {
-    if (/^[a-z]{2}_.+$/.test(locale)) {
-        return locale.substr(0, 2);
+function getWeekBeginsInit(locale: string): number {
+    const lc = new Intl.Locale(locale);
+
+    if ("weekInfo" in lc && isObject(lc.weekInfo)) {
+        return Number(lc.weekInfo.firstDay);
     }
 
-    return locale;
+    return 1;
 }
 
-export function getDefaultConfig(): XDateConfig {
-    const system = Intl.DateTimeFormat().resolvedOptions();
-    const timeZone = process.env.TZ ?? process.env.TIMEZONE ?? system.timeZone;
-    const locale = normalizeLocale(process.env.LANG ?? process.env.LANGUAGE ?? system.locale);
-    const weekBegins = /[0-6]/.test(process.env.DATETIME_WEEK_BEGINS ?? "")
-        ? parseInt(process.env.DATETIME_WEEK_BEGINS ?? "1", 10)
-        : 1;
-
-    Intl.DateTimeFormat(locale, {...system, timeZone} as Intl.DateTimeFormatOptions);
+export function getDefaultConfig(options: Partial<XDateConfig> = {}): XDateConfig {
+    const {locale, timeZone} = Intl.DateTimeFormat(options.locale, {timeZone: options.timeZone}).resolvedOptions();
+    const weekBegins = getWeekBeginsInit(locale);
 
     return {locale, timeZone, weekBegins};
 }
 
 const config: XDateConfig = getDefaultConfig();
 
-export function setLocale(locale: string | string[]): void {
-    const [supported] = Intl.DateTimeFormat.supportedLocalesOf(locale);
-    config.locale = supported;
+export function setLocale(nextLocal: string | string[]): void {
+    const [locale] = Intl.DateTimeFormat.supportedLocalesOf(nextLocal);
+    Object.assign(config, getDefaultConfig({...config, locale}));
 }
 
 export function setTimeZone(timeZone: string): void {
-    config.timeZone = timeZone;
+    Object.assign(config, getDefaultConfig({...config, timeZone}));
 }
 
 export function getLocale(): string {
