@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.32.0](https://github.com/izatop/bunt/compare/v0.31.0...v0.32.0) (2024-10-01)
+
+**Note:** Version bump only for package @bunt/is
+
+
+
+
+
 # [0.31.0](https://github.com/izatop/bunt/compare/v0.30.1...v0.31.0) (2024-09-25)
 
 **Note:** Version bump only for package @bunt/is
