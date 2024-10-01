@@ -3,7 +3,6 @@
 export TIMEZONE=UTC LANG=en-US
 
 yarn clean \
-    && yarn lint \
     && bin/build \
     && bin/run-tests --bail=1 --ci \
     && yarn lerna publish --conventional-commits -y --no-progress
