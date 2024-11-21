@@ -7,6 +7,7 @@ import {join} from "path";
 import {isString, isUndefined} from "@bunt/is";
 import {Defer} from "@bunt/async";
 import {ResponseAbstract, ResponseArgs} from "./ResponseAbstract.js";
+import { escape } from "querystring";
 
 type DownloadSource = string | Readable;
 type DownloadOptions = {
@@ -37,9 +38,9 @@ function createHeaders(options: DownloadOptions): Record<string, string> {
     const size = options.size;
     const attributes = [
         "attachment",
-        `filename="${encodeURI(options.filename)}"`,
+        `filename="${escape(options.filename)}"`,
         // Safari https://datatracker.ietf.org/doc/html/rfc5987#section-3.2.2
-        `filename*=utf-8''${encodeURI(options.filename)}`,
+        `filename*=utf-8''${escape(options.filename)}`,
     ];
 
     const headers: Record<string, string> = {
