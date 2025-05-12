@@ -39,7 +39,7 @@
     "@bunt/is": "^0.32.0",
     "@bunt/type": "^0.32.0",
     "@bunt/util": "^0.32.0",
-    "http-status": "^1.7.4",
+    "http-status": "^1.8.1",
     "path-to-regexp": "^8.2.0"
   },
   "license": "MIT"

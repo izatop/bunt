@@ -36,7 +36,7 @@
     "@bunt/async": "^0.32.0",
     "@bunt/unit": "^0.32.0",
     "@bunt/util": "^0.32.0",
-    "ioredis": "^5.4.1"
+    "ioredis": "^5.6.1"
   },
   "license": "MIT"
 }

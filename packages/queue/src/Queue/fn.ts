@@ -39,8 +39,8 @@ export function unserialize<T, M extends MessageAbstract<T>>(type: MessageCtor<M
     assert(signature === compareSignature, "Wrong checksum");
 
     return isMessageParser(type)
-        ? type.parse(body)
-        : JSON.parse(body);
+        ? type.parse(body) as T
+        : JSON.parse(body) as T;
 }
 
 export function tryUnserialize<M extends MessageAbstract<any>>(type: MessageCtor<M>, message?: string)

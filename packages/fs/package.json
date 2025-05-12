@@ -37,7 +37,7 @@
     "@bunt/is": "^0.32.0",
     "@bunt/unit": "^0.32.0",
     "@types/minio": "^7.1.1",
-    "@types/node-fetch": "^2.6.11",
+    "@types/node-fetch": "^2.6.12",
     "minio": "^7.1.3",
     "node-fetch": "2.7.0"
   },
