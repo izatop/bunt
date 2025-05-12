@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.33.0](https://github.com/izatop/bunt/compare/v0.32.1...v0.33.0) (2025-05-12)
+
+
+### Features
+
+* upgrade ([f590d40](https://github.com/izatop/bunt/commit/f590d40ad1af8810961c122c643eb30b2570424b))
+
+
+
+
+
 ## [0.32.1](https://github.com/izatop/bunt/compare/v0.32.0...v0.32.1) (2024-11-21)
 
 

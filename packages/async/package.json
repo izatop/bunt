@@ -1,6 +1,6 @@
 {
   "name": "@bunt/async",
-  "version": "0.32.0",
+  "version": "0.33.0",
   "keywords": [
     "typescript",
     "async"
@@ -31,9 +31,9 @@
   "description": "Async utils",
   "repository": "git@github.com:izatop/bunt.git",
   "dependencies": {
-    "@bunt/assert": "^0.32.0",
-    "@bunt/is": "^0.32.0",
-    "@bunt/type": "^0.32.0"
+    "@bunt/assert": "^0.33.0",
+    "@bunt/is": "^0.33.0",
+    "@bunt/type": "^0.33.0"
   },
   "publishConfig": {
     "access": "public"

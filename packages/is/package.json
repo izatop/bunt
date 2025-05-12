@@ -1,6 +1,6 @@
 {
   "name": "@bunt/is",
-  "version": "0.32.0",
+  "version": "0.33.0",
   "keywords": [
     "typescript"
   ],
@@ -34,6 +34,6 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@bunt/type": "^0.32.0"
+    "@bunt/type": "^0.33.0"
   }
 }
