@@ -1,7 +1,7 @@
 import {resolve} from "path";
 import {stat} from "fs/promises";
 import {Context} from "@bunt/unit";
-import * as HTTP from "http-status";
+import HTTP from "http-status";
 import {isReadableStream} from "@bunt/util";
 import {DownloadResponse, JSONResponse, NoContentResponse, RedirectResponse, WebServer} from "../../src";
 import HelloWorldRoute from "./app/Action/HelloWorldRoute";

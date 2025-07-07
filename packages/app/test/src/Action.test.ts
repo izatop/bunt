@@ -35,7 +35,7 @@ describe("Route", () => {
     test("Route not found", async () => {
         const app = await Application.factory(new BaseContext());
         const request = new Request("/wrong-uri", {});
-        await expect(app.run(request)).rejects.toThrowError(RouteNotFound);
+        await expect(app.run(request)).rejects.toThrow(RouteNotFound);
     });
 
     test("Async route", async () => {

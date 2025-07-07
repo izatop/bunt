@@ -15,15 +15,15 @@ describe("AsyncPool", () => {
 
         const reject = pool.pull();
         pool.reject(new Error("Test"));
-        await expect(reject).rejects.toThrowError();
-        expect(() => pool.reject(new Error())).toThrowError();
+        await expect(reject).rejects.toThrow();
+        expect(() => pool.reject(new Error())).toThrow();
     });
 
     test("Reverse rejection test case", async () => {
         const pool = new AsyncPool<number>();
 
         pool.reject(new Error("Test"));
-        await expect(pool.pull()).rejects.toThrowError();
+        await expect(pool.pull()).rejects.toThrow();
     });
 
     test("Multiple pull case", async () => {

@@ -12,14 +12,14 @@ describe("XMap", () => {
 
     test("ensure initializer", () => {
         const map = new XMap<number, Record<string, number>>();
-        expect(() => map.ensure(1)).toThrowError();
+        expect(() => map.ensure(1)).toThrow();
     });
 
     test("ensure nullable", () => {
         const map = new XMap<number, any>();
-        expect(() => map.ensure(1, () => undefined)).not.toThrowError();
-        expect(() => map.ensure(2, () => false)).not.toThrowError();
-        expect(() => map.ensure(3, () => null)).not.toThrowError();
+        expect(() => map.ensure(1, () => undefined)).not.toThrow();
+        expect(() => map.ensure(2, () => false)).not.toThrow();
+        expect(() => map.ensure(3, () => null)).not.toThrow();
     });
 
     test("pick", () => {

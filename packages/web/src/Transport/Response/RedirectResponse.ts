@@ -1,5 +1,5 @@
 import {assert} from "@bunt/util";
-import * as HTTP from "http-status";
+import HTTP from "http-status";
 import {IResponseOptions, ResponseAbstract} from "./ResponseAbstract.js";
 
 export class RedirectResponse extends ResponseAbstract<undefined> {
