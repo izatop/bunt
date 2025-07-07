@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.34.0](https://github.com/izatop/bunt/compare/v0.33.0...v0.34.0) (2025-07-07)
+
+
+### Features
+
+* upgrade deps ([d031b7b](https://github.com/izatop/bunt/commit/d031b7bf90a92167a07dda8fcc9c8693ecd6f8e1))
+
+
+
+
+
 # [0.33.0](https://github.com/izatop/bunt/compare/v0.32.1...v0.33.0) (2025-05-12)
 
 
