@@ -50,7 +50,7 @@ export class XMap<K, V> extends Map<K, V> {
             return value;
         }
 
-        assert(exists, `The key doesn't exists: ${key}`);
+        assert(exists, `The key doesn't exists: ${String(key)}`);
 
         return this.get(key) as V;
     }
